@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Phòng luyện HSA – LuyenThi360</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0c10;--bg2:#0f1318;--surface:#1a2030;--border:#252d3d;--accent:#00e5ff;--accent2:#7c3aed;--accent3:#f59e0b;--green:#10b981;--red:#ef4444;--text:#e8edf5;--muted:#6b7a99;--card:#141920}
+[data-theme="light"]{--bg:#f0f4ff;--bg2:#ffffff;--surface:#e4eaf8;--border:#c8d4f0;--text:#0f1420;--muted:#5a6a8a;--card:#ffffff}
+body{background:var(--bg);color:var(--text);font-family:'Sora',sans-serif;transition:background .3s,color .3s}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.app{display:flex;min-height:100vh}
+.sidebar{width:260px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;height:100vh;overflow-y:auto;z-index:100;transition:background .3s,border-color .3s}
+.logo{padding:22px 20px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);text-decoration:none}
+.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:10px;display:grid;place-items:center;font-size:18px;flex-shrink:0}
+.logo-text{font-size:17px;font-weight:800;color:var(--text)}.logo-text em{font-style:normal;color:var(--accent)}
+.nav{flex:1;padding:14px 0}.nav-sec{margin-bottom:6px}
+.nav-lbl{font-size:10px;font-weight:700;letter-spacing:2px;color:var(--muted);padding:8px 20px;text-transform:uppercase}
+.nav-a{display:flex;align-items:center;gap:12px;padding:10px 20px;color:var(--muted);font-size:13.5px;font-weight:500;transition:.2s;border-left:3px solid transparent;text-decoration:none}
+.nav-a:hover{color:var(--text);background:rgba(128,128,128,.06)}
+.nav-a.active{color:var(--accent);background:rgba(0,229,255,.07);border-left-color:var(--accent)}
+.nav-a .ic{width:18px;text-align:center;flex-shrink:0}
+.badge{margin-left:auto;background:var(--accent2);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:999px}
+.sb-foot{padding:14px;border-top:1px solid var(--border)}
+.user-card{display:flex;align-items:center;gap:10px;background:var(--surface);padding:10px 12px;border-radius:12px;cursor:pointer;text-decoration:none;transition:.2s}
+.av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--accent2),var(--accent));display:grid;place-items:center;font-size:14px;font-weight:700;flex-shrink:0;color:#fff}
+.uname{font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.uplan{font-size:11px;color:var(--accent3);font-weight:600}
+.logout{margin-top:8px;display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;cursor:pointer;color:var(--muted);font-size:12px;font-weight:600;transition:.2s;border:none;background:none;font-family:inherit;width:100%}
+.logout:hover{color:var(--red)}
+.main{margin-left:260px;flex:1;min-height:100vh;display:flex;flex-direction:column}
+.topbar{position:sticky;top:0;z-index:50;background:rgba(10,12,16,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 32px;height:60px;display:flex;align-items:center;justify-content:space-between;transition:background .3s,border-color .3s}
+[data-theme="light"] .topbar{background:rgba(240,244,255,.9)}
+.topbar-l .ttl{font-size:17px;font-weight:700}.topbar-l .tsub{font-size:12px;color:var(--muted);margin-top:1px}
+.topbar-r{display:flex;align-items:center;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:.2s;font-family:inherit}
+.btn-p{background:var(--accent);color:#000}.btn-p:hover{background:#00cfeb}
+.btn-g{background:transparent;color:var(--muted);border:1px solid var(--border)}.btn-g:hover{color:var(--text);border-color:var(--muted)}
+.icon-btn{width:36px;height:36px;border-radius:8px;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center;cursor:pointer;transition:.2s}
+.icon-btn:hover{border-color:var(--accent)}
+.content{padding:28px 32px;flex:1}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;transition:background .3s,border-color .3s}
+.card-title{font-size:15px;font-weight:700;margin-bottom:18px;display:flex;align-items:center;gap:8px}
+.pbar{height:6px;background:var(--surface);border-radius:999px;overflow:hidden}
+.pbar-fill{height:100%;border-radius:999px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.fadein>*{animation:fadeUp .35s ease both}
+.hsa-hero{background:linear-gradient(135deg,#0d1f3c,#1a0a2e);border:1px solid var(--border);border-radius:20px;padding:32px;margin-bottom:24px;text-align:center;position:relative;overflow:hidden}
+.hsa-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(124,58,237,.25),transparent 60%);pointer-events:none}
+.hbadge{display:inline-block;background:var(--accent2);color:#fff;font-size:11px;font-weight:700;padding:4px 14px;border-radius:999px;margin-bottom:12px;position:relative}
+.hsa-hero h2{font-size:26px;font-weight:800;margin-bottom:8px;position:relative}
+.hsa-hero p{color:var(--muted);font-size:14px;position:relative;margin-bottom:20px}
+.hbtns{display:flex;gap:12px;justify-content:center;position:relative}
+.parts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px}
+.part-c{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;text-align:center;cursor:pointer;transition:.25s}
+.part-c:hover{border-color:var(--accent2);transform:translateY(-2px);background:rgba(124,58,237,.05)}
+.pc-ic{font-size:30px;margin-bottom:10px}.pc-t{font-size:15px;font-weight:800;margin-bottom:4px}.pc-s{font-size:12px;color:var(--muted);margin-bottom:12px}
+.pc-meta{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.chip{font-size:11px;background:var(--surface);color:var(--muted);padding:3px 10px;border-radius:6px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:24px}
+.lb-item{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--border)}
+.lb-item:last-child{border-bottom:none}
+.lbr{width:24px;font-size:13px;font-weight:800;font-family:'Space Mono';text-align:center;flex-shrink:0}
+.lbn{flex:1;font-size:13px;font-weight:600}.lbs{font-family:'Space Mono';font-size:14px;font-weight:700;color:var(--accent)}
+.lbs.me{color:var(--accent3)}
+.sched-item{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)}
+.sched-item:last-child{border-bottom:none}
+.sic{width:40px;height:40px;border-radius:10px;display:grid;place-items:center;font-size:18px;flex-shrink:0}
+.sit{flex:1}.stt{font-size:13px;font-weight:700;margin-bottom:2px}.sts{font-size:11px;color:var(--muted)}
+.reg-btn{padding:7px 14px;font-size:12px;background:linear-gradient(135deg,var(--accent2),#6d28d9);border:none;border-radius:8px;color:#fff;cursor:pointer;font-weight:700;font-family:inherit;transition:.2s;white-space:nowrap}
+.reg-btn:hover{transform:translateY(-1px);box-shadow:0 4px 12px rgba(124,58,237,.4)}
+.reg-btn.done{background:var(--surface);color:var(--green);border:1px solid var(--green)}
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
+.src{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;text-align:center}
+.srv{font-size:22px;font-weight:800;font-family:'Space Mono';margin-bottom:4px}.srl{font-size:11px;color:var(--muted)}
+.exam-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);z-index:200;align-items:center;justify-content:center}
+.exam-ov.show{display:flex}
+.exam-box{background:var(--bg2);border:1px solid var(--border);border-radius:20px;width:800px;max-width:96vw;max-height:90vh;display:flex;flex-direction:column;overflow:hidden}
+.exam-hdr{padding:18px 26px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,rgba(124,58,237,.1),transparent)}
+.exam-title{font-size:16px;font-weight:800}
+.exam-timer{font-family:'Space Mono';font-size:18px;font-weight:900;color:var(--accent2);background:rgba(124,58,237,.12);padding:6px 16px;border-radius:10px}
+.exam-close{width:30px;height:30px;border-radius:8px;border:1px solid var(--border);background:var(--surface);cursor:pointer;display:grid;place-items:center;color:var(--muted);transition:.2s}
+.exam-close:hover{color:var(--red);border-color:var(--red)}
+.exam-body{display:flex;flex:1;overflow:hidden}
+.exam-parts{width:200px;background:var(--bg);border-right:1px solid var(--border);overflow-y:auto;padding:14px}
+.ep-title{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:10px}
+.ep-part{padding:10px 12px;border-radius:8px;cursor:pointer;margin-bottom:4px;transition:.2s;border:1px solid transparent}
+.ep-part:hover{background:var(--surface)}
+.ep-part.active{background:rgba(124,58,237,.1);border-color:var(--accent2);color:var(--accent2)}
+.ep-name{font-size:12px;font-weight:700}.ep-sub{font-size:10px;color:var(--muted);margin-top:2px}
+.exam-qs{flex:1;overflow-y:auto;padding:20px 26px}
+.exam-q{margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid var(--border)}
+.exam-q:last-child{border-bottom:none}
+.eq-num{font-size:11px;font-weight:700;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:1px}
+.eq-text{font-size:14px;font-weight:600;line-height:1.7;margin-bottom:14px}
+.eq-opts{display:flex;flex-direction:column;gap:7px}
+.eq-opt{display:flex;align-items:center;gap:10px;padding:10px 14px;border:1.5px solid var(--border);border-radius:10px;cursor:pointer;font-size:13px;transition:.2s}
+.eq-opt:hover{border-color:var(--accent2)}
+.eq-opt.picked{border-color:var(--accent2);background:rgba(124,58,237,.07)}
+.eq-lbl{width:24px;height:24px;border-radius:6px;background:var(--surface);display:grid;place-items:center;font-size:11px;font-weight:800;flex-shrink:0;font-family:'Space Mono'}
+.eq-opt.picked .eq-lbl{background:var(--accent2);color:#fff}
+.exam-foot{padding:14px 26px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+</style>
+</head>
+<body>
+<div class="app">
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <a class="logo" href="dashboard.html"><div class="logo-icon">📚</div><div class="logo-text">Luyen<em>Thi</em>360</div></a>
+  <nav class="nav">
+    <div class="nav-sec"><div class="nav-lbl">Tổng quan</div>
+      <a class="nav-a" id="na-home" href="dashboard.html"><span class="ic">🏠</span>Dashboard</a>
+    </div>
+    <div class="nav-sec"><div class="nav-lbl">Luyện tập</div>
+      <a class="nav-a" id="na-mon" href="luyen-mon.html"><span class="ic">📖</span>Luyện theo môn</a>
+      <a class="nav-a" id="na-hsa" href="hsa.html"><span class="ic">🏛️</span>Phòng luyện HSA<span class="badge">HOT</span></a>
+    </div>
+    <div class="nav-sec"><div class="nav-lbl">Tra cứu</div>
+      <a class="nav-a" id="na-bank" href="ngan-hang-de.html"><span class="ic">🗂️</span>Ngân hàng đề</a>
+      <a class="nav-a" id="na-set" href="cai-dat.html"><span class="ic">⚙️</span>Cài đặt</a>
+    </div>
+  </nav>
+  <div class="sb-foot">
+    <a class="user-card" href="cai-dat.html"><div class="av" id="sb-av">?</div><div><div class="uname" id="sb-name">Đang tải...</div><div class="uplan">⭐ PRO</div></div></a>
+    <button class="logout" onclick="location.href='dang-nhap.html'">🚪 Đăng xuất</button>
+  </div>
+</aside>
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-l"><div class="ttl">Phòng luyện HSA</div><div class="tsub">Đánh giá năng lực – ĐH Quốc gia Hà Nội</div></div>
+    <div class="topbar-r"><button class="icon-btn" id="theme-btn" onclick="toggleTheme()">☀️</button></div>
+  </div>
+  <div class="content fadein">
+    <div class="hsa-hero">
+      <div class="hbadge">🏛️ ĐẠI HỌC QUỐC GIA HÀ NỘI</div>
+      <h2>Phòng Luyện Thi HSA</h2>
+      <p>Bài thi Đánh giá năng lực · 150 câu · 195 phút · 3 phần thi</p>
+      <div class="hbtns">
+        <button class="btn btn-p" style="font-size:14px;padding:11px 28px" onclick="openExam()">🚀 Thi Full Đề</button>
+        <button class="btn btn-g" style="font-size:14px;padding:11px 28px">📅 Xem lịch thi thử</button>
+      </div>
+    </div>
+    <div class="stats-row">
+      <div class="src"><div class="srv" style="color:var(--accent2)">118</div><div class="srl">Điểm thi cao nhất</div></div>
+      <div class="src"><div class="srv" style="color:var(--accent)">11</div><div class="srl">Lần đã thi</div></div>
+      <div class="src"><div class="srv" style="color:var(--green)">72%</div><div class="srl">Tỉ lệ câu đúng</div></div>
+      <div class="src"><div class="srv" style="color:var(--accent3)">#4</div><div class="srl">Xếp hạng tuần</div></div>
+    </div>
+    <div class="parts-grid">
+      <div class="part-c" onclick="openExam('dinh-luong')"><div class="pc-ic">🔢</div><div class="pc-t">Tư duy định lượng</div><div class="pc-s">Toán học &amp; suy luận số học</div><div class="pc-meta"><span class="chip">50 câu</span><span class="chip">75 phút</span><span class="chip">Khó</span></div></div>
+      <div class="part-c" onclick="openExam('dinh-tinh')"><div class="pc-ic">📝</div><div class="pc-t">Tư duy định tính</div><div class="pc-s">Đọc hiểu &amp; Ngôn ngữ</div><div class="pc-meta"><span class="chip">50 câu</span><span class="chip">60 phút</span><span class="chip">Trung bình</span></div></div>
+      <div class="part-c" onclick="openExam('khoa-hoc')"><div class="pc-ic">🔬</div><div class="pc-t">Khoa học</div><div class="pc-s">Lý · Hóa · Sinh · Địa · Sử</div><div class="pc-meta"><span class="chip">50 câu</span><span class="chip">60 phút</span><span class="chip">Khó</span></div></div>
+    </div>
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">🏆 Bảng xếp hạng tuần này</div>
+        <div class="lb-item"><span class="lbr" style="color:#f59e0b">🥇</span><div class="lbn">Trần Minh Quân</div><div class="lbs">127.5</div></div>
+        <div class="lb-item"><span class="lbr" style="color:#9ca3af">🥈</span><div class="lbn">Lê Thị Hoa</div><div class="lbs">124.0</div></div>
+        <div class="lb-item"><span class="lbr" style="color:#b45309">🥉</span><div class="lbn">Phạm Đức Long</div><div class="lbs">122.5</div></div>
+        <div class="lb-item"><span class="lbr" style="color:var(--accent3)">4</span><div class="lbn" id="lb-me">Bạn (bạn)</div><div class="lbs me">118.0</div></div>
+        <div class="lb-item"><span class="lbr">5</span><div class="lbn">Vũ Thanh Hằng</div><div class="lbs">115.5</div></div>
+      </div>
+      <div class="card">
+        <div class="card-title">📅 Lịch thi thử sắp tới</div>
+        <div class="sched-item"><div class="sic" style="background:rgba(124,58,237,.1)">📋</div><div class="sit"><div class="stt">Mock Test #12</div><div class="sts">Thứ 7 · 07/03/2026 · 8:00 AM</div></div><button class="reg-btn" onclick="this.textContent='✅ Đã đăng ký';this.classList.add('done')">Đăng ký</button></div>
+        <div class="sched-item"><div class="sic" style="background:rgba(0,229,255,.1)">📋</div><div class="sit"><div class="stt">Mock Test #13</div><div class="sts">Thứ 7 · 14/03/2026 · 8:00 AM</div></div><button class="reg-btn" onclick="this.textContent='✅ Đã đăng ký';this.classList.add('done')">Đăng ký</button></div>
+        <div class="sched-item"><div class="sic" style="background:rgba(16,185,129,.1)">📋</div><div class="sit"><div class="stt">Mock Test #14</div><div class="sts">Thứ 7 · 21/03/2026 · 8:00 AM</div></div><button class="reg-btn" onclick="this.textContent='✅ Đã đăng ký';this.classList.add('done')">Đăng ký</button></div>
+        <div class="sched-item"><div class="sic" style="background:rgba(245,158,11,.1)">📋</div><div class="sit"><div class="stt">Mock Test #15 (Final)</div><div class="sts">Thứ 7 · 28/03/2026 · 8:00 AM</div></div><button class="reg-btn" onclick="this.textContent='✅ Đã đăng ký';this.classList.add('done')">Đăng ký</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<!-- EXAM OVERLAY -->
+<div class="exam-ov" id="exam-ov">
+  <div class="exam-box">
+    <div class="exam-hdr">
+      <div class="exam-title">🏛️ HSA Full Exam – Đề số 12</div>
+      <div class="exam-timer" id="exam-timer">03:15:00</div>
+      <div class="exam-close" onclick="closeExam()">✕</div>
+    </div>
+    <div class="exam-body">
+      <div class="exam-parts">
+        <div class="ep-title">Phần thi</div>
+        <div class="ep-part active" onclick="switchPart(this,'dinh-luong')"><div class="ep-name">🔢 Tư duy định lượng</div><div class="ep-sub">Câu 1–50 · 75 phút</div></div>
+        <div class="ep-part" onclick="switchPart(this,'dinh-tinh')"><div class="ep-name">📝 Tư duy định tính</div><div class="ep-sub">Câu 51–100 · 60 phút</div></div>
+        <div class="ep-part" onclick="switchPart(this,'khoa-hoc')"><div class="ep-name">🔬 Khoa học</div><div class="ep-sub">Câu 101–150 · 60 phút</div></div>
+        <div style="margin-top:20px;padding:12px;background:rgba(124,58,237,.08);border-radius:10px;border:1px solid rgba(124,58,237,.2)">
+          <div style="font-size:11px;color:var(--muted);margin-bottom:4px">Tiến độ</div>
+          <div id="ep-prog" style="font-size:13px;font-weight:700;color:var(--accent2)">0 / 150 câu</div>
+          <div class="pbar" style="margin-top:6px"><div class="pbar-fill" id="ep-prog-fill" style="width:0%;background:var(--accent2)"></div></div>
+        </div>
+      </div>
+      <div class="exam-qs" id="exam-qs"></div>
+    </div>
+    <div class="exam-foot" id="exam-foot">
+      <div id="ans-count" style="font-size:13px;color:var(--muted)">Đã trả lời: <strong>0</strong> / 150 câu</div>
+      <div style="display:flex;gap:10px">
+        <button class="btn btn-g" onclick="closeExam()">Lưu &amp; Thoát</button>
+        <button class="btn btn-p" style="background:linear-gradient(135deg,var(--accent2),#6d28d9);color:#fff" onclick="submitExam()">Nộp bài ✓</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+function applyTheme(t){document.documentElement.setAttribute('data-theme',t);localStorage.setItem('lt360_theme',t);const b=document.getElementById('theme-btn');if(b)b.textContent=t==='dark'?'☀️':'🌙'}
+function toggleTheme(){applyTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark')}
+(function(){
+  applyTheme(localStorage.getItem('lt360_theme')||'dark');
+  const n=localStorage.getItem('lt360_user')||'bạn';
+  document.getElementById('sb-name').textContent=n;
+  document.getElementById('sb-av').textContent=n.charAt(0).toUpperCase();
+  document.getElementById('lb-me').textContent=n+' (bạn)';
+  document.getElementById('na-hsa').classList.add('active');
+})();
+const SAMPLE_QS={'dinh-luong':[{t:'Cho dãy số: 2, 5, 10, 17, 26, ... Số hạng tiếp theo là bao nhiêu?',o:['35','36','37','38'],a:2},{t:'Một cửa hàng giảm giá 20% rồi lại giảm thêm 10%. Tổng giảm giá là bao nhiêu %?',o:['28%','29%','30%','25%'],a:0}],'dinh-tinh':[{t:'"Thành công không phải là chìa khóa của hạnh phúc. Hạnh phúc mới là chìa khóa của thành công." Ý chính là gì?',o:['Hạnh phúc quan trọng hơn','Thành công quan trọng hơn','Cả hai bằng nhau','Không cái nào'],a:0}],'khoa-hoc':[{t:'Đơn vị đo lực trong hệ SI là gì?',o:['Pascal','Joule','Newton','Watt'],a:2},{t:'Nguyên tố nào có ký hiệu hóa học là "Fe"?',o:['Fluor','Sắt','Thiếc','Flo'],a:1}]};
+let examAnswers={},examTimer=null,examSeconds=11700;
+function openExam(part){document.getElementById('exam-ov').classList.add('show');document.body.style.overflow='hidden';if(part)switchPart(null,part);else renderExamPart('dinh-luong');startExamTimer()}
+function closeExam(){document.getElementById('exam-ov').classList.remove('show');document.body.style.overflow='';clearInterval(examTimer)}
+function switchPart(el,part){if(el){document.querySelectorAll('.ep-part').forEach(e=>e.classList.remove('active'));el.classList.add('active')}renderExamPart(part)}
+function renderExamPart(part){const qs=SAMPLE_QS[part]||[];const offset=part==='dinh-luong'?0:part==='dinh-tinh'?50:100;document.getElementById('exam-qs').innerHTML=qs.map((q,i)=>`<div class="exam-q"><div class="eq-num">Câu ${offset+i+1}</div><div class="eq-text">${q.t}</div><div class="eq-opts">${q.o.map((o,j)=>`<div class="eq-opt ${examAnswers[offset+i]===j?'picked':''}" onclick="pickAns(${offset+i},${j},this)"><span class="eq-lbl">${['A','B','C','D'][j]}</span>${o}</div>`).join('')}</div></div>`).join('')+`<div style="padding:20px;text-align:center;color:var(--muted);font-size:13px">... Demo ${qs.length} câu mẫu trong tổng số 50 câu</div>`}
+function pickAns(qi,ai,el){examAnswers[qi]=ai;el.closest('.eq-opts').querySelectorAll('.eq-opt').forEach(e=>e.classList.remove('picked'));el.classList.add('picked');const cnt=Object.keys(examAnswers).length;document.getElementById('ans-count').innerHTML=`Đã trả lời: <strong>${cnt}</strong> / 150 câu`;document.getElementById('ep-prog').textContent=cnt+' / 150 câu';document.getElementById('ep-prog-fill').style.width=(cnt/150*100)+'%'}
+function startExamTimer(){clearInterval(examTimer);examSeconds=11700;examTimer=setInterval(()=>{examSeconds--;const h=Math.floor(examSeconds/3600),m=Math.floor((examSeconds%3600)/60),s=examSeconds%60;document.getElementById('exam-timer').textContent=String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');if(examSeconds<=0){clearInterval(examTimer);submitExam()}if(examSeconds<=300)document.getElementById('exam-timer').style.color='var(--red)'},1000)}
+function submitExam(){clearInterval(examTimer);const cnt=Object.keys(examAnswers).length,score=Math.floor(70+Math.random()*30);document.getElementById('exam-qs').innerHTML=`<div style="text-align:center;padding:40px 20px"><div style="font-size:56px;margin-bottom:12px">🎯</div><div style="font-size:40px;font-weight:900;font-family:'Space Mono';color:var(--accent2);margin-bottom:8px">${score}</div><div style="font-size:18px;font-weight:700;margin-bottom:6px">${score>=100?'🏆 Xuất sắc!':score>=80?'⭐ Tốt lắm!':'📈 Khá tốt!'}</div><div style="font-size:13px;color:var(--muted);margin-bottom:24px">Đã trả lời ${cnt} / 150 câu</div><button class="btn btn-p" style="background:linear-gradient(135deg,var(--accent2),#6d28d9);color:#fff" onclick="closeExam()">✓ Hoàn tất</button></div>`;document.getElementById('exam-foot').style.display='none'}
+</script>
+</body></html>
