@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dashboard – LuyenThi360</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0c10;--bg2:#0f1318;--surface:#1a2030;--border:#252d3d;--accent:#00e5ff;--accent2:#7c3aed;--accent3:#f59e0b;--green:#10b981;--red:#ef4444;--text:#e8edf5;--muted:#6b7a99;--card:#141920}
+[data-theme="light"]{--bg:#f0f4ff;--bg2:#ffffff;--surface:#e4eaf8;--border:#c8d4f0;--text:#0f1420;--muted:#5a6a8a;--card:#ffffff}
+body{background:var(--bg);color:var(--text);font-family:'Sora',sans-serif;transition:background .3s,color .3s}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+.app{display:flex;min-height:100vh}
+.sidebar{width:260px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;height:100vh;overflow-y:auto;z-index:100;transition:background .3s,border-color .3s}
+.logo{padding:22px 20px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);text-decoration:none}
+.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:10px;display:grid;place-items:center;font-size:18px;flex-shrink:0}
+.logo-text{font-size:17px;font-weight:800;color:var(--text)}.logo-text em{font-style:normal;color:var(--accent)}
+.nav{flex:1;padding:14px 0}
+.nav-sec{margin-bottom:6px}
+.nav-lbl{font-size:10px;font-weight:700;letter-spacing:2px;color:var(--muted);padding:8px 20px;text-transform:uppercase}
+.nav-a{display:flex;align-items:center;gap:12px;padding:10px 20px;color:var(--muted);font-size:13.5px;font-weight:500;transition:.2s;border-left:3px solid transparent;text-decoration:none}
+.nav-a:hover{color:var(--text);background:rgba(128,128,128,.06)}
+.nav-a.active{color:var(--accent);background:rgba(0,229,255,.07);border-left-color:var(--accent)}
+.nav-a .ic{width:18px;text-align:center;flex-shrink:0}
+.badge{margin-left:auto;background:var(--accent2);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:999px}
+.sb-foot{padding:14px;border-top:1px solid var(--border)}
+.user-card{display:flex;align-items:center;gap:10px;background:var(--surface);padding:10px 12px;border-radius:12px;cursor:pointer;text-decoration:none;transition:.2s}
+.user-card:hover{border:1px solid var(--border)}
+.av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--accent2),var(--accent));display:grid;place-items:center;font-size:14px;font-weight:700;flex-shrink:0;color:#fff}
+.uname{font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.uplan{font-size:11px;color:var(--accent3);font-weight:600}
+.logout{margin-top:8px;display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;cursor:pointer;color:var(--muted);font-size:12px;font-weight:600;transition:.2s;border:none;background:none;font-family:inherit;width:100%}
+.logout:hover{color:var(--red)}
+.main{margin-left:260px;flex:1;min-height:100vh;display:flex;flex-direction:column}
+.topbar{position:sticky;top:0;z-index:50;background:rgba(10,12,16,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 32px;height:60px;display:flex;align-items:center;justify-content:space-between;transition:background .3s,border-color .3s}
+[data-theme="light"] .topbar{background:rgba(240,244,255,.9)}
+.topbar-l .ttl{font-size:17px;font-weight:700}.topbar-l .tsub{font-size:12px;color:var(--muted);margin-top:1px}
+.topbar-r{display:flex;align-items:center;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:.2s;font-family:inherit}
+.btn-p{background:var(--accent);color:#000}.btn-p:hover{background:#00cfeb}
+.btn-g{background:transparent;color:var(--muted);border:1px solid var(--border)}.btn-g:hover{color:var(--text);border-color:var(--muted)}
+.icon-btn{width:36px;height:36px;border-radius:8px;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center;cursor:pointer;transition:.2s}
+.icon-btn:hover{border-color:var(--accent)}
+.content{padding:28px 32px;flex:1}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;transition:background .3s,border-color .3s}
+.card-title{font-size:15px;font-weight:700;margin-bottom:18px;display:flex;align-items:center;gap:8px}
+.pbar{height:6px;background:var(--surface);border-radius:999px;overflow:hidden}
+.pbar-fill{height:100%;border-radius:999px}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.fadein>*{animation:fadeUp .35s ease both}
+.fadein>*:nth-child(2){animation-delay:.05s}.fadein>*:nth-child(3){animation-delay:.1s}.fadein>*:nth-child(4){animation-delay:.15s}
+</style>
+<style>
+.welcome{background:linear-gradient(135deg,#0a1628,#160d30);border:1px solid var(--border);border-radius:20px;padding:28px 32px;display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;position:relative;overflow:hidden}
+.welcome::before{content:'';position:absolute;right:-40px;top:-40px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(0,229,255,.12),transparent 70%);pointer-events:none}
+.welcome h1{font-size:24px;font-weight:800;margin-bottom:6px}.welcome h1 span{color:var(--accent)}
+.welcome p{font-size:13px;color:var(--muted)}
+.wstats{display:flex;gap:28px;flex-shrink:0}
+.wstat{text-align:center}.wsv{font-size:28px;font-weight:800;font-family:'Space Mono';color:var(--accent)}.wsl{font-size:11px;color:var(--muted);margin-top:2px}
+
+/* COUNTDOWN */
+.countdown-band{background:linear-gradient(135deg,#0d1f0d,#0a1628);border:1px solid var(--border);border-radius:20px;padding:24px 32px;margin-bottom:28px;display:flex;align-items:center;justify-content:space-between;position:relative;overflow:hidden}
+.countdown-band::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(16,185,129,.06),transparent 70%);pointer-events:none}
+.cd-left .cd-label{font-size:12px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.cd-left .cd-label::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+.cd-left .cd-title{font-size:17px;font-weight:800;color:var(--text);margin-bottom:2px}
+.cd-left .cd-date{font-size:12px;color:var(--muted)}
+.cd-units{display:flex;gap:10px}
+.cd-unit{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 16px;text-align:center;min-width:72px}
+.cd-val{font-size:30px;font-weight:900;font-family:'Space Mono';color:var(--green);line-height:1}
+.cd-lbl{font-size:10px;color:var(--muted);margin-top:4px;text-transform:uppercase;letter-spacing:.5px}
+.cd-sep{font-size:26px;font-weight:800;color:var(--muted);align-self:center;padding-bottom:8px}
+
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px}
+.sc{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;position:relative;overflow:hidden;transition:.25s;cursor:default}
+.sc:hover{border-color:var(--accent);transform:translateY(-2px)}
+.sc-icon{font-size:20px;margin-bottom:10px}.sc-val{font-size:26px;font-weight:800;font-family:'Space Mono';margin-bottom:4px}.sc-lbl{font-size:12px;color:var(--muted)}
+.sc-delta{position:absolute;top:14px;right:14px;font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px}
+.up{background:rgba(16,185,129,.15);color:var(--green)}.dn{background:rgba(239,68,68,.15);color:var(--red)}
+
+.two-col{display:grid;grid-template-columns:2fr 1fr;gap:22px;margin-bottom:28px}
+
+.chart-bars{height:140px;display:flex;align-items:flex-end;gap:5px;padding-bottom:4px;margin-bottom:16px}
+.bar-w{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px}
+.bar-b{width:100%;border-radius:5px 5px 0 0;min-height:4px;transition:.6s}
+.bar-l{font-size:9px;color:var(--muted);font-family:'Space Mono'}
+
+.spr{margin-bottom:12px}
+.spr-row{display:flex;justify-content:space-between;margin-bottom:5px}
+.spr-name{font-size:13px;font-weight:600}.spr-pct{font-size:12px;color:var(--muted);font-family:'Space Mono'}
+
+.sug-item{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--border)}
+.sug-item:last-child{border-bottom:none}
+.sig{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;font-size:15px;flex-shrink:0}
+.sit{flex:1}.sit-t{font-size:13px;font-weight:600;margin-bottom:2px}.sit-s{font-size:11px;color:var(--muted)}
+.sug-btn{padding:6px 12px;font-size:11px;background:var(--surface);border:1px solid var(--border);border-radius:7px;cursor:pointer;color:var(--text);font-weight:600;font-family:inherit;transition:.2s;white-space:nowrap}
+.sug-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+</style>
+</head>
+<body>
+<div class="app">
+<!-- SIDEBAR -->
+<aside class="sidebar">
+  <a class="logo" href="index.html">
+    <div class="logo-icon">📚</div>
+    <div class="logo-text">Luyen<em>Thi</em>360</div>
+  </a>
+  <nav class="nav">
+    <div class="nav-sec"><div class="nav-lbl">Tổng quan</div>
+      <a class="nav-a" id="na-home" href="index.html"><span class="ic">🏠</span>Dashboard</a>
+    </div>
+    <div class="nav-sec"><div class="nav-lbl">Luyện tập</div>
+      <a class="nav-a" id="na-mon" href="luyen-mon.html"><span class="ic">📖</span>Luyện theo môn</a>
+      <a class="nav-a" id="na-hsa" href="hsa.html"><span class="ic">🏛️</span>Phòng luyện HSA<span class="badge">HOT</span></a>
+    </div>
+    <div class="nav-sec"><div class="nav-lbl">Phân tích</div>
+      <a class="nav-a" id="na-bank" href="ngan-hang-de.html"><span class="ic">🗂️</span>Ngân hàng đề</a>
+      <a class="nav-a" id="na-set" href="cai-dat.html"><span class="ic">⚙️</span>Cài đặt</a>
+    </div>
+  </nav>
+  <div class="sb-foot">
+    <a class="user-card" href="cai-dat.html">
+      <div class="av" id="sb-av">?</div>
+      <div><div class="uname" id="sb-name">Đang tải...</div><div class="uplan">⭐ PRO</div></div>
+    </a>
+    <button class="logout" onclick="location.href='dang-nhap.html'">🚪 Đăng xuất</button>
+  </div>
+</aside>
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-l"><div class="ttl">Dashboard</div><div class="tsub">Tổng quan cá nhân</div></div>
+    <div class="topbar-r">
+      <button class="icon-btn" id="theme-btn" onclick="toggleTheme()" title="Đổi giao diện">☀️</button>
+      <a class="btn btn-p" href="luyen-mon.html">▶ Luyện ngay</a>
+    </div>
+  </div>
+  <div class="content fadein">
+    <!-- WELCOME -->
+    <div class="welcome">
+      <div><h1>Chào trở lại, <span id="wname">bạn</span> 👋</h1><p>Hôm nay bạn đã sẵn sàng chinh phục 10 điểm chưa?</p></div>
+      <div class="wstats">
+        <div class="wstat"><div class="wsv">7.8</div><div class="wsl">Điểm TB</div></div>
+        <div class="wstat"><div class="wsv">312</div><div class="wsl">Câu hôm nay</div></div>
+        <div class="wstat"><div class="wsv">🔥18</div><div class="wsl">Streak ngày</div></div>
+      </div>
+    </div>
+
+    <!-- COUNTDOWN -->
+    <div class="countdown-band">
+      <div class="cd-left">
+        <div class="cd-label">Đếm ngược đến kỳ thi</div>
+        <div class="cd-title">🎯 Kỳ thi THPT Quốc Gia 2026</div>
+        <div class="cd-date">📅 Dự kiến: 25/06/2026 · Cố lên, bạn làm được!</div>
+      </div>
+      <div class="cd-units">
+        <div class="cd-unit"><div class="cd-val" id="cd-d">--</div><div class="cd-lbl">Ngày</div></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-unit"><div class="cd-val" id="cd-h">--</div><div class="cd-lbl">Giờ</div></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-unit"><div class="cd-val" id="cd-m">--</div><div class="cd-lbl">Phút</div></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-unit"><div class="cd-val" id="cd-s">--</div><div class="cd-lbl">Giây</div></div>
+      </div>
+    </div>
+
+    <!-- STAT CARDS -->
+    <div class="stats-grid">
+      <div class="sc"><div class="sc-icon">📐</div><div class="sc-val" style="color:var(--accent)">8.2</div><div class="sc-lbl">Điểm Toán dự đoán</div><span class="sc-delta up">+0.4</span></div>
+      <div class="sc"><div class="sc-icon">⚡</div><div class="sc-val" style="color:#a78bfa">7.5</div><div class="sc-lbl">Điểm Vật lý dự đoán</div><span class="sc-delta up">+0.2</span></div>
+      <div class="sc"><div class="sc-icon">🧪</div><div class="sc-val" style="color:var(--green)">7.6</div><div class="sc-lbl">Điểm Hóa học dự đoán</div><span class="sc-delta dn">-0.1</span></div>
+      <div class="sc"><div class="sc-icon">🌍</div><div class="sc-val" style="color:var(--accent3)">7.9</div><div class="sc-lbl">Tiếng Anh dự đoán</div><span class="sc-delta up">+0.6</span></div>
+    </div>
+
+    <!-- TWO COL -->
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">📈 Tiến độ từng môn</div>
+        <div class="chart-bars">
+          <div class="bar-w"><div class="bar-b" style="height:72%;background:linear-gradient(to top,var(--accent),#0066ff)"></div><div class="bar-l">T2</div></div>
+          <div class="bar-w"><div class="bar-b" style="height:55%;background:linear-gradient(to top,var(--accent),#0066ff)"></div><div class="bar-l">T3</div></div>
+          <div class="bar-w"><div class="bar-b" style="height:83%;background:linear-gradient(to top,var(--accent),#0066ff)"></div><div class="bar-l">T4</div></div>
+          <div class="bar-w"><div class="bar-b" style="height:60%;background:linear-gradient(to top,var(--accent),#0066ff)"></div><div class="bar-l">T5</div></div>
+          <div class="bar-w"><div class="bar-b" style="height:90%;background:linear-gradient(to top,var(--accent),#0066ff)"></div><div class="bar-l">T6</div></div>
+          <div class="bar-w"><div class="bar-b" style="height:40%;background:linear-gradient(to top,var(--accent),#0066ff)"></div><div class="bar-l">T7</div></div>
+          <div class="bar-w"><div class="bar-b" style="height:68%;background:linear-gradient(to top,var(--accent),#0066ff)"></div><div class="bar-l">CN</div></div>
+        </div>
+        <div class="spr"><div class="spr-row"><span class="spr-name">📐 Toán</span><span class="spr-pct">68%</span></div><div class="pbar"><div class="pbar-fill" style="width:68%;background:linear-gradient(90deg,var(--accent),#0066ff)"></div></div></div>
+        <div class="spr"><div class="spr-row"><span class="spr-name">⚡ Vật lý</span><span class="spr-pct">54%</span></div><div class="pbar"><div class="pbar-fill" style="width:54%;background:linear-gradient(90deg,#a78bfa,var(--accent2))"></div></div></div>
+        <div class="spr"><div class="spr-row"><span class="spr-name">🧪 Hóa học</span><span class="spr-pct">71%</span></div><div class="pbar"><div class="pbar-fill" style="width:71%;background:linear-gradient(90deg,var(--green),#059669)"></div></div></div>
+        <div class="spr"><div class="spr-row"><span class="spr-name">🌍 Tiếng Anh</span><span class="spr-pct">82%</span></div><div class="pbar"><div class="pbar-fill" style="width:82%;background:linear-gradient(90deg,var(--accent3),#f97316)"></div></div></div>
+      </div>
+      <div class="card">
+        <div class="card-title">💡 Gợi ý học tiếp</div>
+        <div class="sug-item"><div class="sig" style="background:rgba(0,229,255,.1)">📐</div><div class="sit"><div class="sit-t">Hàm số &amp; Đồ thị</div><div class="sit-s">Toán · 24 câu chưa làm</div></div><button class="sug-btn" onclick="location.href='luyen-mon.html'">Học</button></div>
+        <div class="sug-item"><div class="sig" style="background:rgba(167,139,250,.1)">⚡</div><div class="sit"><div class="sit-t">Điện xoay chiều</div><div class="sit-s">Vật lý · Sai 8/15 lần trước</div></div><button class="sug-btn" onclick="location.href='luyen-mon.html'">Ôn lại</button></div>
+        <div class="sug-item"><div class="sig" style="background:rgba(245,158,11,.1)">🏛️</div><div class="sit"><div class="sit-t">HSA Mock Test #7</div><div class="sit-s">Thi thử · 120 phút</div></div><button class="sug-btn" onclick="location.href='hsa.html'">Thi thử</button></div>
+        <div class="sug-item"><div class="sig" style="background:rgba(52,211,153,.1)">🧪</div><div class="sit"><div class="sit-t">Este – Lipit</div><div class="sit-s">Hóa · Chuyên đề điểm yếu</div></div><button class="sug-btn" onclick="location.href='luyen-mon.html'">Học</button></div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<script>
+function applyTheme(t){document.documentElement.setAttribute('data-theme',t);localStorage.setItem('lt360_theme',t);const b=document.getElementById('theme-btn');if(b)b.textContent=t==='dark'?'☀️':'🌙'}
+function toggleTheme(){applyTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark')}
+(function(){applyTheme(localStorage.getItem('lt360_theme')||'dark')})();
+// User name
+(function(){
+  const n=localStorage.getItem('lt360_user')||'bạn';
+  document.getElementById('wname').textContent=n;
+  const sbn=document.getElementById('sb-name');if(sbn)sbn.textContent=n;
+  const sbav=document.getElementById('sb-av');if(sbav)sbav.textContent=n.charAt(0).toUpperCase();
+  document.getElementById('na-home').classList.add('active');
+})();
+// Countdown to THPT 2026 (June 25, 2026 07:30 ICT = UTC+7)
+function updateCD(){
+  const target=new Date('2026-06-25T07:30:00+07:00');
+  const now=new Date();
+  let diff=target-now;
+  if(diff<0){document.querySelector('.countdown-band').innerHTML='<div style="text-align:center;width:100%;font-size:18px;font-weight:800;color:var(--green)">🎉 Kỳ thi đã diễn ra! Chúc mừng bạn!</div>';return}
+  const d=Math.floor(diff/86400000);
+  const h=Math.floor((diff%86400000)/3600000);
+  const m=Math.floor((diff%3600000)/60000);
+  const s=Math.floor((diff%60000)/1000);
+  document.getElementById('cd-d').textContent=String(d).padStart(3,'0');
+  document.getElementById('cd-h').textContent=String(h).padStart(2,'0');
+  document.getElementById('cd-m').textContent=String(m).padStart(2,'0');
+  document.getElementById('cd-s').textContent=String(s).padStart(2,'0');
+}
+updateCD();setInterval(updateCD,1000);
+</script>
+</body>
+</html>

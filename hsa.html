@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Phòng luyện HSA – LuyenThi360</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0a0c10;--bg2:#0f1318;--sur:#1a2030;--brd:#252d3d;--ac:#00e5ff;--ac2:#7c3aed;--ac3:#f59e0b;--gr:#10b981;--rd:#ef4444;--tx:#e8edf5;--mt:#6b7a99;--cd:#141920}
+[data-theme=light]{--bg:#f0f4ff;--bg2:#f8faff;--sur:#e8edf8;--brd:#c8d4f0;--tx:#1a2040;--mt:#5a6a90;--cd:#fff}
+html,body{height:100%;font-family:'Sora',sans-serif;background:var(--bg);color:var(--tx);transition:background .3s,color .3s}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:var(--brd);border-radius:2px}
+.app{display:flex;min-height:100vh}
+.sb{width:255px;background:var(--bg2);border-right:1px solid var(--brd);display:flex;flex-direction:column;position:fixed;height:100vh;overflow-y:auto;z-index:100}
+.sb-logo{padding:22px 20px;display:flex;align-items:center;gap:10px;text-decoration:none;border-bottom:1px solid var(--brd)}
+.sb-ico{width:36px;height:36px;background:linear-gradient(135deg,var(--ac),var(--ac2));border-radius:10px;display:grid;place-items:center;font-size:18px;flex-shrink:0}
+.sb-txt{font-size:17px;font-weight:800;color:var(--tx);letter-spacing:-.5px}
+.sb-txt em{font-style:normal;color:var(--ac)}
+.sb-nav{flex:1;padding:14px 0}
+.nb{margin-bottom:6px}.nlbl{font-size:10px;font-weight:700;letter-spacing:2px;color:var(--mt);padding:8px 20px;text-transform:uppercase}
+.na{display:flex;align-items:center;gap:11px;padding:10px 20px;color:var(--mt);font-size:13.5px;font-weight:500;transition:.2s;border-left:3px solid transparent;text-decoration:none}
+.na:hover{color:var(--tx);background:rgba(255,255,255,.04)}.na.on{color:var(--ac);background:rgba(0,229,255,.07);border-left-color:var(--ac)}
+.na .ic{width:18px;text-align:center;flex-shrink:0}
+.nbdg{margin-left:auto;background:var(--ac2);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:999px}
+.sb-foot{padding:14px;border-top:1px solid var(--brd)}
+.uc{display:flex;align-items:center;gap:10px;background:var(--sur);padding:10px 12px;border-radius:12px;cursor:pointer;text-decoration:none;margin-bottom:8px}
+.uav{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--ac2),var(--ac));display:grid;place-items:center;font-size:14px;font-weight:700;flex-shrink:0;color:#fff}
+.uname{font-size:13px;font-weight:600;color:var(--tx)}.uplan{font-size:11px;color:var(--ac3);font-weight:600}
+.lout{display:flex;align-items:center;gap:8px;padding:7px 12px;border-radius:9px;cursor:pointer;color:var(--mt);font-size:12px;font-weight:600;transition:.2s}.lout:hover{color:var(--rd)}
+.main{margin-left:255px;flex:1;display:flex;flex-direction:column}
+.topbar{position:sticky;top:0;z-index:50;background:rgba(10,12,16,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--brd);padding:0 30px;height:58px;display:flex;align-items:center;justify-content:space-between}
+[data-theme=light] .topbar{background:rgba(240,244,255,.92)}
+.tb-l h2{font-size:17px;font-weight:700}.tb-l p{font-size:12px;color:var(--mt)}
+.tb-r{display:flex;align-items:center;gap:10px}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:.2s;font-family:inherit;text-decoration:none}
+.btn-p{background:var(--ac);color:#000}.btn-p:hover{background:#00cfeb}
+.btn-v{background:linear-gradient(135deg,var(--ac2),#9333ea);color:#fff}.btn-v:hover{opacity:.9}
+.tbtn{width:36px;height:36px;border-radius:8px;background:var(--sur);border:1px solid var(--brd);cursor:pointer;display:grid;place-items:center;font-size:17px;transition:.2s}.tbtn:hover{border-color:var(--ac)}
+.content{padding:28px 30px;flex:1}
+/* HERO */
+.hero{background:linear-gradient(135deg,#0d1f3c,#1a0a2e);border:1px solid rgba(124,58,237,.3);border-radius:20px;padding:32px;margin-bottom:24px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(124,58,237,.25),transparent 60%)}
+.hero-tag{display:inline-block;background:var(--ac2);color:#fff;font-size:11px;font-weight:800;padding:4px 14px;border-radius:999px;margin-bottom:12px;position:relative;letter-spacing:.5px}
+.hero h2{font-size:26px;font-weight:800;margin-bottom:8px;position:relative}
+.hero p{color:var(--mt);font-size:14px;margin-bottom:22px;position:relative}
+.hero-acts{display:flex;gap:12px;justify-content:center;position:relative;flex-wrap:wrap}
+/* CARDS 3-col */
+.g3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px}
+.pc{background:var(--cd);border:1px solid var(--brd);border-radius:14px;padding:22px;cursor:pointer;transition:.25s;text-align:center}
+.pc:hover{border-color:var(--ac2);transform:translateY(-2px)}
+.pc-ic{font-size:28px;margin-bottom:10px}
+.pc-t{font-size:14px;font-weight:700;margin-bottom:4px}
+.pc-s{font-size:12px;color:var(--mt)}
+.pc-chips{display:flex;justify-content:center;gap:8px;margin-top:12px}
+.chip{font-size:11px;color:var(--mt);background:var(--sur);padding:3px 10px;border-radius:6px}
+/* TWO COL */
+.two{display:grid;grid-template-columns:3fr 2fr;gap:18px;margin-bottom:24px}
+.card{background:var(--cd);border:1px solid var(--brd);border-radius:16px;padding:22px}
+.ctit{font-size:15px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:7px}
+/* LEADERBOARD */
+.lb-item{display:flex;align-items:center;gap:13px;padding:11px 0;border-bottom:1px solid var(--brd)}
+.lb-item:last-child{border-bottom:none}
+.lb-rank{width:26px;font-size:13px;font-weight:800;font-family:'Space Mono';text-align:center;flex-shrink:0}
+.lb-av{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:700;flex-shrink:0}
+.lb-name{flex:1;font-size:13px;font-weight:600}
+.lb-score{font-family:'Space Mono';font-size:13px;font-weight:700;color:var(--ac)}
+.lb-bar{width:60px;height:4px;border-radius:999px;background:var(--sur);overflow:hidden;margin-left:8px}
+.lb-bf{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--ac),var(--ac2))}
+/* SCHEDULE */
+.sch-item{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--brd)}
+.sch-item:last-child{border-bottom:none}
+.sch-ic{width:36px;height:36px;border-radius:10px;background:rgba(124,58,237,.12);display:grid;place-items:center;font-size:16px;flex-shrink:0}
+.sch-t{font-size:13px;font-weight:600;margin-bottom:2px}
+.sch-s{font-size:11px;color:var(--mt)}
+.sch-btn{margin-left:auto;padding:6px 12px;font-size:11px;background:var(--sur);border:1px solid var(--brd);border-radius:7px;cursor:pointer;color:var(--tx);font-weight:600;transition:.2s;white-space:nowrap;font-family:inherit}
+.sch-btn:hover{border-color:var(--ac2);color:var(--ac2)}
+/* SCORE HISTORY */
+.sco-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
+.sco-c{background:var(--sur);border-radius:12px;padding:14px;text-align:center}
+.sco-v{font-size:22px;font-weight:800;font-family:'Space Mono'}
+.sco-l{font-size:11px;color:var(--mt);margin-top:3px}
+/* PROGRESS BAR */
+.pb{height:6px;background:var(--sur);border-radius:999px;overflow:hidden;margin-top:8px}
+.pbf{height:100%;border-radius:999px}
+/* EXAM MODAL */
+.eov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(8px);z-index:200;align-items:center;justify-content:center}
+.eov.on{display:flex}
+.ebox{background:var(--bg2);border:1px solid var(--brd);border-radius:20px;width:680px;max-width:96vw;max-height:92vh;overflow-y:auto;padding:32px;box-shadow:0 24px 64px rgba(0,0,0,.6)}
+.ebox h3{font-size:20px;font-weight:800;margin-bottom:8px}
+.ebox p{color:var(--mt);font-size:14px;margin-bottom:24px}
+.exam-info{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}
+.ei{background:var(--sur);border-radius:12px;padding:14px;text-align:center}
+.ei-v{font-size:20px;font-weight:800;font-family:'Space Mono';color:var(--ac)}
+.ei-l{font-size:11px;color:var(--mt);margin-top:3px}
+.part-list{display:flex;flex-direction:column;gap:10px;margin-bottom:24px}
+.part{display:flex;align-items:center;gap:14px;background:var(--sur);border-radius:12px;padding:14px 16px}
+.part-ic{font-size:22px;flex-shrink:0}
+.part-t{font-size:14px;font-weight:700;margin-bottom:2px}
+.part-s{font-size:12px;color:var(--mt)}
+.part-tag{margin-left:auto;font-size:11px;background:var(--cd);padding:4px 12px;border-radius:8px;color:var(--mt);white-space:nowrap}
+.exam-acts{display:flex;gap:12px;justify-content:flex-end}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.content>*{animation:fadeUp .35s ease both}
+.content>*:nth-child(2){animation-delay:.06s}.content>*:nth-child(3){animation-delay:.12s}
+@media(max-width:1000px){.g3{grid-template-columns:repeat(2,1fr)}.two{grid-template-columns:1fr}}
+@media(max-width:900px){.sb{width:56px}.sb-txt,.nlbl,.na span:not(.ic),.uname,.uplan,.nbdg{display:none}.main{margin-left:56px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sb">
+    <a class="sb-logo" href="trang-chu.html"><div class="sb-ico">📚</div><div class="sb-txt">Luyen<em>Thi</em>360</div></a>
+    <nav class="sb-nav">
+      <div class="nb"><div class="nlbl">Tổng quan</div><a class="na" href="trang-chu.html"><span class="ic">🏠</span><span>Dashboard</span></a></div>
+      <div class="nb"><div class="nlbl">Luyện tập</div>
+        <a class="na" href="luyen-mon.html"><span class="ic">📖</span><span>Luyện theo môn</span></a>
+        <a class="na on" href="hsa.html"><span class="ic">🏛️</span><span>Phòng luyện HSA</span><span class="nbdg">HOT</span></a>
+      </div>
+      <div class="nb"><div class="nlbl">Tra cứu</div>
+        <a class="na" href="ngan-hang-de.html"><span class="ic">🗂️</span><span>Ngân hàng đề</span></a>
+        <a class="na" href="trang-chu.html"><span class="ic">🗺️</span><span>Lộ trình học</span></a>
+      </div>
+    </nav>
+    <div class="sb-foot">
+      <a class="uc" href="#"><div class="uav js-av">B</div><div><div class="uname js-name">Bạn</div><div class="uplan">⭐ PRO</div></div></a>
+      <div class="lout" onclick="location.href='dang-nhap.html'">🚪 <span>Đăng xuất</span></div>
+    </div>
+  </aside>
+  <div class="main">
+    <div class="topbar">
+      <div class="tb-l"><h2>🏛️ Phòng luyện HSA</h2><p>Đánh giá năng lực – ĐH Quốc gia Hà Nội</p></div>
+      <div class="tb-r"><button class="tbtn" onclick="togTheme()">🌙</button><a class="btn btn-p" href="trang-chu.html">🏠 Dashboard</a></div>
+    </div>
+    <div class="content">
+      <div class="hero">
+        <div class="hero-tag">🏛️ ĐẠI HỌC QUỐC GIA HÀ NỘI</div>
+        <h2>Phòng Luyện Thi HSA 2026</h2>
+        <p>Bài thi Đánh giá năng lực · 150 câu · 195 phút · 3 phần thi</p>
+        <div class="hero-acts">
+          <button class="btn btn-v" onclick="openExam()" style="font-size:15px;padding:12px 28px">🚀 Thi Full Đề (Demo)</button>
+          <button class="btn" style="background:rgba(255,255,255,.08);color:var(--tx);border:1px solid rgba(255,255,255,.15);font-size:14px;padding:12px 22px" onclick="openExam()">📋 Luyện từng phần</button>
+        </div>
+      </div>
+
+      <div class="g3">
+        <div class="pc" onclick="openExam()"><div class="pc-ic">🔢</div><div class="pc-t">Tư duy định lượng</div><div class="pc-s">Toán học & Suy luận số</div><div class="pc-chips"><span class="chip">50 câu</span><span class="chip">75 phút</span></div></div>
+        <div class="pc" onclick="openExam()"><div class="pc-ic">📝</div><div class="pc-t">Tư duy định tính</div><div class="pc-s">Đọc hiểu & Ngôn ngữ</div><div class="pc-chips"><span class="chip">50 câu</span><span class="chip">60 phút</span></div></div>
+        <div class="pc" onclick="openExam()"><div class="pc-ic">🔬</div><div class="pc-t">Khoa học</div><div class="pc-s">Lý · Hóa · Sinh · Địa · Sử</div><div class="pc-chips"><span class="chip">50 câu</span><span class="chip">60 phút</span></div></div>
+      </div>
+
+      <div class="two">
+        <div>
+          <!-- MY SCORES -->
+          <div class="card" style="margin-bottom:18px">
+            <div class="ctit">📊 Kết quả thi thử của bạn</div>
+            <div class="sco-grid">
+              <div class="sco-c"><div class="sco-v" style="color:var(--ac)">118.0</div><div class="sco-l">Điểm cao nhất</div></div>
+              <div class="sco-c"><div class="sco-v" style="color:var(--gr)">112.4</div><div class="sco-l">Điểm trung bình</div></div>
+              <div class="sco-c"><div class="sco-v" style="color:var(--ac3)">3</div><div class="sco-l">Lần thi thử</div></div>
+            </div>
+            <div style="font-size:13px;color:var(--mt);margin-bottom:10px">Tiến độ các phần thi</div>
+            <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:13px;font-weight:600;margin-bottom:5px"><span>🔢 Tư duy định lượng</span><span style="font-family:'Space Mono';color:var(--ac)">38/50</span></div><div class="pb"><div class="pbf" style="width:76%;background:linear-gradient(90deg,var(--ac),#0066ff)"></div></div></div>
+            <div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:13px;font-weight:600;margin-bottom:5px"><span>📝 Tư duy định tính</span><span style="font-family:'Space Mono';color:var(--ac2)">42/50</span></div><div class="pb"><div class="pbf" style="width:84%;background:linear-gradient(90deg,#a78bfa,var(--ac2))"></div></div></div>
+            <div><div style="display:flex;justify-content:space-between;font-size:13px;font-weight:600;margin-bottom:5px"><span>🔬 Khoa học</span><span style="font-family:'Space Mono';color:var(--gr)">38/50</span></div><div class="pb"><div class="pbf" style="width:76%;background:linear-gradient(90deg,var(--gr),#059669)"></div></div></div>
+          </div>
+          <!-- LEADERBOARD -->
+          <div class="card">
+            <div class="ctit">🏆 Bảng xếp hạng tuần này</div>
+            <div class="lb-item"><div class="lb-rank" style="color:#f59e0b">🥇</div><div class="lb-av" style="background:linear-gradient(135deg,#f59e0b,#f97316)">Q</div><div class="lb-name">Trần Minh Quân</div><div class="lb-score">127.5</div><div class="lb-bar"><div class="lb-bf" style="width:100%"></div></div></div>
+            <div class="lb-item"><div class="lb-rank" style="color:#9ca3af">🥈</div><div class="lb-av" style="background:linear-gradient(135deg,#9ca3af,#6b7280)">H</div><div class="lb-name">Lê Thị Hoa</div><div class="lb-score">124.0</div><div class="lb-bar"><div class="lb-bf" style="width:97%"></div></div></div>
+            <div class="lb-item"><div class="lb-rank" style="color:#b45309">🥉</div><div class="lb-av" style="background:linear-gradient(135deg,#b45309,#92400e)">L</div><div class="lb-name">Phạm Đức Long</div><div class="lb-score">122.5</div><div class="lb-bar"><div class="lb-bf" style="width:96%"></div></div></div>
+            <div class="lb-item" style="background:rgba(0,229,255,.04);border-radius:8px;padding:11px 8px;margin:0 -8px"><div class="lb-rank" style="color:var(--ac)">4</div><div class="lb-av js-av2" style="background:linear-gradient(135deg,var(--ac2),var(--ac))">B</div><div class="lb-name"><span class="js-name">Bạn</span> <span style="font-size:10px;color:var(--ac);background:rgba(0,229,255,.1);padding:2px 6px;border-radius:4px">BẠN</span></div><div class="lb-score" style="color:var(--ac3)">118.0</div><div class="lb-bar"><div class="lb-bf" style="width:93%;background:linear-gradient(90deg,var(--ac3),#f97316)"></div></div></div>
+            <div class="lb-item"><div class="lb-rank">5</div><div class="lb-av" style="background:linear-gradient(135deg,var(--gr),#059669)">H</div><div class="lb-name">Vũ Thanh Hằng</div><div class="lb-score">115.5</div><div class="lb-bar"><div class="lb-bf" style="width:91%"></div></div></div>
+          </div>
+        </div>
+        <div>
+          <div class="card">
+            <div class="ctit">📅 Lịch thi thử sắp tới</div>
+            <div class="sch-item"><div class="sch-ic">📋</div><div><div class="sch-t">Mock Test #12</div><div class="sch-s">Thứ 7 · 07/06/2026 · 8:00</div></div><button class="sch-btn" onclick="alert('Đã đăng ký Mock #12!')">Đăng ký</button></div>
+            <div class="sch-item"><div class="sch-ic">📋</div><div><div class="sch-t">Mock Test #13</div><div class="sch-s">Thứ 7 · 14/06/2026 · 8:00</div></div><button class="sch-btn" onclick="alert('Đã đăng ký Mock #13!')">Đăng ký</button></div>
+            <div class="sch-item"><div class="sch-ic">📋</div><div><div class="sch-t">Mock Test #14 (Cuối)</div><div class="sch-s">CN · 21/06/2026 · 8:00</div></div><button class="sch-btn" onclick="alert('Đã đăng ký Mock #14!')">Đăng ký</button></div>
+          </div>
+          <div class="card" style="margin-top:18px">
+            <div class="ctit">💡 Mẹo thi HSA</div>
+            <div style="font-size:13px;line-height:1.9;color:var(--mt)">
+              <div style="margin-bottom:8px">⏱️ <strong style="color:var(--tx)">Quản lý thời gian:</strong> 78 giây/câu</div>
+              <div style="margin-bottom:8px">🎯 <strong style="color:var(--tx)">Điểm đậu NV1:</strong> thường từ 95–110 điểm</div>
+              <div style="margin-bottom:8px">📌 <strong style="color:var(--tx)">Ưu tiên:</strong> Làm phần mạnh trước</div>
+              <div>🔄 <strong style="color:var(--tx)">Không bỏ trống:</strong> Không trừ điểm câu sai</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- EXAM MODAL -->
+<div class="eov" id="eov" onclick="if(event.target===this)document.getElementById('eov').classList.remove('on')">
+  <div class="ebox">
+    <h3>🚀 Chuẩn bị thi Full Đề HSA</h3>
+    <p>Bài thi Đánh giá năng lực – ĐH Quốc gia Hà Nội · Phiên bản Demo</p>
+    <div class="exam-info">
+      <div class="ei"><div class="ei-v">150</div><div class="ei-l">Tổng câu hỏi</div></div>
+      <div class="ei"><div class="ei-v">195</div><div class="ei-l">Phút làm bài</div></div>
+      <div class="ei"><div class="ei-v">3</div><div class="ei-l">Phần thi</div></div>
+    </div>
+    <div class="part-list">
+      <div class="part"><div class="part-ic">🔢</div><div><div class="part-t">Phần 1 · Tư duy định lượng</div><div class="part-s">Toán & Suy luận số · Câu 1–50</div></div><div class="part-tag">75 phút</div></div>
+      <div class="part"><div class="part-ic">📝</div><div><div class="part-t">Phần 2 · Tư duy định tính</div><div class="part-s">Đọc hiểu & Ngôn ngữ · Câu 51–100</div></div><div class="part-tag">60 phút</div></div>
+      <div class="part"><div class="part-ic">🔬</div><div><div class="part-t">Phần 3 · Khoa học</div><div class="part-s">Lý · Hóa · Sinh · Địa · Sử · Câu 101–150</div></div><div class="part-tag">60 phút</div></div>
+    </div>
+    <div style="background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);border-radius:12px;padding:14px 16px;margin-bottom:20px;font-size:13px;color:var(--ac3)">⚠️ Đây là bản demo với câu hỏi mẫu. Hệ thống thật sẽ có đầy đủ 150 câu theo chuẩn HSA.</div>
+    <div class="exam-acts">
+      <button class="btn" style="background:var(--sur);color:var(--mt);border:1px solid var(--brd)" onclick="document.getElementById('eov').classList.remove('on')">Hủy</button>
+      <button class="btn btn-v" onclick="startExam()">🚀 Bắt đầu thi ngay</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function gt(){return localStorage.getItem('lt360_theme')||'dark'}
+function at(t){document.documentElement.setAttribute('data-theme',t);localStorage.setItem('lt360_theme',t);document.querySelectorAll('.tbtn').forEach(b=>b.textContent=t==='dark'?'🌙':'☀️')}
+function togTheme(){at(gt()==='dark'?'light':'dark')}
+function getUser(){return localStorage.getItem('lt360_user')||'Bạn'}
+document.addEventListener('DOMContentLoaded',()=>{
+  at(gt());
+  const n=getUser(),i=n.charAt(0).toUpperCase();
+  document.querySelectorAll('.js-name').forEach(el=>el.textContent=n);
+  document.querySelectorAll('.js-av,.js-av2').forEach(el=>el.textContent=i);
+});
+function openExam(){document.getElementById('eov').classList.add('on')}
+function startExam(){
+  document.getElementById('eov').classList.remove('on');
+  alert('⏳ Đang tải đề thi...\n\n✅ Trong phiên bản thật, bạn sẽ vào phòng thi với 150 câu hỏi và đồng hồ đếm ngược 195 phút!');
+}
+</script>
+</body>
+</html>
