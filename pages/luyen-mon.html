@@ -1,7 +1,3 @@
-
-Luyen mon · HTML
-Copy
-
 <!DOCTYPE html>
 <html lang="vi" data-theme="dark">
 <head>
@@ -9,122 +5,247 @@ Copy
 <title>Luyện theo môn – LuyenThi369</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
+
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0a0c10;--bg2:#0f1318;--surface:#1a2030;--border:#252d3d;--accent:#00e5ff;--accent2:#7c3aed;--accent3:#f59e0b;--green:#10b981;--red:#ef4444;--text:#e8edf5;--muted:#6b7a99;--card:#141920}
-[data-theme="light"]{--bg:#f0f4ff;--bg2:#ffffff;--surface:#e4eaf8;--border:#c8d4f0;--text:#0f1420;--muted:#5a6a8a;--card:#ffffff}
-body{background:var(--bg);color:var(--text);font-family:'Sora',sans-serif;transition:background .3s,color .3s}
+:root{
+  --bg:#080b10;--bg2:#0d1017;--surface:#161c28;--border:#1e2840;
+  --accent:#00e5ff;--accent2:#7c3aed;--accent3:#f59e0b;
+  --green:#10b981;--red:#ef4444;
+  --text:#e8edf5;--muted:#5a6b88;--card:#111622;
+  --shadow:0 4px 24px rgba(0,0,0,.4);
+  --radius:14px;
+}
+[data-theme="light"]{
+  --bg:#f5f7ff;--bg2:#ffffff;--surface:#edf0fb;--border:#dce3f5;
+  --text:#111827;--muted:#6b7a99;--card:#ffffff;
+  --shadow:0 2px 16px rgba(100,120,200,.12);
+}
+body{background:var(--bg);color:var(--text);font-family:'Sora',sans-serif;transition:background .3s,color .3s;line-height:1.5}
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+/* layout */
 .app{display:flex;min-height:100vh}
 .sidebar{width:260px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;height:100vh;overflow-y:auto;z-index:100;transition:background .3s,border-color .3s}
-.logo{padding:22px 20px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);text-decoration:none}
-.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:10px;display:grid;place-items:center;font-size:18px;flex-shrink:0}
+.logo{padding:20px;display:flex;align-items:center;gap:11px;border-bottom:1px solid var(--border);text-decoration:none}
+.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:10px;display:grid;place-items:center;font-size:18px;flex-shrink:0;box-shadow:0 0 16px rgba(0,229,255,.3)}
 .logo-text{font-size:17px;font-weight:800;color:var(--text)}.logo-text em{font-style:normal;color:var(--accent)}
-.nav{flex:1;padding:14px 0}.nav-sec{margin-bottom:6px}
-.nav-lbl{font-size:10px;font-weight:700;letter-spacing:2px;color:var(--muted);padding:8px 20px;text-transform:uppercase}
-.nav-a{display:flex;align-items:center;gap:12px;padding:10px 20px;color:var(--muted);font-size:13.5px;font-weight:500;transition:.2s;border-left:3px solid transparent;text-decoration:none}
-.nav-a:hover{color:var(--text);background:rgba(128,128,128,.06)}
-.nav-a.active{color:var(--accent);background:rgba(0,229,255,.07);border-left-color:var(--accent)}
-.nav-a .ic{width:18px;text-align:center;flex-shrink:0}
-.badge{margin-left:auto;background:var(--accent2);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:999px}
+.nav{flex:1;padding:12px 0}
+.nav-sec{margin-bottom:4px}
+.nav-lbl{font-size:10px;font-weight:700;letter-spacing:2px;color:var(--muted);padding:8px 20px;text-transform:uppercase;opacity:.7}
+.nav-a{display:flex;align-items:center;gap:12px;padding:10px 20px;color:var(--muted);font-size:13.5px;font-weight:500;transition:.2s;border-left:3px solid transparent;text-decoration:none;border-radius:0}
+.nav-a:hover{color:var(--text);background:rgba(128,128,200,.06)}
+.nav-a.active{color:var(--accent);background:rgba(0,229,255,.07);border-left-color:var(--accent);font-weight:600}
+.nav-a .ic{width:18px;text-align:center;flex-shrink:0;font-size:15px}
+.badge{margin-left:auto;background:linear-gradient(135deg,var(--accent2),#6d28d9);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:999px}
 .sb-foot{padding:14px;border-top:1px solid var(--border)}
-.user-card{display:flex;align-items:center;gap:10px;background:var(--surface);padding:10px 12px;border-radius:12px;cursor:pointer;text-decoration:none;transition:.2s}
+.user-card{display:flex;align-items:center;gap:10px;background:var(--surface);padding:10px 12px;border-radius:12px;cursor:pointer;text-decoration:none;transition:.2s;border:1px solid transparent}
+.user-card:hover{border-color:var(--accent)}
 .av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--accent2),var(--accent));display:grid;place-items:center;font-size:14px;font-weight:700;flex-shrink:0;color:#fff}
-.uname{font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.uname{font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:130px}
 .uplan{font-size:11px;color:var(--accent3);font-weight:600}
 .logout{margin-top:8px;display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;cursor:pointer;color:var(--muted);font-size:12px;font-weight:600;transition:.2s;border:none;background:none;font-family:inherit;width:100%}
-.logout:hover{color:var(--red)}
-.main{margin-left:260px;flex:1;min-height:100vh;display:flex;flex-direction:column}
-.topbar{position:sticky;top:0;z-index:50;background:rgba(10,12,16,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 32px;height:60px;display:flex;align-items:center;justify-content:space-between;transition:background .3s,border-color .3s}
-[data-theme="light"] .topbar{background:rgba(240,244,255,.9)}
-.topbar-l .ttl{font-size:17px;font-weight:700}.topbar-l .tsub{font-size:12px;color:var(--muted);margin-top:1px}
-.topbar-r{display:flex;align-items:center;gap:10px}
-.btn{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:.2s;font-family:inherit}
-.btn-p{background:var(--accent);color:#000}.btn-p:hover{background:#00cfeb}
-.btn-g{background:transparent;color:var(--muted);border:1px solid var(--border)}.btn-g:hover{color:var(--text);border-color:var(--muted)}
-.icon-btn{width:36px;height:36px;border-radius:8px;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center;cursor:pointer;transition:.2s}
+.logout:hover{color:var(--red);background:rgba(239,68,68,.06)}
+/* main */
+.main{margin-left:260px;flex:1;display:flex;flex-direction:column;min-height:100vh}
+.topbar{position:sticky;top:0;z-index:50;background:rgba(8,11,16,.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 32px;height:60px;display:flex;align-items:center;justify-content:space-between;transition:background .3s,border-color .3s}
+[data-theme="light"] .topbar{background:rgba(245,247,255,.92)}
+.topbar-l .ttl{font-size:17px;font-weight:700}
+.topbar-l .tsub{font-size:12px;color:var(--muted);margin-top:1px}
+.topbar-r{display:flex;align-items:center;gap:8px}
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:7px;padding:8px 18px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:.2s;font-family:inherit;white-space:nowrap}
+.btn-p{background:var(--accent);color:#000}.btn-p:hover{background:#00cfeb;transform:translateY(-1px)}
+.btn-g{background:var(--surface);color:var(--muted);border:1px solid var(--border)}.btn-g:hover{color:var(--text);border-color:var(--muted)}
+.btn-v{background:linear-gradient(135deg,var(--accent2),#6d28d9);color:#fff}.btn-v:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(124,58,237,.4)}
+.icon-btn{width:36px;height:36px;border-radius:9px;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center;cursor:pointer;transition:.2s;font-size:15px}
 .icon-btn:hover{border-color:var(--accent)}
+/* content */
 .content{padding:28px 32px;flex:1}
-.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;transition:background .3s,border-color .3s}
+/* cards */
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:background .3s,border-color .3s}
+[data-theme="light"] .card{box-shadow:var(--shadow)}
 .card-title{font-size:15px;font-weight:700;margin-bottom:18px;display:flex;align-items:center;gap:8px}
+/* progress bar */
 .pbar{height:6px;background:var(--surface);border-radius:999px;overflow:hidden}
-.pbar-fill{height:100%;border-radius:999px}
-@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.pbar-fill{height:100%;border-radius:999px;transition:width .5s ease}
+/* animation */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 .fadein>*{animation:fadeUp .35s ease both}
+.fadein>*:nth-child(2){animation-delay:.05s}
+.fadein>*:nth-child(3){animation-delay:.1s}
+.fadein>*:nth-child(4){animation-delay:.15s}
+/* footer */
+.site-footer{background:#06090f;border-top:1px solid #1a2030;padding:36px 40px 24px;margin-top:auto;transition:background .3s,border-color .3s}
+[data-theme="light"] .site-footer{background:#eef1fb;border-top-color:#c8d4f0}
+[data-theme="light"] .site-footer .sf-label{color:#7a8aaa;letter-spacing:2px}
+[data-theme="light"] .site-footer .sf-addr{color:#4a5a7a}
+[data-theme="light"] .site-footer .sf-addr strong{color:#1a2545}
+[data-theme="light"] .site-footer .sf-member{color:#4a5a7a}
+[data-theme="light"] .site-footer .sf-copy,[data-theme="light"] .site-footer .sf-brand{color:#7a8aaa}
+[data-theme="light"] .site-footer .sf-bottom{border-top-color:#c8d4f0}
+[data-theme="light"] .sf-col:first-child{border-right-color:#c8d4f0}
+[data-theme="light"] .sf-col:last-child{border-left-color:#c8d4f0}
+[data-theme="light"] .sf-map iframe{border-color:#c8d4f0}
+[data-theme="light"] .sf-fb a{background:#dce6ff;color:#1a2545;border-color:#1877f2}
+[data-theme="light"] .sf-fb a:hover{background:#1877f2;color:#fff}
+.sf-inner{display:grid;grid-template-columns:1.2fr 1fr 1.2fr;gap:0;align-items:start}
+.sf-col{padding:0 28px}
+.sf-col:first-child{padding-left:0;border-right:1px solid #1e2840}
+.sf-col:last-child{padding-right:0;border-left:1px solid #1e2840}
+.sf-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#4a5878;margin-bottom:14px;transition:color .3s}
+.sf-addr{font-size:13px;color:#8899bb;line-height:1.8;transition:color .3s}
+.sf-addr strong{color:#c8d4f0;font-weight:600}
+.sf-map iframe{border-radius:10px;width:100%;height:140px;border:1px solid #1e2840;display:block;margin-top:4px}
+.sf-members{display:flex;flex-direction:column;gap:8px}
+.sf-member{display:flex;align-items:center;gap:9px;font-size:13px;color:#8899bb;transition:color .3s}
+.sf-member::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0;opacity:.7}
+.sf-fb{margin-top:14px}
+.sf-fb a{display:inline-flex;align-items:center;gap:9px;background:#1a2236;color:#e8edf5;font-size:13px;font-weight:600;padding:9px 18px;border-radius:12px;border:1px solid #1877f2;text-decoration:none;transition:.2s}
+.sf-fb a:hover{background:#1877f2;color:#fff}
+.sf-bottom{margin-top:24px;padding-top:16px;border-top:1px solid #1a2030;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;transition:border-color .3s}
+.sf-copy{font-size:12px;color:#3a4868;transition:color .3s}
+.sf-brand{font-size:12px;color:#3a4868;transition:color .3s}
+@media(max-width:760px){.sf-inner{grid-template-columns:1fr}.sf-col{padding:16px 0;border:none!important}.main{margin-left:0}}
+
+
 .stabs{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
-.stab{padding:10px 18px;border-radius:10px;border:1px solid var(--border);background:var(--card);font-size:13px;font-weight:600;cursor:pointer;transition:.2s;color:var(--muted)}
-.stab:hover:not(.active){border-color:var(--muted);color:var(--text)}.stab.active{background:var(--accent);color:#000;border-color:var(--accent)}
+.stab{padding:10px 20px;border-radius:10px;border:1px solid var(--border);background:var(--card);font-size:13px;font-weight:600;cursor:pointer;transition:.2s;color:var(--muted)}
+.stab:hover:not(.active){border-color:var(--muted);color:var(--text)}
+.stab.active{background:var(--accent);color:#000;border-color:var(--accent)}
 .sub-view{display:none}.sub-view.active{display:block}
-.sub-header{display:flex;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 24px;margin-bottom:22px}
-.sh-info h2{font-size:18px;font-weight:800;margin-bottom:4px}.sh-info p{font-size:13px;color:var(--muted)}
-.sh-stats{display:flex;gap:22px}.sh-sv{font-size:22px;font-weight:800;font-family:'Space Mono';color:var(--accent)}.sh-sl{font-size:11px;color:var(--muted);margin-top:2px;text-align:center}
+.sub-header{display:flex;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 26px;margin-bottom:22px}
+[data-theme="light"] .sub-header{box-shadow:var(--shadow)}
+.sh-info h2{font-size:18px;font-weight:800;margin-bottom:4px}
+.sh-info p{font-size:13px;color:var(--muted)}
+.sh-stats{display:flex;gap:22px}
+.sh-sv{font-size:26px;font-weight:800;font-family:'Space Mono';color:var(--accent)}
+.sh-sl{font-size:11px;color:var(--muted);margin-top:2px;text-align:center}
 .modes{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
 .mode-c{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;cursor:pointer;transition:.25s;text-align:center}
+[data-theme="light"] .mode-c{box-shadow:var(--shadow)}
 .mode-c:hover{border-color:var(--accent2);transform:translateY(-2px)}
 .mc-ic{font-size:22px;margin-bottom:8px}.mc-t{font-size:13px;font-weight:700;margin-bottom:2px}.mc-s{font-size:11px;color:var(--muted)}
 .topics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px}
 .tc{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;cursor:pointer;transition:.25s;position:relative;overflow:hidden}
+[data-theme="light"] .tc{box-shadow:var(--shadow)}
 .tc:hover{border-color:var(--accent);transform:translateY(-2px)}
 .tc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));opacity:0;transition:.25s}
 .tc:hover::before{opacity:1}
 .tc-em{font-size:22px;margin-bottom:8px}.tc-t{font-size:14px;font-weight:700;margin-bottom:3px}.tc-c{font-size:12px;color:var(--muted);margin-bottom:10px}
 .tc-pct{position:absolute;top:14px;right:14px;font-size:11px;font-weight:700;font-family:'Space Mono';color:var(--muted)}
-.qov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);z-index:200;align-items:center;justify-content:center}
+/* QUIZ OVERLAY */
+.qov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(10px);z-index:200;align-items:center;justify-content:center}
 .qov.show{display:flex}
-.qbox{background:var(--bg2);border:1px solid var(--border);border-radius:20px;width:740px;max-width:95vw;max-height:92vh;display:flex;flex-direction:column;overflow:hidden}
-.qhdr{padding:18px 26px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.qbox{background:var(--bg2);border:1px solid var(--border);border-radius:20px;width:760px;max-width:96vw;max-height:92vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,.5)}
+[data-theme="light"] .qov{background:rgba(30,50,120,.55)}
+[data-theme="light"] .qbox{background:#fff;border-color:#dce3f5;box-shadow:0 20px 60px rgba(30,50,120,.18)}
+[data-theme="light"] .qhdr{background:#f0f4ff;border-bottom:1px solid #dce3f5}
+[data-theme="light"] .qtitle{color:#0f1420}
+[data-theme="light"] .qmeta .qpw{color:#5a6a8a}
+[data-theme="light"] .qtimer{color:#d97706;background:rgba(217,119,6,.1)}
+[data-theme="light"] .qclose{background:#e4eaf8;border-color:#c8d4f0;color:#5a6a8a}
+[data-theme="light"] .qbody{background:#fff}
+[data-theme="light"] .qnum{color:#7a8aaa}
+[data-theme="light"] .qtext{color:#0f1420}
+[data-theme="light"] .opt{background:#fff;border-color:#d0d8f0;color:#0f1420}
+[data-theme="light"] .opt:hover:not(.locked){border-color:var(--accent);background:rgba(0,229,255,.04)}
+[data-theme="light"] .opt.sel{border-color:var(--accent);background:rgba(0,229,255,.07);color:#0f1420}
+[data-theme="light"] .opt.cor{border-color:var(--green);background:rgba(16,185,129,.07);color:#065f46}
+[data-theme="light"] .opt.wrg{border-color:var(--red);background:rgba(239,68,68,.06);color:#991b1b}
+[data-theme="light"] .olbl{background:#e8edf8;color:#374151}
+[data-theme="light"] .opt.sel .olbl{background:var(--accent);color:#000}
+[data-theme="light"] .opt.cor .olbl{background:var(--green);color:#fff}
+[data-theme="light"] .opt.wrg .olbl{background:var(--red);color:#fff}
+[data-theme="light"] .explain{background:rgba(16,185,129,.06);border-color:rgba(16,185,129,.25);color:#065f46}
+[data-theme="light"] .qfoot{background:#f5f7ff;border-top:1px solid #dce3f5}
+[data-theme="light"] .qdot{background:#d8e0f4;border-color:#c8d4f0}
+[data-theme="light"] .qdot.cur{background:var(--accent);border-color:var(--accent)}
+[data-theme="light"] .qdot.ok{background:var(--green);border-color:var(--green)}
+[data-theme="light"] .qdot.ng{background:var(--red);border-color:var(--red)}
+[data-theme="light"] .sub-header{background:#fff;border-color:#d0d8f0;box-shadow:0 2px 12px rgba(100,120,200,.1)}
+[data-theme="light"] .sh-info h2{color:#0f1420}
+[data-theme="light"] .sh-info p{color:#5a6a8a}
+[data-theme="light"] .mode-c{background:#fff;border-color:#d0d8f0}
+[data-theme="light"] .mode-c:hover{border-color:var(--accent2);background:rgba(124,58,237,.04)}
+[data-theme="light"] .mc-t{color:#0f1420}
+[data-theme="light"] .mc-s{color:#5a6a8a}
+[data-theme="light"] .tc{background:#fff;border-color:#d0d8f0}
+[data-theme="light"] .tc-t{color:#0f1420}
+[data-theme="light"] .tc-c{color:#5a6a8a}
+[data-theme="light"] .tc-pct{color:#7a8aaa}
+[data-theme="light"] .stab{background:#fff;border-color:#d0d8f0;color:#5a6a8a}
+[data-theme="light"] .stab:hover:not(.active){background:#f0f4ff;color:#0f1420}
+[data-theme="light"] .stab.active{background:var(--accent);color:#000;border-color:var(--accent)}
+[data-theme="light"] .sh-sv{color:var(--accent)}
+.qhdr{padding:18px 26px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px}
 .qtitle{font-size:15px;font-weight:800}
-.qmeta{display:flex;align-items:center;gap:12px}
+.qmeta{display:flex;align-items:center;gap:12px;flex-shrink:0}
 .qpw{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
-.qpbar{width:110px;height:5px;background:var(--surface);border-radius:999px;overflow:hidden}
+.qpbar{width:100px;height:5px;background:var(--surface);border-radius:999px;overflow:hidden}
 .qpfill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:999px;transition:.4s}
 .qtimer{font-family:'Space Mono';font-size:14px;font-weight:700;color:var(--accent3);background:rgba(245,158,11,.1);padding:4px 12px;border-radius:8px}
-.qclose{width:30px;height:30px;border-radius:8px;border:1px solid var(--border);background:var(--surface);cursor:pointer;display:grid;place-items:center;color:var(--muted);transition:.2s}
+.qclose{width:30px;height:30px;border-radius:8px;border:1px solid var(--border);background:var(--surface);cursor:pointer;display:grid;place-items:center;color:var(--muted);transition:.2s;flex-shrink:0}
 .qclose:hover{color:var(--red);border-color:var(--red)}
 .qbody{padding:26px;overflow-y:auto;flex:1}
-.qnum{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
-.qtext{font-size:15px;font-weight:600;line-height:1.7;margin-bottom:22px}
+.qnum{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px}
+.qtext{font-size:16px;font-weight:600;line-height:1.7;margin-bottom:22px}
 .opts{display:flex;flex-direction:column;gap:9px}
-.opt{display:flex;align-items:center;gap:13px;padding:13px 16px;border:1.5px solid var(--border);border-radius:11px;cursor:pointer;transition:.2s;font-size:14px;font-weight:500}
+.opt{display:flex;align-items:center;gap:13px;padding:13px 16px;border:1.5px solid var(--border);border-radius:12px;cursor:pointer;transition:.2s;font-size:14px;font-weight:500}
 .opt:hover:not(.locked){border-color:var(--accent);background:rgba(0,229,255,.04)}
 .opt.sel{border-color:var(--accent);background:rgba(0,229,255,.07)}
-.opt.cor{border-color:var(--green);background:rgba(16,185,129,.07);color:var(--green)}
+.opt.cor{border-color:var(--green);background:rgba(16,185,129,.08);color:var(--green)}
 .opt.wrg{border-color:var(--red);background:rgba(239,68,68,.07);color:var(--red)}
 .olbl{width:28px;height:28px;border-radius:8px;background:var(--surface);display:grid;place-items:center;font-size:12px;font-weight:800;flex-shrink:0;font-family:'Space Mono';transition:.2s}
-.opt.sel .olbl{background:var(--accent);color:#000}.opt.cor .olbl{background:var(--green);color:#fff}.opt.wrg .olbl{background:var(--red);color:#fff}
-.explain{margin-top:18px;padding:14px 18px;background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.2);border-radius:11px;font-size:13px;line-height:1.7;display:none}
+.opt.sel .olbl{background:var(--accent);color:#000}
+.opt.cor .olbl{background:var(--green);color:#fff}
+.opt.wrg .olbl{background:var(--red);color:#fff}
+.explain{margin-top:18px;padding:14px 18px;background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.2);border-radius:12px;font-size:13px;line-height:1.7;display:none}
 .explain.show{display:block}
 .qfoot{padding:14px 26px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-.qdots{display:flex;gap:5px;flex-wrap:wrap;max-width:380px}
+.qdots{display:flex;gap:5px;flex-wrap:wrap;max-width:360px}
 .qdot{width:10px;height:10px;border-radius:50%;background:var(--surface);cursor:pointer;border:1px solid var(--border);transition:.2s}
-.qdot.cur{background:var(--accent);border-color:var(--accent)}.qdot.ok{background:var(--green);border-color:var(--green)}.qdot.ng{background:var(--red);border-color:var(--red)}
+.qdot.cur{background:var(--accent);border-color:var(--accent)}
+.qdot.ok{background:var(--green);border-color:var(--green)}
+.qdot.ng{background:var(--red);border-color:var(--red)}
 .qacts{display:flex;gap:8px}
+
 </style>
 </head>
 <body>
 <div class="app">
+
 <aside class="sidebar">
-  <a class="logo" href="dashboard.html"><div class="logo-icon">📚</div><div class="logo-text">Luyen<em>Thi</em>369</div></a>
+  <a class="logo" href="dashboard.html">
+    <div class="logo-icon">📚</div>
+    <div class="logo-text">Luyen<em>Thi</em>369</div>
+  </a>
   <nav class="nav">
-    <div class="nav-sec"><div class="nav-lbl">Tổng quan</div>
-      <a class="nav-a" id="na-home" href="dashboard.html"><span class="ic">🏠</span>Dashboard</a>
+    <div class="nav-sec">
+      <div class="nav-lbl">Tổng quan</div>
+      <a class="nav-a " href="dashboard.html"><span class="ic">🏠</span>Dashboard</a>
     </div>
-    <div class="nav-sec"><div class="nav-lbl">Luyện tập</div>
-      <a class="nav-a" id="na-mon" href="luyen-mon.html"><span class="ic">📖</span>Luyện theo môn</a>
-      <a class="nav-a" id="na-hsa" href="hsa.html"><span class="ic">🏛️</span>Phòng luyện HSA<span class="badge">HOT</span></a>
+    <div class="nav-sec">
+      <div class="nav-lbl">Luyện tập</div>
+      <a class="nav-a active" href="luyen-mon.html"><span class="ic">📖</span>Luyện theo môn</a>
+      <a class="nav-a " href="hsa.html"><span class="ic">🏛️</span>Phòng luyện HSA<span class="badge">HOT</span></a>
     </div>
-    <div class="nav-sec"><div class="nav-lbl">Tra cứu</div>
-      <a class="nav-a" id="na-bank" href="ngan-hang-de.html"><span class="ic">🗂️</span>Ngân hàng đề</a>
-      <a class="nav-a" id="na-set" href="cai-dat.html"><span class="ic">⚙️</span>Cài đặt</a>
+    <div class="nav-sec">
+      <div class="nav-lbl">Tra cứu</div>
+      <a class="nav-a " href="ngan-hang-de.html"><span class="ic">🗂️</span>Ngân hàng đề</a>
+      <a class="nav-a " href="cai-dat.html"><span class="ic">⚙️</span>Cài đặt</a>
     </div>
   </nav>
   <div class="sb-foot">
-    <a class="user-card" href="cai-dat.html"><div class="av" id="sb-av">?</div><div><div class="uname" id="sb-name">Đang tải...</div><div class="uplan">⭐ PRO</div></div></a>
+    <a class="user-card" href="cai-dat.html">
+      <div class="av" id="sb-av">?</div>
+      <div><div class="uname" id="sb-name">Đang tải...</div><div class="uplan">⭐ PRO</div></div>
+    </a>
     <button class="logout" onclick="location.href='dang-nhap.html'">🚪 Đăng xuất</button>
   </div>
 </aside>
+
 <div class="main">
   <div class="topbar">
-    <div class="topbar-l"><div class="ttl">Luyện theo môn</div><div class="tsub">Chuyên đề · Mức độ · Thi thử</div></div>
+    <div class="topbar-l"><div class="ttl">Luyện theo môn</div><div class="tsub">Chuyên đề · 30 câu/môn · Thi thử</div></div>
     <div class="topbar-r"><button class="icon-btn" id="theme-btn" onclick="toggleTheme()">☀️</button></div>
   </div>
   <div class="content fadein">
@@ -137,56 +258,170 @@ body{background:var(--bg);color:var(--text);font-family:'Sora',sans-serif;transi
     </div>
     <!-- TOÁN -->
     <div class="sub-view active" id="sv-toan">
-      <div class="sub-header"><div class="sh-info"><h2>📐 Môn Toán</h2><p>50 câu đã làm · 8 chuyên đề · Tiến độ 68%</p></div><div class="sh-stats"><div><div class="sh-sv" style="color:var(--accent)">8.2</div><div class="sh-sl">Điểm TB</div></div><div><div class="sh-sv" style="color:var(--green)">68%</div><div class="sh-sl">Hoàn thành</div></div><div><div class="sh-sv" style="color:var(--accent3)">32</div><div class="sh-sl">Câu sai</div></div></div></div>
+      <div class="sub-header">
+        <div class="sh-info"><h2>📐 Môn Toán</h2><p>30 câu · 8 chuyên đề · Tiến độ 68%</p></div>
+        <div class="sh-stats">
+          <div><div class="sh-sv" style="color:var(--accent)">8.2</div><div class="sh-sl">Điểm TB</div></div>
+          <div><div class="sh-sv" style="color:var(--green)">68%</div><div class="sh-sl">Hoàn thành</div></div>
+          <div><div class="sh-sv" style="color:var(--accent3)">32</div><div class="sh-sl">Câu sai</div></div>
+        </div>
+      </div>
       <div class="modes">
-        <div class="mode-c" onclick="openQuiz('Hàm số - Chuyên đề')"><div class="mc-ic">📚</div><div class="mc-t">Luyện chuyên đề</div><div class="mc-s">Theo từng chủ đề</div></div>
-        <div class="mode-c" onclick="openQuiz('Mức độ vận dụng cao')"><div class="mc-ic">🎚️</div><div class="mc-t">Theo mức độ</div><div class="mc-s">Nhận · Thông hiểu · VD</div></div>
-        <div class="mode-c" onclick="openQuiz('Câu sai cần ôn lại')"><div class="mc-ic">🔁</div><div class="mc-t">Làm lại câu sai</div><div class="mc-s">32 câu đang chờ</div></div>
-        <div class="mode-c" onclick="openQuiz('Thi thử môn Toán')"><div class="mc-ic">🏆</div><div class="mc-t">Thi thử môn</div><div class="mc-s">50 câu · 90 phút</div></div>
+        <div class="mode-c" onclick="openQuiz('toan','📐 Toán – Luyện chuyên đề')"><div class="mc-ic">📚</div><div class="mc-t">Luyện chuyên đề</div><div class="mc-s">30 câu tổng hợp</div></div>
+        <div class="mode-c" onclick="openQuiz('toan','📐 Toán – Theo mức độ')"><div class="mc-ic">🎚️</div><div class="mc-t">Theo mức độ</div><div class="mc-s">Nhận · Thông hiểu · VD</div></div>
+        <div class="mode-c" onclick="openQuiz('toan','🔁 Câu sai cần ôn lại')"><div class="mc-ic">🔁</div><div class="mc-t">Làm lại câu sai</div><div class="mc-s">32 câu đang chờ</div></div>
+        <div class="mode-c" onclick="openQuiz('toan','🏆 Thi thử môn Toán')"><div class="mc-ic">🏆</div><div class="mc-t">Thi thử môn</div><div class="mc-s">30 câu · 45 phút</div></div>
       </div>
       <div style="font-size:15px;font-weight:700;margin-bottom:14px">📑 Chuyên đề</div>
       <div class="topics">
-        <div class="tc" onclick="openQuiz('Hàm số & Đồ thị')"><div class="tc-pct">72%</div><div class="tc-em">📈</div><div class="tc-t">Hàm số &amp; Đồ thị</div><div class="tc-c">45 câu</div><div class="pbar"><div class="pbar-fill" style="width:72%;background:linear-gradient(90deg,var(--accent),#0066ff)"></div></div></div>
-        <div class="tc" onclick="openQuiz('Nguyên hàm – Tích phân')"><div class="tc-pct">45%</div><div class="tc-em">∫</div><div class="tc-t">Nguyên hàm – Tích phân</div><div class="tc-c">38 câu</div><div class="pbar"><div class="pbar-fill" style="width:45%;background:linear-gradient(90deg,#a78bfa,var(--accent2))"></div></div></div>
-        <div class="tc" onclick="openQuiz('Hình không gian')"><div class="tc-pct">30%</div><div class="tc-em">📐</div><div class="tc-t">Hình không gian</div><div class="tc-c">52 câu</div><div class="pbar"><div class="pbar-fill" style="width:30%;background:linear-gradient(90deg,var(--green),#059669)"></div></div></div>
-        <div class="tc" onclick="openQuiz('Mũ & Logarit')"><div class="tc-pct">88%</div><div class="tc-em">🔢</div><div class="tc-t">Mũ &amp; Logarit</div><div class="tc-c">30 câu</div><div class="pbar"><div class="pbar-fill" style="width:88%;background:linear-gradient(90deg,var(--accent3),#f97316)"></div></div></div>
-        <div class="tc" onclick="openQuiz('Số phức')"><div class="tc-pct">15%</div><div class="tc-em">🔵</div><div class="tc-t">Số phức</div><div class="tc-c">20 câu</div><div class="pbar"><div class="pbar-fill" style="width:15%;background:linear-gradient(90deg,var(--red),#dc2626)"></div></div></div>
-        <div class="tc" onclick="openQuiz('Xác suất – Thống kê')"><div class="tc-pct">60%</div><div class="tc-em">📊</div><div class="tc-t">Xác suất – Thống kê</div><div class="tc-c">25 câu</div><div class="pbar"><div class="pbar-fill" style="width:60%;background:linear-gradient(90deg,#67e8f9,#0891b2)"></div></div></div>
+        <div class="tc" onclick="openQuiz('toan','📈 Hàm số &amp; Đồ thị')"><div class="tc-pct">72%</div><div class="tc-em">📈</div><div class="tc-t">Hàm số &amp; Đồ thị</div><div class="tc-c">Đã làm 22/30</div><div class="pbar"><div class="pbar-fill" style="width:72%;background:linear-gradient(90deg,var(--accent),#0066ff)"></div></div></div>
+        <div class="tc" onclick="openQuiz('toan','∫ Nguyên hàm – Tích phân')"><div class="tc-pct">45%</div><div class="tc-em">∫</div><div class="tc-t">Nguyên hàm – Tích phân</div><div class="tc-c">Đã làm 14/30</div><div class="pbar"><div class="pbar-fill" style="width:45%;background:linear-gradient(90deg,#a78bfa,var(--accent2))"></div></div></div>
+        <div class="tc" onclick="openQuiz('toan','📐 Hình không gian')"><div class="tc-pct">30%</div><div class="tc-em">📐</div><div class="tc-t">Hình không gian</div><div class="tc-c">Đã làm 9/30</div><div class="pbar"><div class="pbar-fill" style="width:30%;background:linear-gradient(90deg,var(--green),#059669)"></div></div></div>
+        <div class="tc" onclick="openQuiz('toan','🔢 Mũ &amp; Logarit')"><div class="tc-pct">88%</div><div class="tc-em">🔢</div><div class="tc-t">Mũ &amp; Logarit</div><div class="tc-c">Đã làm 26/30</div><div class="pbar"><div class="pbar-fill" style="width:88%;background:linear-gradient(90deg,var(--accent3),#f97316)"></div></div></div>
+        <div class="tc" onclick="openQuiz('toan','🔵 Số phức')"><div class="tc-pct">15%</div><div class="tc-em">🔵</div><div class="tc-t">Số phức</div><div class="tc-c">Đã làm 5/30</div><div class="pbar"><div class="pbar-fill" style="width:15%;background:linear-gradient(90deg,var(--red),#dc2626)"></div></div></div>
+        <div class="tc" onclick="openQuiz('toan','📊 Xác suất – Thống kê')"><div class="tc-pct">60%</div><div class="tc-em">📊</div><div class="tc-t">Xác suất – Thống kê</div><div class="tc-c">Đã làm 18/30</div><div class="pbar"><div class="pbar-fill" style="width:60%;background:linear-gradient(90deg,#67e8f9,#0891b2)"></div></div></div>
       </div>
     </div>
     <!-- VẬT LÝ -->
     <div class="sub-view" id="sv-ly">
-      <div class="sub-header"><div class="sh-info"><h2>⚡ Môn Vật lý</h2><p>40 câu đã làm · 6 chuyên đề · Tiến độ 54%</p></div><div class="sh-stats"><div><div class="sh-sv" style="color:#a78bfa">7.5</div><div class="sh-sl">Điểm TB</div></div></div></div>
-      <div class="modes"><div class="mode-c" onclick="openQuiz('Dao động cơ học')"><div class="mc-ic">📚</div><div class="mc-t">Luyện chuyên đề</div><div class="mc-s">Theo từng chủ đề</div></div><div class="mode-c" onclick="openQuiz('Điện xoay chiều nâng cao')"><div class="mc-ic">🎚️</div><div class="mc-t">Theo mức độ</div><div class="mc-s">4 mức độ</div></div><div class="mode-c" onclick="openQuiz('Câu sai Vật lý')"><div class="mc-ic">🔁</div><div class="mc-t">Câu sai</div><div class="mc-s">18 câu cần ôn</div></div><div class="mode-c" onclick="openQuiz('Thi thử Vật lý')"><div class="mc-ic">🏆</div><div class="mc-t">Thi thử</div><div class="mc-s">40 câu · 50 phút</div></div></div>
-      <div class="topics"><div class="tc" onclick="openQuiz('Dao động cơ học')"><div class="tc-pct">70%</div><div class="tc-em">🌊</div><div class="tc-t">Dao động cơ học</div><div class="tc-c">30 câu</div><div class="pbar"><div class="pbar-fill" style="width:70%;background:linear-gradient(90deg,#a78bfa,var(--accent2))"></div></div></div><div class="tc" onclick="openQuiz('Điện xoay chiều')"><div class="tc-pct">42%</div><div class="tc-em">⚡</div><div class="tc-t">Điện xoay chiều</div><div class="tc-c">35 câu</div><div class="pbar"><div class="pbar-fill" style="width:42%;background:linear-gradient(90deg,#a78bfa,var(--accent2))"></div></div></div><div class="tc" onclick="openQuiz('Sóng điện từ')"><div class="tc-pct">55%</div><div class="tc-em">📡</div><div class="tc-t">Sóng điện từ</div><div class="tc-c">25 câu</div><div class="pbar"><div class="pbar-fill" style="width:55%;background:linear-gradient(90deg,#a78bfa,var(--accent2))"></div></div></div></div>
+      <div class="sub-header">
+        <div class="sh-info"><h2>⚡ Môn Vật lý</h2><p>30 câu · 6 chuyên đề · Tiến độ 54%</p></div>
+        <div class="sh-stats"><div><div class="sh-sv" style="color:#a78bfa">7.5</div><div class="sh-sl">Điểm TB</div></div><div><div class="sh-sv" style="color:var(--green)">54%</div><div class="sh-sl">Hoàn thành</div></div></div>
+      </div>
+      <div class="modes">
+        <div class="mode-c" onclick="openQuiz('ly','⚡ Vật lý – Toàn bộ')"><div class="mc-ic">📚</div><div class="mc-t">Luyện chuyên đề</div><div class="mc-s">30 câu tổng hợp</div></div>
+        <div class="mode-c" onclick="openQuiz('ly','🎚️ Vật lý – Theo mức độ')"><div class="mc-ic">🎚️</div><div class="mc-t">Theo mức độ</div><div class="mc-s">4 mức độ</div></div>
+        <div class="mode-c" onclick="openQuiz('ly','🔁 Câu sai Vật lý')"><div class="mc-ic">🔁</div><div class="mc-t">Câu sai</div><div class="mc-s">18 câu cần ôn</div></div>
+        <div class="mode-c" onclick="openQuiz('ly','🏆 Thi thử Vật lý')"><div class="mc-ic">🏆</div><div class="mc-t">Thi thử</div><div class="mc-s">30 câu · 45 phút</div></div>
+      </div>
+      <div style="font-size:15px;font-weight:700;margin-bottom:14px">📑 Chuyên đề</div>
+      <div class="topics">
+        <div class="tc" onclick="openQuiz('ly','🌊 Dao động cơ học')"><div class="tc-pct">70%</div><div class="tc-em">🌊</div><div class="tc-t">Dao động cơ học</div><div class="tc-c">Đã làm 21/30</div><div class="pbar"><div class="pbar-fill" style="width:70%;background:linear-gradient(90deg,#a78bfa,var(--accent2))"></div></div></div>
+        <div class="tc" onclick="openQuiz('ly','⚡ Điện xoay chiều')"><div class="tc-pct">42%</div><div class="tc-em">⚡</div><div class="tc-t">Điện xoay chiều</div><div class="tc-c">Đã làm 13/30</div><div class="pbar"><div class="pbar-fill" style="width:42%;background:linear-gradient(90deg,#a78bfa,var(--accent2))"></div></div></div>
+        <div class="tc" onclick="openQuiz('ly','📡 Sóng điện từ')"><div class="tc-pct">55%</div><div class="tc-em">📡</div><div class="tc-t">Sóng điện từ</div><div class="tc-c">Đã làm 17/30</div><div class="pbar"><div class="pbar-fill" style="width:55%;background:linear-gradient(90deg,#a78bfa,var(--accent2))"></div></div></div>
+        <div class="tc" onclick="openQuiz('ly','☢️ Vật lý hạt nhân')"><div class="tc-pct">38%</div><div class="tc-em">☢️</div><div class="tc-t">Vật lý hạt nhân</div><div class="tc-c">Đã làm 11/30</div><div class="pbar"><div class="pbar-fill" style="width:38%;background:linear-gradient(90deg,var(--red),#dc2626)"></div></div></div>
+        <div class="tc" onclick="openQuiz('ly','💡 Quang học')"><div class="tc-pct">65%</div><div class="tc-em">💡</div><div class="tc-t">Quang học</div><div class="tc-c">Đã làm 20/30</div><div class="pbar"><div class="pbar-fill" style="width:65%;background:linear-gradient(90deg,var(--accent3),#f97316)"></div></div></div>
+        <div class="tc" onclick="openQuiz('ly','🔬 Lượng tử ánh sáng')"><div class="tc-pct">25%</div><div class="tc-em">🔬</div><div class="tc-t">Lượng tử ánh sáng</div><div class="tc-c">Đã làm 8/30</div><div class="pbar"><div class="pbar-fill" style="width:25%;background:linear-gradient(90deg,#67e8f9,#0891b2)"></div></div></div>
+      </div>
     </div>
     <!-- HÓA HỌC -->
     <div class="sub-view" id="sv-hoa">
-      <div class="sub-header"><div class="sh-info"><h2>🧪 Môn Hóa học</h2><p>45 câu đã làm · 7 chuyên đề · Tiến độ 71%</p></div><div class="sh-stats"><div><div class="sh-sv" style="color:var(--green)">7.6</div><div class="sh-sl">Điểm TB</div></div></div></div>
-      <div class="modes"><div class="mode-c" onclick="openQuiz('Hóa hữu cơ')"><div class="mc-ic">📚</div><div class="mc-t">Luyện chuyên đề</div><div class="mc-s">Theo từng chủ đề</div></div><div class="mode-c" onclick="openQuiz('Bài tập tính toán Hóa')"><div class="mc-ic">🎚️</div><div class="mc-t">Theo mức độ</div><div class="mc-s">4 mức độ</div></div><div class="mode-c" onclick="openQuiz('Câu sai Hóa học')"><div class="mc-ic">🔁</div><div class="mc-t">Câu sai</div><div class="mc-s">21 câu cần ôn</div></div><div class="mode-c" onclick="openQuiz('Thi thử Hóa học')"><div class="mc-ic">🏆</div><div class="mc-t">Thi thử</div><div class="mc-s">40 câu · 50 phút</div></div></div>
-      <div class="topics"><div class="tc" onclick="openQuiz('Este – Lipit')"><div class="tc-pct">65%</div><div class="tc-em">🧴</div><div class="tc-t">Este – Lipit</div><div class="tc-c">28 câu</div><div class="pbar"><div class="pbar-fill" style="width:65%;background:linear-gradient(90deg,var(--green),#059669)"></div></div></div><div class="tc" onclick="openQuiz('Amin – Aminoaxit')"><div class="tc-pct">50%</div><div class="tc-em">🔬</div><div class="tc-t">Amin – Aminoaxit</div><div class="tc-c">22 câu</div><div class="pbar"><div class="pbar-fill" style="width:50%;background:linear-gradient(90deg,var(--green),#059669)"></div></div></div><div class="tc" onclick="openQuiz('Kim loại kiềm')"><div class="tc-pct">80%</div><div class="tc-em">⚗️</div><div class="tc-t">Kim loại kiềm</div><div class="tc-c">18 câu</div><div class="pbar"><div class="pbar-fill" style="width:80%;background:linear-gradient(90deg,var(--green),#059669)"></div></div></div></div>
+      <div class="sub-header">
+        <div class="sh-info"><h2>🧪 Môn Hóa học</h2><p>30 câu · 7 chuyên đề · Tiến độ 71%</p></div>
+        <div class="sh-stats"><div><div class="sh-sv" style="color:var(--green)">7.6</div><div class="sh-sl">Điểm TB</div></div><div><div class="sh-sv" style="color:var(--green)">71%</div><div class="sh-sl">Hoàn thành</div></div></div>
+      </div>
+      <div class="modes">
+        <div class="mode-c" onclick="openQuiz('hoa','🧪 Hóa – Toàn bộ')"><div class="mc-ic">📚</div><div class="mc-t">Luyện chuyên đề</div><div class="mc-s">30 câu tổng hợp</div></div>
+        <div class="mode-c" onclick="openQuiz('hoa','🎚️ Hóa – Theo mức độ')"><div class="mc-ic">🎚️</div><div class="mc-t">Theo mức độ</div><div class="mc-s">4 mức độ</div></div>
+        <div class="mode-c" onclick="openQuiz('hoa','🔁 Câu sai Hóa học')"><div class="mc-ic">🔁</div><div class="mc-t">Câu sai</div><div class="mc-s">21 câu cần ôn</div></div>
+        <div class="mode-c" onclick="openQuiz('hoa','🏆 Thi thử Hóa học')"><div class="mc-ic">🏆</div><div class="mc-t">Thi thử</div><div class="mc-s">30 câu · 45 phút</div></div>
+      </div>
+      <div style="font-size:15px;font-weight:700;margin-bottom:14px">📑 Chuyên đề</div>
+      <div class="topics">
+        <div class="tc" onclick="openQuiz('hoa','🧴 Este – Lipit')"><div class="tc-pct">65%</div><div class="tc-em">🧴</div><div class="tc-t">Este – Lipit</div><div class="tc-c">Đã làm 20/30</div><div class="pbar"><div class="pbar-fill" style="width:65%;background:linear-gradient(90deg,var(--green),#059669)"></div></div></div>
+        <div class="tc" onclick="openQuiz('hoa','🔬 Amin – Aminoaxit')"><div class="tc-pct">50%</div><div class="tc-em">🔬</div><div class="tc-t">Amin – Aminoaxit</div><div class="tc-c">Đã làm 15/30</div><div class="pbar"><div class="pbar-fill" style="width:50%;background:linear-gradient(90deg,var(--green),#059669)"></div></div></div>
+        <div class="tc" onclick="openQuiz('hoa','⚗️ Kim loại kiềm')"><div class="tc-pct">80%</div><div class="tc-em">⚗️</div><div class="tc-t">Kim loại kiềm</div><div class="tc-c">Đã làm 24/30</div><div class="pbar"><div class="pbar-fill" style="width:80%;background:linear-gradient(90deg,var(--green),#059669)"></div></div></div>
+        <div class="tc" onclick="openQuiz('hoa','🍬 Carbohydrate')"><div class="tc-pct">70%</div><div class="tc-em">🍬</div><div class="tc-t">Carbohydrate</div><div class="tc-c">Đã làm 21/30</div><div class="pbar"><div class="pbar-fill" style="width:70%;background:linear-gradient(90deg,var(--accent3),#f97316)"></div></div></div>
+        <div class="tc" onclick="openQuiz('hoa','🧱 Polime')"><div class="tc-pct">45%</div><div class="tc-em">🧱</div><div class="tc-t">Polime</div><div class="tc-c">Đã làm 14/30</div><div class="pbar"><div class="pbar-fill" style="width:45%;background:linear-gradient(90deg,#a78bfa,var(--accent2))"></div></div></div>
+        <div class="tc" onclick="openQuiz('hoa','⚡ Điện hóa học')"><div class="tc-pct">55%</div><div class="tc-em">⚡</div><div class="tc-t">Điện hóa học</div><div class="tc-c">Đã làm 17/30</div><div class="pbar"><div class="pbar-fill" style="width:55%;background:linear-gradient(90deg,var(--accent),#0066ff)"></div></div></div>
+      </div>
     </div>
     <!-- SINH HỌC -->
     <div class="sub-view" id="sv-sinh">
-      <div class="sub-header"><div class="sh-info"><h2>🌱 Môn Sinh học</h2><p>35 câu đã làm · Tiến độ 48%</p></div></div>
-      <div class="topics"><div class="tc" onclick="openQuiz('Di truyền học')"><div class="tc-pct">55%</div><div class="tc-em">🧬</div><div class="tc-t">Di truyền học</div><div class="tc-c">30 câu</div><div class="pbar"><div class="pbar-fill" style="width:55%;background:linear-gradient(90deg,#4ade80,#16a34a)"></div></div></div><div class="tc" onclick="openQuiz('Sinh thái học')"><div class="tc-pct">40%</div><div class="tc-em">🌿</div><div class="tc-t">Sinh thái học</div><div class="tc-c">25 câu</div><div class="pbar"><div class="pbar-fill" style="width:40%;background:linear-gradient(90deg,#4ade80,#16a34a)"></div></div></div><div class="tc" onclick="openQuiz('Tế bào học')"><div class="tc-pct">62%</div><div class="tc-em">🔭</div><div class="tc-t">Tế bào học</div><div class="tc-c">20 câu</div><div class="pbar"><div class="pbar-fill" style="width:62%;background:linear-gradient(90deg,#4ade80,#16a34a)"></div></div></div></div>
+      <div class="sub-header">
+        <div class="sh-info"><h2>🌱 Môn Sinh học</h2><p>30 câu · 6 chuyên đề · Tiến độ 48%</p></div>
+        <div class="sh-stats"><div><div class="sh-sv" style="color:#4ade80">6.8</div><div class="sh-sl">Điểm TB</div></div></div>
+      </div>
+      <div class="modes">
+        <div class="mode-c" onclick="openQuiz('sinh','🌱 Sinh học – Toàn bộ')"><div class="mc-ic">📚</div><div class="mc-t">Luyện chuyên đề</div><div class="mc-s">30 câu tổng hợp</div></div>
+        <div class="mode-c" onclick="openQuiz('sinh','🎚️ Sinh học – Theo mức độ')"><div class="mc-ic">🎚️</div><div class="mc-t">Theo mức độ</div><div class="mc-s">4 mức độ</div></div>
+        <div class="mode-c" onclick="openQuiz('sinh','🔁 Câu sai Sinh học')"><div class="mc-ic">🔁</div><div class="mc-t">Câu sai</div><div class="mc-s">15 câu cần ôn</div></div>
+        <div class="mode-c" onclick="openQuiz('sinh','🏆 Thi thử Sinh học')"><div class="mc-ic">🏆</div><div class="mc-t">Thi thử</div><div class="mc-s">30 câu · 45 phút</div></div>
+      </div>
+      <div style="font-size:15px;font-weight:700;margin-bottom:14px">📑 Chuyên đề</div>
+      <div class="topics">
+        <div class="tc" onclick="openQuiz('sinh','🧬 Di truyền học')"><div class="tc-pct">55%</div><div class="tc-em">🧬</div><div class="tc-t">Di truyền học</div><div class="tc-c">Đã làm 17/30</div><div class="pbar"><div class="pbar-fill" style="width:55%;background:linear-gradient(90deg,#4ade80,#16a34a)"></div></div></div>
+        <div class="tc" onclick="openQuiz('sinh','🌿 Sinh thái học')"><div class="tc-pct">40%</div><div class="tc-em">🌿</div><div class="tc-t">Sinh thái học</div><div class="tc-c">Đã làm 12/30</div><div class="pbar"><div class="pbar-fill" style="width:40%;background:linear-gradient(90deg,#4ade80,#16a34a)"></div></div></div>
+        <div class="tc" onclick="openQuiz('sinh','🔭 Tế bào học')"><div class="tc-pct">62%</div><div class="tc-em">🔭</div><div class="tc-t">Tế bào học</div><div class="tc-c">Đã làm 19/30</div><div class="pbar"><div class="pbar-fill" style="width:62%;background:linear-gradient(90deg,#4ade80,#16a34a)"></div></div></div>
+        <div class="tc" onclick="openQuiz('sinh','🧫 Vi sinh vật')"><div class="tc-pct">35%</div><div class="tc-em">🧫</div><div class="tc-t">Vi sinh vật</div><div class="tc-c">Đã làm 11/30</div><div class="pbar"><div class="pbar-fill" style="width:35%;background:linear-gradient(90deg,#4ade80,#16a34a)"></div></div></div>
+        <div class="tc" onclick="openQuiz('sinh','💪 Sinh lý người')"><div class="tc-pct">50%</div><div class="tc-em">💪</div><div class="tc-t">Sinh lý người</div><div class="tc-c">Đã làm 15/30</div><div class="pbar"><div class="pbar-fill" style="width:50%;background:linear-gradient(90deg,#4ade80,#16a34a)"></div></div></div>
+        <div class="tc" onclick="openQuiz('sinh','🌍 Tiến hóa')"><div class="tc-pct">30%</div><div class="tc-em">🌍</div><div class="tc-t">Tiến hóa</div><div class="tc-c">Đã làm 9/30</div><div class="pbar"><div class="pbar-fill" style="width:30%;background:linear-gradient(90deg,#4ade80,#16a34a)"></div></div></div>
+      </div>
     </div>
     <!-- TIẾNG ANH -->
     <div class="sub-view" id="sv-anh">
-      <div class="sub-header"><div class="sh-info"><h2>🌍 Tiếng Anh</h2><p>60 câu đã làm · Tiến độ 82%</p></div><div class="sh-stats"><div><div class="sh-sv" style="color:var(--accent3)">7.9</div><div class="sh-sl">Điểm TB</div></div></div></div>
-      <div class="topics"><div class="tc" onclick="openQuiz('Grammar')"><div class="tc-pct">88%</div><div class="tc-em">📝</div><div class="tc-t">Grammar</div><div class="tc-c">40 câu</div><div class="pbar"><div class="pbar-fill" style="width:88%;background:linear-gradient(90deg,var(--accent3),#f97316)"></div></div></div><div class="tc" onclick="openQuiz('Reading Comprehension')"><div class="tc-pct">76%</div><div class="tc-em">📖</div><div class="tc-t">Reading Comprehension</div><div class="tc-c">35 câu</div><div class="pbar"><div class="pbar-fill" style="width:76%;background:linear-gradient(90deg,var(--accent3),#f97316)"></div></div></div><div class="tc" onclick="openQuiz('Vocabulary')"><div class="tc-pct">91%</div><div class="tc-em">🔤</div><div class="tc-t">Vocabulary</div><div class="tc-c">30 câu</div><div class="pbar"><div class="pbar-fill" style="width:91%;background:linear-gradient(90deg,var(--accent3),#f97316)"></div></div></div></div>
+      <div class="sub-header">
+        <div class="sh-info"><h2>🌍 Tiếng Anh</h2><p>30 câu · 5 chuyên đề · Tiến độ 82%</p></div>
+        <div class="sh-stats"><div><div class="sh-sv" style="color:var(--accent3)">7.9</div><div class="sh-sl">Điểm TB</div></div><div><div class="sh-sv" style="color:var(--green)">82%</div><div class="sh-sl">Hoàn thành</div></div></div>
+      </div>
+      <div class="modes">
+        <div class="mode-c" onclick="openQuiz('anh','🌍 Tiếng Anh – Toàn bộ')"><div class="mc-ic">📚</div><div class="mc-t">Luyện chuyên đề</div><div class="mc-s">30 câu tổng hợp</div></div>
+        <div class="mode-c" onclick="openQuiz('anh','📖 Reading Comprehension')"><div class="mc-ic">📖</div><div class="mc-t">Đọc hiểu</div><div class="mc-s">30 câu chuyên sâu</div></div>
+        <div class="mode-c" onclick="openQuiz('anh','🔁 Câu sai Tiếng Anh')"><div class="mc-ic">🔁</div><div class="mc-t">Câu sai</div><div class="mc-s">8 câu cần ôn</div></div>
+        <div class="mode-c" onclick="openQuiz('anh','🏆 Thi thử Tiếng Anh')"><div class="mc-ic">🏆</div><div class="mc-t">Thi thử</div><div class="mc-s">30 câu · 45 phút</div></div>
+      </div>
+      <div style="font-size:15px;font-weight:700;margin-bottom:14px">📑 Chuyên đề</div>
+      <div class="topics">
+        <div class="tc" onclick="openQuiz('anh','📝 Grammar')"><div class="tc-pct">88%</div><div class="tc-em">📝</div><div class="tc-t">Grammar</div><div class="tc-c">Đã làm 26/30</div><div class="pbar"><div class="pbar-fill" style="width:88%;background:linear-gradient(90deg,var(--accent3),#f97316)"></div></div></div>
+        <div class="tc" onclick="openQuiz('anh','📖 Reading')"><div class="tc-pct">76%</div><div class="tc-em">📖</div><div class="tc-t">Reading</div><div class="tc-c">Đã làm 23/30</div><div class="pbar"><div class="pbar-fill" style="width:76%;background:linear-gradient(90deg,var(--accent3),#f97316)"></div></div></div>
+        <div class="tc" onclick="openQuiz('anh','🔤 Vocabulary')"><div class="tc-pct">91%</div><div class="tc-em">🔤</div><div class="tc-t">Vocabulary</div><div class="tc-c">Đã làm 27/30</div><div class="pbar"><div class="pbar-fill" style="width:91%;background:linear-gradient(90deg,var(--accent3),#f97316)"></div></div></div>
+        <div class="tc" onclick="openQuiz('anh','🗣️ Communication')"><div class="tc-pct">78%</div><div class="tc-em">🗣️</div><div class="tc-t">Communication</div><div class="tc-c">Đã làm 23/30</div><div class="pbar"><div class="pbar-fill" style="width:78%;background:linear-gradient(90deg,var(--accent3),#f97316)"></div></div></div>
+        <div class="tc" onclick="openQuiz('anh','🔊 Pronunciation')"><div class="tc-pct">65%</div><div class="tc-em">🔊</div><div class="tc-t">Pronunciation</div><div class="tc-c">Đã làm 19/30</div><div class="pbar"><div class="pbar-fill" style="width:65%;background:linear-gradient(90deg,var(--accent3),#f97316)"></div></div></div>
+        <div class="tc" onclick="openQuiz('anh','✍️ Writing Skills')"><div class="tc-pct">58%</div><div class="tc-em">✍️</div><div class="tc-t">Writing Skills</div><div class="tc-c">Đã làm 17/30</div><div class="pbar"><div class="pbar-fill" style="width:58%;background:linear-gradient(90deg,var(--accent),#0066ff)"></div></div></div>
+      </div>
     </div>
   </div>
+  
+<footer class="site-footer">
+  <div class="sf-inner">
+    <div class="sf-col">
+      <div class="sf-label">Địa chỉ</div>
+      <div class="sf-addr">
+        <strong>Lớp 12A4</strong><br>
+        Trường THPT Đan Phượng<br>
+        Thị trấn Phùng, huyện Đan Phượng<br>
+        Hà Nội
+      </div>
+      <div class="sf-map" style="margin-top:14px">
+        <iframe src="https://maps.google.com/maps?q=Tr%C6%B0%E1%BB%9Dng%20THPT%20%C4%90an%20Ph%C6%B0%E1%BB%A3ng&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+    <div class="sf-col" style="text-align:center">
+      <div class="sf-label">Thành viên nhóm</div>
+      <div class="sf-members" style="align-items:center">
+        <div class="sf-member">Nguyễn Thế Hải Nam</div>
+        <div class="sf-member">Doãn Hà Anh</div>
+        <div class="sf-member">Nguyễn Huyền Linh</div>
+        <div class="sf-member">Đỗ Minh Phương</div>
+        <div class="sf-member">Nguyễn Thị Mai Trang</div>
+      </div>
+    </div>
+    <div class="sf-col" style="text-align:right">
+      <div class="sf-label">Mạng xã hội</div>
+      <div class="sf-fb">
+        <a href="https://facebook.com" target="_blank">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="#1877f2"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.413c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.953h-1.513c-1.491 0-1.956.93-1.956 1.886v2.284h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+          Facebook
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="sf-bottom">
+    <span class="sf-copy">© 2026 LuyenThi369</span>
+    <span class="sf-brand">Lớp 12A4 · Trường THPT Đan Phượng</span>
+  </div>
+</footer>
+
 </div>
 </div>
 <!-- QUIZ OVERLAY -->
 <div class="qov" id="qov">
   <div class="qbox">
     <div class="qhdr">
-      <div class="qtitle" id="qtitle">Quiz</div>
+      <div class="qtitle" id="qtitle" data-subj="">Quiz</div>
       <div class="qmeta">
-        <div class="qpw"><span id="qcur">1</span>/<span id="qtot">10</span><div class="qpbar"><div class="qpfill" id="qpfill" style="width:10%"></div></div></div>
-        <div class="qtimer" id="qtimer">14:59</div>
+        <div class="qpw"><span id="qcur">1</span>/<span id="qtot">30</span><div class="qpbar"><div class="qpfill" id="qpfill" style="width:3.3%"></div></div></div>
+        <div class="qtimer" id="qtimer">30:00</div>
         <div class="qclose" onclick="closeQuiz()">✕</div>
       </div>
     </div>
@@ -201,47 +436,239 @@ body{background:var(--bg);color:var(--text);font-family:'Sora',sans-serif;transi
   </div>
 </div>
 <script>
-function applyTheme(t){document.documentElement.setAttribute('data-theme',t);localStorage.setItem('lt369_theme',t);const b=document.getElementById('theme-btn');if(b)b.textContent=t==='dark'?'☀️':'🌙'}
+
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  localStorage.setItem('lt369_theme',t);
+  const b=document.getElementById('theme-btn');
+  if(b) b.textContent=t==='dark'?'☀️':'🌙';
+}
 function toggleTheme(){applyTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark')}
+
+
 (function(){
   applyTheme(localStorage.getItem('lt369_theme')||'dark');
   const n=localStorage.getItem('lt369_user')||'bạn';
-  document.getElementById('sb-name').textContent=n;
-  document.getElementById('sb-av').textContent=n.charAt(0).toUpperCase();
-  document.getElementById('na-mon').classList.add('active');
+  const av=document.getElementById('sb-av');
+  const nm=document.getElementById('sb-name');
+  if(av) av.textContent=n.charAt(0).toUpperCase();
+  if(nm) nm.textContent=n;
+  const el=document.getElementById('na-mon');
+  if(el) el.classList.add('active');
 })();
-function switchSub(id,el){document.querySelectorAll('.sub-view').forEach(v=>v.classList.remove('active'));document.getElementById('sv-'+id).classList.add('active');document.querySelectorAll('.stab').forEach(t=>t.classList.remove('active'));el.classList.add('active')}
-const QS=[
-  {q:'Cho hàm số y = x³ - 3x² + 2. Hàm số đạt cực đại tại x bằng bao nhiêu?',opts:['x = 0','x = 1','x = 2','x = -1'],ans:0,ex:'y\' = 3x² - 6x = 3x(x-2) = 0 → x=0 hoặc x=2. y\'\'(0) = -6 < 0 nên x=0 là cực đại.'},
-  {q:'Tích phân ∫₀¹ 2x dx bằng bao nhiêu?',opts:['0','1','2','1/2'],ans:1,ex:'∫₀¹ 2x dx = [x²]₀¹ = 1 - 0 = 1'},
-  {q:'Cho log₂(8) = ?',opts:['2','3','4','1'],ans:1,ex:'log₂(8) = log₂(2³) = 3'},
-  {q:'Số phức z = 2 + 3i có môđun bằng:',opts:['√5','√13','5','13'],ans:1,ex:'|z| = √(4+9) = √13'},
-  {q:'Thể tích khối lập phương cạnh a là:',opts:['a²','2a³','a³','3a²'],ans:2,ex:'V = a × a × a = a³'},
-  {q:'Xác suất tung đồng xu 3 lần được đúng 2 mặt ngửa là:',opts:['1/4','3/8','1/2','1/8'],ans:1,ex:'C(3,2)×(1/2)²×(1/2) = 3/8'},
-  {q:'Giải phương trình 2ˣ = 32:',opts:['x = 4','x = 5','x = 6','x = 3'],ans:1,ex:'2ˣ = 2⁵ → x = 5'},
-  {q:'Cấp số nhân 2; 6; 18; ... Công bội q bằng:',opts:['2','3','4','6'],ans:1,ex:'q = 6/2 = 3'},
-  {q:'Diện tích hình tròn bán kính r = 5 cm là:',opts:['10π','25π','50π','5π'],ans:1,ex:'S = πr² = 25π cm²'},
-  {q:'Hàm số y = sin(x) có chu kỳ là:',opts:['π','2π','π/2','4π'],ans:1,ex:'Hàm y = sin(x) có chu kỳ T = 2π'},
-];
-let curQ=0,answers=[],timerI=null,timeLeft=900;
-function openQuiz(title){document.getElementById('qtitle').textContent=title;curQ=0;answers=new Array(10).fill(null);timeLeft=900;document.getElementById('qtot').textContent=QS.length;document.getElementById('qfoot').style.display='flex';renderQ();renderDots();startTimer();document.getElementById('qov').classList.add('show');document.body.style.overflow='hidden'}
+
+function switchSub(id,el){
+  document.querySelectorAll('.sub-view').forEach(v=>v.classList.remove('active'));
+  document.getElementById('sv-'+id).classList.add('active');
+  document.querySelectorAll('.stab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+}
+
+const QBANK={
+  toan:[{q:'Hàm số y = x³ − 3x² + 2 đạt cực đại tại x = ?',o:["x = 0", "x = 1", "x = 2", "x = −1"],a:0,e:'y\'=3x²−6x=3x(x−2)=0 → x=0 hoặc x=2. y\'\'(0)=−6<0 nên x=0 là cực đại.'},
+{q:'Tích phân ∫₀¹ 2x dx bằng:',o:["0", "1", "2", "1/2"],a:1,e:'∫₀¹ 2x dx = [x²]₀¹ = 1.'},
+{q:'log₂(32) = ?',o:["4", "5", "6", "3"],a:1,e:'log₂(32)=log₂(2⁵)=5.'},
+{q:'Số phức z = 3 + 4i có môđun bằng:',o:["5", "7", "√5", "√7"],a:0,e:'|z|=√(9+16)=√25=5.'},
+{q:'Thể tích khối lập phương cạnh 3 cm là:',o:["9 cm³", "18 cm³", "27 cm³", "81 cm³"],a:2,e:'V=a³=3³=27 cm³.'},
+{q:'Xác suất tung đồng xu 3 lần được đúng 2 mặt ngửa là:',o:["1/4", "3/8", "1/2", "1/8"],a:1,e:'C(3,2)×(1/2)³=3/8.'},
+{q:'Giải phương trình 3ˣ = 81:',o:["x=3", "x=4", "x=5", "x=2"],a:1,e:'3ˣ=3⁴ → x=4.'},
+{q:'Cấp số nhân 3; 6; 12; ... có công bội q = ?',o:["2", "3", "4", "6"],a:0,e:'q=6/3=2.'},
+{q:'Diện tích hình tròn bán kính 4 cm là:',o:["8π", "16π", "12π", "4π"],a:1,e:'S=πr²=16π cm².'},
+{q:'Hàm số y = cos(x) có chu kỳ là:',o:["π", "2π", "π/2", "3π"],a:1,e:'Chu kỳ hàm cos là T=2π.'},
+{q:'Cho hàm số f(x) = 2x³ − 3x² − 12x + 1. Giá trị cực tiểu là:',o:["−16", "−15", "−3", "−19"],a:3,e:'f\'=6x²−6x−12=0 → x=2 hoặc x=−1. f(2)=16−12−24+1=−19 (cực tiểu).'},
+{q:'∫ (3x² + 2) dx = ?',o:["x³+2x+C", "3x+C", "6x+C", "x³+C"],a:0,e:'∫(3x²+2)dx=x³+2x+C.'},
+{q:'Nghiệm của phương trình 2ˣ⁺¹ = 16 là:',o:["x=2", "x=3", "x=4", "x=1"],a:1,e:'2ˣ⁺¹=2⁴ → x+1=4 → x=3.'},
+{q:'Số tổ hợp C(10,3) = ?',o:["100", "120", "360", "720"],a:1,e:'C(10,3)=10!/(3!·7!)=120.'},
+{q:'Trong không gian, mặt phẳng Oxz có phương trình là:',o:["x=0", "y=0", "z=0", "x+z=0"],a:1,e:'Mặt phẳng Oxz chứa trục Ox và Oz nên y=0.'},
+{q:'Giới hạn lim(x→2) (x²−4)/(x−2) = ?',o:["0", "2", "4", "∞"],a:2,e:'(x²−4)/(x−2)=(x+2)(x−2)/(x−2)=x+2 → tại x=2 bằng 4.'},
+{q:'Phương trình đường tròn tâm O(0,0) bán kính 5 là:',o:["x²+y²=5", "x²+y²=25", "x+y=5", "x²+y²=10"],a:1,e:'(x−0)²+(y−0)²=5² → x²+y²=25.'},
+{q:'Khai triển (a+b)³ = ?',o:["a³+b³", "a³+3a²b+3ab²+b³", "a³+2ab+b³", "a³−b³"],a:1,e:'Nhị thức Newton: (a+b)³=a³+3a²b+3ab²+b³.'},
+{q:'Diện tích tam giác có 3 cạnh 3, 4, 5 là:',o:["6", "12", "7,5", "10"],a:0,e:'Tam giác vuông (3²+4²=5²), S=½×3×4=6.'},
+{q:'Phương trình 2x² − 5x + 3 = 0 có nghiệm là:',o:["x=1 hoặc x=3/2", "x=1 hoặc x=−3/2", "x=−1 hoặc x=3/2", "Vô nghiệm"],a:0,e:'Δ=25−24=1 → x=(5±1)/4 → x=1 hoặc x=3/2.'},
+{q:'Tổng cấp số nhân vô hạn 1 + 1/2 + 1/4 + ... = ?',o:["1", "2", "3", "4"],a:1,e:'S=a/(1−q)=1/(1−1/2)=2.'},
+{q:'Đạo hàm của f(x) = sin(2x) là:',o:["cos(2x)", "2cos(2x)", "−2sin(2x)", "2sin(x)"],a:1,e:'f\'(x)=cos(2x)·2=2cos(2x).'},
+{q:'Logarit tự nhiên ln(e³) = ?',o:["e³", "3e", "3", "e"],a:2,e:'ln(eⁿ)=n, nên ln(e³)=3.'},
+{q:'Số nghiệm nguyên của bất phương trình x² − 5x + 6 ≤ 0 là:',o:["1", "2", "3", "4"],a:1,e:'x²−5x+6=(x−2)(x−3)≤0 → 2≤x≤3 → x∈{2,3}: 2 nghiệm. Sai, phải nhận x=2 và x=3, tức 2 nghiệm nguyên.'},
+{q:'Thể tích khối cầu bán kính R = 3 là:',o:["9π", "12π", "36π", "4π"],a:2,e:'V=(4/3)πR³=(4/3)π·27=36π.'},
+{q:'Tích phân ∫₁² (1/x) dx = ?',o:["ln2", "ln3", "1/2", "2ln2"],a:0,e:'∫₁²(1/x)dx=[ln|x|]₁²=ln2−0=ln2.'},
+{q:'Phương trình 4ˣ = 2 có nghiệm là:',o:["x=1/4", "x=1/2", "x=2", "x=1"],a:1,e:'4ˣ=2²ˣ=2¹ → 2x=1 → x=1/2.'},
+{q:'Hàm số y = |x| có đạo hàm tại x = 0:',o:["0", "1", "−1", "Không tồn tại"],a:3,e:'Giới hạn trái −1 ≠ giới hạn phải 1 nên không có đạo hàm tại x=0.'},
+{q:'Tổng 1 + 2 + 3 + ... + 100 = ?',o:["5000", "5050", "10000", "4950"],a:1,e:'S=n(n+1)/2=100×101/2=5050.'},
+{q:'Đường thẳng y = 3x − 2 có hệ số góc là:',o:["−2", "2", "3", "−3"],a:2,e:'Hệ số góc là hệ số của x, tức k=3.'}],
+  ly:[{q:'Dao động điều hòa có phương trình x = 5cos(2πt) cm. Chu kỳ dao động là:',o:["0,5 s", "1 s", "2 s", "π s"],a:1,e:'T=2π/ω=2π/2π=1 s.'},
+{q:'Vật dao động điều hòa có biên độ A=10cm, tần số f=2Hz. Vận tốc cực đại là:',o:["10π cm/s", "20π cm/s", "40π cm/s", "5π cm/s"],a:2,e:'v_max=Aω=A·2πf=10·2π·2=40π cm/s.'},
+{q:'Mạch RLC nối tiếp có R=100Ω, Z_L=100Ω, Z_C=100Ω. Tổng trở Z = ?',o:["0Ω", "100Ω", "200Ω", "300Ω"],a:1,e:'Z=√(R²+(Z_L−Z_C)²)=√(100²+0²)=100Ω (cộng hưởng).'},
+{q:'Tần số cộng hưởng của mạch LC là:',o:["f=2π√(LC)", "f=1/(2π√(LC))", "f=√(LC)/2π", "f=2πLC"],a:1,e:'f₀=1/(2π√(LC)).'},
+{q:'Hiện tượng nào sau đây là ứng dụng của cộng hưởng cơ?',o:["Lò vi sóng", "Đài phát thanh AM", "Cầu bị gãy do bước đều", "Đèn huỳnh quang"],a:2,e:'Cộng hưởng cơ xảy ra khi tần số ngoại lực bằng tần số riêng, có thể gây gãy cầu.'},
+{q:'Vận tốc ánh sáng trong chân không là:',o:["3×10⁶ m/s", "3×10⁸ m/s", "3×10¹⁰ m/s", "3×10⁴ m/s"],a:1,e:'c≈3×10⁸ m/s.'},
+{q:'Tia nào sau đây có bước sóng lớn nhất?',o:["Tia X", "Tia gamma", "Tia tử ngoại", "Tia hồng ngoại"],a:3,e:'Thứ tự sóng điện từ tăng dần: γ < X < UV < ánh sáng < hồng ngoại < viba < sóng radio.'},
+{q:'Hiệu điện thế hiệu dụng trong mạch xoay chiều là U. Điện áp cực đại bằng:',o:["U/√2", "U√2", "2U", "U/2"],a:1,e:'U₀=U√2.'},
+{q:'Trong thí nghiệm Young về giao thoa ánh sáng, khoảng vân i tỉ lệ:',o:["Thuận với a", "Nghịch với a", "Thuận với λ", "Cả B và C"],a:3,e:'i=λD/a: tỉ lệ thuận λ và nghịch với a.'},
+{q:'Hiện tượng quang điện xảy ra khi:',o:["Chiếu bất kỳ ánh sáng nào", "Ánh sáng có bước sóng nhỏ hơn giới hạn quang điện", "Ánh sáng có tần số thấp", "Chiếu hồng ngoại"],a:1,e:'Cần λ ≤ λ₀ (giới hạn quang điện).'},
+{q:'Hạt nhân ²³⁸₉₂U có số nơtron là:',o:["92", "238", "146", "330"],a:2,e:'N=A−Z=238−92=146.'},
+{q:'Phản ứng hạt nhân nào là phân hạch?',o:["2H+3H→4He+n", "235U+n→nhiều mảnh", "4He hình thành từ H", "56Fe → nhiều hạt nhỏ"],a:1,e:'Phân hạch là phản ứng vỡ hạt nhân nặng thành các mảnh nhỏ hơn.'},
+{q:'Công thức tính năng lượng liên kết hạt nhân là:',o:["E=mc", "E=Δm·c²", "E=mc²/2", "E=m/c²"],a:1,e:'E=Δm·c² (Δm là độ hụt khối).'},
+{q:'Máy biến áp lý tưởng có n₁=1000 vòng, n₂=50 vòng, U₁=220V. U₂ = ?',o:["4400V", "11V", "110V", "44V"],a:1,e:'U₂/U₁=n₂/n₁=50/1000 → U₂=220×0,05=11V.'},
+{q:'Điện trở thuần R mắc vào nguồn xoay chiều u=U₀sin(ωt). Công suất tiêu thụ là:',o:["P=U₀²/R", "P=U₀²/(2R)", "P=2U₀²/R", "P=U₀²/(R√2)"],a:1,e:'P=I²R=(U/R)²·R=U²/R=(U₀/√2)²/R=U₀²/(2R).'},
+{q:'Con lắc đơn dao động điều hòa, chu kỳ tăng khi:',o:["Tăng biên độ", "Tăng chiều dài dây", "Tăng gia tốc g", "Giảm khối lượng"],a:1,e:'T=2π√(l/g): tăng l thì T tăng.'},
+{q:'Hiện tượng tán sắc ánh sáng chứng tỏ:',o:["Ánh sáng trắng là đơn sắc", "Ánh sáng trắng gồm nhiều ánh sáng đơn sắc", "Thủy tinh hấp thụ ánh sáng", "Ánh sáng trắng bị phản xạ"],a:1,e:'Tán sắc cho thấy ánh sáng trắng là hỗn hợp nhiều ánh sáng đơn sắc.'},
+{q:'Gia tốc rơi tự do tại bề mặt Trái Đất xấp xỉ:',o:["1 m/s²", "9,8 m/s²", "10 m/s²", "98 m/s²"],a:1,e:'g ≈ 9,8 m/s².'},
+{q:'Vật khối lượng 2 kg, vận tốc 5 m/s. Động năng bằng:',o:["5J", "10J", "25J", "50J"],a:2,e:'Wđ=½mv²=½×2×25=25 J.'},
+{q:'Lực Lorentz tác dụng lên hạt điện tích chuyển động trong từ trường có phương:',o:["Song song với v", "Vuông góc với v", "Song song với B", "Vuông góc với v và B"],a:3,e:'Lực Lorentz f=qv×B, vuông góc cả v và B.'},
+{q:'Khi chiết suất n của môi trường tăng thì vận tốc ánh sáng trong môi trường đó:',o:["Tăng", "Giảm", "Không đổi", "Tăng rồi giảm"],a:1,e:'v=c/n: n tăng thì v giảm.'},
+{q:'Sóng điện từ truyền được trong chân không là do:',o:["Điện trường và từ trường tồn tại trong chân không", "Điện từ trường biến thiên lan truyền", "Photon truyền qua chân không", "Cả A và B"],a:3,e:'Sóng EM là điện từ trường biến thiên lan truyền, không cần môi trường.'},
+{q:'Định luật Faraday về cảm ứng điện từ: suất điện động cảm ứng bằng:',o:["e=−dΦ/dt", "e=dΦ/dt", "e=−dB/dt", "e=ΦB"],a:0,e:'e=−dΦ/dt (dấu trừ là quy tắc Lenz).'},
+{q:'Hiệu suất của máy biến áp lý tưởng là:',o:["50%", "75%", "100%", "80%"],a:2,e:'Máy biến áp lý tưởng không tổn hao, H=100%.'},
+{q:'Tia X có bước sóng vào khoảng:',o:["10⁻² đến 10⁻⁷ m", "10⁻¹¹ đến 10⁻⁸ m", "10⁻³ đến 10⁻² m", "10⁻⁶ đến 10⁻⁴ m"],a:1,e:'Tia X có λ từ 10⁻¹¹ đến 10⁻⁸ m.'},
+{q:'Nguyên lý siêu âm dựa trên:',o:["Phản xạ sóng âm", "Tán xạ ánh sáng", "Hấp thụ sóng điện từ", "Cảm ứng điện từ"],a:0,e:'Siêu âm hoạt động dựa trên phản xạ sóng âm.'},
+{q:'Chu kỳ bán rã của một chất phóng xạ là thời gian để:',o:["Toàn bộ hạt nhân phân rã", "Một nửa số hạt nhân phân rã", "Toàn bộ chất phân rã", "Phát ra một photon gamma"],a:1,e:'T₁/₂ là thời gian để N₀/2 hạt nhân phân rã.'},
+{q:'Nguyên tắc hoạt động của điện thoại di động dựa trên:',o:["Sóng âm", "Sóng điện từ", "Sóng cơ", "Ánh sáng"],a:1,e:'Điện thoại di động sử dụng sóng điện từ (viba) để truyền thông tin.'},
+{q:'Biến trở là thiết bị dùng để:',o:["Thay đổi điện áp", "Thay đổi điện trở", "Thay đổi tần số", "Thay đổi từ thông"],a:1,e:'Biến trở dùng để điều chỉnh giá trị điện trở trong mạch.'},
+{q:'Cảm ứng từ B tại điểm cách dây dẫn thẳng dài r là:',o:["B=μ₀I/(2πr)", "B=μ₀I/r", "B=μ₀Ir/(2π)", "B=I/(2πr)"],a:0,e:'B=μ₀I/(2πr) theo công thức cảm ứng từ dây dẫn thẳng.'}],
+  hoa:[{q:'Nguyên tử Carbon có số proton là:',o:["4", "6", "8", "12"],a:1,e:'C ở ô số 6 → Z=6 proton.'},
+{q:'Phân tử H₂SO₄ có khối lượng phân tử là:',o:["48", "96", "98", "64"],a:2,e:'M=2+32+64=98 g/mol.'},
+{q:'Este no đơn chức có công thức chung là:',o:["CₙH₂ₙO₂", "CₙH₂ₙ₊₂O₂", "CₙH₂ₙ₋₂O₂", "CₙH₂ₙO"],a:0,e:'Este no đơn chức: CₙH₂ₙO₂ (n≥2).'},
+{q:'Phản ứng xà phòng hóa este trong NaOH thu được:',o:["Axit và ancol", "Muối và ancol", "Axit và xeton", "Anđehit và ancol"],a:1,e:'Este + NaOH → muối (của axit) + ancol.'},
+{q:'Kim loại nào có tính khử mạnh nhất?',o:["Fe", "Cu", "Na", "Au"],a:2,e:'Na là kim loại kiềm, có tính khử rất mạnh.'},
+{q:'Phản ứng nào sau đây là phản ứng oxi hóa – khử?',o:["HCl + NaOH → NaCl + H₂O", "CaCO₃ → CaO + CO₂", "Fe + CuSO₄ → FeSO₄ + Cu", "BaCl₂ + Na₂SO₄ → BaSO₄ + 2NaCl"],a:2,e:'Fe bị oxi hóa, Cu²⁺ bị khử.'},
+{q:'Glucozo có công thức phân tử là:',o:["C₆H₁₂O₅", "C₆H₁₂O₆", "C₁₂H₂₂O₁₁", "C₆H₁₀O₅"],a:1,e:'Glucozo: C₆H₁₂O₆.'},
+{q:'Phản ứng thủy phân tinh bột trong môi trường axit cho sản phẩm cuối là:',o:["Fructozo", "Saccarozo", "Glucozo", "Mantozo"],a:2,e:'Tinh bột →(H⁺,H₂O) Glucozo.'},
+{q:'Amin bậc 2 là amin có:',o:["1 nhóm NH₂", "2 nguyên tử N", "Nguyên tử N liên kết với 2 gốc hiđrocacbon", "Nguyên tử N liên kết với 3 gốc hiđrocacbon"],a:2,e:'Amin bậc 2: R−NH−R\'.'},
+{q:'Kim loại nào sau đây tác dụng được với nước ở nhiệt độ thường?',o:["Fe", "Al", "Ca", "Cu"],a:2,e:'Ca là kim loại kiềm thổ, phản ứng với nước ở điều kiện thường.'},
+{q:'Hợp chất nào sau đây là aminoaxit?',o:["CH₃NH₂", "H₂N−CH₂−COOH", "CH₃COOH", "C₂H₅OH"],a:1,e:'Aminoaxit có cả nhóm NH₂ và COOH.'},
+{q:'Phản ứng trùng hợp của CH₂=CH₂ tạo ra:',o:["PVC", "Polietilen", "Polipropilen", "Polistiren"],a:1,e:'nCH₂=CH₂ → (−CH₂−CH₂−)ₙ là polietilen (PE).'},
+{q:'Độ pH của dung dịch HCl 0,01M là:',o:["2", "1", "12", "3"],a:0,e:'[H⁺]=0,01M → pH=−log(0,01)=2.'},
+{q:'Ion nào sau đây làm quỳ tím hóa xanh?',o:["H⁺", "Cl⁻", "OH⁻", "Na⁺"],a:2,e:'OH⁻ là bazơ làm quỳ hóa xanh.'},
+{q:'Gang là hợp kim của sắt chứa bao nhiêu % carbon?',o:["<0,01%", "0,01–2%", "2–6%", ">6%"],a:2,e:'Gang chứa 2–6% C (nhiều hơn thép).'},
+{q:'Nguyên liệu chính để sản xuất gang trong lò cao là:',o:["Quặng sắt, than coke, đá vôi", "Quặng sắt, than đá", "Sắt phế liệu, than coke", "Oxit sắt và nhôm"],a:0,e:'Nguyên liệu lò cao: quặng sắt + than coke + đá vôi.'},
+{q:'Phương trình điện phân NaCl nóng chảy (catot) cho sản phẩm là:',o:["Cl₂", "Na", "H₂", "NaOH"],a:1,e:'Tại catot: Na⁺ + e⁻ → Na.'},
+{q:'Vitamin C có tên hóa học là:',o:["Axit axetic", "Axit ascorbic", "Axit citric", "Axit benzoic"],a:1,e:'Vitamin C là axit ascorbic (C₆H₈O₆).'},
+{q:'Nhựa PVC được tổng hợp từ monome nào?',o:["CH₂=CH₂", "CH₂=CHCl", "CH₂=CHCH₃", "C₆H₅CH=CH₂"],a:1,e:'Vinyl clorua CH₂=CHCl trùng hợp cho PVC.'},
+{q:'Axit nào sau đây có tính oxi hóa mạnh?',o:["HCl", "H₃PO₄", "HNO₃ đặc", "CH₃COOH"],a:2,e:'HNO₃ đặc là axit có tính oxi hóa rất mạnh.'},
+{q:'Nhôm tan trong dung dịch NaOH vì:',o:["Al là kim loại mạnh", "Al có tính lưỡng tính", "Al bị ăn mòn điện hóa", "Al không tác dụng"],a:1,e:'Al có tính lưỡng tính, tan trong cả axit và bazơ.'},
+{q:'Khi đốt cháy hoàn toàn ancol no đơn chức thu được tỉ lệ mol CO₂ : H₂O là:',o:["n CO₂ > n H₂O", "n CO₂ = n H₂O", "n CO₂ < n H₂O", "Không xác định được"],a:2,e:'Ancol no đơn chức CₙH₂ₙ₊₂O: n CO₂ = n, n H₂O = n+1 → n H₂O > n CO₂.'},
+{q:'Saccarozo bị thủy phân tạo ra:',o:["2 Glucozo", "Glucozo + Fructozo", "2 Fructozo", "Glucozo + Galactozo"],a:1,e:'Saccarozo C₁₂H₂₂O₁₁ → Glucozo + Fructozo.'},
+{q:'Phản ứng tráng bạc dùng để nhận biết:',o:["Lipit", "Tinh bột", "Glucozo", "Protein"],a:2,e:'Glucozo có nhóm CHO nên thực hiện được phản ứng tráng gương.'},
+{q:'Kim loại nào sau đây không tác dụng với dung dịch HCl?',o:["Fe", "Zn", "Cu", "Mg"],a:2,e:'Cu đứng sau H trong dãy điện hóa nên không tác dụng HCl.'},
+{q:'Protein có phản ứng màu biure (tím) với:',o:["NaOH + CuSO₄", "HNO₃ đặc", "AgNO₃/NH₃", "I₂"],a:0,e:'Phản ứng biure của protein với Cu(OH)₂ trong NaOH cho màu tím.'},
+{q:'Phân bón nào cung cấp nguyên tố Nitơ cho cây trồng?',o:["Supephotphat", "Kali clorua", "Ure", "Vôi bột"],a:2,e:'Ure CO(NH₂)₂ cung cấp N cho cây trồng.'},
+{q:'Polime nào được dùng làm sợi tổng hợp phổ biến nhất?',o:["Polietilen", "Nylon-6,6", "PVC", "Cao su thiên nhiên"],a:1,e:'Nylon-6,6 (polyamide) là sợi tổng hợp phổ biến.'},
+{q:'Hóa trị của nitrogen trong NH₃ là:',o:["1", "2", "3", "4"],a:2,e:'N có 3 liên kết với 3 H → hóa trị 3.'},
+{q:'Axit axetic CH₃COOH có pKa ≈ 4,75. Đây là axit:',o:["Mạnh", "Trung bình", "Yếu", "Rất mạnh"],a:2,e:'pKa=4,75 → Ka≈10⁻⁵ → axit yếu.'}],
+  sinh:[{q:'Quá trình nào tổng hợp ARN từ khuôn ADN?',o:["Dịch mã", "Phiên mã", "Nhân đôi ADN", "Tái tổ hợp"],a:1,e:'Phiên mã (transcription): ADN → ARN.'},
+{q:'Codon khởi đầu trong dịch mã là:',o:["UAA", "UAG", "AUG", "UGA"],a:2,e:'AUG là codon mở đầu (mã hóa Met).'},
+{q:'Gen là:',o:["Một đoạn ADN mang thông tin di truyền", "Toàn bộ phân tử ADN", "Một đoạn ARN", "Một đoạn protein"],a:0,e:'Gen là đoạn ADN mang thông tin mã hóa một chuỗi polipeptit.'},
+{q:'Trong phân bào giảm nhiễm, lần phân bào I là:',o:["Phân bào nguyên nhiễm", "Phân bào giảm nhiễm (tế bào 2n → 2 tế bào n)", "Phân bào tạo tế bào sinh dưỡng", "Phân bào tạo tế bào trứng"],a:1,e:'Phân bào I là phân bào giảm nhiễm thực sự, tách cặp NST tương đồng.'},
+{q:'Định luật phân ly của Mendel phát biểu:',o:["Mỗi tính trạng do 2 nhân tố di truyền quy định", "Các nhân tố di truyền phân ly độc lập", "F2 phân ly 3 trội : 1 lặn", "Cả A và C"],a:3,e:'Mỗi tính trạng do 2 nhân tố di truyền (alen) quy định và chúng phân ly ở F2 theo tỉ lệ 3:1.'},
+{q:'ADN tái bản theo nguyên tắc:',o:["Toàn thủ", "Bán thủ", "Phân tán", "Toàn mới"],a:1,e:'ADN nhân đôi bán bảo tồn (semiconservative): mỗi phân tử con có 1 mạch cũ.'},
+{q:'Tế bào hồng cầu người có bao nhiêu nhiễm sắc thể?',o:["46", "23", "0", "92"],a:2,e:'Hồng cầu người không có nhân nên không có NST.'},
+{q:'Quá trình tổng hợp protein diễn ra tại:',o:["Nhân tế bào", "Ribosome", "Ty thể", "Lưới nội chất trơn"],a:1,e:'Dịch mã (tổng hợp protein) xảy ra tại ribosome.'},
+{q:'Đột biến gen là:',o:["Thay đổi số lượng NST", "Thay đổi cấu trúc NST", "Biến đổi trong cấu trúc gen", "Biến đổi kiểu hình"],a:2,e:'Đột biến gen là biến đổi trong trình tự nucleotide của gen.'},
+{q:'Quan hệ nào sau đây là ký sinh?',o:["Cá hề – hải quỳ", "Sâu bướm ăn lá cây", "Ve sầu – nấm côn trùng", "Địa y (nấm và tảo)"],a:2,e:'Nấm côn trùng ký sinh trên sâu bướm, làm hại vật chủ.'},
+{q:'Chuỗi thức ăn bắt đầu từ:',o:["Động vật ăn thịt", "Sinh vật phân giải", "Sinh vật sản xuất (thực vật)", "Động vật ăn cỏ"],a:2,e:'Chuỗi thức ăn bắt đầu từ sinh vật tự dưỡng (thực vật).'},
+{q:'Chất nào sau đây là sản phẩm của quá trình quang hợp?',o:["CO₂ và H₂O", "O₂ và Glucozo", "ATP và NADPH", "ADP và Pi"],a:1,e:'6CO₂+6H₂O → C₆H₁₂O₆+6O₂.'},
+{q:'Hệ tuần hoàn kép có đặc điểm:',o:["Máu qua tim 1 lần", "Máu qua tim 2 lần trong một vòng tuần hoàn", "Chỉ có 1 tâm thất", "Không có tâm nhĩ"],a:1,e:'Vòng tuần hoàn lớn và nhỏ → máu qua tim 2 lần.'},
+{q:'Hình thức sinh sản nào tạo ra con cái giống hệt nhau?',o:["Sinh sản hữu tính", "Sinh sản vô tính", "Thụ phấn chéo", "Thụ tinh ngoài"],a:1,e:'Sinh sản vô tính tạo ra các cá thể đồng nhất về di truyền.'},
+{q:'Điều hòa hoạt động gen ở sinh vật nhân sơ (operon Lac) được kiểm soát bởi:',o:["Protein ức chế và chất cảm ứng", "Histone", "Methyl hóa ADN", "Splicing"],a:0,e:'Operon Lac của E.coli được điều hòa bởi protein ức chế (repressor) và lactose (chất cảm ứng).'},
+{q:'Quần xã sinh vật là:',o:["Tập hợp cá thể cùng loài", "Tập hợp nhiều quần thể khác loài cùng sinh sống", "Khu vực địa lý", "Hệ thống vô sinh"],a:1,e:'Quần xã là tập hợp các quần thể sinh vật khác loài sống chung.'},
+{q:'Hiện tượng \"bình nguyên dân số\" xảy ra khi:',o:["Dân số tăng trưởng theo hàm mũ", "Dân số đạt sức chứa tối đa", "Dân số giảm mạnh", "Tỉ lệ sinh = tỉ lệ tử"],a:1,e:'Khi quần thể đạt K (sức chứa), tốc độ tăng trưởng = 0.'},
+{q:'Mô nào thực hiện chức năng bảo vệ cơ thể?',o:["Mô cơ", "Mô thần kinh", "Mô biểu bì", "Mô liên kết"],a:2,e:'Mô biểu bì bao phủ và bảo vệ cơ thể.'},
+{q:'Vitamin D được tổng hợp khi:',o:["Ăn rau xanh", "Da tiếp xúc ánh sáng mặt trời", "Uống sữa", "Tập thể dục"],a:1,e:'Tia UV trong ánh nắng kích hoạt tổng hợp vitamin D3 tại da.'},
+{q:'Kháng sinh tiêu diệt vi khuẩn bằng cách nào?',o:["Ức chế tổng hợp thành tế bào", "Phá vỡ màng nhân", "Tăng nhiệt độ tế bào", "Loại bỏ nước"],a:0,e:'Nhiều kháng sinh (Penicillin) ức chế tổng hợp thành peptidoglycan của vi khuẩn.'},
+{q:'Nguyên tắc bổ sung trong ADN là:',o:["A liên kết T, G liên kết C", "A liên kết G, T liên kết C", "A liên kết C, G liên kết T", "Tất cả bazơ bắt cặp tự do"],a:0,e:'A-T (2 liên kết H), G-C (3 liên kết H).'},
+{q:'Nhiễm sắc thể giới tính ở người:',o:["XX (nam), XY (nữ)", "XY (nam), XX (nữ)", "XX (cả nam và nữ)", "XY (cả nam và nữ)"],a:1,e:'Nam: 44+XY; Nữ: 44+XX.'},
+{q:'Trong giảm phân II, số lượng NST trong tế bào:',o:["Giữ nguyên như tế bào mẹ", "Giảm đi một nửa so với giảm phân I", "Tăng gấp đôi", "Bằng 2n"],a:1,e:'Sau GP I tế bào có n NST kép. GP II tách thành n NST đơn.'},
+{q:'Cơ chế miễn dịch tế bào do:',o:["Lympho B", "Lympho T", "Bạch cầu trung tính", "Tiểu cầu"],a:1,e:'Tế bào T (CD4, CD8) thực hiện miễn dịch tế bào.'},
+{q:'Hô hấp hiếu khí diễn ra ở đâu?',o:["Bào tương", "Ribosome", "Ty thể", "Lưới nội chất"],a:2,e:'Chuỗi truyền electron và phosphoryl hóa xảy ra ở màng trong ty thể.'},
+{q:'Bào quan nào thực hiện quang hợp?',o:["Ty thể", "Lục lạp", "Ribosome", "Nhân"],a:1,e:'Lục lạp (chloroplast) thực hiện quang hợp ở tế bào thực vật.'},
+{q:'Sự tiến hóa theo thuyết Darwin được giải thích bởi:',o:["Đột biến định hướng", "Chọn lọc tự nhiên", "Biến dị tổ hợp", "Di nhập gen"],a:1,e:'Darwin: tiến hóa do chọn lọc tự nhiên tác động lên biến dị.'},
+{q:'Quá trình cố định nitơ (N₂) được thực hiện bởi:',o:["Thực vật", "Nấm", "Vi khuẩn cố định đạm", "Tảo xanh lục"],a:2,e:'Vi khuẩn Rhizobium, Azotobacter cố định N₂ thành NH₃.'},
+{q:'Kiểu gen AA x Aa cho F1 có tỉ lệ kiểu gen:',o:["1AA:1Aa", "1AA:2Aa:1aa", "3AA:1Aa", "2AA:1Aa"],a:0,e:'AA x Aa → 1/2 AA + 1/2 Aa.'},
+{q:'Thực vật C4 (như mía, ngô) khác C3 ở điểm:',o:["Không quang hợp", "Cố định CO₂ sơ cấp bằng PEP carboxylase", "Không có chu trình Calvin", "Hô hấp cao hơn"],a:1,e:'C4 cố định CO₂ đầu tiên qua PEP→OAA, tránh quang hô hấp.'}],
+  anh:[{q:'Choose the correct form: \"She ____ to school every day.\"',o:["go", "goes", "going", "gone"],a:1,e:'\"She\" là ngôi thứ 3 số ít, hiện tại đơn thêm -s → goes.'},
+{q:'The synonym of \"beautiful\" is:',o:["ugly", "lovely", "terrible", "boring"],a:1,e:'\"lovely\" nghĩa là xinh đẹp, tương đương beautiful.'},
+{q:'Choose the correct tense: \"By next year, they ____ this project.\"',o:["finish", "finished", "will finish", "will have finished"],a:3,e:'\"By next year\" đi với tương lai hoàn thành (Future Perfect).'},
+{q:'\"Despite the rain, they ____ the match.\"',o:["played", "play", "were played", "are playing"],a:0,e:'\"Despite\" + danh từ/V-ing, mệnh đề chính ở quá khứ đơn.'},
+{q:'The word \"benevolent\" means:',o:["kind and generous", "cruel", "intelligent", "hardworking"],a:0,e:'\"benevolent\" = nhân từ, hào phóng.'},
+{q:'Choose the sentence with correct usage of \"which\":',o:["The book which I read it was good", "The book which I read was good", "The book that I read it was good", "The book, that I read, was good"],a:1,e:'Mệnh đề quan hệ không lặp đại từ: which I read (không có \"it\").'},
+{q:'The passive voice of \"They built this bridge in 1990\" is:',o:["This bridge was built in 1990", "This bridge is built in 1990", "This bridge had been built in 1990", "This bridge built in 1990"],a:0,e:'Bị động quá khứ đơn: was/were + P2.'},
+{q:'Choose the correct conditional: \"If it ____ tomorrow, we will cancel the picnic.\"',o:["rain", "rains", "rained", "would rain"],a:1,e:'Câu điều kiện loại 1: If + present simple, will + V.'},
+{q:'\"She is used to ____ early every morning.\"',o:["wake", "woke", "waking", "waken"],a:2,e:'\"be used to\" + V-ing.'},
+{q:'Choose the word with different stress pattern: ',o:["photograph", "photography", "photographer", "geographic"],a:0,e:'\"photograph\" nhấn âm đầu; các từ còn lại nhấn âm thứ 2.'},
+{q:'The antonym of \"generous\" is:',o:["kind", "stingy", "brave", "honest"],a:1,e:'\"stingy\" = keo kiệt, trái nghĩa với generous.'},
+{q:'\"No sooner ____ than it started to rain.\"',o:["we arrived", "had we arrived", "we had arrived", "did we arrive"],a:1,e:'\"No sooner...than\" đảo ngữ: No sooner + had + S + P2.'},
+{q:'Choose the correct article: \"____ Eiffel Tower is in Paris.\"',o:["A", "An", "The", "No article"],a:2,e:'Danh từ duy nhất, xác định → dùng \"The\".'},
+{q:'The word \"affect\" in \"Pollution affects health\" is:',o:["Noun", "Verb", "Adjective", "Adverb"],a:1,e:'\"affects\" là động từ trong câu.'},
+{q:'\"He suggested that she ____ a doctor.\"',o:["see", "sees", "saw", "to see"],a:0,e:'Sau \"suggest that\" dùng V nguyên thể (subjunctive).'},
+{q:'Choose the correct preposition: \"She is good ____ math.\"',o:["in", "on", "at", "for"],a:2,e:'\"good at\" + môn học/kỹ năng.'},
+{q:'The sentence \"Hardly had I left when the phone rang\" expresses:',o:["Condition", "Concession", "Time sequence", "Contrast"],a:2,e:'\"Hardly...when\" diễn tả tuần tự thời gian.'},
+{q:'\"It is high time we ____ this problem.\"',o:["solve", "solved", "have solved", "will solve"],a:1,e:'\"It is high time + S + V-ed\" diễn tả việc đã đến lúc phải làm.'},
+{q:'The phrasal verb \"put off\" means:',o:["cancel permanently", "postpone", "put somewhere", "turn off"],a:1,e:'\"put off\" = hoãn lại (postpone).'},
+{q:'Choose the word that best completes: \"The committee ____ unable to reach a decision.\"',o:["are", "were", "was", "is"],a:2,e:'\"committee\" là danh từ tập thể, ở Mỹ dùng số ít: was.'},
+{q:'In the sentence \"Having finished the exam, he left the room\", the subject of \"Having finished\" is:',o:["the exam", "he", "the room", "unclear"],a:1,e:'Phân từ hoàn thành \"Having finished\" có chủ ngữ ngầm là \"he\".'},
+{q:'Choose the best response: \"Would you mind opening the window?\" – \"___\"',o:["Yes, I would.", "Of course not.", "No, I wouldn't.", "Yes, please."],a:1,e:'\"Of course not\" = Tất nhiên không ngại – câu trả lời đồng ý lịch sự.'},
+{q:'The word \"ambiguous\" means:',o:["clear", "uncertain or having two meanings", "important", "boring"],a:1,e:'\"ambiguous\" = mơ hồ, có thể hiểu theo nhiều nghĩa.'},
+{q:'\"She not only speaks French ____ Spanish.\"',o:["and also", "but also", "or also", "but and"],a:1,e:'\"not only...but also\" là cặp liên từ tương quan.'},
+{q:'Choose the correct form: \"I wish I ____ more time to study.\"',o:["have", "had", "will have", "would have"],a:1,e:'\"I wish + S + V-ed\" diễn tả ước muốn trái thực tế hiện tại.'},
+{q:'The reading passage topic \"sustainable development\" refers to:',o:["Economic growth only", "Development that meets current needs without harming future generations", "Environmental destruction", "Rapid industrialization"],a:1,e:'Phát triển bền vững đáp ứng nhu cầu hiện tại mà không làm hại thế hệ tương lai.'},
+{q:'Choose the correct relative clause: \"The student, ____ essay won the prize, is my friend.\"',o:["who", "whom", "whose", "which"],a:2,e:'\"whose\" dùng cho sở hữu (essay của student).'},
+{q:'The idiom \"bite the bullet\" means:',o:["Eat quickly", "Endure a painful situation", "Get angry", "Give up"],a:1,e:'\"bite the bullet\" = chịu đựng khó khăn.'},
+{q:'\"By the time she arrived, he ____ for two hours.\"',o:["waited", "has waited", "had been waiting", "was waiting"],a:2,e:'\"By the time\" + QK đơn → mệnh đề kia dùng QKHT tiếp diễn.'},
+{q:'Choose the word with /ɪ/ sound: ',o:["feet", "seat", "sit", "sea"],a:2,e:'\"sit\" có âm /ɪ/ ngắn, các từ còn lại có /iː/.'}]
+};
+let curQ=0,answers=[],timerI=null,timeLeft=1800,curSet=[];
+function openQuiz(subj,title){
+  curSet=QBANK[subj]||QBANK.toan;
+  document.getElementById('qtitle').textContent=title;
+  curQ=0;answers=new Array(curSet.length).fill(null);
+  timeLeft=1800;
+  document.getElementById('qtot').textContent=curSet.length;
+  document.getElementById('qfoot').style.display='flex';
+  renderQ();renderDots();startTimer();
+  document.getElementById('qov').classList.add('show');
+  document.body.style.overflow='hidden';
+}
 function closeQuiz(){document.getElementById('qov').classList.remove('show');document.body.style.overflow='';clearInterval(timerI)}
 function renderQ(){
-  const q=QS[curQ],ans=answers[curQ],locked=ans!==null;
+  const q=curSet[curQ],ans=answers[curQ],locked=ans!==null;
   document.getElementById('qcur').textContent=curQ+1;
-  document.getElementById('qpfill').style.width=((curQ+1)/QS.length*100)+'%';
-  document.getElementById('qbody').innerHTML=`<div class="qnum">Câu ${curQ+1} / ${QS.length}</div><div class="qtext">${q.q}</div><div class="opts">${q.opts.map((o,i)=>`<div class="opt ${locked?(i===q.ans?'cor':(i===ans?'wrg':'locked')):(i===ans?'sel':'')} ${locked?'locked':''}" onclick="${locked?'':'selectOpt('+i+')'}"><span class="olbl">${['A','B','C','D'][i]}</span>${o}</div>`).join('')}</div><div class="explain ${locked?'show':''}">${locked?'<strong>'+(ans===q.ans?'✅ Đúng!':'❌ Chưa đúng.')+'</strong> '+q.ex:''}</div>`;
+  document.getElementById('qpfill').style.width=((curQ+1)/curSet.length*100)+'%';
+  document.getElementById('qbody').innerHTML=`
+    <div class="qnum">Câu ${curQ+1} / ${curSet.length}</div>
+    <div class="qtext">${q.q}</div>
+    <div class="opts">${q.o.map((o,i)=>`
+      <div class="opt ${locked?(i===q.a?'cor':(i===ans?'wrg':'locked')):(i===ans?'sel':'')} ${locked?'locked':''}" onclick="${locked?'':'selectOpt('+i+')'}">
+        <span class="olbl">${['A','B','C','D'][i]}</span>${o}
+      </div>`).join('')}</div>
+    <div class="explain ${locked?'show':''}">${locked?'<strong>'+(ans===q.a?'✅ Đúng!':'❌ Sai.')+'</strong> '+q.e:''}</div>`;
   document.getElementById('btn-prev').disabled=curQ===0;
-  document.getElementById('btn-next').textContent=curQ===QS.length-1?'Xem kết quả ✓':'Tiếp theo →';
+  document.getElementById('btn-next').textContent=curQ===curSet.length-1?'Xem kết quả ✓':'Tiếp theo →';
 }
 function selectOpt(i){if(answers[curQ]!==null)return;answers[curQ]=i;renderQ();renderDots()}
 function prevQ(){if(curQ>0){curQ--;renderQ();renderDots()}}
-function nextQ(){if(curQ<QS.length-1){curQ++;renderQ();renderDots()}else showResult()}
-function renderDots(){document.getElementById('qdots').innerHTML=QS.map((_,i)=>`<div class="qdot ${i===curQ?'cur':answers[i]===null?'':(answers[i]===QS[i].ans?'ok':'ng')}" onclick="goQ(${i})"></div>`).join('')}
+function nextQ(){if(curQ<curSet.length-1){curQ++;renderQ();renderDots()}else showResult()}
+function renderDots(){document.getElementById('qdots').innerHTML=curSet.map((_,i)=>`<div class="qdot ${i===curQ?'cur':answers[i]===null?'':(answers[i]===curSet[i].a?'ok':'ng')}" onclick="goQ(${i})"></div>`).join('')}
 function goQ(i){curQ=i;renderQ();renderDots()}
 function startTimer(){clearInterval(timerI);timerI=setInterval(()=>{timeLeft--;const m=Math.floor(timeLeft/60),s=timeLeft%60;document.getElementById('qtimer').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');if(timeLeft<=0){clearInterval(timerI);showResult()}if(timeLeft<=60)document.getElementById('qtimer').style.color='var(--red)'},1000)}
-function showResult(){clearInterval(timerI);const correct=answers.filter((a,i)=>a===QS[i].ans).length,score=(correct/QS.length*10).toFixed(1);const grade=score>=9?'🏆 Xuất sắc!':score>=7?'⭐ Khá tốt!':score>=5?'📈 Trung bình':'💪 Cần cố gắng!';document.getElementById('qbody').innerHTML=`<div style="text-align:center;padding:32px 20px"><div style="font-size:48px">🎯</div><div style="font-size:60px;font-weight:900;font-family:'Space Mono';color:${score>=7?'var(--green)':score>=5?'var(--accent3)':'var(--red)'};margin:12px 0">${score}</div><div style="font-size:18px;font-weight:700;margin-bottom:6px">${grade}</div><div style="font-size:13px;color:var(--muted);margin-bottom:24px">${correct}/${QS.length} câu đúng</div><div style="display:flex;gap:10px;justify-content:center"><button class="btn btn-p" onclick="openQuiz(document.getElementById('qtitle').textContent)">🔁 Làm lại</button><button class="btn btn-g" onclick="closeQuiz()">✕ Đóng</button></div></div>`;document.getElementById('qfoot').style.display='none'}
+function showResult(){
+  clearInterval(timerI);
+  const correct=answers.filter((a,i)=>a===curSet[i].a).length;
+  const score=(correct/curSet.length*10).toFixed(1);
+  const grade=score>=9?'🏆 Xuất sắc!':score>=7?'⭐ Khá tốt!':score>=5?'📈 Trung bình':'💪 Cần cố gắng!';
+  const col=score>=7?'var(--green)':score>=5?'var(--accent3)':'var(--red)';
+  document.getElementById('qbody').innerHTML=`
+    <div style="text-align:center;padding:32px 20px">
+      <div style="font-size:56px;margin-bottom:8px">🎯</div>
+      <div style="font-size:64px;font-weight:900;font-family:'Space Mono';color:${col};line-height:1;margin-bottom:8px">${score}</div>
+      <div style="font-size:18px;font-weight:700;margin-bottom:6px">${grade}</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:28px">${correct}/${curSet.length} câu đúng</div>
+      <div style="display:flex;gap:10px;justify-content:center">
+        <button class="btn btn-p" onclick="openQuiz(document.getElementById('qtitle').dataset.subj||'toan',document.getElementById('qtitle').textContent)">🔁 Làm lại</button>
+        <button class="btn btn-g" onclick="closeQuiz()">✕ Đóng</button>
+      </div>
+    </div>`;
+  document.getElementById('qfoot').style.display='none';
+}
+
 </script>
-
-
 </body></html>
