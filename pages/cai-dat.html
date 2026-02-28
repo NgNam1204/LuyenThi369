@@ -1,8 +1,11 @@
+
+Copy
+
 <!DOCTYPE html>
 <html lang="vi" data-theme="dark">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Cài đặt – LuyenThi360</title>
+<title>Dashboard – LuyenThi369</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
@@ -51,57 +54,60 @@ body{background:var(--bg);color:var(--text);font-family:'Sora',sans-serif;transi
 .fadein>*:nth-child(2){animation-delay:.05s}.fadein>*:nth-child(3){animation-delay:.1s}.fadein>*:nth-child(4){animation-delay:.15s}
 </style>
 <style>
-.settings-layout{display:grid;grid-template-columns:260px 1fr;gap:24px}
-.settings-menu{display:flex;flex-direction:column;gap:4px}
-.sm-item{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;cursor:pointer;font-size:13px;font-weight:600;color:var(--muted);transition:.2s;border:1px solid transparent}
-.sm-item:hover{background:var(--surface);color:var(--text)}
-.sm-item.active{background:rgba(0,229,255,.07);color:var(--accent);border-color:rgba(0,229,255,.2)}
-.sm-ic{font-size:16px;flex-shrink:0}
+.welcome{background:linear-gradient(135deg,#0a1628,#160d30);border:1px solid var(--border);border-radius:20px;padding:28px 32px;display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;position:relative;overflow:hidden;transition:background .3s}
+.welcome::before{content:'';position:absolute;right:-40px;top:-40px;width:240px;height:240px;border-radius:50%;background:radial-gradient(circle,rgba(0,229,255,.12),transparent 70%);pointer-events:none}
+.welcome h1{font-size:24px;font-weight:800;margin-bottom:6px;color:#e8edf5}.welcome h1 span{color:var(--accent)}
+.welcome p{font-size:13px;color:rgba(255,255,255,.55)}
+[data-theme="light"] .welcome{background:linear-gradient(135deg,#1e3a6e,#2d1b69)}
+[data-theme="light"] .welcome h1{color:#ffffff}
+[data-theme="light"] .welcome p{color:rgba(255,255,255,.7)}
+[data-theme="light"] .wsv{color:#ffffff!important}
+[data-theme="light"] .wsl{color:rgba(255,255,255,.6)}
+.wstats{display:flex;gap:28px;flex-shrink:0}
+.wstat{text-align:center}.wsv{font-size:28px;font-weight:800;font-family:'Space Mono';color:var(--accent)}.wsl{font-size:11px;color:var(--muted);margin-top:2px}
 
-.settings-panel{display:none}.settings-panel.active{display:block}
+/* COUNTDOWN */
+.countdown-band{background:linear-gradient(135deg,#0d1f0d,#0a1628);border:1px solid var(--border);border-radius:20px;padding:24px 32px;margin-bottom:28px;display:flex;align-items:center;justify-content:space-between;position:relative;overflow:hidden;transition:background .3s}
+.countdown-band::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(16,185,129,.06),transparent 70%);pointer-events:none}
+[data-theme="light"] .countdown-band{background:linear-gradient(135deg,#0a3320,#0d2a1a)}
+.cd-left .cd-label{font-size:12px;font-weight:700;color:var(--green);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.cd-left .cd-label::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+.cd-left .cd-title{font-size:17px;font-weight:800;color:#e8edf5;margin-bottom:2px}
+.cd-left .cd-date{font-size:12px;color:rgba(255,255,255,.5)}
+[data-theme="light"] .cd-left .cd-title{color:#ffffff}
+[data-theme="light"] .cd-left .cd-date{color:rgba(255,255,255,.65)}
+.cd-units{display:flex;gap:10px}
+.cd-unit{background:rgba(0,0,0,.3);border:1px solid rgba(255,255,255,.12);border-radius:12px;padding:12px 16px;text-align:center;min-width:72px}
+.cd-val{font-size:30px;font-weight:900;font-family:'Space Mono';color:var(--green);line-height:1}
+.cd-lbl{font-size:10px;color:rgba(255,255,255,.5);margin-top:4px;text-transform:uppercase;letter-spacing:.5px}
+.cd-sep{font-size:26px;font-weight:800;color:rgba(255,255,255,.3);align-self:center;padding-bottom:8px}
 
-.set-section{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:22px;margin-bottom:16px;transition:background .3s}
-.set-sec-title{font-size:15px;font-weight:700;margin-bottom:16px;display:flex;align-items:center;gap:8px;color:var(--text)}
-.set-row{display:flex;align-items:center;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--border)}
-.set-row:last-child{border-bottom:none}
-.set-lbl{font-size:14px;font-weight:600}
-.set-sub{font-size:12px;color:var(--muted);margin-top:3px}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:28px}
+.sc{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;position:relative;overflow:hidden;transition:.25s;cursor:default}
+.sc:hover{border-color:var(--accent);transform:translateY(-2px)}
+.sc-icon{font-size:20px;margin-bottom:10px}.sc-val{font-size:26px;font-weight:800;font-family:'Space Mono';margin-bottom:4px}.sc-lbl{font-size:12px;color:var(--muted)}
+.sc-delta{position:absolute;top:14px;right:14px;font-size:11px;font-weight:700;padding:2px 8px;border-radius:6px}
+.up{background:rgba(16,185,129,.15);color:var(--green)}.dn{background:rgba(239,68,68,.15);color:var(--red)}
 
-/* TOGGLE */
-.toggle{width:44px;height:24px;border-radius:999px;background:var(--surface);border:1px solid var(--border);position:relative;cursor:pointer;transition:.25s;flex-shrink:0}
-.toggle.on{background:var(--accent);border-color:var(--accent)}
-.toggle::after{content:'';position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:#fff;transition:.25s;box-shadow:0 1px 4px rgba(0,0,0,.3)}
-.toggle.on::after{left:23px}
+.two-col{display:grid;grid-template-columns:2fr 1fr;gap:22px;margin-bottom:28px}
 
-/* THEME PICKER */
-.theme-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.tc-card{border:2px solid var(--border);border-radius:12px;padding:16px;cursor:pointer;transition:.25s;text-align:center}
-.tc-card:hover{border-color:var(--muted)}
-.tc-card.selected{border-color:var(--accent)}
-.tc-preview{height:60px;border-radius:8px;margin-bottom:10px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;letter-spacing:.5px}
-.tc-name{font-size:13px;font-weight:700}
-.tc-sub{font-size:11px;color:var(--muted);margin-top:2px}
+.chart-bars{height:140px;display:flex;align-items:flex-end;gap:5px;padding-bottom:4px;margin-bottom:16px}
+.bar-w{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px}
+.bar-b{width:100%;border-radius:5px 5px 0 0;min-height:4px;transition:.6s}
+.bar-l{font-size:9px;color:var(--muted);font-family:'Space Mono'}
 
-/* PROFILE */
-.avatar-row{display:flex;align-items:center;gap:16px;margin-bottom:20px}
-.big-av{width:72px;height:72px;border-radius:50%;background:linear-gradient(135deg,var(--accent2),var(--accent));display:grid;place-items:center;font-size:28px;font-weight:700;color:#fff;flex-shrink:0}
-.av-info{flex:1}
-.av-name{font-size:18px;font-weight:800;margin-bottom:4px}
-.av-plan{display:inline-block;background:linear-gradient(90deg,var(--accent3),#f97316);color:#000;font-size:11px;font-weight:800;padding:3px 12px;border-radius:999px}
-.form-field{margin-bottom:14px}
-.form-lbl{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
-.form-inp{width:100%;background:var(--bg);border:1.5px solid var(--border);color:var(--text);padding:10px 14px;border-radius:10px;font-family:inherit;font-size:14px;outline:none;transition:.2s}
-.form-inp:focus{border-color:var(--accent)}
+.spr{margin-bottom:12px}
+.spr-row{display:flex;justify-content:space-between;margin-bottom:5px}
+.spr-name{font-size:13px;font-weight:600}.spr-pct{font-size:12px;color:var(--muted);font-family:'Space Mono'}
 
-/* PROGRESS STATS */
-.prog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
-.pg{background:var(--surface);border-radius:12px;padding:14px;text-align:center}
-.pgv{font-size:22px;font-weight:800;font-family:'Space Mono';color:var(--accent)}.pgl{font-size:11px;color:var(--muted);margin-top:3px}
+.sug-item{display:flex;align-items:center;gap:12px;padding:11px 0;border-bottom:1px solid var(--border)}
+.sug-item:last-child{border-bottom:none}
+.sig{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;font-size:15px;flex-shrink:0}
+.sit{flex:1}.sit-t{font-size:13px;font-weight:600;margin-bottom:2px}.sit-s{font-size:11px;color:var(--muted)}
+.sug-btn{padding:6px 12px;font-size:11px;background:var(--surface);border:1px solid var(--border);border-radius:7px;cursor:pointer;color:var(--text);font-weight:600;font-family:inherit;transition:.2s;white-space:nowrap}
+.sug-btn:hover{border-color:var(--accent);color:var(--accent)}
 
-.save-btn{background:linear-gradient(135deg,var(--accent),#0099cc);border:none;border-radius:10px;color:#000;padding:11px 28px;font-size:14px;font-weight:800;cursor:pointer;font-family:inherit;transition:.2s}
-.save-btn:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,229,255,.3)}
-.danger-btn{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.3);border-radius:10px;color:var(--red);padding:11px 20px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:.2s}
-.danger-btn:hover{background:rgba(239,68,68,.15)}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 </style>
 </head>
 <body>
@@ -110,7 +116,7 @@ body{background:var(--bg);color:var(--text);font-family:'Sora',sans-serif;transi
 <aside class="sidebar">
   <a class="logo" href="dashboard.html">
     <div class="logo-icon">📚</div>
-    <div class="logo-text">Luyen<em>Thi</em>360</div>
+    <div class="logo-text">Luyen<em>Thi</em>369</div>
   </a>
   <nav class="nav">
     <div class="nav-sec"><div class="nav-lbl">Tổng quan</div>
@@ -135,237 +141,147 @@ body{background:var(--bg);color:var(--text);font-family:'Sora',sans-serif;transi
 </aside>
 <div class="main">
   <div class="topbar">
-    <div class="topbar-l"><div class="ttl">Cài đặt</div><div class="tsub">Tài khoản &amp; Tuỳ chỉnh</div></div>
+    <div class="topbar-l"><div class="ttl">Dashboard</div><div class="tsub">Tổng quan cá nhân</div></div>
     <div class="topbar-r">
-      <button class="icon-btn" id="theme-btn" onclick="toggleTheme()">☀️</button>
+      <button class="icon-btn" id="theme-btn" onclick="toggleTheme()" title="Đổi giao diện">☀️</button>
+      <a class="btn btn-p" href="luyen-mon.html">▶ Luyện ngay</a>
     </div>
   </div>
   <div class="content fadein">
-    <div class="settings-layout">
-      <!-- MENU -->
-      <div class="settings-menu">
-        <div class="sm-item active" onclick="showPanel('profile',this)"><span class="sm-ic">👤</span>Hồ sơ cá nhân</div>
-        <div class="sm-item" onclick="showPanel('appearance',this)"><span class="sm-ic">🎨</span>Giao diện</div>
-        <div class="sm-item" onclick="showPanel('notifications',this)"><span class="sm-ic">🔔</span>Thông báo</div>
-        <div class="sm-item" onclick="showPanel('study',this)"><span class="sm-ic">📚</span>Học tập</div>
-        <div class="sm-item" onclick="showPanel('account',this)"><span class="sm-ic">🔐</span>Tài khoản &amp; Bảo mật</div>
+    <!-- WELCOME -->
+    <div class="welcome">
+      <div><h1>Chào trở lại, <span id="wname">bạn</span> 👋</h1><p>Hôm nay bạn đã sẵn sàng chinh phục 10 điểm chưa?</p></div>
+      <div class="wstats">
+        <div class="wstat"><div class="wsv">7.8</div><div class="wsl">Điểm TB</div></div>
+        <div class="wstat"><div class="wsv">312</div><div class="wsl">Câu hôm nay</div></div>
+        <div class="wstat"><div class="wsv">🔥18</div><div class="wsl">Streak ngày</div></div>
       </div>
+    </div>
 
-      <!-- PANELS -->
-      <div>
-        <!-- PROFILE -->
-        <div class="settings-panel active" id="p-profile">
-          <div class="set-section">
-            <div class="set-sec-title">👤 Hồ sơ cá nhân</div>
-            <div class="avatar-row">
-              <div class="big-av" id="big-av">?</div>
-              <div class="av-info">
-                <div class="av-name" id="av-name">Đang tải...</div>
-                <div class="av-plan">⭐ PRO</div>
-              </div>
-            </div>
-            <div class="form-field"><div class="form-lbl">Họ và tên</div><input class="form-inp" id="name-inp" placeholder="Nhập tên đầy đủ"></div>
-            <div class="form-field"><div class="form-lbl">Email</div><input class="form-inp" type="email" placeholder="email@gmail.com"></div>
-            <div class="form-field"><div class="form-lbl">Khối thi</div>
-              <select class="form-inp" style="cursor:pointer">
-                <option>A00 – Toán, Vật lý, Hóa học</option>
-                <option>A01 – Toán, Vật lý, Tiếng Anh</option>
-                <option>B00 – Toán, Hóa học, Sinh học</option>
-                <option>D01 – Toán, Ngữ văn, Tiếng Anh</option>
-              </select>
-            </div>
-            <div class="form-field"><div class="form-lbl">Mục tiêu điểm số</div><input class="form-inp" type="number" placeholder="VD: 28" min="0" max="30"></div>
-            <button class="save-btn" onclick="saveName()">💾 Lưu thay đổi</button>
-          </div>
-          <div class="set-section">
-            <div class="set-sec-title">📊 Thống kê học tập</div>
-            <div class="prog-grid">
-              <div class="pg"><div class="pgv">1,737</div><div class="pgl">Câu đã làm</div></div>
-              <div class="pg"><div class="pgv" style="color:var(--green)">72%</div><div class="pgl">Tỉ lệ đúng</div></div>
-              <div class="pg"><div class="pgv" style="color:var(--accent3)">🔥 18</div><div class="pgl">Streak ngày</div></div>
-              <div class="pg"><div class="pgv" style="color:#a78bfa">11</div><div class="pgl">Đề đã thi</div></div>
-              <div class="pg"><div class="pgv" style="color:var(--accent)">118</div><div class="pgl">Điểm HSA cao nhất</div></div>
-              <div class="pg"><div class="pgv" style="color:var(--red)">47</div><div class="pgl">Ngày tới kỳ thi</div></div>
-            </div>
-          </div>
-        </div>
+    <!-- COUNTDOWN -->
+    <div class="countdown-band">
+      <div class="cd-left">
+        <div class="cd-label">Đếm ngược đến kỳ thi</div>
+        <div class="cd-title">🎯 Kỳ thi THPT Quốc Gia 2026</div>
+        <div class="cd-date">📅 Dự kiến: 11/06/2026 · Cố lên, bạn làm được!</div>
+      </div>
+      <div class="cd-units">
+        <div class="cd-unit"><div class="cd-val" id="cd-d">--</div><div class="cd-lbl">Ngày</div></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-unit"><div class="cd-val" id="cd-h">--</div><div class="cd-lbl">Giờ</div></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-unit"><div class="cd-val" id="cd-m">--</div><div class="cd-lbl">Phút</div></div>
+        <div class="cd-sep">:</div>
+        <div class="cd-unit"><div class="cd-val" id="cd-s">--</div><div class="cd-lbl">Giây</div></div>
+      </div>
+    </div>
 
-        <!-- APPEARANCE -->
-        <div class="settings-panel" id="p-appearance">
-          <div class="set-section">
-            <div class="set-sec-title">🎨 Chủ đề giao diện</div>
-            <div class="theme-cards">
-              <div class="tc-card" id="tc-dark" onclick="setThemeCard('dark')">
-                <div class="tc-preview" style="background:#0a0c10;color:#00e5ff;border:1px solid #252d3d">DARK MODE</div>
-                <div class="tc-name">🌙 Tối (Dark)</div>
-                <div class="tc-sub">Bảo vệ mắt, học đêm</div>
-              </div>
-              <div class="tc-card" id="tc-light" onclick="setThemeCard('light')">
-                <div class="tc-preview" style="background:#f0f4ff;color:#0f1420;border:1px solid #d0d8ee">LIGHT MODE</div>
-                <div class="tc-name">☀️ Sáng (Light)</div>
-                <div class="tc-sub">Rõ ràng, học ban ngày</div>
-              </div>
-            </div>
-          </div>
-          <div class="set-section">
-            <div class="set-sec-title">🖥️ Hiển thị</div>
-            <div class="set-row"><div><div class="set-lbl">Hiệu ứng chuyển trang</div><div class="set-sub">Animation khi chuyển màn hình</div></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
-            <div class="set-row"><div><div class="set-lbl">Cỡ chữ lớn hơn</div><div class="set-sub">Tăng kích thước chữ trong quiz</div></div><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
-            <div class="set-row"><div><div class="set-lbl">Màu sắc chủ đạo</div><div class="set-sub">Màu nhấn của giao diện</div></div>
-              <div style="display:flex;gap:8px">
-                <div style="width:22px;height:22px;border-radius:50%;background:#00e5ff;cursor:pointer;border:2px solid var(--accent)" onclick="setAccent('#00e5ff',this)"></div>
-                <div style="width:22px;height:22px;border-radius:50%;background:#7c3aed;cursor:pointer;border:2px solid transparent" onclick="setAccent('#7c3aed',this)"></div>
-                <div style="width:22px;height:22px;border-radius:50%;background:#10b981;cursor:pointer;border:2px solid transparent" onclick="setAccent('#10b981',this)"></div>
-                <div style="width:22px;height:22px;border-radius:50%;background:#f59e0b;cursor:pointer;border:2px solid transparent" onclick="setAccent('#f59e0b',this)"></div>
-                <div style="width:22px;height:22px;border-radius:50%;background:#ef4444;cursor:pointer;border:2px solid transparent" onclick="setAccent('#ef4444',this)"></div>
-              </div>
-            </div>
-          </div>
-        </div>
+    <!-- STAT CARDS -->
+    <div class="stats-grid">
+      <div class="sc"><div class="sc-icon">📐</div><div class="sc-val" style="color:var(--accent)">8.2</div><div class="sc-lbl">Điểm Toán dự đoán</div><span class="sc-delta up">+0.4</span></div>
+      <div class="sc"><div class="sc-icon">⚡</div><div class="sc-val" style="color:#a78bfa">7.5</div><div class="sc-lbl">Điểm Vật lý dự đoán</div><span class="sc-delta up">+0.2</span></div>
+      <div class="sc"><div class="sc-icon">🧪</div><div class="sc-val" style="color:var(--green)">7.6</div><div class="sc-lbl">Điểm Hóa học dự đoán</div><span class="sc-delta dn">-0.1</span></div>
+      <div class="sc"><div class="sc-icon">🌍</div><div class="sc-val" style="color:var(--accent3)">7.9</div><div class="sc-lbl">Tiếng Anh dự đoán</div><span class="sc-delta up">+0.6</span></div>
+    </div>
 
-        <!-- NOTIFICATIONS -->
-        <div class="settings-panel" id="p-notifications">
-          <div class="set-section">
-            <div class="set-sec-title">🔔 Thông báo</div>
-            <div class="set-row"><div><div class="set-lbl">Nhắc nhở học hàng ngày</div><div class="set-sub">Thông báo nhắc bạn luyện tập mỗi ngày</div></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
-            <div class="set-row"><div><div class="set-lbl">Giờ nhắc nhở</div><div class="set-sub">Nhắc lúc mấy giờ?</div></div><input type="time" value="20:00" style="background:var(--surface);border:1px solid var(--border);color:var(--text);padding:6px 10px;border-radius:8px;font-family:inherit;font-size:13px;outline:none"></div>
-            <div class="set-row"><div><div class="set-lbl">Thông báo kết quả thi</div><div class="set-sub">Thông báo khi có kết quả bài thi thử</div></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
-            <div class="set-row"><div><div class="set-lbl">Thông báo lịch thi thử</div><div class="set-sub">Nhắc trước 1 ngày khi có mock test</div></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
-            <div class="set-row"><div><div class="set-lbl">Email tổng kết tuần</div><div class="set-sub">Báo cáo tiến độ học mỗi tuần</div></div><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
-          </div>
+    <!-- TWO COL -->
+    <div class="two-col">
+      <div class="card">
+        <div class="card-title">📈 Tiến độ từng môn</div>
+        <div class="chart-bars">
+          <div class="bar-w"><div class="bar-b" style="height:72%;background:linear-gradient(to top,var(--accent),#0066ff)"></div><div class="bar-l">T2</div></div>
+          <div class="bar-w"><div class="bar-b" style="height:55%;background:linear-gradient(to top,var(--accent),#0066ff)"></div><div class="bar-l">T3</div></div>
+          <div class="bar-w"><div class="bar-b" style="height:83%;background:linear-gradient(to top,var(--accent),#0066ff)"></div><div class="bar-l">T4</div></div>
+          <div class="bar-w"><div class="bar-b" style="height:60%;background:linear-gradient(to top,var(--accent),#0066ff)"></div><div class="bar-l">T5</div></div>
+          <div class="bar-w"><div class="bar-b" style="height:90%;background:linear-gradient(to top,var(--accent),#0066ff)"></div><div class="bar-l">T6</div></div>
+          <div class="bar-w"><div class="bar-b" style="height:40%;background:linear-gradient(to top,var(--accent),#0066ff)"></div><div class="bar-l">T7</div></div>
+          <div class="bar-w"><div class="bar-b" style="height:68%;background:linear-gradient(to top,var(--accent),#0066ff)"></div><div class="bar-l">CN</div></div>
         </div>
-
-        <!-- STUDY -->
-        <div class="settings-panel" id="p-study">
-          <div class="set-section">
-            <div class="set-sec-title">📚 Tuỳ chỉnh học tập</div>
-            <div class="set-row"><div><div class="set-lbl">Hiển thị giải thích sau mỗi câu</div><div class="set-sub">Xem giải thích ngay sau khi trả lời</div></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
-            <div class="set-row"><div><div class="set-lbl">Âm thanh khi đúng/sai</div><div class="set-sub">Phát âm thanh phản hồi khi trả lời</div></div><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
-            <div class="set-row"><div><div class="set-lbl">Rung thiết bị</div><div class="set-sub">Rung khi trả lời sai (mobile)</div></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
-            <div class="set-row"><div><div class="set-lbl">Tự động chuyển câu</div><div class="set-sub">Chuyển câu sau 1 giây khi đã chọn đáp án</div></div><div class="toggle" onclick="this.classList.toggle('on')"></div></div>
-            <div class="set-row"><div><div class="set-lbl">Hiện đếm ngược trong quiz</div><div class="set-sub">Hiện đồng hồ đếm ngược khi làm bài</div></div><div class="toggle on" onclick="this.classList.toggle('on')"></div></div>
-          </div>
-          <div class="set-section">
-            <div class="set-sec-title">🎯 Mục tiêu hàng ngày</div>
-            <div class="set-row"><div><div class="set-lbl">Số câu mục tiêu / ngày</div></div>
-              <select class="form-inp" style="width:auto;padding:6px 12px;cursor:pointer">
-                <option>30 câu</option><option>50 câu</option><option selected>100 câu</option><option>150 câu</option><option>200 câu</option>
-              </select>
-            </div>
-            <div class="set-row"><div><div class="set-lbl">Thời gian học mục tiêu</div></div>
-              <select class="form-inp" style="width:auto;padding:6px 12px;cursor:pointer">
-                <option>30 phút</option><option selected>60 phút</option><option>90 phút</option><option>120 phút</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <!-- ACCOUNT SECURITY -->
-        <div class="settings-panel" id="p-account">
-          <div class="set-section">
-            <div class="set-sec-title">🔐 Bảo mật tài khoản</div>
-            <div class="form-field"><div class="form-lbl">Mật khẩu hiện tại</div><input class="form-inp" type="password" placeholder="••••••••"></div>
-            <div class="form-field"><div class="form-lbl">Mật khẩu mới</div><input class="form-inp" type="password" placeholder="Tối thiểu 8 ký tự"></div>
-            <div class="form-field"><div class="form-lbl">Xác nhận mật khẩu mới</div><input class="form-inp" type="password" placeholder="Nhập lại mật khẩu mới"></div>
-            <button class="save-btn" onclick="alert('✅ Đã đổi mật khẩu thành công!')">🔑 Đổi mật khẩu</button>
-          </div>
-          <div class="set-section">
-            <div class="set-sec-title">📦 Gói học tập</div>
-            <div style="background:linear-gradient(135deg,#1a0a2e,#0d1f3c);border-radius:12px;padding:16px;margin-bottom:14px;border:1px solid var(--accent2)">
-              <div style="font-size:11px;color:var(--muted);margin-bottom:4px">GÓI HIỆN TẠI</div>
-              <div style="font-size:18px;font-weight:800;color:var(--accent2)">PRO 3 tháng</div>
-              <div style="font-size:12px;color:var(--muted);margin-top:4px">Hết hạn: 15/06/2026</div>
-            </div>
-            <button class="save-btn" onclick="alert('Chuyển đến trang thanh toán!')">💎 Gia hạn / Nâng cấp</button>
-          </div>
-          <div class="set-section" style="border-color:rgba(239,68,68,.3)">
-            <div class="set-sec-title" style="color:var(--red)">⚠️ Vùng nguy hiểm</div>
-            <div class="set-row"><div><div class="set-lbl">Xoá lịch sử làm bài</div><div class="set-sub">Không thể khôi phục sau khi xoá</div></div><button class="danger-btn" onclick="confirm('Bạn có chắc muốn xoá toàn bộ lịch sử?')&&alert('✅ Đã xoá!')">Xoá</button></div>
-            <div class="set-row"><div><div class="set-lbl">Đăng xuất tất cả thiết bị</div><div class="set-sub">Đăng xuất khỏi mọi thiết bị đang đăng nhập</div></div><button class="danger-btn" onclick="alert('✅ Đã đăng xuất tất cả!')">Đăng xuất</button></div>
-            <div class="set-row"><div><div class="set-lbl">Xoá tài khoản</div><div class="set-sub">Xoá vĩnh viễn tài khoản và toàn bộ dữ liệu</div></div><button class="danger-btn" onclick="confirm('Bạn CÓ CHẮC muốn xoá tài khoản? Không thể khôi phục!')&&(localStorage.clear(),location.href='dang-nhap.html')">Xoá tài khoản</button></div>
-          </div>
-        </div>
+        <div class="spr"><div class="spr-row"><span class="spr-name">📐 Toán</span><span class="spr-pct">68%</span></div><div class="pbar"><div class="pbar-fill" style="width:68%;background:linear-gradient(90deg,var(--accent),#0066ff)"></div></div></div>
+        <div class="spr"><div class="spr-row"><span class="spr-name">⚡ Vật lý</span><span class="spr-pct">54%</span></div><div class="pbar"><div class="pbar-fill" style="width:54%;background:linear-gradient(90deg,#a78bfa,var(--accent2))"></div></div></div>
+        <div class="spr"><div class="spr-row"><span class="spr-name">🧪 Hóa học</span><span class="spr-pct">71%</span></div><div class="pbar"><div class="pbar-fill" style="width:71%;background:linear-gradient(90deg,var(--green),#059669)"></div></div></div>
+        <div class="spr"><div class="spr-row"><span class="spr-name">🌍 Tiếng Anh</span><span class="spr-pct">82%</span></div><div class="pbar"><div class="pbar-fill" style="width:82%;background:linear-gradient(90deg,var(--accent3),#f97316)"></div></div></div>
+      </div>
+      <div class="card">
+        <div class="card-title">💡 Gợi ý học tiếp</div>
+        <div class="sug-item"><div class="sig" style="background:rgba(0,229,255,.1)">📐</div><div class="sit"><div class="sit-t">Hàm số &amp; Đồ thị</div><div class="sit-s">Toán · 24 câu chưa làm</div></div><button class="sug-btn" onclick="location.href='luyen-mon.html'">Học</button></div>
+        <div class="sug-item"><div class="sig" style="background:rgba(167,139,250,.1)">⚡</div><div class="sit"><div class="sit-t">Điện xoay chiều</div><div class="sit-s">Vật lý · Sai 8/15 lần trước</div></div><button class="sug-btn" onclick="location.href='luyen-mon.html'">Ôn lại</button></div>
+        <div class="sug-item"><div class="sig" style="background:rgba(245,158,11,.1)">🏛️</div><div class="sit"><div class="sit-t">HSA Mock Test #7</div><div class="sit-s">Thi thử · 120 phút</div></div><button class="sug-btn" onclick="location.href='hsa.html'">Thi thử</button></div>
+        <div class="sug-item"><div class="sig" style="background:rgba(52,211,153,.1)">🧪</div><div class="sit"><div class="sit-t">Este – Lipit</div><div class="sit-s">Hóa · Chuyên đề điểm yếu</div></div><button class="sug-btn" onclick="location.href='luyen-mon.html'">Học</button></div>
       </div>
     </div>
   </div>
-</div>
-</div>
-<script>
-function applyTheme(t){document.documentElement.setAttribute('data-theme',t);localStorage.setItem('lt360_theme',t);const b=document.getElementById('theme-btn');if(b)b.textContent=t==='dark'?'☀️':'🌙';const td=document.getElementById('tc-dark'),tl=document.getElementById('tc-light');if(td&&tl){td.classList.toggle('selected',t==='dark');tl.classList.toggle('selected',t==='light')}}
-function toggleTheme(){applyTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark')}
-function setThemeCard(t){applyTheme(t)}
-(function(){applyTheme(localStorage.getItem('lt360_theme')||'dark')})();
-(function(){
-  const n=localStorage.getItem('lt360_user')||'bạn';
-  const sbn=document.getElementById('sb-name');if(sbn)sbn.textContent=n;
-  const sbav=document.getElementById('sb-av');if(sbav)sbav.textContent=n.charAt(0).toUpperCase();
-  const bav=document.getElementById('big-av');if(bav)bav.textContent=n.charAt(0).toUpperCase();
-  const avn=document.getElementById('av-name');if(avn)avn.textContent=n;
-  const ni=document.getElementById('name-inp');if(ni)ni.value=n;
-  document.getElementById('na-set').classList.add('active');
-})();
-function showPanel(id,el){
-  document.querySelectorAll('.settings-panel').forEach(p=>p.classList.remove('active'));
-  document.getElementById('p-'+id).classList.add('active');
-  document.querySelectorAll('.sm-item').forEach(e=>e.classList.remove('active'));
-  el.classList.add('active');
-}
-function saveName(){
-  const n=document.getElementById('name-inp').value.trim();
-  if(!n){alert('Nhập tên trước nhé!');return}
-  const fn=n.charAt(0).toUpperCase()+n.slice(1);
-  localStorage.setItem('lt360_user',fn);
-  document.getElementById('av-name').textContent=fn;
-  document.getElementById('big-av').textContent=fn.charAt(0).toUpperCase();
-  document.getElementById('sb-name').textContent=fn;
-  document.getElementById('sb-av').textContent=fn.charAt(0).toUpperCase();
-  const btn=event.target;btn.textContent='✅ Đã lưu!';setTimeout(()=>btn.textContent='💾 Lưu thay đổi',2000);
-}
-function setAccent(color,el){
-  document.documentElement.style.setProperty('--accent',color);
-  document.querySelectorAll('[onclick^="setAccent"]').forEach(e=>e.style.border='2px solid transparent');
-  el.style.border='2px solid '+color;
-}
-</script>
-
 <style>
-.lt360-footer{background:#0d1117;border-top:1px solid #1e2736;padding:40px 48px 24px;margin-top:40px;font-family:'Sora',sans-serif;width:100%}
-.lt360-footer-inner{max-width:100%;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;text-align:center;justify-items:center}
-.lt360-footer h4{font-size:13px;font-weight:700;color:#e8edf5;margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px}
-.lt360-footer p{font-size:13px;color:#6b7a99;line-height:1.7;margin:0}
-.lt360-footer-map iframe{border-radius:10px;border:1px solid #1e2736;width:100%;height:150px}.lt360-footer-map{width:100%}
-.lt360-footer-social{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px}
-.lt360-footer-social span{background:#1a2236;color:#a0aec0;font-size:12px;padding:5px 12px;border-radius:20px;border:1px solid #252d3d}.lt360-fb-btn{display:inline-flex;align-items:center;gap:8px;background:#1a2236;color:#e8edf5;font-size:13px;font-weight:600;padding:8px 16px;border-radius:20px;border:1px solid #1877f2;text-decoration:none;transition:background .2s}.lt360-fb-btn:hover{background:#1877f2}
-.lt360-footer-bottom{max-width:100%;margin:24px auto 0;padding-top:16px;border-top:1px solid #1a2236;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
-.lt360-footer-bottom span{font-size:12px;color:#4a5568}
-.lt360-footer-exam{background:linear-gradient(90deg,rgba(0,229,255,.1),rgba(124,58,237,.1));border:1px solid rgba(0,229,255,.2);border-radius:8px;padding:8px 14px;font-size:12px;color:#00e5ff;font-weight:600}
-@media(max-width:700px){.lt360-footer-inner{grid-template-columns:1fr}.lt360-footer-bottom{flex-direction:column;text-align:center}}
+.lt369-footer{background:#0d1117;border-top:1px solid #1e2736;padding:40px 48px 24px;margin-top:40px;font-family:'Sora',sans-serif;width:100%}
+.lt369-footer-inner{max-width:100%;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;text-align:center;justify-items:center}
+.lt369-footer h4{font-size:13px;font-weight:700;color:#e8edf5;margin-bottom:12px;text-transform:uppercase;letter-spacing:.5px}
+.lt369-footer p{font-size:13px;color:#6b7a99;line-height:1.7;margin:0}
+.lt369-footer-map iframe{border-radius:10px;border:1px solid #1e2736;width:100%;height:150px}.lt369-footer-map{width:100%}
+.lt369-footer-social{display:flex;flex-wrap:wrap;gap:8px;margin-top:4px;justify-content:center}
+.lt369-fb-btn{display:inline-flex;align-items:center;gap:8px;background:#1a2236;color:#e8edf5;font-size:13px;font-weight:600;padding:8px 16px;border-radius:20px;border:1px solid #1877f2;text-decoration:none;transition:background .2s}.lt369-fb-btn:hover{background:#1877f2}
+.lt369-footer-bottom{max-width:100%;margin:24px auto 0;padding-top:16px;border-top:1px solid #1a2236;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.lt369-footer-bottom span{font-size:12px;color:#4a5568}
+.lt369-footer-exam{background:linear-gradient(90deg,rgba(0,229,255,.1),rgba(124,58,237,.1));border:1px solid rgba(0,229,255,.2);border-radius:8px;padding:8px 14px;font-size:12px;color:#00e5ff;font-weight:600}
+@media(max-width:700px){.lt369-footer-inner{grid-template-columns:1fr}.lt369-footer-bottom{flex-direction:column;text-align:center}}
 </style>
-<footer class="lt360-footer">
-  <div class="lt360-footer-inner">
+<footer class="lt369-footer">
+  <div class="lt369-footer-inner">
     <div>
       <h4>Địa chỉ</h4>
       <p>Lớp 12A4<br>Trường THPT Đan Phượng<br>Thị trấn Phùng, huyện Đan Phượng, Hà Nội</p>
-      <p style="margin-top:10px">© 2026 ReRach Esport</p>
+      <p style="margin-top:10px">© 2026 LuyenThi369</p>
     </div>
-    <div class="lt360-footer-map">
+    <div class="lt369-footer-map">
       <h4>Bản đồ</h4>
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3721.8!2d105.65899!3d21.08234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313454b58ec0714f%3A0xa26e4532e0b7e0ef!2sTr%C6%B0%E1%BB%9Dng%20THPT%20%C4%90an%20Ph%C6%B0%E1%BB%A3ng!5e0!3m2!1svi!2svn!4v1748000000000!5m2!1svi!2svn" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      <iframe src="https://maps.google.com/maps?q=Tr%C6%B0%E1%BB%9Dng%20THPT%20%C4%90an%20Ph%C6%B0%E1%BB%A3ng&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
     <div>
       <h4>Mạng xã hội</h4>
-      <div class="lt360-footer-social">
-        <a href="https://facebook.com" target="_blank" class="lt360-fb-btn">
+      <div class="lt369-footer-social">
+        <a href="https://facebook.com" target="_blank" class="lt369-fb-btn">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="#1877f2"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.413c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.953h-1.513c-1.491 0-1.956.93-1.956 1.886v2.284h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
           Facebook
         </a>
       </div>
     </div>
   </div>
-  <div class="lt360-footer-bottom">
-    <span>LuyenThi360 – Nền tảng ôn thi THPT Quốc gia</span>
-    <div class="lt360-footer-exam">🗓️ Ngày thi: 11/06/2026</div>
+  <div class="lt369-footer-bottom">
+    <span>LuyenThi369 – Nền tảng ôn thi THPT Quốc gia</span>
+    <div class="lt369-footer-exam">🗓️ Ngày thi: 11/06/2026</div>
   </div>
 </footer>
+</div>
+</div>
+<script>
+function applyTheme(t){document.documentElement.setAttribute('data-theme',t);localStorage.setItem('lt369_theme',t);const b=document.getElementById('theme-btn');if(b)b.textContent=t==='dark'?'☀️':'🌙'}
+function toggleTheme(){applyTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark')}
+(function(){applyTheme(localStorage.getItem('lt369_theme')||'dark')})();
+// User name
+(function(){
+  const n=localStorage.getItem('lt369_user')||'bạn';
+  document.getElementById('wname').textContent=n;
+  const sbn=document.getElementById('sb-name');if(sbn)sbn.textContent=n;
+  const sbav=document.getElementById('sb-av');if(sbav)sbav.textContent=n.charAt(0).toUpperCase();
+  document.getElementById('na-home').classList.add('active');
+})();
+// Countdown to THPT 2026 (June 25, 2026 07:30 ICT = UTC+7)
+function updateCD(){
+  const target=new Date('2026-06-11T07:30:00+07:00');
+  const now=new Date();
+  let diff=target-now;
+  if(diff<0){document.querySelector('.countdown-band').innerHTML='<div style="text-align:center;width:100%;font-size:18px;font-weight:800;color:var(--green)">🎉 Kỳ thi đã diễn ra! Chúc mừng bạn!</div>';return}
+  const d=Math.floor(diff/86400000);
+  const h=Math.floor((diff%86400000)/3600000);
+  const m=Math.floor((diff%3600000)/60000);
+  const s=Math.floor((diff%60000)/1000);
+  document.getElementById('cd-d').textContent=String(d).padStart(3,'0');
+  document.getElementById('cd-h').textContent=String(h).padStart(2,'0');
+  document.getElementById('cd-m').textContent=String(m).padStart(2,'0');
+  document.getElementById('cd-s').textContent=String(s).padStart(2,'0');
+}
+updateCD();setInterval(updateCD,1000);
+</script>
+
+
 </body>
 </html>
