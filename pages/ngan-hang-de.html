@@ -1,7 +1,3 @@
-
-Ngan hang de · HTML
-Copy
-
 <!DOCTYPE html>
 <html lang="vi" data-theme="dark">
 <head>
@@ -9,75 +5,142 @@ Copy
 <title>Ngân hàng đề – LuyenThi369</title>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
+
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--bg:#0a0c10;--bg2:#0f1318;--surface:#1a2030;--border:#252d3d;--accent:#00e5ff;--accent2:#7c3aed;--accent3:#f59e0b;--green:#10b981;--red:#ef4444;--text:#e8edf5;--muted:#6b7a99;--card:#141920}
-[data-theme="light"]{--bg:#f0f4ff;--bg2:#ffffff;--surface:#e4eaf8;--border:#c8d4f0;--text:#0f1420;--muted:#5a6a8a;--card:#ffffff}
-body{background:var(--bg);color:var(--text);font-family:'Sora',sans-serif;transition:background .3s,color .3s}
+:root{
+  --bg:#080b10;--bg2:#0d1017;--surface:#161c28;--border:#1e2840;
+  --accent:#00e5ff;--accent2:#7c3aed;--accent3:#f59e0b;
+  --green:#10b981;--red:#ef4444;
+  --text:#e8edf5;--muted:#5a6b88;--card:#111622;
+  --shadow:0 4px 24px rgba(0,0,0,.4);
+  --radius:14px;
+}
+[data-theme="light"]{
+  --bg:#f5f7ff;--bg2:#ffffff;--surface:#edf0fb;--border:#dce3f5;
+  --text:#111827;--muted:#6b7a99;--card:#ffffff;
+  --shadow:0 2px 16px rgba(100,120,200,.12);
+}
+body{background:var(--bg);color:var(--text);font-family:'Sora',sans-serif;transition:background .3s,color .3s;line-height:1.5}
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+/* layout */
 .app{display:flex;min-height:100vh}
 .sidebar{width:260px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;height:100vh;overflow-y:auto;z-index:100;transition:background .3s,border-color .3s}
-.logo{padding:22px 20px;display:flex;align-items:center;gap:10px;border-bottom:1px solid var(--border);text-decoration:none}
-.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:10px;display:grid;place-items:center;font-size:18px;flex-shrink:0}
+.logo{padding:20px;display:flex;align-items:center;gap:11px;border-bottom:1px solid var(--border);text-decoration:none}
+.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:10px;display:grid;place-items:center;font-size:18px;flex-shrink:0;box-shadow:0 0 16px rgba(0,229,255,.3)}
 .logo-text{font-size:17px;font-weight:800;color:var(--text)}.logo-text em{font-style:normal;color:var(--accent)}
-.nav{flex:1;padding:14px 0}.nav-sec{margin-bottom:6px}
-.nav-lbl{font-size:10px;font-weight:700;letter-spacing:2px;color:var(--muted);padding:8px 20px;text-transform:uppercase}
-.nav-a{display:flex;align-items:center;gap:12px;padding:10px 20px;color:var(--muted);font-size:13.5px;font-weight:500;transition:.2s;border-left:3px solid transparent;text-decoration:none}
-.nav-a:hover{color:var(--text);background:rgba(128,128,128,.06)}
-.nav-a.active{color:var(--accent);background:rgba(0,229,255,.07);border-left-color:var(--accent)}
-.nav-a .ic{width:18px;text-align:center;flex-shrink:0}
-.badge{margin-left:auto;background:var(--accent2);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:999px}
+.nav{flex:1;padding:12px 0}
+.nav-sec{margin-bottom:4px}
+.nav-lbl{font-size:10px;font-weight:700;letter-spacing:2px;color:var(--muted);padding:8px 20px;text-transform:uppercase;opacity:.7}
+.nav-a{display:flex;align-items:center;gap:12px;padding:10px 20px;color:var(--muted);font-size:13.5px;font-weight:500;transition:.2s;border-left:3px solid transparent;text-decoration:none;border-radius:0}
+.nav-a:hover{color:var(--text);background:rgba(128,128,200,.06)}
+.nav-a.active{color:var(--accent);background:rgba(0,229,255,.07);border-left-color:var(--accent);font-weight:600}
+.nav-a .ic{width:18px;text-align:center;flex-shrink:0;font-size:15px}
+.badge{margin-left:auto;background:linear-gradient(135deg,var(--accent2),#6d28d9);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:999px}
 .sb-foot{padding:14px;border-top:1px solid var(--border)}
-.user-card{display:flex;align-items:center;gap:10px;background:var(--surface);padding:10px 12px;border-radius:12px;cursor:pointer;text-decoration:none;transition:.2s}
+.user-card{display:flex;align-items:center;gap:10px;background:var(--surface);padding:10px 12px;border-radius:12px;cursor:pointer;text-decoration:none;transition:.2s;border:1px solid transparent}
+.user-card:hover{border-color:var(--accent)}
 .av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--accent2),var(--accent));display:grid;place-items:center;font-size:14px;font-weight:700;flex-shrink:0;color:#fff}
-.uname{font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.uname{font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:130px}
 .uplan{font-size:11px;color:var(--accent3);font-weight:600}
 .logout{margin-top:8px;display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;cursor:pointer;color:var(--muted);font-size:12px;font-weight:600;transition:.2s;border:none;background:none;font-family:inherit;width:100%}
-.logout:hover{color:var(--red)}
-.main{margin-left:260px;flex:1;min-height:100vh;display:flex;flex-direction:column}
-.topbar{position:sticky;top:0;z-index:50;background:rgba(10,12,16,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:0 32px;height:60px;display:flex;align-items:center;justify-content:space-between;transition:background .3s,border-color .3s}
-[data-theme="light"] .topbar{background:rgba(240,244,255,.9)}
-.topbar-l .ttl{font-size:17px;font-weight:700}.topbar-l .tsub{font-size:12px;color:var(--muted);margin-top:1px}
-.topbar-r{display:flex;align-items:center;gap:10px}
-.btn{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:.2s;font-family:inherit}
-.btn-p{background:var(--accent);color:#000}.btn-p:hover{background:#00cfeb}
-.btn-g{background:transparent;color:var(--muted);border:1px solid var(--border)}.btn-g:hover{color:var(--text);border-color:var(--muted)}
-.icon-btn{width:36px;height:36px;border-radius:8px;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center;cursor:pointer;transition:.2s}
+.logout:hover{color:var(--red);background:rgba(239,68,68,.06)}
+/* main */
+.main{margin-left:260px;flex:1;display:flex;flex-direction:column;min-height:100vh}
+.topbar{position:sticky;top:0;z-index:50;background:rgba(8,11,16,.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 32px;height:60px;display:flex;align-items:center;justify-content:space-between;transition:background .3s,border-color .3s}
+[data-theme="light"] .topbar{background:rgba(245,247,255,.92)}
+.topbar-l .ttl{font-size:17px;font-weight:700}
+.topbar-l .tsub{font-size:12px;color:var(--muted);margin-top:1px}
+.topbar-r{display:flex;align-items:center;gap:8px}
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:7px;padding:8px 18px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:.2s;font-family:inherit;white-space:nowrap}
+.btn-p{background:var(--accent);color:#000}.btn-p:hover{background:#00cfeb;transform:translateY(-1px)}
+.btn-g{background:var(--surface);color:var(--muted);border:1px solid var(--border)}.btn-g:hover{color:var(--text);border-color:var(--muted)}
+.btn-v{background:linear-gradient(135deg,var(--accent2),#6d28d9);color:#fff}.btn-v:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(124,58,237,.4)}
+.icon-btn{width:36px;height:36px;border-radius:9px;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center;cursor:pointer;transition:.2s;font-size:15px}
 .icon-btn:hover{border-color:var(--accent)}
+/* content */
 .content{padding:28px 32px;flex:1}
-.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:24px;transition:background .3s,border-color .3s}
+/* cards */
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:background .3s,border-color .3s}
+[data-theme="light"] .card{box-shadow:var(--shadow)}
 .card-title{font-size:15px;font-weight:700;margin-bottom:18px;display:flex;align-items:center;gap:8px}
+/* progress bar */
 .pbar{height:6px;background:var(--surface);border-radius:999px;overflow:hidden}
-.pbar-fill{height:100%;border-radius:999px}
-@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+.pbar-fill{height:100%;border-radius:999px;transition:width .5s ease}
+/* animation */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 .fadein>*{animation:fadeUp .35s ease both}
+.fadein>*:nth-child(2){animation-delay:.05s}
+.fadein>*:nth-child(3){animation-delay:.1s}
+.fadein>*:nth-child(4){animation-delay:.15s}
+/* footer */
+.site-footer{background:#06090f;border-top:1px solid #1a2030;padding:36px 40px 24px;margin-top:auto;transition:background .3s,border-color .3s}
+[data-theme="light"] .site-footer{background:#eef1fb;border-top-color:#c8d4f0}
+[data-theme="light"] .site-footer .sf-label{color:#7a8aaa;letter-spacing:2px}
+[data-theme="light"] .site-footer .sf-addr{color:#4a5a7a}
+[data-theme="light"] .site-footer .sf-addr strong{color:#1a2545}
+[data-theme="light"] .site-footer .sf-member{color:#4a5a7a}
+[data-theme="light"] .site-footer .sf-copy,[data-theme="light"] .site-footer .sf-brand{color:#7a8aaa}
+[data-theme="light"] .site-footer .sf-bottom{border-top-color:#c8d4f0}
+[data-theme="light"] .sf-col:first-child{border-right-color:#c8d4f0}
+[data-theme="light"] .sf-col:last-child{border-left-color:#c8d4f0}
+[data-theme="light"] .sf-map iframe{border-color:#c8d4f0}
+[data-theme="light"] .sf-fb a{background:#dce6ff;color:#1a2545;border-color:#1877f2}
+[data-theme="light"] .sf-fb a:hover{background:#1877f2;color:#fff}
+.sf-inner{display:grid;grid-template-columns:1.2fr 1fr 1.2fr;gap:0;align-items:start}
+.sf-col{padding:0 28px}
+.sf-col:first-child{padding-left:0;border-right:1px solid #1e2840}
+.sf-col:last-child{padding-right:0;border-left:1px solid #1e2840}
+.sf-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#4a5878;margin-bottom:14px;transition:color .3s}
+.sf-addr{font-size:13px;color:#8899bb;line-height:1.8;transition:color .3s}
+.sf-addr strong{color:#c8d4f0;font-weight:600}
+.sf-map iframe{border-radius:10px;width:100%;height:140px;border:1px solid #1e2840;display:block;margin-top:4px}
+.sf-members{display:flex;flex-direction:column;gap:8px}
+.sf-member{display:flex;align-items:center;gap:9px;font-size:13px;color:#8899bb;transition:color .3s}
+.sf-member::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0;opacity:.7}
+.sf-fb{margin-top:14px}
+.sf-fb a{display:inline-flex;align-items:center;gap:9px;background:#1a2236;color:#e8edf5;font-size:13px;font-weight:600;padding:9px 18px;border-radius:12px;border:1px solid #1877f2;text-decoration:none;transition:.2s}
+.sf-fb a:hover{background:#1877f2;color:#fff}
+.sf-bottom{margin-top:24px;padding-top:16px;border-top:1px solid #1a2030;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;transition:border-color .3s}
+.sf-copy{font-size:12px;color:#3a4868;transition:color .3s}
+.sf-brand{font-size:12px;color:#3a4868;transition:color .3s}
+@media(max-width:760px){.sf-inner{grid-template-columns:1fr}.sf-col{padding:16px 0;border:none!important}.main{margin-left:0}}
+
 .filter-bar{display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap;align-items:center}
 .sw{position:relative;flex:1;min-width:200px}
 .sw::before{content:'🔍';position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:13px;pointer-events:none}
 .sw input{width:100%;background:var(--card);border:1px solid var(--border);padding:10px 14px 10px 36px;border-radius:10px;color:var(--text);font-family:inherit;font-size:13px;outline:none;transition:.2s}
-.sw input:focus{border-color:var(--accent)}.sw input::placeholder{color:var(--muted)}
+[data-theme="light"] .sw input{background:#fff}
+.sw input:focus{border-color:var(--accent)}
+.sw input::placeholder{color:var(--muted)}
 .fsel{background:var(--card);border:1px solid var(--border);color:var(--text);padding:10px 14px;border-radius:10px;font-family:inherit;font-size:13px;cursor:pointer;outline:none;transition:.2s}
+[data-theme="light"] .fsel{background:#fff}
 .fsel:focus{border-color:var(--accent)}
-.ai-btn{background:linear-gradient(135deg,var(--accent2),#6d28d9);border:none;border-radius:10px;color:#fff;padding:10px 18px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:.2s;display:flex;align-items:center;gap:6px;white-space:nowrap}
-.ai-btn:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(124,58,237,.4)}
 .tabs-row{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
 .ftab{padding:7px 16px;border-radius:8px;border:1px solid var(--border);background:var(--card);font-size:12px;font-weight:700;cursor:pointer;transition:.2s;color:var(--muted)}
-.ftab:hover{border-color:var(--muted);color:var(--text)}.ftab.active{background:var(--accent);color:#000;border-color:var(--accent)}
+.ftab:hover{border-color:var(--muted);color:var(--text)}
+.ftab.active{background:var(--accent);color:#000;border-color:var(--accent)}
 .bank-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
 .bi{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;cursor:pointer;transition:.25s}
+[data-theme="light"] .bi{box-shadow:var(--shadow)}
 .bi:hover{border-color:var(--accent3);transform:translateY(-2px)}
 .bi-hdr{display:flex;align-items:center;gap:10px;margin-bottom:10px}
 .bib{padding:3px 10px;border-radius:6px;font-size:11px;font-weight:700}
-.bb-bo{background:rgba(16,185,129,.12);color:var(--green)}.bb-truong{background:rgba(0,229,255,.1);color:var(--accent)}
-.bb-dd{background:rgba(245,158,11,.12);color:var(--accent3)}.bb-ai{background:rgba(124,58,237,.12);color:#a78bfa}
-.bi-year{font-size:11px;color:var(--muted)}.bi-title{font-size:14px;font-weight:700;margin-bottom:4px}.bi-meta{font-size:12px;color:var(--muted);margin-bottom:12px}
+.bb-bo{background:rgba(16,185,129,.12);color:var(--green)}
+.bb-truong{background:rgba(0,229,255,.1);color:var(--accent)}
+.bb-dd{background:rgba(245,158,11,.12);color:var(--accent3)}
+.bb-ai{background:rgba(124,58,237,.12);color:#a78bfa}
+.bi-year{font-size:11px;color:var(--muted)}
+.bi-title{font-size:14px;font-weight:700;margin-bottom:4px}
+.bi-meta{font-size:12px;color:var(--muted);margin-bottom:12px}
 .bi-foot{display:flex;align-items:center;justify-content:space-between}
 .bi-diff{font-size:11px;font-weight:700}
 .diff-e{color:var(--green)}.diff-m{color:var(--accent3)}.diff-h{color:var(--red)}
 .start-btn{padding:7px 16px;font-size:12px;font-weight:700;border:none;border-radius:8px;cursor:pointer;font-family:inherit;transition:.2s;background:var(--accent);color:#000}
 .start-btn:hover{background:#00cfeb}
-.prev-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);z-index:200;align-items:center;justify-content:center}
+.prev-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(10px);z-index:200;align-items:center;justify-content:center}
 .prev-ov.show{display:flex}
-.prev-box{background:var(--bg2);border:1px solid var(--border);border-radius:20px;width:680px;max-width:95vw;max-height:88vh;overflow:hidden;display:flex;flex-direction:column}
+.prev-box{background:var(--bg2);border:1px solid var(--border);border-radius:20px;width:680px;max-width:95vw;max-height:88vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 32px 80px rgba(0,0,0,.5)}
 .prev-hdr{padding:18px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
 .prev-title{font-size:15px;font-weight:800}
 .prev-close{width:30px;height:30px;border-radius:8px;border:1px solid var(--border);background:var(--surface);cursor:pointer;display:grid;place-items:center;color:var(--muted);transition:.2s}
@@ -85,113 +148,220 @@ body{background:var(--bg);color:var(--text);font-family:'Sora',sans-serif;transi
 .prev-body{padding:24px;overflow-y:auto;flex:1}
 .prev-info{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
 .pi{background:var(--surface);border-radius:10px;padding:12px;text-align:center}
-.piv{font-size:18px;font-weight:800;font-family:'Space Mono';color:var(--accent)}.pil{font-size:11px;color:var(--muted);margin-top:3px}
-.prev-q{padding:14px 0;border-bottom:1px solid var(--border)}.prev-q:last-child{border-bottom:none}
-.pq-n{font-size:11px;color:var(--muted);margin-bottom:6px;font-weight:700;text-transform:uppercase;letter-spacing:1px}
-.pq-t{font-size:14px;font-weight:600;line-height:1.6;margin-bottom:10px}
-.pq-opts{display:flex;flex-wrap:wrap;gap:6px}
-.pq-o{padding:6px 14px;border:1px solid var(--border);border-radius:8px;font-size:12px;cursor:pointer;transition:.2s}
-.pq-o:hover{border-color:var(--accent);color:var(--accent)}
+.piv{font-size:18px;font-weight:800;font-family:'Space Mono';color:var(--accent)}
+.pil{font-size:11px;color:var(--muted);margin-top:3px}
 .prev-foot{padding:14px 24px;border-top:1px solid var(--border);display:flex;gap:10px;justify-content:flex-end}
 </style>
 </head>
 <body>
 <div class="app">
+
 <aside class="sidebar">
-  <a class="logo" href="dashboard.html"><div class="logo-icon">📚</div><div class="logo-text">Luyen<em>Thi</em>369</div></a>
+  <a class="logo" href="dashboard.html">
+    <div class="logo-icon">📚</div>
+    <div class="logo-text">Luyen<em>Thi</em>369</div>
+  </a>
   <nav class="nav">
-    <div class="nav-sec"><div class="nav-lbl">Tổng quan</div>
-      <a class="nav-a" id="na-home" href="dashboard.html"><span class="ic">🏠</span>Dashboard</a>
+    <div class="nav-sec">
+      <div class="nav-lbl">Tổng quan</div>
+      <a class="nav-a " href="dashboard.html"><span class="ic">🏠</span>Dashboard</a>
     </div>
-    <div class="nav-sec"><div class="nav-lbl">Luyện tập</div>
-      <a class="nav-a" id="na-mon" href="luyen-mon.html"><span class="ic">📖</span>Luyện theo môn</a>
-      <a class="nav-a" id="na-hsa" href="hsa.html"><span class="ic">🏛️</span>Phòng luyện HSA<span class="badge">HOT</span></a>
+    <div class="nav-sec">
+      <div class="nav-lbl">Luyện tập</div>
+      <a class="nav-a " href="luyen-mon.html"><span class="ic">📖</span>Luyện theo môn</a>
+      <a class="nav-a " href="hsa.html"><span class="ic">🏛️</span>Phòng luyện HSA<span class="badge">HOT</span></a>
     </div>
-    <div class="nav-sec"><div class="nav-lbl">Tra cứu</div>
-      <a class="nav-a" id="na-bank" href="ngan-hang-de.html"><span class="ic">🗂️</span>Ngân hàng đề</a>
-      <a class="nav-a" id="na-set" href="cai-dat.html"><span class="ic">⚙️</span>Cài đặt</a>
+    <div class="nav-sec">
+      <div class="nav-lbl">Tra cứu</div>
+      <a class="nav-a active" href="ngan-hang-de.html"><span class="ic">🗂️</span>Ngân hàng đề</a>
+      <a class="nav-a " href="cai-dat.html"><span class="ic">⚙️</span>Cài đặt</a>
     </div>
   </nav>
   <div class="sb-foot">
-    <a class="user-card" href="cai-dat.html"><div class="av" id="sb-av">?</div><div><div class="uname" id="sb-name">Đang tải...</div><div class="uplan">⭐ PRO</div></div></a>
+    <a class="user-card" href="cai-dat.html">
+      <div class="av" id="sb-av">?</div>
+      <div><div class="uname" id="sb-name">Đang tải...</div><div class="uplan">⭐ PRO</div></div>
+    </a>
     <button class="logout" onclick="location.href='dang-nhap.html'">🚪 Đăng xuất</button>
   </div>
 </aside>
+
 <div class="main">
   <div class="topbar">
-    <div class="topbar-l"><div class="ttl">Ngân hàng đề</div><div class="tsub">Bộ GD · Trường chuyên · Dự đoán · AI</div></div>
+    <div class="topbar-l"><div class="ttl">Ngân hàng đề</div><div class="tsub">14 đề thi · Lọc theo môn & năm</div></div>
     <div class="topbar-r"><button class="icon-btn" id="theme-btn" onclick="toggleTheme()">☀️</button></div>
   </div>
   <div class="content fadein">
     <div class="filter-bar">
-      <div class="sw"><input placeholder="Tìm kiếm đề thi..." id="search-inp" oninput="renderBank()"></div>
-      <select class="fsel" id="f-mon" onchange="renderBank()"><option value="">Tất cả môn</option><option value="toan">📐 Toán</option><option value="ly">⚡ Vật lý</option><option value="hoa">🧪 Hóa học</option><option value="anh">🌍 Tiếng Anh</option><option value="sinh">🌱 Sinh học</option><option value="hsa">🏛️ HSA</option></select>
-      <select class="fsel" id="f-nam" onchange="renderBank()"><option value="">Tất cả năm</option><option value="2025">2025</option><option value="2024">2024</option><option value="2023">2023</option><option value="2022">2022</option></select>
-      <select class="fsel" id="f-do" onchange="renderBank()"><option value="">Độ khó</option><option value="de">Dễ</option><option value="tb">Trung bình</option><option value="kho">Khó</option></select>
-      <button class="ai-btn" onclick="openPreview('ai')">🤖 Đề AI cho tôi</button>
+      <div class="sw"><input type="text" id="search-inp" placeholder="Tìm đề thi..." oninput="filterBank()"></div>
+      <select class="fsel" id="sel-mon" onchange="filterBank()">
+        <option value="">Tất cả môn</option>
+        <option value="Toán">Toán</option>
+        <option value="Vật lý">Vật lý</option>
+        <option value="Hóa học">Hóa học</option>
+        <option value="Sinh học">Sinh học</option>
+        <option value="Tiếng Anh">Tiếng Anh</option>
+        <option value="HSA">HSA</option>
+      </select>
+      <select class="fsel" id="sel-year" onchange="filterBank()">
+        <option value="">Tất cả năm</option>
+        <option value="2025">2025</option>
+        <option value="2024">2024</option>
+        <option value="2023">2023</option>
+        <option value="2022">2022</option>
+      </select>
     </div>
     <div class="tabs-row">
-      <div class="ftab active" onclick="setTab('all',this)">Tất cả</div>
-      <div class="ftab" onclick="setTab('bo-gd',this)">📋 Đề Bộ GD</div>
-      <div class="ftab" onclick="setTab('truong-chuyen',this)">🏫 Trường chuyên</div>
-      <div class="ftab" onclick="setTab('du-doan',this)">🔮 Đề dự đoán</div>
-      <div class="ftab" onclick="setTab('ai',this)">🤖 Đề AI</div>
+      <div class="ftab active" onclick="setTab('all',this)">Tất cả (14)</div>
+      <div class="ftab" onclick="setTab('bo',this)">📚 Bộ GD&ĐT</div>
+      <div class="ftab" onclick="setTab('truong',this)">🏫 Trường THPT</div>
+      <div class="ftab" onclick="setTab('dd',this)">📝 Đề dự đoán</div>
+      <div class="ftab" onclick="setTab('ai',this)">🤖 AI tạo</div>
     </div>
     <div class="bank-grid" id="bank-grid"></div>
   </div>
+  
+<footer class="site-footer">
+  <div class="sf-inner">
+    <div class="sf-col">
+      <div class="sf-label">Địa chỉ</div>
+      <div class="sf-addr">
+        <strong>Lớp 12A4</strong><br>
+        Trường THPT Đan Phượng<br>
+        Thị trấn Phùng, huyện Đan Phượng<br>
+        Hà Nội
+      </div>
+      <div class="sf-map" style="margin-top:14px">
+        <iframe src="https://maps.google.com/maps?q=Tr%C6%B0%E1%BB%9Dng%20THPT%20%C4%90an%20Ph%C6%B0%E1%BB%A3ng&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+    <div class="sf-col" style="text-align:center">
+      <div class="sf-label">Thành viên nhóm</div>
+      <div class="sf-members" style="align-items:center">
+        <div class="sf-member">Nguyễn Thế Hải Nam</div>
+        <div class="sf-member">Doãn Hà Anh</div>
+        <div class="sf-member">Nguyễn Huyền Linh</div>
+        <div class="sf-member">Đỗ Minh Phương</div>
+        <div class="sf-member">Nguyễn Thị Mai Trang</div>
+      </div>
+    </div>
+    <div class="sf-col" style="text-align:right">
+      <div class="sf-label">Mạng xã hội</div>
+      <div class="sf-fb">
+        <a href="https://facebook.com" target="_blank">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="#1877f2"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.413c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.953h-1.513c-1.491 0-1.956.93-1.956 1.886v2.284h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+          Facebook
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="sf-bottom">
+    <span class="sf-copy">© 2026 LuyenThi369</span>
+    <span class="sf-brand">Lớp 12A4 · Trường THPT Đan Phượng</span>
+  </div>
+</footer>
+
 </div>
 </div>
+<!-- PREVIEW OVERLAY -->
 <div class="prev-ov" id="prev-ov">
   <div class="prev-box">
-    <div class="prev-hdr"><div class="prev-title" id="prev-title">Xem trước đề thi</div><div class="prev-close" onclick="closePreview()">✕</div></div>
+    <div class="prev-hdr">
+      <div class="prev-title" id="prev-title">Xem trước đề</div>
+      <div class="prev-close" onclick="closePrev()">✕</div>
+    </div>
     <div class="prev-body" id="prev-body"></div>
-    <div class="prev-foot"><button class="btn btn-g" onclick="closePreview()">Đóng</button><button class="btn btn-p" onclick="closePreview();alert('✅ Đã thêm vào danh sách luyện!')">Luyện ngay →</button></div>
+    <div class="prev-foot">
+      <button class="btn btn-g" onclick="closePrev()">Đóng</button>
+      <button class="btn btn-p">▶ Bắt đầu làm đề</button>
+    </div>
   </div>
 </div>
 <script>
-function applyTheme(t){document.documentElement.setAttribute('data-theme',t);localStorage.setItem('lt369_theme',t);const b=document.getElementById('theme-btn');if(b)b.textContent=t==='dark'?'☀️':'🌙'}
+
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  localStorage.setItem('lt369_theme',t);
+  const b=document.getElementById('theme-btn');
+  if(b) b.textContent=t==='dark'?'☀️':'🌙';
+}
 function toggleTheme(){applyTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark')}
+
+
 (function(){
   applyTheme(localStorage.getItem('lt369_theme')||'dark');
   const n=localStorage.getItem('lt369_user')||'bạn';
-  document.getElementById('sb-name').textContent=n;
-  document.getElementById('sb-av').textContent=n.charAt(0).toUpperCase();
-  document.getElementById('na-bank').classList.add('active');
+  const av=document.getElementById('sb-av');
+  const nm=document.getElementById('sb-name');
+  if(av) av.textContent=n.charAt(0).toUpperCase();
+  if(nm) nm.textContent=n;
+  const el=document.getElementById('na-bank');
+  if(el) el.classList.add('active');
 })();
-const DATA=[
-  {id:1,type:'bo-gd',badge:'bb-bo',blbl:'BỘ GD',title:'Đề thi THPT Quốc gia 2024 – Toán',meta:'50 câu · 90 phút · 1,234 lượt thi',year:'2024',mon:'toan',diff:'tb',dlbl:'Trung bình',dcls:'diff-m'},
-  {id:2,type:'bo-gd',badge:'bb-bo',blbl:'BỘ GD',title:'Đề thi THPT Quốc gia 2024 – Vật lý',meta:'40 câu · 50 phút · 987 lượt thi',year:'2024',mon:'ly',diff:'kho',dlbl:'Khó',dcls:'diff-h'},
-  {id:3,type:'bo-gd',badge:'bb-bo',blbl:'BỘ GD',title:'Đề thi THPT Quốc gia 2023 – Hóa học',meta:'40 câu · 50 phút · 1,102 lượt thi',year:'2023',mon:'hoa',diff:'tb',dlbl:'Trung bình',dcls:'diff-m'},
-  {id:4,type:'bo-gd',badge:'bb-bo',blbl:'BỘ GD',title:'Đề thi THPT Quốc gia 2023 – Tiếng Anh',meta:'50 câu · 60 phút · 2,341 lượt thi',year:'2023',mon:'anh',diff:'de',dlbl:'Dễ',dcls:'diff-e'},
-  {id:5,type:'truong-chuyen',badge:'bb-truong',blbl:'CHUYÊN',title:'Đề THPT Chuyên Hà Nội – Toán',meta:'50 câu · 90 phút · Rất khó',year:'2024',mon:'toan',diff:'kho',dlbl:'Khó',dcls:'diff-h'},
-  {id:6,type:'truong-chuyen',badge:'bb-truong',blbl:'CHUYÊN',title:'Đề THPT Lê Hồng Phong – Tiếng Anh',meta:'50 câu · 60 phút',year:'2024',mon:'anh',diff:'tb',dlbl:'Trung bình',dcls:'diff-m'},
-  {id:7,type:'truong-chuyen',badge:'bb-truong',blbl:'CHUYÊN',title:'Đề THPT Amsterdam – Vật lý',meta:'40 câu · 50 phút',year:'2023',mon:'ly',diff:'kho',dlbl:'Khó',dcls:'diff-h'},
-  {id:8,type:'du-doan',badge:'bb-dd',blbl:'DỰ ĐOÁN',title:'Đề dự đoán THPT 2026 – Toán (v3)',meta:'50 câu · Cập nhật 20/01/2026',year:'2025',mon:'toan',diff:'tb',dlbl:'Trung bình',dcls:'diff-m'},
-  {id:9,type:'du-doan',badge:'bb-dd',blbl:'DỰ ĐOÁN',title:'Đề dự đoán THPT 2026 – Hóa học',meta:'40 câu · Cập nhật 18/01/2026',year:'2025',mon:'hoa',diff:'kho',dlbl:'Khó',dcls:'diff-h'},
-  {id:10,type:'ai',badge:'bb-ai',blbl:'🤖 AI',title:'Đề thích nghi theo điểm yếu – Toán',meta:'30 câu · Tạo riêng cho bạn',year:'',mon:'toan',diff:'tb',dlbl:'Cá nhân hoá',dcls:'diff-m'},
-  {id:11,type:'ai',badge:'bb-ai',blbl:'🤖 AI',title:'Đề AI ngẫu nhiên – Vật lý',meta:'25 câu · Tự động tạo',year:'',mon:'ly',diff:'kho',dlbl:'Thích nghi',dcls:'diff-h'},
-  {id:12,type:'bo-gd',badge:'bb-bo',blbl:'BỘ GD',title:'Đề thi THPT Quốc gia 2022 – Sinh học',meta:'40 câu · 50 phút · 876 lượt thi',year:'2022',mon:'sinh',diff:'tb',dlbl:'Trung bình',dcls:'diff-m'},
-  {id:13,type:'ai',badge:'bb-ai',blbl:'🤖 AI',title:'Đề HSA thích nghi – Full 150 câu',meta:'150 câu · 195 phút · AI tạo theo lực bạn',year:'',mon:'hsa',diff:'tb',dlbl:'Thích nghi',dcls:'diff-m'},
-  {id:14,type:'truong-chuyen',badge:'bb-truong',blbl:'CHUYÊN',title:'Đề THPT Chuyên Khoa học Tự nhiên – Sinh',meta:'40 câu · 50 phút',year:'2023',mon:'sinh',diff:'kho',dlbl:'Khó',dcls:'diff-h'},
+
+const BANK=[
+  {id:1,title:'Đề thi THPT Quốc gia 2025 – Môn Toán',type:'bo',mon:'Toán',year:'2025',q:50,time:90,diff:'Khó',score:'9.2'},
+  {id:2,title:'Đề thi THPT Quốc gia 2025 – Vật lý',type:'bo',mon:'Vật lý',year:'2025',q:40,time:50,diff:'Khó',score:'8.8'},
+  {id:3,title:'Đề thi THPT Quốc gia 2025 – Hóa học',type:'bo',mon:'Hóa học',year:'2025',q:40,time:50,diff:'Trung bình',score:'8.5'},
+  {id:4,title:'Đề thi THPT Quốc gia 2024 – Môn Toán',type:'bo',mon:'Toán',year:'2024',q:50,time:90,diff:'Trung bình',score:'8.0'},
+  {id:5,title:'Đề thi THPT Quốc gia 2024 – Tiếng Anh',type:'bo',mon:'Tiếng Anh',year:'2024',q:50,time:60,diff:'Trung bình',score:'7.8'},
+  {id:6,title:'Đề thử nghiệm THPT 2026 – THPT Đan Phượng',type:'truong',mon:'Tổng hợp',year:'2025',q:40,time:60,diff:'Dễ',score:'9.0'},
+  {id:7,title:'Đề kiểm tra HK1 2025 – Toán',type:'truong',mon:'Toán',year:'2025',q:30,time:45,diff:'Dễ',score:'9.5'},
+  {id:8,title:'Đề kiểm tra HK1 2025 – Hóa học',type:'truong',mon:'Hóa học',year:'2025',q:30,time:45,diff:'Dễ',score:'8.7'},
+  {id:9,title:'Đề dự đoán THPT 2026 – Toán (Đề 1)',type:'dd',mon:'Toán',year:'2026',q:50,time:90,diff:'Khó',score:'7.5'},
+  {id:10,title:'Đề dự đoán THPT 2026 – Vật lý (Đề 1)',type:'dd',mon:'Vật lý',year:'2026',q:40,time:50,diff:'Khó',score:'7.2'},
+  {id:11,title:'Đề dự đoán THPT 2026 – Tiếng Anh',type:'dd',mon:'Tiếng Anh',year:'2026',q:50,time:60,diff:'Trung bình',score:'8.1'},
+  {id:12,title:'HSA Mock Test #10 – Full đề 150 câu',type:'ai',mon:'HSA',year:'2025',q:150,time:195,diff:'Khó',score:'112'},
+  {id:13,title:'HSA Mock Test #11 – Tư duy định lượng',type:'ai',mon:'HSA',year:'2025',q:50,time:75,diff:'Khó',score:'45'},
+  {id:14,title:'AI Generated – Đề tổng hợp 2026',type:'ai',mon:'Tổng hợp',year:'2026',q:40,time:60,diff:'Trung bình',score:'8.3'},
 ];
-let curTab='all';
-function setTab(t,el){curTab=t;document.querySelectorAll('.ftab').forEach(e=>e.classList.remove('active'));el.classList.add('active');renderBank()}
-function renderBank(){
-  const s=document.getElementById('search-inp').value.toLowerCase(),mon=document.getElementById('f-mon').value,nam=document.getElementById('f-nam').value,diff=document.getElementById('f-do').value;
-  const r=DATA.filter(d=>(curTab==='all'||d.type===curTab)&&(!mon||d.mon===mon)&&(!nam||d.year===nam)&&(!diff||d.diff===diff)&&(!s||d.title.toLowerCase().includes(s)));
-  document.getElementById('bank-grid').innerHTML=r.length?r.map(d=>`<div class="bi"><div class="bi-hdr"><span class="bib ${d.badge}">${d.blbl}</span>${d.year?`<span class="bi-year">${d.year}</span>`:''}</div><div class="bi-title">${d.title}</div><div class="bi-meta">${d.meta}</div><div class="bi-foot"><div class="bi-diff ${d.dcls}">● ${d.dlbl}</div><button class="start-btn" onclick="openPreview(${d.id})">Xem &amp; Luyện →</button></div></div>`).join(''):'<div style="grid-column:span 2;text-align:center;padding:48px;color:var(--muted)">😕 Không tìm thấy đề phù hợp</div>';
+const TYPE_LABELS={bo:'📚 Bộ GD&ĐT',truong:'🏫 Trường THPT',dd:'📝 Đề dự đoán',ai:'🤖 AI tạo'};
+const TYPE_CLASSES={bo:'bb-bo',truong:'bb-truong',dd:'bb-dd',ai:'bb-ai'};
+const DIFF_CLASSES={Khó:'diff-h','Trung bình':'diff-m',Dễ:'diff-e'};
+let currentTab='all';
+function renderBank(data){
+  document.getElementById('bank-grid').innerHTML=data.map(d=>`
+    <div class="bi" onclick="openPrev(${d.id})">
+      <div class="bi-hdr">
+        <span class="bib ${TYPE_CLASSES[d.type]}">${TYPE_LABELS[d.type]}</span>
+        <span class="bi-year">${d.year}</span>
+      </div>
+      <div class="bi-title">${d.title}</div>
+      <div class="bi-meta">${d.mon} · ${d.q} câu · ${d.time} phút</div>
+      <div class="bi-foot">
+        <span class="bi-diff ${DIFF_CLASSES[d.diff]}">● ${d.diff}</span>
+        <button class="start-btn" onclick="event.stopPropagation()">▶ Làm đề</button>
+      </div>
+    </div>`).join('');
 }
-renderBank();
-const SAMPLE=[{n:'Câu 1',t:'Cho hàm số y = 2x³ - 3x² - 12x + 1. Hàm số nghịch biến trên khoảng nào?',o:['(-1, 2)','(-2, 1)','(-∞, -1)','(2, +∞)']},{n:'Câu 2',t:'Tập nghiệm của bất phương trình log₃(x-1) > 2 là:',o:['(1,10)','(10,+∞)','(1,+∞)','(8,+∞)']},{n:'Câu 3',t:'Số nghiệm phương trình sin²x - sinx = 0 trên [0,2π] là:',o:['2','3','4','5']}];
-function openPreview(id){
-  const d=id==='ai'?null:DATA.find(x=>x.id===id);
-  document.getElementById('prev-title').textContent=d?d.title:'🤖 Đề AI – Tạo riêng cho bạn';
-  document.getElementById('prev-body').innerHTML=`<div class="prev-info"><div class="pi"><div class="piv">${id==='ai'?30:50}</div><div class="pil">Số câu</div></div><div class="pi"><div class="piv" style="color:var(--accent3)">${id==='ai'?45:90}</div><div class="pil">Phút</div></div><div class="pi"><div class="piv" style="color:var(--green)">${id==='ai'?'AI':'BỘ GD'}</div><div class="pil">Nguồn</div></div></div><div style="font-size:13px;color:var(--muted);margin-bottom:14px">📌 Xem trước 3 câu đầu:</div>${SAMPLE.map(q=>`<div class="prev-q"><div class="pq-n">${q.n}</div><div class="pq-t">${q.t}</div><div class="pq-opts">${q.o.map((o,i)=>`<div class="pq-o">${['A','B','C','D'][i]}. ${o}</div>`).join('')}</div></div>`).join('')}<div style="text-align:center;padding:16px 0;color:var(--muted);font-size:13px">... và ${(id==='ai'?30:50)-3} câu tiếp theo</div>`;
+function filterBank(){
+  const s=document.getElementById('search-inp').value.toLowerCase();
+  const m=document.getElementById('sel-mon').value;
+  const y=document.getElementById('sel-year').value;
+  let data=BANK.filter(d=>
+    (currentTab==='all'||d.type===currentTab)&&
+    (!s||d.title.toLowerCase().includes(s))&&
+    (!m||d.mon===m)&&
+    (!y||d.year===y)
+  );
+  renderBank(data);
+}
+function setTab(t,el){currentTab=t;document.querySelectorAll('.ftab').forEach(e=>e.classList.remove('active'));el.classList.add('active');filterBank()}
+function openPrev(id){
+  const d=BANK.find(b=>b.id===id);if(!d)return;
+  document.getElementById('prev-title').textContent=d.title;
+  document.getElementById('prev-body').innerHTML=`
+    <div class="prev-info">
+      <div class="pi"><div class="piv">${d.q}</div><div class="pil">Câu hỏi</div></div>
+      <div class="pi"><div class="piv">${d.time}'</div><div class="pil">Thời gian</div></div>
+      <div class="pi"><div class="piv" style="font-size:14px">${d.diff}</div><div class="pil">Độ khó</div></div>
+    </div>
+    <p style="font-size:13px;color:var(--muted);margin-bottom:16px">Môn: <strong style="color:var(--text)">${d.mon}</strong> · Năm: <strong style="color:var(--text)">${d.year}</strong> · Nguồn: <strong style="color:var(--text)">${TYPE_LABELS[d.type]}</strong></p>
+    <p style="font-size:13px;color:var(--muted)">Điểm trung bình người dùng: <strong style="color:var(--accent);font-family:'Space Mono'">${d.score}</strong></p>`;
   document.getElementById('prev-ov').classList.add('show');
   document.body.style.overflow='hidden';
 }
-function closePreview(){document.getElementById('prev-ov').classList.remove('show');document.body.style.overflow=''}
+function closePrev(){document.getElementById('prev-ov').classList.remove('show');document.body.style.overflow=''}
+renderBank(BANK);
 </script>
-
-
 </body></html>
