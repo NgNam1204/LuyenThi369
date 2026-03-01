@@ -20,7 +20,7 @@
   --text:#111827;--muted:#6b7a99;--card:#ffffff;
   --shadow:0 2px 16px rgba(100,120,200,.12);
 }
-body{background:var(--bg);color:var(--text);font-family:'Sora',sans-serif;transition:background .3s,color .3s;line-height:1.5}
+body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-serif;transition:background .3s,color .3s;line-height:1.5}
 ::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
 /* layout */
 .app{display:flex;min-height:100vh}
@@ -208,6 +208,49 @@ body{background:var(--bg);color:var(--text);font-family:'Sora',sans-serif;transi
 .qdot.ng{background:var(--red);border-color:var(--red)}
 .qacts{display:flex;gap:8px}
 
+
+/* ── MOBILE ── */
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:99;backdrop-filter:blur(4px)}
+.sidebar-overlay.show{display:block}
+.hamburger{width:38px;height:38px;border-radius:9px;background:var(--surface);border:1px solid var(--border);align-items:center;justify-content:center;cursor:pointer;font-size:18px;flex-shrink:0;transition:.2s;margin-right:10px;display:none}
+.hamburger:hover{border-color:var(--accent)}
+@media(max-width:768px){
+  .hamburger{display:flex!important}
+  .sidebar{position:fixed;left:0;top:0;height:100vh;transform:translateX(-260px);transition:transform .28s cubic-bezier(.4,0,.2,1);z-index:100;box-shadow:4px 0 24px rgba(0,0,0,.4)}
+  .sidebar.open{transform:translateX(0)}
+  .main{margin-left:0!important;width:100%}
+  .topbar{padding:0 16px}
+  .content{padding:16px}
+  .grid-4{grid-template-columns:repeat(2,1fr)!important}
+  .grid-2{grid-template-columns:1fr!important}
+  .two-col{grid-template-columns:1fr!important}
+  .modes{grid-template-columns:repeat(2,1fr)!important}
+  .topics{grid-template-columns:repeat(2,1fr)!important}
+  .parts-grid{grid-template-columns:1fr!important}
+  .stats-row{grid-template-columns:repeat(2,1fr)!important}
+  .settings-layout{grid-template-columns:1fr!important}
+  .bank-grid{grid-template-columns:1fr!important}
+  .sf-inner{grid-template-columns:1fr!important}
+  .sf-col{padding:16px 0!important;border:none!important}
+  .sf-bottom{flex-direction:column;align-items:flex-start;gap:4px}
+  .qbox{max-height:98vh;border-radius:16px 16px 0 0;position:fixed;bottom:0;left:0;right:0;width:100%!important;max-width:100%!important}
+  .qov{align-items:flex-end}
+  .cd-band{flex-direction:column;align-items:flex-start;gap:10px}
+  .welcome-banner{flex-direction:column}
+  .stabs{gap:6px}
+  .stab{padding:8px 12px;font-size:12px}
+  .hsa-hero{padding:24px 16px}
+  .hbtns{flex-direction:column}
+  .exam-box{border-radius:16px 16px 0 0;position:fixed;bottom:0;left:0;right:0;width:100%!important;max-width:100%!important;max-height:95vh}
+  .exam-ov{align-items:flex-end}
+  .exam-body{flex-direction:column}
+  .exam-parts{width:100%!important;height:auto;flex-direction:row;overflow-x:auto;padding:10px;display:flex;gap:8px;border-right:none;border-bottom:1px solid var(--border)}
+  .ep-part{flex-shrink:0;padding:8px 12px;margin-bottom:0}
+  .prev-box{border-radius:16px 16px 0 0;position:fixed;bottom:0;left:0;right:0;width:100%!important;max-width:100%!important}
+  .prev-ov{align-items:flex-end}
+  .topbar-l .ttl{font-size:15px}
+  .topbar-l .tsub{display:none}
+}
 </style>
 </head>
 <body>
@@ -245,7 +288,7 @@ body{background:var(--bg);color:var(--text);font-family:'Sora',sans-serif;transi
 
 <div class="main">
   <div class="topbar">
-    <div class="topbar-l"><div class="ttl">Luyện theo môn</div><div class="tsub">Chuyên đề · 30 câu/môn · Thi thử</div></div>
+    <div class="topbar-l" style="display:flex;align-items:center;gap:0"><button class="hamburger" onclick="openSidebar()" aria-label="Menu">☰</button><div class="ttl">Luyện theo môn</div><div class="tsub">Chuyên đề · 30 câu/môn · Thi thử</div></div>
     <div class="topbar-r"><button class="icon-btn" id="theme-btn" onclick="toggleTheme()">☀️</button></div>
   </div>
   <div class="content fadein">
@@ -670,5 +713,17 @@ function showResult(){
   document.getElementById('qfoot').style.display='none';
 }
 
+
+// Mobile sidebar
+function openSidebar(){
+  document.querySelector('.sidebar').classList.add('open');
+  document.querySelector('.sidebar-overlay').classList.add('show');
+  document.body.style.overflow='hidden';
+}
+function closeSidebar(){
+  document.querySelector('.sidebar').classList.remove('open');
+  document.querySelector('.sidebar-overlay').classList.remove('show');
+  document.body.style.overflow='';
+}
 </script>
 </body></html>
