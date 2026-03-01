@@ -290,6 +290,7 @@ body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-se
     </div>
     <div class="topbar-r">
       <button class="icon-btn" onclick="Pomodoro.open()" title="Pomodoro 🍅">🍅</button>
+      <button class="icon-btn" id="music-btn" onclick="LofiPlayer.toggle()" title="Nhạc Lo-fi">🎵</button>
       <button class="btn btn-v hide-sm" onclick="Battle.open()">⚔️ Battle</button>
       <button class="icon-btn" id="theme-btn" onclick="toggleTheme()" title="Đổi theme">☀️</button>
       <a class="btn btn-p" href="luyen-mon.html">▶ Luyện ngay</a>
@@ -742,6 +743,176 @@ const Pomodoro=(function(){
   }
   function reset(){clearInterval(timerI);timerI=null;mode='work';secsLeft=25*60;if(ov){document.getElementById('pomo-btn').textContent='▶ Bắt đầu';updateUI();}}
   return{open,close,toggle,reset};
+})();
+</script>
+
+<!-- ── LO-FI PLAYER ── -->
+<script>
+const LofiPlayer = (function(){
+  const STATIONS = [
+    { name:'Lofi Girl',      emoji:'👧', id:'jfKfPfyJRdk' },
+    { name:'Chillhop',       emoji:'🦝', id:'5yx6BWlEVcY' },
+    { name:'College Music',  emoji:'📚', id:'NIJnbx74bJ0' },
+    { name:'Lofi Hip Hop',   emoji:'🌙', id:'DWcJFNfaw9c' },
+    { name:'Jazz Lofi',      emoji:'🎷', id:'HuFYqnbVDzE' },
+  ];
+
+  let widget = null;
+  let isOpen = false;
+  let isPlaying = false;
+  let currentIdx = parseInt(localStorage.getItem('lt369_lofi_idx') || '0');
+  let volume = parseInt(localStorage.getItem('lt369_lofi_vol') || '40');
+  let player = null;
+  let ytReady = false;
+
+  function buildWidget() {
+    widget = document.createElement('div');
+    widget.id = 'lofi-widget';
+    widget.style.cssText = `
+      position:fixed;bottom:80px;right:24px;z-index:400;
+      background:#0d1117;border:1px solid #1e2840;border-radius:18px;
+      padding:16px 18px;width:260px;
+      box-shadow:0 12px 40px rgba(0,0,0,.6);
+      display:none;
+      animation:fadeUp .25s ease;
+    `;
+    widget.innerHTML = `
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+        <div style="display:flex;align-items:center;gap:8px">
+          <div id="lf-indicator" style="width:8px;height:8px;border-radius:50%;background:#1e2840;transition:.3s"></div>
+          <span style="font-size:13px;font-weight:700;color:#e8edf5">🎵 Lo-fi Player</span>
+        </div>
+        <button onclick="LofiPlayer.close()" style="background:none;border:none;color:#5a6b88;cursor:pointer;font-size:16px;line-height:1">✕</button>
+      </div>
+
+      <!-- Station list -->
+      <div style="display:flex;flex-direction:column;gap:5px;margin-bottom:14px" id="lf-stations"></div>
+
+      <!-- Controls -->
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:12px">
+        <button id="lf-play-btn" onclick="LofiPlayer.playPause()" style="
+          flex:1;padding:9px;
+          background:linear-gradient(135deg,#00e5ff,#0099cc);
+          border:none;border-radius:10px;color:#000;
+          font-weight:800;cursor:pointer;font-size:13px;font-family:inherit;
+          transition:.2s;
+        ">▶ Phát</button>
+        <button onclick="LofiPlayer.prev()" style="padding:9px 11px;background:#111622;border:1px solid #1e2840;border-radius:10px;color:#5a6b88;cursor:pointer;font-size:13px">◀</button>
+        <button onclick="LofiPlayer.next()" style="padding:9px 11px;background:#111622;border:1px solid #1e2840;border-radius:10px;color:#5a6b88;cursor:pointer;font-size:13px">▶</button>
+      </div>
+
+      <!-- Volume -->
+      <div style="display:flex;align-items:center;gap:10px">
+        <span style="font-size:14px">🔈</span>
+        <input type="range" id="lf-vol" min="0" max="100" value="${volume}"
+          oninput="LofiPlayer.setVol(this.value)"
+          style="flex:1;accent-color:#00e5ff;cursor:pointer;height:4px">
+        <span style="font-size:14px">🔊</span>
+      </div>
+
+      <!-- Hidden YT iframe -->
+      <div id="lf-yt" style="display:none"></div>
+    `;
+    document.body.appendChild(widget);
+    renderStations();
+    loadYTApi();
+  }
+
+  function renderStations() {
+    const cont = document.getElementById('lf-stations');
+    cont.innerHTML = STATIONS.map((s, i) => `
+      <div onclick="LofiPlayer.selectStation(${i})" id="lf-s${i}" style="
+        display:flex;align-items:center;gap:10px;padding:8px 10px;
+        border-radius:10px;cursor:pointer;transition:.2s;
+        background:${i===currentIdx?'rgba(0,229,255,.08)':'transparent'};
+        border:1px solid ${i===currentIdx?'rgba(0,229,255,.3)':'transparent'};
+      ">
+        <span style="font-size:16px">${s.emoji}</span>
+        <span style="font-size:13px;font-weight:${i===currentIdx?'700':'500'};color:${i===currentIdx?'#00e5ff':'#8899bb'}">${s.name}</span>
+        ${i===currentIdx && isPlaying ? '<span style="margin-left:auto;font-size:10px;color:#00e5ff;animation:lfPulse 1s ease-in-out infinite">♪</span>' : ''}
+      </div>
+    `).join('');
+  }
+
+  function loadYTApi() {
+    if (window.YT) { ytReady = true; return; }
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    document.head.appendChild(tag);
+    window.onYouTubeIframeAPIReady = () => { ytReady = true; };
+  }
+
+  function initPlayer(videoId) {
+    const container = document.getElementById('lf-yt');
+    container.innerHTML = '<div id="lf-yt-inner"></div>';
+    player = new YT.Player('lf-yt-inner', {
+      height: '1', width: '1',
+      videoId: videoId,
+      playerVars: { autoplay: 1, loop: 1, playlist: videoId },
+      events: {
+        onReady: (e) => { e.target.setVolume(volume); e.target.playVideo(); setPlaying(true); },
+        onError: () => { showToast('😔','Không tải được','Thử kênh khác nhé!','#ef4444'); setPlaying(false); }
+      }
+    });
+  }
+
+  function setPlaying(val) {
+    isPlaying = val;
+    const btn = document.getElementById('lf-play-btn');
+    const ind = document.getElementById('lf-indicator');
+    const mb = document.getElementById('music-btn');
+    if (btn) btn.textContent = val ? '⏸ Dừng' : '▶ Phát';
+    if (ind) { ind.style.background = val ? '#10b981' : '#1e2840'; ind.style.boxShadow = val ? '0 0 8px #10b981' : 'none'; }
+    if (mb) mb.style.color = val ? '#00e5ff' : '';
+    renderStations();
+  }
+
+  function toggle() {
+    if (!widget) buildWidget();
+    isOpen = !isOpen;
+    widget.style.display = isOpen ? 'block' : 'none';
+  }
+
+  function close() {
+    isOpen = false;
+    if (widget) widget.style.display = 'none';
+  }
+
+  function playPause() {
+    if (!ytReady) { showToast('⏳','Đang tải...','YouTube API chưa sẵn sàng','#f59e0b'); loadYTApi(); return; }
+    if (!player) {
+      initPlayer(STATIONS[currentIdx].id);
+    } else {
+      const state = player.getPlayerState();
+      if (state === 1) { player.pauseVideo(); setPlaying(false); }
+      else { player.playVideo(); setPlaying(true); }
+    }
+  }
+
+  function selectStation(idx) {
+    currentIdx = idx;
+    localStorage.setItem('lt369_lofi_idx', idx);
+    if (player) { player.destroy(); player = null; }
+    if (ytReady) initPlayer(STATIONS[idx].id);
+    else { loadYTApi(); setTimeout(() => initPlayer(STATIONS[idx].id), 1500); }
+    renderStations();
+  }
+
+  function prev() { selectStation((currentIdx - 1 + STATIONS.length) % STATIONS.length); }
+  function next() { selectStation((currentIdx + 1) % STATIONS.length); }
+
+  function setVol(v) {
+    volume = parseInt(v);
+    localStorage.setItem('lt369_lofi_vol', volume);
+    if (player && player.setVolume) player.setVolume(volume);
+  }
+
+  // Add pulse animation
+  const st = document.createElement('style');
+  st.textContent = `@keyframes lfPulse{0%,100%{opacity:1}50%{opacity:.3}}`;
+  document.head.appendChild(st);
+
+  return { toggle, close, playPause, prev, next, next, setVol, selectStation };
 })();
 </script>
 </body></html>
