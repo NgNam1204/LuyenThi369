@@ -31,39 +31,39 @@ body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-se
 .nav{flex:1;padding:12px 0}
 .nav-sec{margin-bottom:4px}
 .nav-lbl{font-size:10px;font-weight:700;letter-spacing:2px;color:var(--muted);padding:8px 20px;text-transform:uppercase;opacity:.7}
-.nav-a{display:flex;align-items:center;gap:12px;padding:10px 20px;color:var(--muted);font-size:13.5px;font-weight:500;transition:.2s;border-left:3px solid transparent;text-decoration:none;border-radius:0}
+.nav-a{display:flex;align-items:center;gap:12px;padding:10px 20px;color:var(--muted);font-size:15.5px;font-weight:500;transition:.2s;border-left:3px solid transparent;text-decoration:none;border-radius:0}
 .nav-a:hover{color:var(--text);background:rgba(128,128,200,.06)}
 .nav-a.active{color:var(--accent);background:rgba(0,229,255,.07);border-left-color:var(--accent);font-weight:600}
-.nav-a .ic{width:18px;text-align:center;flex-shrink:0;font-size:15px}
+.nav-a .ic{width:18px;text-align:center;flex-shrink:0;font-size:17px}
 .badge{margin-left:auto;background:linear-gradient(135deg,var(--accent2),#6d28d9);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:999px}
 .sb-foot{padding:14px;border-top:1px solid var(--border)}
 .user-card{display:flex;align-items:center;gap:10px;background:var(--surface);padding:10px 12px;border-radius:12px;cursor:pointer;text-decoration:none;transition:.2s;border:1px solid transparent}
 .user-card:hover{border-color:var(--accent)}
-.av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--accent2),var(--accent));display:grid;place-items:center;font-size:14px;font-weight:700;flex-shrink:0;color:#fff}
-.uname{font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:130px}
-.uplan{font-size:11px;color:var(--accent3);font-weight:600}
-.logout{margin-top:8px;display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;cursor:pointer;color:var(--muted);font-size:12px;font-weight:600;transition:.2s;border:none;background:none;font-family:inherit;width:100%}
+.av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--accent2),var(--accent));display:grid;place-items:center;font-size:18px;font-weight:700;flex-shrink:0;color:#fff}
+.uname{font-size:17px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:130px}
+.uplan{font-size:17px;color:var(--accent3);font-weight:600}
+.logout{margin-top:8px;display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;cursor:pointer;color:var(--muted);font-size:18px;font-weight:600;transition:.2s;border:none;background:none;font-family:inherit;width:100%}
 .logout:hover{color:var(--red);background:rgba(239,68,68,.06)}
 /* main */
 .main{margin-left:260px;flex:1;display:flex;flex-direction:column;min-height:100vh}
 .topbar{position:sticky;top:0;z-index:50;background:rgba(8,11,16,.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 32px;height:60px;display:flex;align-items:center;justify-content:space-between;transition:background .3s,border-color .3s}
 [data-theme="light"] .topbar{background:rgba(245,247,255,.92)}
-.topbar-l .ttl{font-size:17px;font-weight:700}
-.topbar-l .tsub{font-size:12px;color:var(--muted);margin-top:1px}
+.topbar-l .ttl{font-size:22px;font-weight:800;letter-spacing:-.3px;line-height:1.2}
+.topbar-l .tsub{font-size:18px;color:var(--muted);margin-top:3px;display:block}
 .topbar-r{display:flex;align-items:center;gap:8px}
 /* buttons */
-.btn{display:inline-flex;align-items:center;gap:7px;padding:8px 18px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:.2s;font-family:inherit;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:8px 18px;border-radius:9px;font-size:17px;font-weight:600;cursor:pointer;border:none;transition:.2s;font-family:inherit;white-space:nowrap}
 .btn-p{background:var(--accent);color:#000}.btn-p:hover{background:#00cfeb;transform:translateY(-1px)}
 .btn-g{background:var(--surface);color:var(--muted);border:1px solid var(--border)}.btn-g:hover{color:var(--text);border-color:var(--muted)}
 .btn-v{background:linear-gradient(135deg,var(--accent2),#6d28d9);color:#fff}.btn-v:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(124,58,237,.4)}
-.icon-btn{width:36px;height:36px;border-radius:9px;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center;cursor:pointer;transition:.2s;font-size:15px}
+.icon-btn{width:36px;height:36px;border-radius:9px;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center;cursor:pointer;transition:.2s;font-size:17px}
 .icon-btn:hover{border-color:var(--accent)}
 /* content */
 .content{padding:28px 32px;flex:1}
 /* cards */
 .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:background .3s,border-color .3s}
 [data-theme="light"] .card{box-shadow:var(--shadow)}
-.card-title{font-size:15px;font-weight:700;margin-bottom:18px;display:flex;align-items:center;gap:8px}
+.card-title{font-size:17px;font-weight:700;margin-bottom:18px;display:flex;align-items:center;gap:8px}
 /* progress bar */
 .pbar{height:6px;background:var(--surface);border-radius:999px;overflow:hidden}
 .pbar-fill{height:100%;border-radius:999px;transition:width .5s ease}
@@ -92,31 +92,31 @@ body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-se
 .sf-col:first-child{padding-left:0;border-right:1px solid #1e2840}
 .sf-col:last-child{padding-right:0;border-left:1px solid #1e2840}
 .sf-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#4a5878;margin-bottom:14px;transition:color .3s}
-.sf-addr{font-size:13px;color:#8899bb;line-height:1.8;transition:color .3s}
+.sf-addr{font-size:17px;color:#8899bb;line-height:1.8;transition:color .3s}
 .sf-addr strong{color:#c8d4f0;font-weight:600}
 .sf-map iframe{border-radius:10px;width:100%;height:140px;border:1px solid #1e2840;display:block;margin-top:4px}
 .sf-members{display:flex;flex-direction:column;gap:8px}
-.sf-member{display:flex;align-items:center;gap:9px;font-size:13px;color:#8899bb;transition:color .3s}
+.sf-member{display:flex;align-items:center;gap:9px;font-size:17px;color:#8899bb;transition:color .3s}
 .sf-member::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0;opacity:.7}
 .sf-fb{margin-top:14px}
-.sf-fb a{display:inline-flex;align-items:center;gap:9px;background:#1a2236;color:#e8edf5;font-size:13px;font-weight:600;padding:9px 18px;border-radius:12px;border:1px solid #1877f2;text-decoration:none;transition:.2s}
+.sf-fb a{display:inline-flex;align-items:center;gap:9px;background:#1a2236;color:#e8edf5;font-size:17px;font-weight:600;padding:9px 18px;border-radius:12px;border:1px solid #1877f2;text-decoration:none;transition:.2s}
 .sf-fb a:hover{background:#1877f2;color:#fff}
 .sf-bottom{margin-top:24px;padding-top:16px;border-top:1px solid #1a2030;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;transition:border-color .3s}
-.sf-copy{font-size:12px;color:#3a4868;transition:color .3s}
-.sf-brand{font-size:12px;color:#3a4868;transition:color .3s}
+.sf-copy{font-size:18px;color:#3a4868;transition:color .3s}
+.sf-brand{font-size:18px;color:#3a4868;transition:color .3s}
 @media(max-width:760px){.sf-inner{grid-template-columns:1fr}.sf-col{padding:16px 0;border:none!important}.main{margin-left:0}}
 
 .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
 .stat-c{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;transition:background .3s,border-color .3s}
 [data-theme="light"] .stat-c{box-shadow:var(--shadow)}
 .stat-c:hover{border-color:var(--accent);transform:translateY(-2px);transition:.25s}
-.stat-label{font-size:11px;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px;font-weight:600}
+.stat-label{font-size:17px;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:.5px;font-weight:600}
 .stat-val{font-size:28px;font-weight:800;font-family:'Space Mono';letter-spacing:-1px}
-.stat-sub{font-size:12px;color:var(--muted);margin-top:4px}
+.stat-sub{font-size:18px;color:var(--muted);margin-top:4px}
 .grid-2{display:grid;grid-template-columns:2fr 1fr;gap:16px;margin-bottom:24px}
 .cd-band{background:linear-gradient(135deg,rgba(0,229,255,.06),rgba(124,58,237,.06));border:1px solid rgba(0,229,255,.15);border-radius:var(--radius);padding:20px 28px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
-.cd-label{font-size:13px;font-weight:700;color:var(--muted);margin-bottom:6px}
-.cd-title{font-size:16px;font-weight:800;color:var(--text)}
+.cd-label{font-size:17px;font-weight:700;color:var(--muted);margin-bottom:6px}
+.cd-title{font-size:18px;font-weight:800;color:var(--text)}
 .cd-nums{display:flex;gap:8px;align-items:center}
 .cd-unit{text-align:center}
 .cd-n{font-size:30px;font-weight:900;font-family:'Space Mono';color:var(--accent);line-height:1}
@@ -128,27 +128,27 @@ body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-se
 .bar-l{font-size:10px;color:var(--muted);font-family:'Space Mono'}
 .spr{margin-bottom:14px}.spr:last-child{margin-bottom:0}
 .spr-row{display:flex;justify-content:space-between;margin-bottom:6px}
-.spr-name{font-size:13px;font-weight:600}.spr-pct{font-size:13px;font-weight:700;font-family:'Space Mono';color:var(--accent)}
+.spr-name{font-size:17px;font-weight:600}.spr-pct{font-size:17px;font-weight:700;font-family:'Space Mono';color:var(--accent)}
 .sug-item{display:flex;align-items:center;gap:13px;padding:12px 0;border-bottom:1px solid var(--border)}
 .sug-item:last-child{border-bottom:none}
 .sig{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;font-size:20px;flex-shrink:0}
-.sit-t{font-size:13px;font-weight:700;margin-bottom:2px}
-.sit-s{font-size:11px;color:var(--muted)}
-.sug-btn{margin-left:auto;padding:6px 14px;font-size:12px;font-weight:700;background:var(--surface);border:1px solid var(--border);border-radius:8px;cursor:pointer;color:var(--text);font-family:inherit;transition:.2s;white-space:nowrap}
+.sit-t{font-size:17px;font-weight:700;margin-bottom:2px}
+.sit-s{font-size:17px;color:var(--muted)}
+.sug-btn{margin-left:auto;padding:6px 14px;font-size:18px;font-weight:700;background:var(--surface);border:1px solid var(--border);border-radius:8px;cursor:pointer;color:var(--text);font-family:inherit;transition:.2s;white-space:nowrap}
 .sug-btn:hover{border-color:var(--accent);color:var(--accent)}
 .welcome-banner{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px 28px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:center;gap:20px}
 [data-theme="light"] .welcome-banner{box-shadow:var(--shadow)}
 .welcome-banner h1{font-size:20px;font-weight:800;margin-bottom:6px}
-.welcome-banner p{font-size:13px;color:var(--muted)}
+.welcome-banner p{font-size:17px;color:var(--muted)}
 
 /* ── MOBILE ── */
-.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:99;backdrop-filter:blur(4px)}
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:98;backdrop-filter:blur(4px);cursor:pointer}
 .sidebar-overlay.show{display:block}
 .hamburger{width:38px;height:38px;border-radius:9px;background:var(--surface);border:1px solid var(--border);align-items:center;justify-content:center;cursor:pointer;font-size:18px;flex-shrink:0;transition:.2s;margin-right:10px;display:none}
 .hamburger:hover{border-color:var(--accent)}
 @media(max-width:768px){
   .hamburger{display:flex!important}
-  .sidebar{position:fixed;left:0;top:0;height:100vh;transform:translateX(-260px);transition:transform .28s cubic-bezier(.4,0,.2,1);z-index:100;box-shadow:4px 0 24px rgba(0,0,0,.4)}
+  .sidebar{position:fixed;left:0;top:0;height:100vh;transform:translateX(-260px);transition:transform .28s cubic-bezier(.4,0,.2,1);z-index:99;box-shadow:4px 0 24px rgba(0,0,0,.4)}
   .sidebar.open{transform:translateX(0)}
   .main{margin-left:0!important;width:100%}
   .topbar{padding:0 16px}
@@ -170,7 +170,7 @@ body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-se
   .cd-band{flex-direction:column;align-items:flex-start;gap:10px}
   .welcome-banner{flex-direction:column}
   .stabs{gap:6px}
-  .stab{padding:8px 12px;font-size:12px}
+  .stab{padding:8px 12px;font-size:18px}
   .hsa-hero{padding:24px 16px}
   .hbtns{flex-direction:column}
   .exam-box{border-radius:16px 16px 0 0;position:fixed;bottom:0;left:0;right:0;width:100%!important;max-width:100%!important;max-height:95vh}
@@ -180,15 +180,21 @@ body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-se
   .ep-part{flex-shrink:0;padding:8px 12px;margin-bottom:0}
   .prev-box{border-radius:16px 16px 0 0;position:fixed;bottom:0;left:0;right:0;width:100%!important;max-width:100%!important}
   .prev-ov{align-items:flex-end}
-  .topbar-l .ttl{font-size:15px}
+  .topbar-l .ttl{font-size:17px}
   .topbar-l .tsub{display:none}
 }
+
+.sidebar-close{display:none;position:absolute;top:16px;right:10px;width:32px;height:32px;border-radius:8px;background:var(--surface);border:1px solid var(--border);align-items:center;justify-content:center;cursor:pointer;font-size:22px;font-weight:700;color:var(--muted);transition:.2s;z-index:10;line-height:1}
+.sidebar-close:hover{color:var(--accent);border-color:var(--accent);background:rgba(0,229,255,.08)}
+@media(max-width:768px){.sidebar-close{display:flex}}
 </style>
 </head>
 <body>
 <div class="app">
+<div class="sidebar-overlay" id="sb-overlay" onclick="closeSidebar()"></div>
 
 <aside class="sidebar">
+  <button class="sidebar-close" onclick="closeSidebar()" title="Đóng menu">‹</button>
   <a class="logo" href="dashboard.html">
     <div class="logo-icon">📚</div>
     <div class="logo-text">Luyen<em>Thi</em>369</div>
@@ -220,7 +226,7 @@ body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-se
 
 <div class="main">
   <div class="topbar">
-    <div class="topbar-l" style="display:flex;align-items:center;gap:0"><button class="hamburger" onclick="openSidebar()" aria-label="Menu">☰</button><div class="ttl">Dashboard</div><div class="tsub">Tổng quan cá nhân</div></div>
+    <div class="topbar-l" style="display:flex;align-items:center;gap:10px"><button class="hamburger" onclick="openSidebar()" aria-label="Menu">☰</button><div style="display:flex;flex-direction:column"><div class="ttl">Trang chủ</div><div class="tsub">Tổng quan cá nhân</div></div></div>
     <div class="topbar-r">
       <button class="icon-btn" id="theme-btn" onclick="toggleTheme()" title="Đổi giao diện">☀️</button>
       <a class="btn btn-p" href="luyen-mon.html">▶ Luyện ngay</a>
@@ -369,12 +375,14 @@ updateCD();setInterval(updateCD,1000);
 // Mobile sidebar
 function openSidebar(){
   document.querySelector('.sidebar').classList.add('open');
-  document.querySelector('.sidebar-overlay').classList.add('show');
+  var ov=document.getElementById('sb-overlay');
+  if(ov)ov.classList.add('show');
   document.body.style.overflow='hidden';
 }
 function closeSidebar(){
   document.querySelector('.sidebar').classList.remove('open');
-  document.querySelector('.sidebar-overlay').classList.remove('show');
+  var ov=document.getElementById('sb-overlay');
+  if(ov)ov.classList.remove('show');
   document.body.style.overflow='';
 }
 </script>
