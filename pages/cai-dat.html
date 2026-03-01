@@ -2,7 +2,7 @@
 <html lang="vi" data-theme="dark">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Ngân hàng đề – LuyenThi369</title>
+<title>Cài đặt – LuyenThi369</title>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 
@@ -111,51 +111,40 @@ body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-se
 .sf-copy,.sf-brand{font-size:13px;color:#3a4868;transition:color .3s}
 [data-theme="light"] .sf-copy,[data-theme="light"] .sf-brand{color:#7a8aaa}
 
-.filter-bar{display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap;align-items:center}
-.sw{position:relative;flex:1;min-width:200px}
-.sw::before{content:'🔍';position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:14px;pointer-events:none}
-.sw input{width:100%;background:var(--card);border:1px solid var(--border);padding:10px 14px 10px 36px;border-radius:10px;color:var(--text);font-family:inherit;font-size:14px;outline:none;transition:.2s}
-[data-theme="light"] .sw input{background:#fff}
-.sw input:focus{border-color:var(--accent)}
-.sw input::placeholder{color:var(--muted)}
-.fsel{background:var(--card);border:1px solid var(--border);color:var(--text);padding:10px 14px;border-radius:10px;font-family:inherit;font-size:14px;cursor:pointer;outline:none;transition:.2s}
-[data-theme="light"] .fsel{background:#fff}
-.fsel:focus{border-color:var(--accent)}
-.tabs-row{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
-.ftab{padding:7px 16px;border-radius:8px;border:1px solid var(--border);background:var(--card);font-size:13px;font-weight:600;cursor:pointer;transition:.2s;color:var(--muted)}
-.ftab:hover{border-color:var(--muted);color:var(--text)}
-.ftab.active{background:var(--accent);color:#000;border-color:var(--accent)}
-.bank-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-.bi{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;cursor:pointer;transition:.25s}
-[data-theme="light"] .bi{box-shadow:var(--shadow)}
-.bi:hover{border-color:var(--accent3);transform:translateY(-2px)}
-.bi-hdr{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-.bib{padding:3px 10px;border-radius:6px;font-size:11px;font-weight:700}
-.bb-bo{background:rgba(16,185,129,.12);color:var(--green)}
-.bb-truong{background:rgba(0,229,255,.1);color:var(--accent)}
-.bb-dd{background:rgba(245,158,11,.12);color:var(--accent3)}
-.bb-ai{background:rgba(124,58,237,.12);color:#a78bfa}
-.bi-year{font-size:12px;color:var(--muted)}
-.bi-title{font-size:15px;font-weight:700;margin-bottom:6px}
-.bi-meta{font-size:12px;color:var(--muted);margin-bottom:12px}
-.bi-foot{display:flex;align-items:center;justify-content:space-between}
-.bi-diff{font-size:12px;font-weight:600}
-.diff-e{color:var(--green)}.diff-m{color:var(--accent3)}.diff-h{color:var(--red)}
-.start-btn{padding:7px 16px;font-size:13px;font-weight:700;border:none;border-radius:8px;cursor:pointer;font-family:inherit;transition:.2s;background:var(--accent);color:#000}
-.start-btn:hover{background:#00cfeb}
-.prev-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(10px);z-index:200;align-items:center;justify-content:center}
-.prev-ov.show{display:flex}
-.prev-box{background:var(--bg2);border:1px solid var(--border);border-radius:20px;width:680px;max-width:95vw;max-height:88vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 32px 80px rgba(0,0,0,.5)}
-.prev-hdr{padding:18px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-.prev-title{font-size:15px;font-weight:800}
-.prev-close{width:30px;height:30px;border-radius:8px;border:1px solid var(--border);background:var(--surface);cursor:pointer;display:grid;place-items:center;color:var(--muted);transition:.2s}
-.prev-close:hover{color:var(--red);border-color:var(--red)}
-.prev-body{padding:24px;overflow-y:auto;flex:1}
-.prev-info{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
-.pi{background:var(--surface);border-radius:10px;padding:12px;text-align:center}
-.piv{font-size:18px;font-weight:800;font-family:'Space Mono';color:var(--accent)}
-.pil{font-size:17px;color:var(--muted);margin-top:3px}
-.prev-foot{padding:14px 24px;border-top:1px solid var(--border);display:flex;gap:10px;justify-content:flex-end}
+.settings-layout{display:grid;grid-template-columns:240px 1fr;gap:20px}
+.settings-menu{display:flex;flex-direction:column;gap:4px}
+.sm-item{display:flex;align-items:center;gap:10px;padding:11px 14px;border-radius:10px;cursor:pointer;font-size:17px;font-weight:600;color:var(--muted);transition:.2s;border:1px solid transparent}
+.sm-item:hover{background:var(--surface);color:var(--text)}
+.sm-item.active{background:rgba(0,229,255,.07);color:var(--accent);border-color:rgba(0,229,255,.18)}
+.sm-ic{font-size:18px;flex-shrink:0}
+.settings-panel{display:none}.settings-panel.active{display:block}
+.set-section{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px;margin-bottom:16px;transition:background .3s}
+[data-theme="light"] .set-section{box-shadow:var(--shadow)}
+.set-sec-title{font-size:17px;font-weight:700;margin-bottom:18px;display:flex;align-items:center;gap:8px}
+.set-row{display:flex;align-items:center;justify-content:space-between;padding:13px 0;border-bottom:1px solid var(--border)}
+.set-row:last-child{border-bottom:none}
+.set-label{font-size:12px;font-weight:600}
+.set-desc{font-size:18px;color:var(--muted);margin-top:2px}
+.toggle{width:44px;height:24px;border-radius:999px;border:none;cursor:pointer;position:relative;transition:.3s;flex-shrink:0;background:var(--surface);border:2px solid var(--border)}
+.toggle.on{background:var(--accent);border-color:var(--accent)}
+.toggle::after{content:'';position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:var(--muted);transition:.3s}
+.toggle.on::after{left:22px;background:#000}
+.theme-cards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tc-card{border:2px solid var(--border);border-radius:12px;padding:16px;cursor:pointer;transition:.25s;text-align:center}
+.tc-card:hover{border-color:var(--muted)}
+.tc-card.selected{border-color:var(--accent);background:rgba(0,229,255,.04)}
+.tc-preview{height:60px;border-radius:8px;margin-bottom:10px;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;letter-spacing:.5px}
+.tc-name{font-size:17px;font-weight:700}
+.inp{width:100%;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 14px;color:var(--text);font-family:inherit;font-size:17px;outline:none;transition:.2s}
+.inp:focus{border-color:var(--accent)}
+.save-btn{padding:9px 22px;font-size:17px;font-weight:700;background:var(--accent);color:#000;border:none;border-radius:9px;cursor:pointer;font-family:inherit;transition:.2s;margin-top:12px}
+.save-btn:hover{background:#00cfeb}
+.danger-btn{padding:9px 22px;font-size:17px;font-weight:700;background:rgba(239,68,68,.1);color:var(--red);border:1px solid rgba(239,68,68,.3);border-radius:9px;cursor:pointer;font-family:inherit;transition:.2s}
+.danger-btn:hover{background:rgba(239,68,68,.2)}
+.profile-av{width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,var(--accent2),var(--accent));display:grid;place-items:center;font-size:32px;font-weight:800;color:#fff;margin-bottom:16px;cursor:pointer;transition:.2s}
+.profile-av:hover{transform:scale(1.05)}
+.toast{position:fixed;bottom:24px;right:24px;background:var(--green);color:#fff;padding:12px 20px;border-radius:10px;font-size:17px;font-weight:700;z-index:9999;transform:translateY(80px);opacity:0;transition:.3s;pointer-events:none}
+.toast.show{transform:translateY(0);opacity:1}
 
 /* ── MOBILE ── */
 .sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:98;backdrop-filter:blur(4px);cursor:pointer}
@@ -315,8 +304,8 @@ body{animation:pageLoad .4s cubic-bezier(.2,.8,.3,1)}
     </div>
     <div class="nav-sec">
       <div class="nav-lbl">Tra cứu</div>
-      <a class="nav-a active" href="ngan-hang-de.html"><span class="ic">🗂️</span>Ngân hàng đề</a>
-      <a class="nav-a " href="cai-dat.html"><span class="ic">⚙️</span>Cài đặt</a>
+      <a class="nav-a " href="ngan-hang-de.html"><span class="ic">🗂️</span>Ngân hàng đề</a>
+      <a class="nav-a active" href="cai-dat.html"><span class="ic">⚙️</span>Cài đặt</a>
     </div>
   </nav>
   <div class="sb-foot">
@@ -330,37 +319,108 @@ body{animation:pageLoad .4s cubic-bezier(.2,.8,.3,1)}
 
 <div class="main">
   <div class="topbar">
-    <div class="topbar-l" style="display:flex;align-items:center;gap:10px"><button class="hamburger" onclick="openSidebar()">☰</button><div style="display:flex;flex-direction:column"><div class="ttl">Ngân hàng đề</div><div class="tsub">Lọc theo môn & năm</div></div></div>
+    <div class="topbar-l" style="display:flex;align-items:center;gap:10px"><button class="hamburger" onclick="openSidebar()">☰</button><div style="display:flex;flex-direction:column"><div class="ttl">Cài đặt</div><div class="tsub">Tùy chỉnh tài khoản & giao diện</div></div></div>
     <div class="topbar-r"><button class="icon-btn" onclick="Pomodoro.open()" title="Pomodoro">🍅</button><button class="btn btn-v" onclick="Battle.open()" style="gap:6px">⚔️ Battle</button><button class="icon-btn" id="theme-btn" onclick="toggleTheme()">☀️</button></div>
   </div>
   <div class="content fadein">
-    <div class="filter-bar">
-      <div class="sw"><input type="text" id="search-inp" placeholder="Tìm đề thi..." oninput="filterBank()"></div>
-      <select class="fsel" id="sel-mon" onchange="filterBank()">
-        <option value="">Tất cả môn</option>
-        <option value="Toán">Toán</option>
-        <option value="Vật lý">Vật lý</option>
-        <option value="Hóa học">Hóa học</option>
-        <option value="Sinh học">Sinh học</option>
-        <option value="Tiếng Anh">Tiếng Anh</option>
-        <option value="HSA">HSA</option>
-      </select>
-      <select class="fsel" id="sel-year" onchange="filterBank()">
-        <option value="">Tất cả năm</option>
-        <option value="2025">2025</option>
-        <option value="2024">2024</option>
-        <option value="2023">2023</option>
-        <option value="2022">2022</option>
-      </select>
+    <div class="settings-layout">
+      <div>
+        <div class="settings-menu">
+          <div class="sm-item active" onclick="showPanel('profile',this)"><span class="sm-ic">👤</span>Hồ sơ cá nhân</div>
+          <div class="sm-item" onclick="showPanel('theme',this)"><span class="sm-ic">🎨</span>Giao diện</div>
+          <div class="sm-item" onclick="showPanel('notif',this)"><span class="sm-ic">🔔</span>Thông báo</div>
+          <div class="sm-item" onclick="showPanel('study',this)"><span class="sm-ic">📚</span>Học tập</div>
+          <div class="sm-item" onclick="showPanel('danger',this)"><span class="sm-ic">⚠️</span>Tài khoản</div>
+        </div>
+      </div>
+      <div>
+        <!-- PROFILE -->
+        <div class="settings-panel active" id="panel-profile">
+          <div class="set-section">
+            <div class="set-sec-title">👤 Hồ sơ cá nhân</div>
+            <div style="display:flex;flex-direction:column;align-items:center;margin-bottom:20px">
+              <div class="profile-av" id="prof-av">?</div>
+              <div style="font-size:12px;color:var(--muted)">Nhấn để đổi ảnh đại diện</div>
+            </div>
+            <div class="set-row"><div><div class="set-label">Tên hiển thị</div><div class="set-desc">Tên này sẽ hiển thị trên bảng xếp hạng</div></div></div>
+            <input class="inp" type="text" id="inp-name" placeholder="Nhập tên..." style="margin-top:10px">
+            <div class="set-row" style="margin-top:16px"><div><div class="set-label">Email</div><div class="set-desc">Dùng để khôi phục tài khoản</div></div></div>
+            <input class="inp" type="email" id="inp-email" placeholder="email@example.com" style="margin-top:10px">
+            <div class="set-row" style="margin-top:16px"><div><div class="set-label">Gói hiện tại</div><div class="set-desc">⭐ PRO – Đã kích hoạt</div></div></div>
+            <button class="save-btn" onclick="saveProfile()">💾 Lưu thay đổi</button>
+          </div>
+        </div>
+        <!-- THEME -->
+        <div class="settings-panel" id="panel-theme">
+          <div class="set-section">
+            <div class="set-sec-title">🎨 Giao diện</div>
+            <div class="theme-cards">
+              <div class="tc-card selected" id="tc-dark" onclick="setThemeCard('dark')">
+                <div class="tc-preview" style="background:#080b10;color:#00e5ff">DARK ◐</div>
+                <div class="tc-name">Tối (mặc định)</div>
+              </div>
+              <div class="tc-card" id="tc-light" onclick="setThemeCard('light')">
+                <div class="tc-preview" style="background:#f5f7ff;color:#111827;border:1px solid #dce3f5">LIGHT ◑</div>
+                <div class="tc-name">Sáng</div>
+              </div>
+            </div>
+            <div class="set-row" style="margin-top:20px">
+              <div><div class="set-label">Màu nhấn (Accent)</div><div class="set-desc">Màu chủ đạo của giao diện</div></div>
+              <div style="display:flex;gap:8px">
+                <div onclick="setAccent('#00e5ff',this)" style="width:24px;height:24px;border-radius:50%;background:#00e5ff;cursor:pointer;border:2px solid white"></div>
+                <div onclick="setAccent('#7c3aed',this)" style="width:24px;height:24px;border-radius:50%;background:#7c3aed;cursor:pointer"></div>
+                <div onclick="setAccent('#10b981',this)" style="width:24px;height:24px;border-radius:50%;background:#10b981;cursor:pointer"></div>
+                <div onclick="setAccent('#f59e0b',this)" style="width:24px;height:24px;border-radius:50%;background:#f59e0b;cursor:pointer"></div>
+              </div>
+            </div>
+            <div class="set-row">
+              <div><div class="set-label">Cỡ chữ</div><div class="set-desc">Điều chỉnh kích thước văn bản</div></div>
+              <select class="fsel" onchange="document.body.style.fontSize=this.value">
+                <option value="14px">Nhỏ</option>
+                <option value="16px" selected>Vừa</option>
+                <option value="18px">Lớn</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <!-- NOTIFICATIONS -->
+        <div class="settings-panel" id="panel-notif">
+          <div class="set-section">
+            <div class="set-sec-title">🔔 Thông báo</div>
+            <div class="set-row"><div><div class="set-label">Nhắc nhở học tập hàng ngày</div><div class="set-desc">Gửi thông báo vào 7:00 sáng</div></div><button class="toggle on" onclick="this.classList.toggle('on')"></button></div>
+            <div class="set-row"><div><div class="set-label">Kết quả thi thử</div><div class="set-desc">Thông báo khi có kết quả mới</div></div><button class="toggle on" onclick="this.classList.toggle('on')"></button></div>
+            <div class="set-row"><div><div class="set-label">Lịch thi sắp tới</div><div class="set-desc">Nhắc 24h trước kỳ thi</div></div><button class="toggle on" onclick="this.classList.toggle('on')"></button></div>
+            <div class="set-row"><div><div class="set-label">Cập nhật đề mới</div><div class="set-desc">Thông báo khi ngân hàng đề được cập nhật</div></div><button class="toggle" onclick="this.classList.toggle('on')"></button></div>
+          </div>
+        </div>
+        <!-- STUDY -->
+        <div class="settings-panel" id="panel-study">
+          <div class="set-section">
+            <div class="set-sec-title">📚 Cài đặt học tập</div>
+            <div class="set-row"><div><div class="set-label">Tự động chuyển câu sau khi trả lời</div><div class="set-desc">Chuyển sang câu tiếp theo sau 1.5 giây</div></div><button class="toggle" onclick="this.classList.toggle('on')"></button></div>
+            <div class="set-row"><div><div class="set-label">Hiển thị giải thích ngay</div><div class="set-desc">Xem giải thích chi tiết sau mỗi câu trả lời</div></div><button class="toggle on" onclick="this.classList.toggle('on')"></button></div>
+            <div class="set-row"><div><div class="set-label">Bộ đếm thời gian</div><div class="set-desc">Hiển thị đồng hồ đếm ngược khi làm bài</div></div><button class="toggle on" onclick="this.classList.toggle('on')"></button></div>
+            <div class="set-row"><div><div class="set-label">Mục tiêu câu/ngày</div><div class="set-desc">Số câu hỏi cần làm mỗi ngày</div></div>
+              <select class="fsel">
+                <option>20 câu</option>
+                <option selected>30 câu</option>
+                <option>50 câu</option>
+                <option>100 câu</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <!-- DANGER ZONE -->
+        <div class="settings-panel" id="panel-danger">
+          <div class="set-section">
+            <div class="set-sec-title" style="color:var(--red)">⚠️ Vùng nguy hiểm</div>
+            <div class="set-row"><div><div class="set-label">Xóa lịch sử làm bài</div><div class="set-desc">Không thể hoàn tác, toàn bộ tiến trình sẽ bị xóa</div></div><button class="danger-btn" onclick="showToast('Đã xóa lịch sử làm bài')">Xóa lịch sử</button></div>
+            <div class="set-row"><div><div class="set-label">Đặt lại tài khoản</div><div class="set-desc">Reset toàn bộ dữ liệu về mặc định</div></div><button class="danger-btn" onclick="showToast('Đã đặt lại tài khoản')">Reset</button></div>
+            <div class="set-row"><div><div class="set-label">Đăng xuất</div><div class="set-desc">Thoát khỏi tài khoản hiện tại</div></div><button class="danger-btn" onclick="location.href='dang-nhap.html'">Đăng xuất</button></div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="tabs-row">
-      <div class="ftab active" onclick="setTab('all',this)">Tất cả (14)</div>
-      <div class="ftab" onclick="setTab('bo',this)">📚 Bộ GD&ĐT</div>
-      <div class="ftab" onclick="setTab('truong',this)">🏫 Trường THPT</div>
-      <div class="ftab" onclick="setTab('dd',this)">📝 Đề dự đoán</div>
-      <div class="ftab" onclick="setTab('ai',this)">🤖 AI tạo</div>
-    </div>
-    <div class="bank-grid" id="bank-grid"></div>
   </div>
   
 <footer class="site-footer">
@@ -405,20 +465,7 @@ body{animation:pageLoad .4s cubic-bezier(.2,.8,.3,1)}
 
 </div>
 </div>
-<!-- PREVIEW OVERLAY -->
-<div class="prev-ov" id="prev-ov">
-  <div class="prev-box">
-    <div class="prev-hdr">
-      <div class="prev-title" id="prev-title">Xem trước đề</div>
-      <div class="prev-close" onclick="closePrev()">✕</div>
-    </div>
-    <div class="prev-body" id="prev-body"></div>
-    <div class="prev-foot">
-      <button class="btn btn-g" onclick="closePrev()">Đóng</button>
-      <button class="btn btn-p">▶ Bắt đầu làm đề</button>
-    </div>
-  </div>
-</div>
+<div class="toast" id="toast">✅ Đã lưu</div>
 <script>
 
 function applyTheme(t){
@@ -437,74 +484,45 @@ function toggleTheme(){applyTheme(document.documentElement.getAttribute('data-th
   const nm=document.getElementById('sb-name');
   if(av) av.textContent=n.charAt(0).toUpperCase();
   if(nm) nm.textContent=n;
-  const el=document.getElementById('na-bank');
+  const el=document.getElementById('na-set');
   if(el) el.classList.add('active');
 })();
 
-const BANK=[
-  {id:1,title:'Đề thi THPT Quốc gia 2025 – Môn Toán',type:'bo',mon:'Toán',year:'2025',q:50,time:90,diff:'Khó',score:'9.2'},
-  {id:2,title:'Đề thi THPT Quốc gia 2025 – Vật lý',type:'bo',mon:'Vật lý',year:'2025',q:40,time:50,diff:'Khó',score:'8.8'},
-  {id:3,title:'Đề thi THPT Quốc gia 2025 – Hóa học',type:'bo',mon:'Hóa học',year:'2025',q:40,time:50,diff:'Trung bình',score:'8.5'},
-  {id:4,title:'Đề thi THPT Quốc gia 2024 – Môn Toán',type:'bo',mon:'Toán',year:'2024',q:50,time:90,diff:'Trung bình',score:'8.0'},
-  {id:5,title:'Đề thi THPT Quốc gia 2024 – Tiếng Anh',type:'bo',mon:'Tiếng Anh',year:'2024',q:50,time:60,diff:'Trung bình',score:'7.8'},
-  {id:6,title:'Đề thử nghiệm THPT 2026 – THPT Đan Phượng',type:'truong',mon:'Tổng hợp',year:'2025',q:40,time:60,diff:'Dễ',score:'9.0'},
-  {id:7,title:'Đề kiểm tra HK1 2025 – Toán',type:'truong',mon:'Toán',year:'2025',q:30,time:45,diff:'Dễ',score:'9.5'},
-  {id:8,title:'Đề kiểm tra HK1 2025 – Hóa học',type:'truong',mon:'Hóa học',year:'2025',q:30,time:45,diff:'Dễ',score:'8.7'},
-  {id:9,title:'Đề dự đoán THPT 2026 – Toán (Đề 1)',type:'dd',mon:'Toán',year:'2026',q:50,time:90,diff:'Khó',score:'7.5'},
-  {id:10,title:'Đề dự đoán THPT 2026 – Vật lý (Đề 1)',type:'dd',mon:'Vật lý',year:'2026',q:40,time:50,diff:'Khó',score:'7.2'},
-  {id:11,title:'Đề dự đoán THPT 2026 – Tiếng Anh',type:'dd',mon:'Tiếng Anh',year:'2026',q:50,time:60,diff:'Trung bình',score:'8.1'},
-  {id:12,title:'HSA Mock Test #10 – Full đề 150 câu',type:'ai',mon:'HSA',year:'2025',q:150,time:195,diff:'Khó',score:'112'},
-  {id:13,title:'HSA Mock Test #11 – Tư duy định lượng',type:'ai',mon:'HSA',year:'2025',q:50,time:75,diff:'Khó',score:'45'},
-  {id:14,title:'AI Generated – Đề tổng hợp 2026',type:'ai',mon:'Tổng hợp',year:'2026',q:40,time:60,diff:'Trung bình',score:'8.3'},
-];
-const TYPE_LABELS={bo:'📚 Bộ GD&ĐT',truong:'🏫 Trường THPT',dd:'📝 Đề dự đoán',ai:'🤖 AI tạo'};
-const TYPE_CLASSES={bo:'bb-bo',truong:'bb-truong',dd:'bb-dd',ai:'bb-ai'};
-const DIFF_CLASSES={Khó:'diff-h','Trung bình':'diff-m',Dễ:'diff-e'};
-let currentTab='all';
-function renderBank(data){
-  document.getElementById('bank-grid').innerHTML=data.map(d=>`
-    <div class="bi" onclick="openPrev(${d.id})">
-      <div class="bi-hdr">
-        <span class="bib ${TYPE_CLASSES[d.type]}">${TYPE_LABELS[d.type]}</span>
-        <span class="bi-year">${d.year}</span>
-      </div>
-      <div class="bi-title">${d.title}</div>
-      <div class="bi-meta">${d.mon} · ${d.q} câu · ${d.time} phút</div>
-      <div class="bi-foot">
-        <span class="bi-diff ${DIFF_CLASSES[d.diff]}">● ${d.diff}</span>
-        <button class="start-btn" onclick="event.stopPropagation()">▶ Làm đề</button>
-      </div>
-    </div>`).join('');
+(function(){
+  const n=localStorage.getItem('lt369_user')||'bạn';
+  document.getElementById('inp-name').value=n;
+  const av=document.getElementById('prof-av');
+  if(av)av.textContent=n.charAt(0).toUpperCase();
+})();
+function showPanel(id,el){
+  document.querySelectorAll('.settings-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.sm-item').forEach(i=>i.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  el.classList.add('active');
 }
-function filterBank(){
-  const s=document.getElementById('search-inp').value.toLowerCase();
-  const m=document.getElementById('sel-mon').value;
-  const y=document.getElementById('sel-year').value;
-  let data=BANK.filter(d=>
-    (currentTab==='all'||d.type===currentTab)&&
-    (!s||d.title.toLowerCase().includes(s))&&
-    (!m||d.mon===m)&&
-    (!y||d.year===y)
-  );
-  renderBank(data);
+function setThemeCard(t){
+  document.getElementById('tc-dark').classList.remove('selected');
+  document.getElementById('tc-light').classList.remove('selected');
+  document.getElementById('tc-'+t).classList.add('selected');
+  applyTheme(t);
 }
-function setTab(t,el){currentTab=t;document.querySelectorAll('.ftab').forEach(e=>e.classList.remove('active'));el.classList.add('active');filterBank()}
-function openPrev(id){
-  const d=BANK.find(b=>b.id===id);if(!d)return;
-  document.getElementById('prev-title').textContent=d.title;
-  document.getElementById('prev-body').innerHTML=`
-    <div class="prev-info">
-      <div class="pi"><div class="piv">${d.q}</div><div class="pil">Câu hỏi</div></div>
-      <div class="pi"><div class="piv">${d.time}'</div><div class="pil">Thời gian</div></div>
-      <div class="pi"><div class="piv" style="font-size:14px">${d.diff}</div><div class="pil">Độ khó</div></div>
-    </div>
-    <p style="font-size:13px;color:var(--muted);margin-bottom:16px">Môn: <strong style="color:var(--text)">${d.mon}</strong> · Năm: <strong style="color:var(--text)">${d.year}</strong> · Nguồn: <strong style="color:var(--text)">${TYPE_LABELS[d.type]}</strong></p>
-    <p style="font-size:13px;color:var(--muted)">Điểm trung bình người dùng: <strong style="color:var(--accent);font-family:'Space Mono'">${d.score}</strong></p>`;
-  document.getElementById('prev-ov').classList.add('show');
-  document.body.style.overflow='hidden';
+function setAccent(c){
+  document.documentElement.style.setProperty('--accent',c);
+  showToast('Đã đổi màu nhấn');
 }
-function closePrev(){document.getElementById('prev-ov').classList.remove('show');document.body.style.overflow=''}
-renderBank(BANK);
+function saveProfile(){
+  const n=document.getElementById('inp-name').value||'bạn';
+  localStorage.setItem('lt369_user',n);
+  document.getElementById('sb-name').textContent=n;
+  document.getElementById('sb-av').textContent=n.charAt(0).toUpperCase();
+  document.getElementById('prof-av').textContent=n.charAt(0).toUpperCase();
+  showToast('✅ Đã lưu hồ sơ');
+}
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
 
 
 // Topbar scroll shadow
