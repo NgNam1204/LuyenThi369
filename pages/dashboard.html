@@ -74,37 +74,7 @@ body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-se
 .fadein>*:nth-child(3){animation-delay:.1s}
 .fadein>*:nth-child(4){animation-delay:.15s}
 /* footer */
-.site-footer{background:#06090f;border-top:1px solid #1a2030;padding:36px 40px 24px;margin-top:auto;transition:background .3s,border-color .3s}
-[data-theme="light"] .site-footer{background:#eef1fb;border-top-color:#c8d4f0}
-[data-theme="light"] .site-footer .sf-label{color:#7a8aaa;letter-spacing:2px}
-[data-theme="light"] .site-footer .sf-addr{color:#4a5a7a}
-[data-theme="light"] .site-footer .sf-addr strong{color:#1a2545}
-[data-theme="light"] .site-footer .sf-member{color:#4a5a7a}
-[data-theme="light"] .site-footer .sf-copy,[data-theme="light"] .site-footer .sf-brand{color:#7a8aaa}
-[data-theme="light"] .site-footer .sf-bottom{border-top-color:#c8d4f0}
-[data-theme="light"] .sf-col:first-child{border-right-color:#c8d4f0}
-[data-theme="light"] .sf-col:last-child{border-left-color:#c8d4f0}
-[data-theme="light"] .sf-map iframe{border-color:#c8d4f0}
-[data-theme="light"] .sf-fb a{background:#dce6ff;color:#1a2545;border-color:#1877f2}
-[data-theme="light"] .sf-fb a:hover{background:#1877f2;color:#fff}
-.sf-inner{display:grid;grid-template-columns:1.2fr 1fr 1.2fr;gap:0;align-items:start}
-.sf-col{padding:0 28px}
-.sf-col:first-child{padding-left:0;border-right:1px solid #1e2840}
-.sf-col:last-child{padding-right:0;border-left:1px solid #1e2840}
-.sf-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#4a5878;margin-bottom:14px;transition:color .3s}
-.sf-addr{font-size:17px;color:#8899bb;line-height:1.8;transition:color .3s}
-.sf-addr strong{color:#c8d4f0;font-weight:600}
-.sf-map iframe{border-radius:10px;width:100%;height:140px;border:1px solid #1e2840;display:block;margin-top:4px}
-.sf-members{display:flex;flex-direction:column;gap:8px}
-.sf-member{display:flex;align-items:center;gap:9px;font-size:17px;color:#8899bb;transition:color .3s}
-.sf-member::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0;opacity:.7}
-.sf-fb{margin-top:14px}
-.sf-fb a{display:inline-flex;align-items:center;gap:9px;background:#1a2236;color:#e8edf5;font-size:17px;font-weight:600;padding:9px 18px;border-radius:12px;border:1px solid #1877f2;text-decoration:none;transition:.2s}
-.sf-fb a:hover{background:#1877f2;color:#fff}
-.sf-bottom{margin-top:24px;padding-top:16px;border-top:1px solid #1a2030;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;transition:border-color .3s}
-.sf-copy{font-size:18px;color:#3a4868;transition:color .3s}
-.sf-brand{font-size:18px;color:#3a4868;transition:color .3s}
-@media(max-width:760px){.sf-inner{grid-template-columns:1fr}.sf-col{padding:16px 0;border:none!important}.main{margin-left:0}}
+[data-theme="light"] [data-theme="light"] [data-theme="light"] [data-theme="light"] [data-theme="light"] @media(max-width:760px){.main{margin-left:0}}
 
 .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
 .stat-c{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;transition:background .3s,border-color .3s}
@@ -162,10 +132,7 @@ body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-se
   .stats-row{grid-template-columns:repeat(2,1fr)!important}
   .settings-layout{grid-template-columns:1fr!important}
   .bank-grid{grid-template-columns:1fr!important}
-  .sf-inner{grid-template-columns:1fr!important}
-  .sf-col{padding:16px 0!important;border:none!important}
-  .sf-bottom{flex-direction:column;align-items:flex-start;gap:4px}
-  .qbox{max-height:98vh;border-radius:16px 16px 0 0;position:fixed;bottom:0;left:0;right:0;width:100%!important;max-width:100%!important}
+        .qbox{max-height:98vh;border-radius:16px 16px 0 0;position:fixed;bottom:0;left:0;right:0;width:100%!important;max-width:100%!important}
   .qov{align-items:flex-end}
   .cd-band{flex-direction:column;align-items:flex-start;gap:10px}
   .welcome-banner{flex-direction:column}
@@ -187,6 +154,37 @@ body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-se
 .sidebar-close{display:none;position:absolute;top:16px;right:10px;width:32px;height:32px;border-radius:8px;background:var(--surface);border:1px solid var(--border);align-items:center;justify-content:center;cursor:pointer;font-size:22px;font-weight:700;color:var(--muted);transition:.2s;z-index:10;line-height:1}
 .sidebar-close:hover{color:var(--accent);border-color:var(--accent);background:rgba(0,229,255,.08)}
 @media(max-width:768px){.sidebar-close{display:flex}}
+
+/* ═══ FOOTER ═══ */
+.site-footer{background:#06090f;border-top:1px solid #1a2030;padding:40px 44px 24px;margin-top:auto;transition:background .3s,border-color .3s}
+[data-theme="light"] .site-footer{background:#eef1fb;border-top-color:#c8d4f0}
+.sf-inner{display:grid;grid-template-columns:1fr 1fr 1fr;gap:0;align-items:stretch}
+.sf-col{padding:0 32px;text-align:center;display:flex;flex-direction:column}
+.sf-col:first-child{padding-left:0;text-align:left;border-right:1px solid #1e2840}
+.sf-col:nth-child(2){border-right:1px solid #1e2840}
+.sf-col:last-child{padding-right:0}
+[data-theme="light"] .sf-col:first-child,[data-theme="light"] .sf-col:nth-child(2){border-right-color:#c8d4f0}
+.sf-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#4a5878;margin-bottom:14px;text-align:center}
+[data-theme="light"] .sf-label{color:#7a8aaa}
+.sf-addr{font-size:14px;color:#8899bb;line-height:1.9}
+.sf-addr strong{color:#c8d4f0;font-weight:700}
+[data-theme="light"] .sf-addr{color:#4a5a7a}
+[data-theme="light"] .sf-addr strong{color:#1a2545}
+.sf-map{flex:1;display:flex;flex-direction:column}
+.sf-map iframe{border-radius:10px;width:100%;flex:1;min-height:120px;border:1px solid #1e2840;display:block;margin-top:10px}
+[data-theme="light"] .sf-map iframe{border-color:#c8d4f0}
+.sf-members{display:flex;flex-direction:column;gap:10px;align-items:center}
+.sf-member{display:flex;align-items:center;gap:9px;font-size:14px;color:#8899bb;white-space:nowrap}
+[data-theme="light"] .sf-member{color:#4a5a7a}
+.sf-member::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--accent);flex-shrink:0}
+.sf-fb{display:flex;justify-content:center;align-items:flex-start}
+.sf-fb a{display:inline-flex;align-items:center;gap:9px;background:#1a2236;color:#e8edf5;font-size:14px;font-weight:600;padding:10px 22px;border-radius:12px;border:1px solid #1877f2;text-decoration:none;transition:.2s}
+[data-theme="light"] .sf-fb a{background:#dce6ff;color:#1a2545}
+.sf-fb a:hover{background:#1877f2;color:#fff}
+.sf-bottom{margin-top:24px;padding-top:16px;border-top:1px solid #1a2030;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+[data-theme="light"] .sf-bottom{border-top-color:#c8d4f0}
+.sf-copy,.sf-brand{font-size:13px;color:#3a4868}
+[data-theme="light"] .sf-copy,[data-theme="light"] .sf-brand{color:#7a8aaa}
 </style>
 </head>
 <body>
@@ -297,13 +295,13 @@ body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-se
         Thị trấn Phùng, huyện Đan Phượng<br>
         Hà Nội
       </div>
-      <div class="sf-map" style="margin-top:14px">
+      <div class="sf-map">
         <iframe src="https://maps.google.com/maps?q=Tr%C6%B0%E1%BB%9Dng%20THPT%20%C4%90an%20Ph%C6%B0%E1%BB%A3ng&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
     </div>
-    <div class="sf-col" style="text-align:center">
+    <div class="sf-col">
       <div class="sf-label">Thành viên nhóm</div>
-      <div class="sf-members" style="align-items:center">
+      <div class="sf-members">
         <div class="sf-member">Nguyễn Thế Hải Nam</div>
         <div class="sf-member">Doãn Hà Anh</div>
         <div class="sf-member">Nguyễn Huyền Linh</div>
@@ -311,7 +309,7 @@ body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-se
         <div class="sf-member">Nguyễn Thị Mai Trang</div>
       </div>
     </div>
-    <div class="sf-col" style="text-align:right">
+    <div class="sf-col">
       <div class="sf-label">Mạng xã hội</div>
       <div class="sf-fb">
         <a href="https://facebook.com" target="_blank">
