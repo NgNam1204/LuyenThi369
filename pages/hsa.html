@@ -217,6 +217,96 @@ body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-se
   .sf-col:first-child{text-align:center!important}
   .sf-bottom{flex-direction:column;align-items:flex-start;gap:4px}
 }
+
+/* ═══ GLOBAL UI ENHANCEMENTS ═══ */
+
+/* Smooth page entry */
+body{animation:pageLoad .4s cubic-bezier(.2,.8,.3,1)}
+@keyframes pageLoad{from{opacity:0}to{opacity:1}}
+
+/* Card hover lift */
+.card{transition:all .25s cubic-bezier(.2,.8,.3,1)!important}
+.card:hover{border-color:rgba(0,229,255,.25)!important;transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.3)!important}
+
+/* Stat cards glow on hover */
+.stat-c:hover{border-color:var(--accent)!important;box-shadow:0 0 20px rgba(0,229,255,.1)!important}
+
+/* Nav items smooth */
+.nav-a{transition:all .18s cubic-bezier(.2,.8,.3,1)!important}
+
+/* Logo pulse */
+@keyframes logoPulse{0%,100%{box-shadow:0 0 16px rgba(0,229,255,.3)}50%{box-shadow:0 0 28px rgba(0,229,255,.5)}}
+.logo-icon{animation:logoPulse 3s ease-in-out infinite}
+
+/* Topbar shadow on scroll */
+.topbar{transition:box-shadow .3s,background .3s,border-color .3s,left .28s!important}
+.topbar.scrolled{box-shadow:0 4px 32px rgba(0,0,0,.3)!important}
+
+/* Buttons ripple */
+.btn{position:relative;overflow:hidden}
+.btn::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,.1);opacity:0;border-radius:inherit;transform:scale(0);transition:.3s}
+.btn:active::after{transform:scale(1);opacity:1;transition:0s}
+
+/* Progress bars animated on load */
+.pbar-fill{animation:growBar .9s cubic-bezier(.2,.8,.3,1) both}
+@keyframes growBar{from{width:0!important}to{}}
+
+/* Suggestion items slide */
+.sug-item{transition:all .18s cubic-bezier(.2,.8,.3,1)!important}
+.sug-item:hover{transform:translateX(5px)!important;background:rgba(0,229,255,.03)!important}
+
+/* Topic cards */
+.tc{transition:all .2s cubic-bezier(.2,.8,.3,1)!important}
+.tc:hover{transform:translateY(-4px)!important;box-shadow:0 12px 32px rgba(0,0,0,.3)!important}
+
+/* Mode cards */
+.mode-c{transition:all .2s cubic-bezier(.2,.8,.3,1)!important}
+.mode-c:hover{transform:translateY(-3px)!important;box-shadow:0 8px 24px rgba(0,0,0,.25)!important}
+
+/* Part cards HSA */
+.part-c{transition:all .2s cubic-bezier(.2,.8,.3,1)!important}
+.part-c:hover{transform:translateY(-4px)!important;box-shadow:0 12px 32px rgba(0,0,0,.3)!important}
+
+/* Scrollbar upgrade */
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(0,229,255,.2);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:rgba(0,229,255,.4)}
+
+/* Selection color */
+::selection{background:rgba(0,229,255,.25);color:var(--text)}
+
+/* Footer members hover */
+.sf-member{transition:.2s}
+.sf-member:hover{color:var(--accent)!important;transform:translateX(4px)}
+
+/* Icon buttons */
+.icon-btn{transition:all .18s cubic-bezier(.2,.8,.3,1)!important}
+.icon-btn:hover{transform:translateY(-1px)!important;background:rgba(0,229,255,.08)!important}
+
+/* Leaderboard items */
+.lb-item{transition:.18s}
+.lb-item:hover{background:rgba(0,229,255,.04);border-radius:8px;padding-left:8px}
+
+/* Schedule items */
+.sched-item{transition:.18s}
+.sched-item:hover{background:rgba(0,229,255,.03);border-radius:10px;padding:12px 8px}
+
+/* Badge pop */
+.badge{animation:badgePop 2s ease-in-out infinite}
+@keyframes badgePop{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+
+/* HSA Hero gradient animate */
+.hsa-hero{background:linear-gradient(135deg,rgba(124,58,237,.08),rgba(0,229,255,.04),rgba(245,158,11,.04))!important;background-size:200%!important;animation:heroGrad 6s ease-in-out infinite!important}
+@keyframes heroGrad{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+
+/* Streak flame */
+.streak-flame,.streak-icon{animation:flameDance 2s ease-in-out infinite}
+@keyframes flameDance{0%,100%{transform:rotate(-4deg) scale(1)}25%{transform:rotate(4deg) scale(1.07)}50%{transform:rotate(-2deg) scale(1.04)}75%{transform:rotate(3deg) scale(1.06)}}
+
+/* Count-up animation for stats */
+.stat-val,.sh-sv,.srv{animation:countUp .6s cubic-bezier(.2,.8,.3,1) both}
+@keyframes countUp{from{opacity:0;transform:scale(.7) translateY(10px)}to{opacity:1;transform:none}}
 </style>
 </head>
 <body>
@@ -257,7 +347,11 @@ body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-se
 <div class="main">
   <div class="topbar">
     <div class="topbar-l" style="display:flex;align-items:center;gap:10px"><button class="hamburger" onclick="openSidebar()">☰</button><div style="display:flex;flex-direction:column"><div class="ttl">Phòng luyện HSA</div><div class="tsub">Đánh giá năng lực – ĐH Quốc gia Hà Nội</div></div></div>
-    <div class="topbar-r"><button class="icon-btn" id="theme-btn" onclick="toggleTheme()">☀️</button></div>
+    <div class="topbar-r">
+      <button class="icon-btn" onclick="Pomodoro.open()" title="Pomodoro">🍅</button>
+      <button class="btn btn-v" onclick="Battle.open()" style="gap:6px">⚔️ Battle</button>
+      <button class="icon-btn" id="theme-btn" onclick="toggleTheme()">☀️</button>
+    </div>
   </div>
   <div class="content fadein">
     <div class="hsa-hero">
@@ -452,6 +546,12 @@ function submitExam(){
   document.getElementById('exam-foot').style.display='none';
 }
 
+
+// Topbar scroll shadow
+window.addEventListener('scroll',()=>{
+  const tb=document.querySelector('.topbar');
+  if(tb) tb.classList.toggle('scrolled',window.scrollY>10);
+});
 function openSidebar(){
   document.querySelector('.sidebar').classList.add('open');
   var ov=document.getElementById('sb-overlay');
@@ -464,5 +564,425 @@ function closeSidebar(){
   if(ov)ov.classList.remove('show');
   document.body.style.overflow='';
 }
+// ═══════════════════════════════════════════════
+// SHARED ENHANCEMENTS - LuyenThi369
+// Battle Mode + Sound + Confetti + UI upgrades
+// ═══════════════════════════════════════════════
+
+// ── WEB AUDIO SOUND ENGINE ──
+const SFX = (function(){
+  let ctx = null;
+  function getCtx(){ if(!ctx) ctx = new (window.AudioContext||window.webkitAudioContext)(); return ctx; }
+  function play(freq, type, duration, gain=0.3){
+    try{
+      const c=getCtx(), o=c.createOscillator(), g=c.createGain();
+      o.connect(g); g.connect(c.destination);
+      o.type=type; o.frequency.setValueAtTime(freq,c.currentTime);
+      g.gain.setValueAtTime(gain,c.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+duration);
+      o.start(c.currentTime); o.stop(c.currentTime+duration);
+    } catch(e){}
+  }
+  return {
+    correct(){ play(523,  'sine', 0.12, 0.25); setTimeout(()=>play(659,'sine',0.12,0.2),80); setTimeout(()=>play(784,'sine',0.18,0.18),160); },
+    wrong(){   play(200,  'sawtooth', 0.15, 0.18); setTimeout(()=>play(160,'sawtooth',0.1,0.18),100); },
+    flip(){    play(880,  'sine', 0.06, 0.08); },
+    click(){   play(1200, 'sine', 0.04, 0.05); },
+    streak(){  [523,659,784,1047].forEach((f,i)=>setTimeout(()=>play(f,'sine',0.2,0.3),i*80)); },
+    countdown(){ play(440,'square',0.1,0.08); },
+    finish(){  [784,988,1175,1568].forEach((f,i)=>setTimeout(()=>play(f,'sine',0.25,0.3),i*100)); },
+    battle_start(){ [262,330,392,523].forEach((f,i)=>setTimeout(()=>play(f,'triangle',0.2,0.25),i*60)); }
+  };
+})();
+
+// ── CONFETTI ENGINE ──
+const Confetti = (function(){
+  let canvas, ctx2, pieces=[], anim=null;
+  const COLORS=['#00e5ff','#7c3aed','#f59e0b','#10b981','#ef4444','#a78bfa','#34d399','#fbbf24'];
+  function init(){
+    if(canvas) return;
+    canvas=document.createElement('canvas');
+    canvas.style.cssText='position:fixed;inset:0;pointer-events:none;z-index:99999;';
+    document.body.appendChild(canvas);
+    ctx2=canvas.getContext('2d');
+    resize(); window.addEventListener('resize',resize);
+  }
+  function resize(){ if(canvas){canvas.width=innerWidth;canvas.height=innerHeight;} }
+  function burst(n=120){
+    init();
+    for(let i=0;i<n;i++){
+      pieces.push({
+        x:Math.random()*innerWidth, y:-20,
+        vx:(Math.random()-0.5)*8, vy:Math.random()*6+3,
+        rot:Math.random()*360, rotV:(Math.random()-0.5)*8,
+        w:Math.random()*10+5, h:Math.random()*6+3,
+        color:COLORS[Math.floor(Math.random()*COLORS.length)],
+        alpha:1, gravity:0.15
+      });
+    }
+    if(!anim) loop();
+  }
+  function loop(){
+    ctx2.clearRect(0,0,canvas.width,canvas.height);
+    pieces=pieces.filter(p=>{
+      p.x+=p.vx; p.y+=p.vy; p.vy+=p.gravity;
+      p.rot+=p.rotV; p.alpha-=0.008;
+      if(p.alpha<=0||p.y>canvas.height+20) return false;
+      ctx2.save(); ctx2.translate(p.x,p.y); ctx2.rotate(p.rot*Math.PI/180);
+      ctx2.globalAlpha=p.alpha; ctx2.fillStyle=p.color;
+      ctx2.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+      ctx2.restore();
+      return true;
+    });
+    if(pieces.length>0){anim=requestAnimationFrame(loop);}
+    else{anim=null; ctx2.clearRect(0,0,canvas.width,canvas.height);}
+  }
+  return { burst };
+})();
+
+// ── TOAST SYSTEM ──
+function showToast(ic, title, sub, color=''){
+  let t=document.getElementById('global-toast');
+  if(!t){
+    t=document.createElement('div'); t.id='global-toast';
+    t.style.cssText='position:fixed;bottom:24px;right:24px;background:linear-gradient(135deg,#1a2236,#0d1220);border:1px solid #1e2840;border-radius:14px;padding:14px 20px;display:flex;align-items:center;gap:12px;z-index:9998;transform:translateY(80px);opacity:0;transition:.4s cubic-bezier(.2,.8,.3,1);box-shadow:0 8px 32px rgba(0,0,0,.5);max-width:300px;pointer-events:none;';
+    document.body.appendChild(t);
+  }
+  if(color) t.style.borderColor=color;
+  t.innerHTML=`<span style="font-size:24px">${ic}</span><div><div style="font-size:14px;font-weight:700;color:#e8edf5">${title}</div>${sub?`<div style="font-size:12px;color:#5a6b88;margin-top:2px">${sub}</div>`:''}</div>`;
+  t.style.transform='translateY(0)'; t.style.opacity='1';
+  clearTimeout(t._timer);
+  t._timer=setTimeout(()=>{t.style.transform='translateY(80px)';t.style.opacity='0';},3500);
+}
+
+// ── BATTLE MODE ──
+const Battle = (function(){
+  const QBANK_BATTLE = {
+    toan:[
+      {q:'∫2x dx = ?',o:['x²+C','x²/2+C','2x²+C','2+C'],a:0},
+      {q:'Đạo hàm của x³ là?',o:['3x','3x²','x²','2x³'],a:1},
+      {q:'log₂(8) = ?',o:['2','3','4','8'],a:1},
+      {q:'sin(90°) = ?',o:['0','1','-1','√2/2'],a:1},
+      {q:'Diện tích hình tròn bán kính r?',o:['πr','2πr','πr²','4πr²'],a:2},
+      {q:'(a+b)² = ?',o:['a²+b²','a²+ab+b²','a²+2ab+b²','2a²+2b²'],a:2},
+      {q:'Nghiệm của 2x+6=0 là?',o:['x=3','x=-3','x=6','x=-6'],a:1},
+      {q:'C(5,2) = ?',o:['10','20','5','15'],a:0},
+      {q:'cos(0°) = ?',o:['0','1','-1','1/2'],a:1},
+      {q:'Giới hạn lim(x→∞) 1/x = ?',o:['1','∞','0','-1'],a:2},
+    ],
+    ly:[
+      {q:'F=ma. Nếu F=10N, m=2kg thì a=?',o:['5 m/s²','20 m/s²','8 m/s²','12 m/s²'],a:0},
+      {q:'Tốc độ ánh sáng xấp xỉ?',o:['3×10⁶ m/s','3×10⁸ m/s','3×10¹⁰ m/s','3×10⁴ m/s'],a:1},
+      {q:'Đơn vị đo lực là?',o:['Pascal','Joule','Newton','Watt'],a:2},
+      {q:'Công thức tính động năng?',o:['mv','½mv²','ma','F×d'],a:1},
+      {q:'P=U×I là công thức tính?',o:['Điện trở','Công suất','Điện áp','Cường độ'],a:1},
+      {q:'Chu kỳ T = 1/f, f là?',o:['Biên độ','Pha ban đầu','Tần số','Góc pha'],a:2},
+      {q:'Hiện tượng khúc xạ ánh sáng xảy ra khi?',o:['Ánh sáng phản xạ','Ánh sáng đi qua 2 môi trường','Ánh sáng tắt','Nhiễu xạ'],a:1},
+      {q:'Đơn vị điện trở là?',o:['Volt','Ampere','Ohm','Farad'],a:2},
+    ],
+    hoa:[
+      {q:'Số hiệu nguyên tử của Natri (Na)?',o:['10','11','12','13'],a:1},
+      {q:'Công thức hóa học của nước?',o:['H₂O₂','HO','H₂O','H₃O'],a:2},
+      {q:'NaOH là?',o:['Axit','Bazơ','Muối','Oxit axit'],a:1},
+      {q:'Phản ứng tráng bạc dùng để nhận biết?',o:['Glucozo','Fructozo','Saccarozo','Tinh bột'],a:0},
+      {q:'CO₂ là oxit gì?',o:['Oxit bazơ','Oxit lưỡng tính','Oxit axit','Oxit trung tính'],a:2},
+      {q:'Khí gây hiệu ứng nhà kính chủ yếu?',o:['O₂','N₂','CO₂','H₂'],a:2},
+      {q:'Polyme được tổng hợp từ?',o:['Monome','Dime','Polyme nhỏ hơn','Nguyên tử'],a:0},
+      {q:'Kim loại nào dẫn điện tốt nhất?',o:['Vàng','Sắt','Bạc','Nhôm'],a:2},
+    ],
+    anh:[
+      {q:'"She ___ to school every day."',o:['go','goes','going','gone'],a:1},
+      {q:'Antonym of "generous"?',o:['kind','stingy','brave','honest'],a:1},
+      {q:'"I wish I ___ more money."',o:['have','had','will have','has'],a:1},
+      {q:'Passive: "They built this bridge." →',o:['This bridge built','This bridge is built','This bridge was built','This bridge were built'],a:2},
+      {q:'"Good at" + ?',o:['V-inf','V-ed','V-ing','V-s'],a:2},
+      {q:'Which word is a noun?',o:['beautiful','quickly','happiness','run'],a:2},
+      {q:'"It is high time we ___."',o:['leave','left','leaving','to leave'],a:1},
+      {q:'"Put off" means?',o:['cancel','postpone','hurry','finish'],a:1},
+    ],
+    mix:[]
+  };
+  // Build mix from all
+  Object.keys(QBANK_BATTLE).filter(k=>k!=='mix').forEach(k=>{
+    QBANK_BATTLE.mix.push(...QBANK_BATTLE[k]);
+  });
+
+  let overlay, state={};
+
+  function buildOverlay(){
+    const el=document.createElement('div');
+    el.id='battle-ov';
+    el.style.cssText='display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);backdrop-filter:blur(20px);z-index:500;align-items:center;justify-content:center;';
+    el.innerHTML=`
+    <div id="battle-box" style="width:700px;max-width:95vw;background:#0d1117;border:1px solid #1e2840;border-radius:24px;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,.7);">
+      <!-- LOBBY -->
+      <div id="bt-lobby" style="padding:40px;text-align:center;">
+        <div style="font-size:52px;margin-bottom:12px;animation:pulse2 1.5s ease-in-out infinite">⚔️</div>
+        <h2 style="font-size:28px;font-weight:900;margin-bottom:8px;background:linear-gradient(135deg,#00e5ff,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Battle Mode</h2>
+        <p style="color:#5a6b88;margin-bottom:28px;font-size:14px">10 câu · 15 giây/câu · Điểm theo tốc độ</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:24px;" id="bt-subj-grid">
+          <div class="bt-sopt active" data-s="mix" onclick="Battle.selSubj(this,'mix')">🎲 Tổng hợp</div>
+          <div class="bt-sopt" data-s="toan" onclick="Battle.selSubj(this,'toan')">📐 Toán</div>
+          <div class="bt-sopt" data-s="ly" onclick="Battle.selSubj(this,'ly')">⚡ Vật lý</div>
+          <div class="bt-sopt" data-s="hoa" onclick="Battle.selSubj(this,'hoa')">🧪 Hóa</div>
+          <div class="bt-sopt" data-s="anh" onclick="Battle.selSubj(this,'anh')">🌍 Anh</div>
+        </div>
+        <button onclick="Battle.start()" style="width:100%;padding:16px;background:linear-gradient(135deg,#00e5ff,#0099cc);border:none;border-radius:12px;color:#000;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit;transition:.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">⚡ Bắt đầu!</button>
+        <button onclick="Battle.close()" style="margin-top:10px;width:100%;padding:10px;background:none;border:1px solid #1e2840;border-radius:12px;color:#5a6b88;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;">✕ Đóng</button>
+      </div>
+      <!-- GAME -->
+      <div id="bt-game" style="display:none;">
+        <div style="padding:16px 24px;border-bottom:1px solid #1e2840;display:flex;align-items:center;justify-content:space-between;">
+          <div style="font-size:13px;color:#5a6b88;font-weight:600" id="bt-qnum">Câu 1/10</div>
+          <div id="bt-timer-wrap" style="display:flex;align-items:center;gap:8px;">
+            <div id="bt-timer-bar-wrap" style="width:120px;height:6px;background:#1e2840;border-radius:999px;overflow:hidden;">
+              <div id="bt-timer-bar" style="height:100%;background:linear-gradient(90deg,#00e5ff,#7c3aed);border-radius:999px;transition:width .1s linear;"></div>
+            </div>
+            <div id="bt-timer" style="font-family:'Space Mono';font-size:20px;font-weight:900;color:#f59e0b;min-width:28px;text-align:right;">15</div>
+          </div>
+          <div id="bt-score-display" style="font-family:'Space Mono';font-size:16px;font-weight:800;color:#00e5ff;">0 pts</div>
+        </div>
+        <div style="padding:28px 28px 20px;">
+          <div id="bt-qtxt" style="font-size:20px;font-weight:700;line-height:1.6;margin-bottom:22px;min-height:60px;"></div>
+          <div id="bt-opts" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"></div>
+          <div id="bt-explain" style="display:none;margin-top:16px;padding:14px 16px;background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.2);border-radius:12px;font-size:13px;line-height:1.7;"></div>
+        </div>
+      </div>
+      <!-- RESULT -->
+      <div id="bt-result" style="display:none;padding:40px;text-align:center;"></div>
+    </div>`;
+    // Add styles
+    const style=document.createElement('style');
+    style.textContent=`
+    #battle-ov.show{display:flex!important}
+    .bt-sopt{padding:12px 8px;background:#111622;border:2px solid #1e2840;border-radius:12px;cursor:pointer;font-size:13px;font-weight:700;color:#5a6b88;transition:.2s;text-align:center;}
+    .bt-sopt:hover{border-color:#5a6b88;color:#e8edf5;}
+    .bt-sopt.active{background:rgba(0,229,255,.08);border-color:#00e5ff;color:#00e5ff;}
+    .bt-opt{padding:14px 16px;background:#111622;border:2px solid #1e2840;border-radius:12px;cursor:pointer;font-size:14px;font-weight:600;color:#e8edf5;transition:.2s;text-align:left;display:flex;align-items:center;gap:10px;}
+    .bt-opt:hover:not(.locked){border-color:#00e5ff;background:rgba(0,229,255,.04);transform:translateY(-1px);}
+    .bt-opt.correct{border-color:#10b981!important;background:rgba(16,185,129,.12)!important;color:#10b981!important;animation:correctPop .3s ease;}
+    .bt-opt.wrong{border-color:#ef4444!important;background:rgba(239,68,68,.1)!important;color:#ef4444!important;animation:wrongShake .3s ease;}
+    .bt-opt.reveal{border-color:#10b981;background:rgba(16,185,129,.06);color:#10b981;}
+    .bt-olbl{width:24px;height:24px;border-radius:6px;background:#1e2840;display:grid;place-items:center;font-size:12px;font-weight:800;flex-shrink:0;font-family:'Space Mono';}
+    .bt-opt.correct .bt-olbl{background:#10b981;color:#fff;}
+    .bt-opt.wrong .bt-olbl{background:#ef4444;color:#fff;}
+    @keyframes pulse2{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+    @keyframes correctPop{0%{transform:scale(1)}40%{transform:scale(1.03)}100%{transform:scale(1)}}
+    @keyframes wrongShake{0%,100%{transform:translateX(0)}20%{transform:translateX(-5px)}60%{transform:translateX(5px)}}
+    @keyframes btScorePop{0%{transform:scale(1)}50%{transform:scale(1.3)}100%{transform:scale(1)}}
+    `;
+    document.head.appendChild(style);
+    document.body.appendChild(el);
+    overlay=el;
+  }
+
+  let selectedSubj='mix', timerI=null, timeLeft=15, currentQ=0, questions=[], answers=[], score=0;
+
+  function open(){
+    if(!overlay) buildOverlay();
+    document.getElementById('bt-lobby').style.display='block';
+    document.getElementById('bt-game').style.display='none';
+    document.getElementById('bt-result').style.display='none';
+    overlay.classList.add('show');
+    document.body.style.overflow='hidden';
+  }
+  function close(){
+    if(overlay) overlay.classList.remove('show');
+    document.body.style.overflow='';
+    clearInterval(timerI);
+  }
+  function selSubj(el, subj){
+    selectedSubj=subj;
+    document.querySelectorAll('.bt-sopt').forEach(e=>e.classList.remove('active'));
+    el.classList.add('active');
+  }
+  function start(){
+    SFX.battle_start();
+    const pool=[...(QBANK_BATTLE[selectedSubj]||QBANK_BATTLE.mix)].sort(()=>Math.random()-.5);
+    questions=pool.slice(0,10);
+    answers=[];
+    score=0;
+    currentQ=0;
+    document.getElementById('bt-lobby').style.display='none';
+    document.getElementById('bt-game').style.display='block';
+    document.getElementById('bt-result').style.display='none';
+    renderQ();
+  }
+  function renderQ(){
+    if(currentQ>=questions.length){showResult();return;}
+    const q=questions[currentQ];
+    document.getElementById('bt-qnum').textContent=`Câu ${currentQ+1}/10`;
+    document.getElementById('bt-score-display').textContent=score+' pts';
+    document.getElementById('bt-qtxt').textContent=q.q;
+    document.getElementById('bt-explain').style.display='none';
+    document.getElementById('bt-opts').innerHTML=q.o.map((o,i)=>`
+      <div class="bt-opt" onclick="Battle._answer(${i})" data-idx="${i}">
+        <span class="bt-olbl">${['A','B','C','D'][i]}</span>${o}
+      </div>`).join('');
+    startTimer();
+  }
+  function startTimer(){
+    clearInterval(timerI);
+    timeLeft=15;
+    updateTimerUI();
+    timerI=setInterval(()=>{
+      timeLeft--;
+      updateTimerUI();
+      if(timeLeft<=5) SFX.countdown();
+      if(timeLeft<=0){clearInterval(timerI);_answer(-1);}
+    },1000);
+  }
+  function updateTimerUI(){
+    document.getElementById('bt-timer').textContent=timeLeft;
+    document.getElementById('bt-timer-bar').style.width=(timeLeft/15*100)+'%';
+    const col=timeLeft<=5?'#ef4444':timeLeft<=10?'#f59e0b':'';
+    document.getElementById('bt-timer').style.color=col||'#f59e0b';
+    document.getElementById('bt-timer-bar').style.background=timeLeft<=5?'#ef4444':timeLeft<=10?'linear-gradient(90deg,#f59e0b,#ef4444)':'linear-gradient(90deg,#00e5ff,#7c3aed)';
+  }
+  function _answer(idx){
+    clearInterval(timerI);
+    const q=questions[currentQ];
+    const correct=idx===q.a;
+    const timeBonus=Math.max(0,timeLeft);
+    const pts=correct?100+timeBonus*10:0;
+    score+=pts;
+    answers.push({q:q.q,chosen:idx,correct:q.a,isCorrect:correct,pts});
+    // Lock all options
+    document.querySelectorAll('.bt-opt').forEach(el=>{
+      el.classList.add('locked');
+      el.style.cursor='default';
+      el.onclick=null;
+    });
+    // Highlight
+    document.querySelectorAll('.bt-opt').forEach(el=>{
+      const i=parseInt(el.dataset.idx);
+      if(i===q.a) el.classList.add('correct');
+      else if(i===idx && idx!==q.a) el.classList.add('wrong');
+    });
+    if(correct){SFX.correct();if(pts>200)Confetti.burst(40);}
+    else SFX.wrong();
+    document.getElementById('bt-score-display').textContent=score+' pts';
+    document.getElementById('bt-score-display').style.animation='btScorePop .3s ease';
+    setTimeout(()=>document.getElementById('bt-score-display').style.animation='',300);
+    // Show explain briefly then next
+    if(idx===-1){
+      const exp=document.getElementById('bt-explain');
+      exp.innerHTML=`⏰ <strong>Hết giờ!</strong> Đáp án đúng: <strong>${['A','B','C','D'][q.a]}. ${q.o[q.a]}</strong>`;
+      exp.style.display='block';
+    }
+    currentQ++;
+    setTimeout(()=>renderQ(), correct?600:1000);
+  }
+  function showResult(){
+    SFX.finish();
+    const total=questions.length;
+    const correct=answers.filter(a=>a.isCorrect).length;
+    const pct=Math.round(correct/total*100);
+    if(pct>=80) Confetti.burst(150);
+    document.getElementById('bt-game').style.display='none';
+    document.getElementById('bt-result').style.display='block';
+    const grade=pct>=90?'🏆 Huyền thoại!':pct>=70?'⭐ Xuất sắc!':pct>=50?'💪 Khá tốt!':'📖 Cần ôn thêm!';
+    const col=pct>=70?'#10b981':pct>=50?'#f59e0b':'#ef4444';
+    document.getElementById('bt-result').innerHTML=`
+      <div style="font-size:52px;margin-bottom:12px">${pct>=80?'🏆':pct>=60?'⭐':'💪'}</div>
+      <div style="font-size:56px;font-weight:900;font-family:'Space Mono';color:${col};line-height:1;margin-bottom:4px">${score}</div>
+      <div style="font-size:13px;color:#5a6b88;margin-bottom:8px">điểm</div>
+      <div style="font-size:18px;font-weight:800;margin-bottom:4px">${grade}</div>
+      <div style="font-size:13px;color:#5a6b88;margin-bottom:28px">${correct}/${total} câu đúng</div>
+      <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+        <button onclick="Battle.start()" style="padding:12px 24px;background:linear-gradient(135deg,#00e5ff,#0099cc);border:none;border-radius:10px;color:#000;font-weight:800;cursor:pointer;font-size:14px;font-family:inherit">🔁 Chơi lại</button>
+        <button onclick="Battle.close()" style="padding:12px 24px;background:#111622;border:1px solid #1e2840;border-radius:10px;color:#5a6b88;font-weight:700;cursor:pointer;font-size:14px;font-family:inherit">✕ Đóng</button>
+      </div>`;
+    // Save high score
+    const best=parseInt(localStorage.getItem('lt369_battle_best')||'0');
+    if(score>best){
+      localStorage.setItem('lt369_battle_best',score);
+      showToast('🏆','Kỷ lục mới!',`${score} điểm – Battle Mode`,'#f59e0b');
+    }
+  }
+  return {open,close,start,selSubj,_answer};
+})();
+
+// ── STREAK MILESTONE CONFETTI ──
+function checkStreakMilestone(){
+  const streak=parseInt(localStorage.getItem('lt369_streak')||'0');
+  const lastMile=parseInt(localStorage.getItem('lt369_last_milestone')||'0');
+  const milestones=[3,7,14,21,30,50,100];
+  const hit=milestones.find(m=>streak>=m&&lastMile<m);
+  if(hit){
+    localStorage.setItem('lt369_last_milestone',hit);
+    setTimeout(()=>{
+      Confetti.burst(200);
+      SFX.streak();
+      showToast('🔥',`Streak ${hit} ngày!`,hit>=30?'🏆 Siêu phi thường!':hit>=14?'🌟 Tuyệt vời!':'💪 Tiếp tục nhé!','#f59e0b');
+    },800);
+  }
+}
+
+// ── POMODORO ──
+const Pomodoro = (function(){
+  let overlay, timerI=null, secsLeft=25*60, mode='work', workMins=25;
+  function init(){
+    if(overlay) return;
+    overlay=document.createElement('div');
+    overlay.id='pomo-widget';
+    overlay.style.cssText='position:fixed;bottom:80px;right:24px;z-index:400;background:#0d1117;border:1px solid #1e2840;border-radius:18px;padding:18px 22px;width:220px;box-shadow:0 12px 40px rgba(0,0,0,.5);display:none;';
+    overlay.innerHTML=`
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+        <div style="font-size:13px;font-weight:700;color:#e8edf5" id="pomo-label">🍅 Pomodoro</div>
+        <button onclick="Pomodoro.close()" style="background:none;border:none;color:#5a6b88;cursor:pointer;font-size:16px;line-height:1">✕</button>
+      </div>
+      <div style="text-align:center;margin-bottom:14px;">
+        <div id="pomo-time" style="font-size:42px;font-weight:900;font-family:'Space Mono';color:#00e5ff;line-height:1;">25:00</div>
+        <div id="pomo-mode" style="font-size:11px;color:#5a6b88;margin-top:4px;text-transform:uppercase;letter-spacing:1px;">Tập trung</div>
+      </div>
+      <div style="height:4px;background:#1e2840;border-radius:999px;margin-bottom:14px;overflow:hidden;">
+        <div id="pomo-bar" style="height:100%;background:linear-gradient(90deg,#00e5ff,#7c3aed);border-radius:999px;width:100%;transition:width .5s linear;"></div>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button id="pomo-btn" onclick="Pomodoro.toggle()" style="flex:1;padding:10px;background:linear-gradient(135deg,#00e5ff,#0099cc);border:none;border-radius:10px;color:#000;font-weight:800;cursor:pointer;font-size:13px;font-family:inherit;">▶ Bắt đầu</button>
+        <button onclick="Pomodoro.reset()" style="padding:10px 12px;background:#111622;border:1px solid #1e2840;border-radius:10px;color:#5a6b88;cursor:pointer;font-size:13px;font-family:inherit;">↺</button>
+      </div>`;
+    document.body.appendChild(overlay);
+  }
+  const totalSecs=()=>mode==='work'?workMins*60:5*60;
+  function updateUI(){
+    const m=Math.floor(secsLeft/60),s=secsLeft%60;
+    document.getElementById('pomo-time').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+    document.getElementById('pomo-bar').style.width=(secsLeft/totalSecs()*100)+'%';
+    document.getElementById('pomo-mode').textContent=mode==='work'?'Tập trung':'Nghỉ giải lao';
+    const col=mode==='work'?secsLeft<=60?'#ef4444':'#00e5ff':'#10b981';
+    document.getElementById('pomo-time').style.color=col;
+  }
+  function open(){init();overlay.style.display='block';}
+  function close(){if(overlay)overlay.style.display='none';clearInterval(timerI);timerI=null;}
+  function toggle(){
+    if(timerI){clearInterval(timerI);timerI=null;document.getElementById('pomo-btn').textContent='▶ Tiếp tục';}
+    else{
+      document.getElementById('pomo-btn').textContent='⏸ Dừng';
+      timerI=setInterval(()=>{
+        secsLeft--;
+        updateUI();
+        if(secsLeft<=0){
+          clearInterval(timerI);timerI=null;
+          SFX.finish();
+          if(mode==='work'){
+            mode='break';secsLeft=5*60;
+            showToast('☕','Nghỉ 5 phút!','Bạn đã tập trung 25 phút, nghỉ ngơi nào!','#10b981');
+          } else {
+            mode='work';secsLeft=workMins*60;
+            showToast('🍅','Bắt đầu phiên mới!','Tập trung 25 phút!','#00e5ff');
+          }
+          document.getElementById('pomo-btn').textContent='▶ Bắt đầu';
+          updateUI();
+        }
+      },1000);
+    }
+  }
+  function reset(){clearInterval(timerI);timerI=null;mode='work';secsLeft=workMins*60;document.getElementById('pomo-btn').textContent='▶ Bắt đầu';updateUI();}
+  return {open,close,toggle,reset};
+})();
+
+
 </script>
 </body></html>
