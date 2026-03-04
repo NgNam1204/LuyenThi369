@@ -512,7 +512,11 @@ async function doUpload(){
   const bar=document.getElementById('prog-bar');
   const lbl=document.getElementById('prog-lbl');
   bar.style.width='15%';lbl.textContent='Đang upload file...';
-  const fileName=`${Date.now()}_${selectedFile.name.replace(/\s+/g,'_')}`;
+  const fileName=`${Date.now()}_${selectedFile.name
+  .normalize('NFD').replace(/[\u0300-\u036f]/g,'')  // bỏ dấu
+  .replace(/đ/gi,'d')                                 // đ → d
+  .replace(/[^a-zA-Z0-9._-]/g,'_')                   // ký tự lạ → _
+  .replace(/_+/g,'_')}`;                              // nhiều _ liền → 1 _
   const {error:storErr}=await sb.storage.from(BUCKET).upload(fileName,selectedFile,{cacheControl:'3600',upsert:false});
   if(storErr){showToast('❌','Lỗi upload',storErr.message,'var(--red)');bar.style.width='0%';prog.classList.remove('show');return;}
   bar.style.width='70%';lbl.textContent='Đang lưu thông tin...';
