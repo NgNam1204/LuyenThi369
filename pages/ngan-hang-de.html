@@ -3,946 +3,375 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Ngân hàng đề – LuyenThi369</title>
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
-
 *{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --bg:#080b10;--bg2:#0d1017;--surface:#161c28;--border:#1e2840;
-  --accent:#00e5ff;--accent2:#7c3aed;--accent3:#f59e0b;
-  --green:#10b981;--red:#ef4444;
-  --text:#e8edf5;--muted:#5a6b88;--card:#111622;
-  --shadow:0 4px 24px rgba(0,0,0,.4);
-  --radius:14px;
-}
-[data-theme="light"]{
-  --bg:#f5f7ff;--bg2:#ffffff;--surface:#edf0fb;--border:#dce3f5;
-  --text:#111827;--muted:#6b7a99;--card:#ffffff;
-  --shadow:0 2px 16px rgba(100,120,200,.12);
-}
-body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-serif;transition:background .3s,color .3s;line-height:1.5}
-::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
-/* layout */
+:root{--bg:#080b10;--bg2:#0d1017;--surface:#161c28;--border:#1e2840;--accent:#00e5ff;--accent2:#7c3aed;--accent3:#f59e0b;--green:#10b981;--red:#ef4444;--text:#e8edf5;--muted:#5a6b88;--card:#111622;--radius:14px}
+[data-theme="light"]{--bg:#f5f7ff;--bg2:#fff;--surface:#edf0fb;--border:#dce3f5;--text:#111827;--muted:#6b7a99;--card:#fff}
+body{background:var(--bg);color:var(--text);font-family:"Be Vietnam Pro",sans-serif;line-height:1.5;animation:pageLoad .4s ease}
+@keyframes pageLoad{from{opacity:0}to{opacity:1}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scaleIn{from{opacity:0;transform:scale(.94)}to{opacity:1;transform:scale(1)}}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+@keyframes logoPulse{0%,100%{box-shadow:0 0 16px rgba(0,229,255,.3)}50%{box-shadow:0 0 28px rgba(0,229,255,.55)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:rgba(0,229,255,.2);border-radius:3px}
 .app{display:flex;min-height:100vh}
-.sidebar{width:260px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;height:100vh;overflow-y:auto;z-index:100;transition:background .3s,border-color .3s}
+.sidebar{width:260px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;height:100vh;overflow-y:auto;z-index:100}
 .logo{padding:20px;display:flex;align-items:center;gap:11px;border-bottom:1px solid var(--border);text-decoration:none}
-.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:10px;display:grid;place-items:center;font-size:18px;flex-shrink:0;box-shadow:0 0 16px rgba(0,229,255,.3)}
+.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:10px;display:grid;place-items:center;flex-shrink:0;overflow:hidden;animation:logoPulse 3s ease-in-out infinite}
+.logo-icon img{width:28px;height:28px;object-fit:contain}
 .logo-text{font-size:16px;font-weight:800;color:var(--text)}.logo-text em{font-style:normal;color:var(--accent)}
 .nav{flex:1;padding:12px 0}
-.nav-sec{margin-bottom:4px}
 .nav-lbl{font-size:10px;font-weight:700;letter-spacing:2px;color:var(--muted);padding:8px 20px;text-transform:uppercase;opacity:.7}
-.nav-a{display:flex;align-items:center;gap:12px;padding:10px 20px;color:var(--muted);font-size:14px;font-weight:500;transition:.2s;border-left:3px solid transparent;text-decoration:none;border-radius:0}
+.nav-a{display:flex;align-items:center;gap:12px;padding:10px 20px;color:var(--muted);font-size:14px;font-weight:500;transition:.2s;border-left:3px solid transparent;text-decoration:none}
 .nav-a:hover{color:var(--text);background:rgba(128,128,200,.06)}
 .nav-a.active{color:var(--accent);background:rgba(0,229,255,.07);border-left-color:var(--accent);font-weight:600}
 .nav-a .ic{width:18px;text-align:center;flex-shrink:0;font-size:17px}
-.badge{margin-left:auto;background:linear-gradient(135deg,var(--accent2),#6d28d9);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:999px}
 .sb-foot{padding:14px;border-top:1px solid var(--border)}
-.user-card{display:flex;align-items:center;gap:10px;background:var(--surface);padding:10px 12px;border-radius:12px;cursor:pointer;text-decoration:none;transition:.2s;border:1px solid transparent}
+.user-card{display:flex;align-items:center;gap:10px;background:var(--surface);padding:10px 12px;border-radius:12px;text-decoration:none;border:1px solid transparent;transition:.2s}
 .user-card:hover{border-color:var(--accent)}
-.av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--accent2),var(--accent));display:grid;place-items:center;font-size:18px;font-weight:700;flex-shrink:0;color:#fff}
+.av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--accent2),var(--accent));display:grid;place-items:center;font-size:16px;font-weight:700;flex-shrink:0;color:#fff}
 .uname{font-size:14px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:130px}
 .uplan{font-size:12px;color:var(--accent3);font-weight:600}
 .logout{margin-top:8px;display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;cursor:pointer;color:var(--muted);font-size:14px;font-weight:600;transition:.2s;border:none;background:none;font-family:inherit;width:100%}
 .logout:hover{color:var(--red);background:rgba(239,68,68,.06)}
-/* main */
-.main{margin-left:260px;flex:1;display:flex;flex-direction:column;min-height:100vh;min-width:0;overflow-x:hidden}
-.topbar{position:fixed;top:0;left:260px;right:0;z-index:50;background:rgba(8,11,16,.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 32px;height:60px;display:flex;align-items:center;justify-content:space-between;transition:background .3s,border-color .3s,left .28s}
+.main{margin-left:260px;flex:1;min-height:100vh;overflow-x:hidden}
+.topbar{position:fixed;top:0;left:260px;right:0;z-index:50;background:rgba(8,11,16,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between}
 [data-theme="light"] .topbar{background:rgba(245,247,255,.92)}
-.topbar-l .ttl{font-size:22px;font-weight:800;letter-spacing:-.3px;line-height:1.2}
-.topbar-l .tsub{font-size:13px;color:var(--muted);margin-top:1px}
+.topbar-l .ttl{font-size:20px;font-weight:800;letter-spacing:-.3px}
 .topbar-r{display:flex;align-items:center;gap:8px}
-/* buttons */
-.btn{display:inline-flex;align-items:center;gap:7px;padding:8px 18px;border-radius:9px;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:.2s;font-family:inherit;white-space:nowrap}
-.btn-p{background:var(--accent);color:#000}.btn-p:hover{background:#00cfeb;transform:translateY(-1px)}
-.btn-g{background:var(--surface);color:var(--muted);border:1px solid var(--border)}.btn-g:hover{color:var(--text);border-color:var(--muted)}
-.btn-v{background:linear-gradient(135deg,var(--accent2),#6d28d9);color:#fff}.btn-v:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(124,58,237,.4)}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border-radius:9px;font-size:13px;font-weight:700;cursor:pointer;border:none;transition:.2s;font-family:inherit;text-decoration:none;white-space:nowrap}
+.btn-p{background:var(--accent);color:#000}.btn-p:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,229,255,.35)}
+.btn-v{background:linear-gradient(135deg,var(--accent2),#6d28d9);color:#fff}.btn-v:hover{transform:translateY(-1px)}
+.btn-g{background:var(--surface);color:var(--muted);border:1px solid var(--border)}.btn-g:hover{color:var(--text)}
 .icon-btn{width:36px;height:36px;border-radius:9px;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center;cursor:pointer;transition:.2s;font-size:16px}
 .icon-btn:hover{border-color:var(--accent)}
-/* content */
-.content{padding:24px 28px;flex:1;min-width:0;overflow-x:hidden;padding-top:84px}
-/* cards */
-.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:background .3s,border-color .3s;min-width:0;overflow:hidden}
-[data-theme="light"] .card{box-shadow:var(--shadow)}
-.card-title{font-size:14px;font-weight:700;margin-bottom:18px;display:flex;align-items:center;gap:8px}
-/* progress bar */
-.pbar{height:6px;background:var(--surface);border-radius:999px;overflow:hidden}
-.pbar-fill{height:100%;border-radius:999px;transition:width .5s ease}
-/* animation */
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.fadein>*{animation:fadeUp .35s ease both}
-.fadein>*:nth-child(2){animation-delay:.05s}
-.fadein>*:nth-child(3){animation-delay:.1s}
-.fadein>*:nth-child(4){animation-delay:.15s}
-/* footer */
-.site-footer{background:#06090f;border-top:1px solid #1a2030;padding:36px 40px 24px;margin-top:auto;transition:background .3s,border-color .3s}
-[data-theme="light"] .site-footer{background:#eef1fb;border-top-color:#c8d4f0}
-/* light mode text */
-[data-theme="light"] .sf-addr{color:#3a4a6a}
-[data-theme="light"] .sf-addr strong{color:#0f1a35}
-[data-theme="light"] .sf-member{color:#3a4a6a}
-[data-theme="light"] .sf-label{color:#5a6a8a}
-[data-theme="light"] .sf-copy,[data-theme="light"] .sf-brand{color:#5a6a8a}
-[data-theme="light"] .sf-bottom{border-top-color:#c8d4f0}
-[data-theme="light"] .sf-col:first-child,[data-theme="light"] .sf-col:nth-child(2){border-right-color:#c8d4f0}
-[data-theme="light"] .sf-map iframe{border-color:#c8d4f0}
-[data-theme="light"] .sf-fb a{background:#dce6ff;color:#0f1a35;border-color:#1877f2}
-/* layout */
-.sf-inner{display:table;width:100%;table-layout:fixed;border-collapse:collapse}
-.sf-col{display:table-cell;width:33.333%;vertical-align:top;padding:0 28px;text-align:center}
-.sf-col:first-child{padding-left:0;text-align:left;border-right:1px solid #1e2840}
-.sf-col:nth-child(2){border-right:1px solid #1e2840}
-.sf-col:last-child{padding-right:0}
-.sf-label{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#4a5878;margin-bottom:16px;display:block;text-align:center}
-.sf-col:first-child .sf-label{text-align:left}
-.sf-addr{font-size:14px;color:#8899bb;line-height:1.9}
-.sf-addr strong{color:#c8d4f0;font-weight:700}
-.sf-map{margin-top:14px}
-.sf-map iframe{border-radius:10px;width:100%;height:150px;border:1px solid #1e2840;display:block}
-.sf-members{display:inline-flex;flex-direction:column;gap:10px;align-items:flex-start}
-.sf-member{display:flex;align-items:center;gap:9px;font-size:14px;color:#8899bb;white-space:nowrap}
-[data-theme="light"] .sf-member{color:#3a4a6a}
-.sf-member::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--accent);flex-shrink:0}
-.sf-fb{display:flex;justify-content:center;width:100%}
-.sf-fb a{display:inline-flex;align-items:center;gap:9px;background:#1a2236;color:#e8edf5;font-size:14px;font-weight:600;padding:10px 22px;border-radius:12px;border:1px solid #1877f2;text-decoration:none;transition:.2s}
-[data-theme="light"] .sf-fb a{background:#dce6ff;color:#1a2545;border-color:#1877f2}
-.sf-fb a:hover{background:#1877f2;color:#fff}
-.sf-bottom{margin-top:24px;padding-top:16px;border-top:1px solid #1a2030;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;transition:border-color .3s}
-[data-theme="light"] .sf-bottom{border-top-color:#c8d4f0}
-.sf-copy,.sf-brand{font-size:13px;color:#3a4868;transition:color .3s}
-[data-theme="light"] .sf-copy,[data-theme="light"] .sf-brand{color:#7a8aaa}
+.content{padding:24px;padding-top:84px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px}
+.sec-lbl{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.sec-lbl::after{content:"";flex:1;height:1px;background:var(--border)}
 
-.filter-bar{display:flex;gap:10px;margin-bottom:24px;flex-wrap:wrap;align-items:center}
-.sw{position:relative;flex:1;min-width:200px}
-.sw::before{content:'🔍';position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:14px;pointer-events:none}
-.sw input{width:100%;background:var(--card);border:1px solid var(--border);padding:10px 14px 10px 36px;border-radius:10px;color:var(--text);font-family:inherit;font-size:14px;outline:none;transition:.2s}
-[data-theme="light"] .sw input{background:#fff}
-.sw input:focus{border-color:var(--accent)}
-.sw input::placeholder{color:var(--muted)}
-.fsel{background:var(--card);border:1px solid var(--border);color:var(--text);padding:10px 14px;border-radius:10px;font-family:inherit;font-size:14px;cursor:pointer;outline:none;transition:.2s}
-[data-theme="light"] .fsel{background:#fff}
-.fsel:focus{border-color:var(--accent)}
-.tabs-row{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
-.ftab{padding:7px 16px;border-radius:8px;border:1px solid var(--border);background:var(--card);font-size:13px;font-weight:600;cursor:pointer;transition:.2s;color:var(--muted)}
-.ftab:hover{border-color:var(--muted);color:var(--text)}
-.ftab.active{background:var(--accent);color:#000;border-color:var(--accent)}
-.bank-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-.bi{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;cursor:pointer;transition:.25s}
-[data-theme="light"] .bi{box-shadow:var(--shadow)}
-.bi:hover{border-color:var(--accent3);transform:translateY(-2px)}
-.bi-hdr{display:flex;align-items:center;gap:10px;margin-bottom:10px}
-.bib{padding:3px 10px;border-radius:6px;font-size:11px;font-weight:700}
-.bb-bo{background:rgba(16,185,129,.12);color:var(--green)}
-.bb-truong{background:rgba(0,229,255,.1);color:var(--accent)}
-.bb-dd{background:rgba(245,158,11,.12);color:var(--accent3)}
-.bb-ai{background:rgba(124,58,237,.12);color:#a78bfa}
-.bi-year{font-size:12px;color:var(--muted)}
-.bi-title{font-size:15px;font-weight:700;margin-bottom:6px}
-.bi-meta{font-size:12px;color:var(--muted);margin-bottom:12px}
-.bi-foot{display:flex;align-items:center;justify-content:space-between}
-.bi-diff{font-size:12px;font-weight:600}
-.diff-e{color:var(--green)}.diff-m{color:var(--accent3)}.diff-h{color:var(--red)}
-.start-btn{padding:7px 16px;font-size:13px;font-weight:700;border:none;border-radius:8px;cursor:pointer;font-family:inherit;transition:.2s;background:var(--accent);color:#000}
-.start-btn:hover{background:#00cfeb}
-.prev-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(10px);z-index:200;align-items:center;justify-content:center}
-.prev-ov.show{display:flex}
-.prev-box{background:var(--bg2);border:1px solid var(--border);border-radius:20px;width:680px;max-width:95vw;max-height:88vh;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 32px 80px rgba(0,0,0,.5)}
-.prev-hdr{padding:18px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-.prev-title{font-size:15px;font-weight:800}
-.prev-close{width:30px;height:30px;border-radius:8px;border:1px solid var(--border);background:var(--surface);cursor:pointer;display:grid;place-items:center;color:var(--muted);transition:.2s}
-.prev-close:hover{color:var(--red);border-color:var(--red)}
-.prev-body{padding:24px;overflow-y:auto;flex:1}
-.prev-info{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px}
-.pi{background:var(--surface);border-radius:10px;padding:12px;text-align:center}
-.piv{font-size:18px;font-weight:800;font-family:'Space Mono';color:var(--accent)}
-.pil{font-size:17px;color:var(--muted);margin-top:3px}
-.prev-foot{padding:14px 24px;border-top:1px solid var(--border);display:flex;gap:10px;justify-content:flex-end}
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
+.stat-c{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;animation:scaleIn .4s cubic-bezier(.16,1,.3,1) both;transition:.25s}
+.stat-c:hover{border-color:rgba(0,229,255,.2);transform:translateY(-2px)}
+.stat-c:nth-child(1){animation-delay:.05s}.stat-c:nth-child(2){animation-delay:.1s}
+.stat-c:nth-child(3){animation-delay:.15s}.stat-c:nth-child(4){animation-delay:.2s}
+.stat-label{font-size:12px;color:var(--muted);font-weight:600;margin-bottom:8px}
+.stat-val{font-size:28px;font-weight:900;font-family:"Space Mono",monospace;margin-bottom:4px}
+.stat-sub{font-size:11px;color:var(--muted)}
 
-/* ── MOBILE ── */
-.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:98;backdrop-filter:blur(4px);cursor:pointer}
-.sidebar-overlay.show{display:block}
-.hamburger{width:38px;height:38px;border-radius:9px;background:var(--surface);border:1px solid var(--border);align-items:center;justify-content:center;cursor:pointer;font-size:18px;flex-shrink:0;transition:.2s;margin-right:10px;display:none}
-.hamburger:hover{border-color:var(--accent)}
-.sidebar-close{display:none;position:absolute;top:16px;right:10px;width:32px;height:32px;border-radius:8px;background:var(--surface);border:1px solid var(--border);align-items:center;justify-content:center;cursor:pointer;font-size:22px;font-weight:700;color:var(--muted);transition:.2s;z-index:10;line-height:1}
-.sidebar-close:hover{color:var(--accent);border-color:var(--accent)}
-@media(max-width:768px){
-  .hamburger{display:flex!important}
-  .sidebar-close{display:flex}
-  .sidebar{position:fixed;left:0;top:0;height:100vh;transform:translateX(-260px);transition:transform .28s cubic-bezier(.4,0,.2,1);z-index:99;box-shadow:4px 0 24px rgba(0,0,0,.4)}
-  .sidebar.open{transform:translateX(0)}
-  .main{margin-left:0!important;width:100%}
-  .topbar{padding:0 16px;left:0}
-  .content{padding:16px}
-  .grid-4{grid-template-columns:repeat(2,1fr)!important}
-  .grid-2{grid-template-columns:1fr!important}
-  .two-col{grid-template-columns:1fr!important}
-  .modes{grid-template-columns:repeat(2,1fr)!important}
-  .topics{grid-template-columns:repeat(2,1fr)!important}
-  .parts-grid{grid-template-columns:1fr!important}
-  .stats-row{grid-template-columns:repeat(2,1fr)!important}
-  .settings-layout{grid-template-columns:1fr!important}
-  .bank-grid{grid-template-columns:1fr!important}
-  .qbox{max-height:98vh;border-radius:16px 16px 0 0;position:fixed;bottom:0;left:0;right:0;width:100%!important;max-width:100%!important}
-  .qov{align-items:flex-end}
-  .exam-box{border-radius:16px 16px 0 0;position:fixed;bottom:0;left:0;right:0;width:100%!important;max-width:100%!important;max-height:95vh}
-  .exam-ov{align-items:flex-end}
-  .exam-body{flex-direction:column}
-  .exam-parts{width:100%!important;height:auto;flex-direction:row;overflow-x:auto;padding:10px;display:flex;gap:8px;border-right:none;border-bottom:1px solid var(--border)}
-  .ep-part{flex-shrink:0;padding:8px 12px;margin-bottom:0}
-  .prev-box{border-radius:16px 16px 0 0;position:fixed;bottom:0;left:0;right:0;width:100%!important;max-width:100%!important}
-  .prev-ov{align-items:flex-end}
-  .topbar-l .ttl{font-size:17px}
-  .topbar-l .tsub{display:none}
-  .welcome-banner{flex-direction:column}
-  .cd-band{flex-direction:column;gap:10px}
-  .hbtns{flex-direction:column}
-  .hsa-hero{padding:24px 16px}
-  .sf-inner{display:flex!important;flex-direction:column!important}
-  .sf-col{width:100%!important;padding:16px 0!important;border:none!important;display:block!important;text-align:center!important}
-  .sf-col:first-child{text-align:center!important}
-  .sf-bottom{flex-direction:column;align-items:flex-start;gap:4px}
-}
+/* FILTER BAR */
+.filter-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;align-items:center}
+.search-wrap{position:relative;flex:1;min-width:200px}
+.search-wrap input{width:100%;background:var(--card);border:1.5px solid var(--border);border-radius:11px;padding:10px 16px 10px 40px;font-size:14px;font-weight:500;color:var(--text);font-family:inherit;outline:none;transition:.25s}
+.search-wrap input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,229,255,.07)}
+.search-wrap::before{content:"🔍";position:absolute;left:13px;top:50%;transform:translateY(-50%);font-size:14px;pointer-events:none}
+select{background:var(--card);border:1.5px solid var(--border);border-radius:11px;padding:10px 14px;font-size:13px;font-weight:600;color:var(--text);font-family:inherit;outline:none;cursor:pointer;transition:.25s}
+select:focus{border-color:var(--accent)}
 
-/* ═══ GLOBAL UI ENHANCEMENTS ═══ */
+/* QUESTION TABLE */
+.q-table{width:100%;border-collapse:collapse}
+.q-table th{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--muted);padding:10px 14px;text-align:left;border-bottom:1px solid var(--border)}
+.q-table td{padding:12px 14px;border-bottom:1px solid rgba(30,40,64,.5);font-size:13px;vertical-align:middle}
+.q-table tr{transition:.15s;animation:fadeUp .35s cubic-bezier(.16,1,.3,1) both}
+.q-table tbody tr:hover{background:rgba(0,229,255,.03);cursor:pointer}
+.q-num{font-family:"Space Mono",monospace;font-size:11px;color:var(--muted);white-space:nowrap}
+.q-content{max-width:360px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500}
+.q-badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:999px;font-size:11px;font-weight:700;white-space:nowrap}
+.diff-easy{background:rgba(16,185,129,.12);color:#34d399;border:1px solid rgba(16,185,129,.2)}
+.diff-med{background:rgba(245,158,11,.12);color:#fbbf24;border:1px solid rgba(245,158,11,.2)}
+.diff-hard{background:rgba(239,68,68,.12);color:#f87171;border:1px solid rgba(239,68,68,.2)}
+.q-actions{display:flex;gap:6px;justify-content:flex-end}
+.q-act-btn{width:30px;height:30px;border-radius:7px;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center;cursor:pointer;transition:.18s;font-size:13px}
+.q-act-btn:hover{border-color:var(--accent);transform:translateY(-1px)}
 
-/* Smooth page entry */
-body{animation:pageLoad .4s cubic-bezier(.2,.8,.3,1)}
-@keyframes pageLoad{from{opacity:0}to{opacity:1}}
+/* PAGINATION */
+.pagination{display:flex;align-items:center;justify-content:between;gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)}
+.page-btn{width:34px;height:34px;border-radius:8px;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center;cursor:pointer;font-size:13px;font-weight:700;transition:.18s}
+.page-btn:hover{border-color:var(--accent);color:var(--accent)}
+.page-btn.active{background:var(--accent);color:#000;border-color:var(--accent)}
+.page-info{font-size:13px;color:var(--muted);margin:0 8px}
 
-/* Card hover lift */
-.card{transition:all .25s cubic-bezier(.2,.8,.3,1)!important}
-.card:hover{border-color:rgba(0,229,255,.25)!important;transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.3)!important}
+/* MODAL */
+.modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(12px);z-index:999;display:none;align-items:center;justify-content:center}
+.modal-ov.show{display:flex}
+.modal-box{background:var(--card);border:1px solid var(--border);border-radius:20px;width:min(680px,95vw);max-height:90vh;overflow-y:auto;animation:scaleIn .3s cubic-bezier(.16,1,.3,1)}
+.modal-hdr{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--card);z-index:1}
+.modal-title{font-size:17px;font-weight:800;letter-spacing:-.2px}
+.modal-close{width:32px;height:32px;border-radius:8px;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center;cursor:pointer;font-size:14px;transition:.2s}
+.modal-close:hover{border-color:var(--red);color:var(--red)}
+.modal-body{padding:24px}
+.opt-item{padding:12px 16px;border-radius:10px;border:1.5px solid var(--border);margin-bottom:8px;font-size:14px;transition:.2s}
+.opt-item.correct{border-color:var(--green);background:rgba(16,185,129,.08);color:var(--green)}
+.explain-box{background:rgba(0,229,255,.05);border:1px solid rgba(0,229,255,.15);border-radius:10px;padding:14px;font-size:13px;line-height:1.7;margin-top:14px}
 
-/* Stat cards glow on hover */
-.stat-c:hover{border-color:var(--accent)!important;box-shadow:0 0 20px rgba(0,229,255,.1)!important}
+/* LOADING */
+.loading-row td{text-align:center;padding:40px;color:var(--muted);font-size:13px}
+.spinner{width:20px;height:20px;border:2.5px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;display:inline-block;vertical-align:middle;margin-right:8px}
 
-/* Nav items smooth */
-.nav-a{transition:all .18s cubic-bezier(.2,.8,.3,1)!important}
+/* TOAST */
+#toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(40px);background:var(--card);border:1px solid var(--border);border-radius:14px;padding:12px 20px;display:flex;align-items:center;gap:12px;font-size:14px;font-weight:600;z-index:2000;transition:.3s cubic-bezier(.16,1,.3,1);opacity:0;pointer-events:none;min-width:220px}
+#toast.show{transform:translateX(-50%) translateY(0);opacity:1}
 
-/* Logo pulse */
-@keyframes logoPulse{0%,100%{box-shadow:0 0 16px rgba(0,229,255,.3)}50%{box-shadow:0 0 28px rgba(0,229,255,.5)}}
-.logo-icon{animation:logoPulse 3s ease-in-out infinite}
-
-/* Topbar shadow on scroll */
-.topbar{transition:box-shadow .3s,background .3s,border-color .3s,left .28s!important}
-.topbar.scrolled{box-shadow:0 4px 32px rgba(0,0,0,.3)!important}
-
-/* Buttons ripple */
-.btn{position:relative;overflow:hidden}
-.btn::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,.1);opacity:0;border-radius:inherit;transform:scale(0);transition:.3s}
-.btn:active::after{transform:scale(1);opacity:1;transition:0s}
-
-/* Progress bars animated on load */
-.pbar-fill{animation:growBar .9s cubic-bezier(.2,.8,.3,1) both}
-@keyframes growBar{from{width:0!important}to{}}
-
-/* Suggestion items slide */
-.sug-item{transition:all .18s cubic-bezier(.2,.8,.3,1)!important}
-.sug-item:hover{transform:translateX(5px)!important;background:rgba(0,229,255,.03)!important}
-
-/* Topic cards */
-.tc{transition:all .2s cubic-bezier(.2,.8,.3,1)!important}
-.tc:hover{transform:translateY(-4px)!important;box-shadow:0 12px 32px rgba(0,0,0,.3)!important}
-
-/* Mode cards */
-.mode-c{transition:all .2s cubic-bezier(.2,.8,.3,1)!important}
-.mode-c:hover{transform:translateY(-3px)!important;box-shadow:0 8px 24px rgba(0,0,0,.25)!important}
-
-/* Part cards HSA */
-.part-c{transition:all .2s cubic-bezier(.2,.8,.3,1)!important}
-.part-c:hover{transform:translateY(-4px)!important;box-shadow:0 12px 32px rgba(0,0,0,.3)!important}
-
-/* Scrollbar upgrade */
-::-webkit-scrollbar{width:5px;height:5px}
-::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:rgba(0,229,255,.2);border-radius:3px}
-::-webkit-scrollbar-thumb:hover{background:rgba(0,229,255,.4)}
-
-/* Selection color */
-::selection{background:rgba(0,229,255,.25);color:var(--text)}
-
-/* Footer members hover */
-.sf-member{transition:.2s}
-.sf-member:hover{color:var(--accent)!important;transform:translateX(4px)}
-
-/* Icon buttons */
-.icon-btn{transition:all .18s cubic-bezier(.2,.8,.3,1)!important}
-.icon-btn:hover{transform:translateY(-1px)!important;background:rgba(0,229,255,.08)!important}
-
-/* Leaderboard items */
-.lb-item{transition:.18s}
-.lb-item:hover{background:rgba(0,229,255,.04);border-radius:8px;padding-left:8px}
-
-/* Schedule items */
-.sched-item{transition:.18s}
-.sched-item:hover{background:rgba(0,229,255,.03);border-radius:10px;padding:12px 8px}
-
-/* Badge pop */
-.badge{animation:badgePop 2s ease-in-out infinite}
-@keyframes badgePop{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
-
-/* HSA Hero gradient animate */
-.hsa-hero{background:linear-gradient(135deg,rgba(124,58,237,.08),rgba(0,229,255,.04),rgba(245,158,11,.04))!important;background-size:200%!important;animation:heroGrad 6s ease-in-out infinite!important}
-@keyframes heroGrad{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
-
-/* Streak flame */
-.streak-flame,.streak-icon{animation:flameDance 2s ease-in-out infinite}
-@keyframes flameDance{0%,100%{transform:rotate(-4deg) scale(1)}25%{transform:rotate(4deg) scale(1.07)}50%{transform:rotate(-2deg) scale(1.04)}75%{transform:rotate(3deg) scale(1.06)}}
-
-/* Count-up animation for stats */
-.stat-val,.sh-sv,.srv{animation:countUp .6s cubic-bezier(.2,.8,.3,1) both}
-@keyframes countUp{from{opacity:0;transform:scale(.7) translateY(10px)}to{opacity:1;transform:none}}
+@media(max-width:768px){.sidebar{transform:translateX(-100%);transition:.3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0}.topbar{left:0}.stats-row{grid-template-columns:1fr 1fr}}
 </style>
 </head>
 <body>
 <div class="app">
-<div class="sidebar-overlay" id="sb-overlay" onclick="closeSidebar()"></div>
-
-<aside class="sidebar">
-  <button class="sidebar-close" onclick="closeSidebar()">‹</button>
+<div class="sidebar">
   <a class="logo" href="dashboard.html">
-    <div class="logo-icon"><img src="logo.png" style="width:28px;height:28px;object-fit:contain;"></div>
+    <div class="logo-icon"><img src="logo.png" style="width:28px;height:28px;object-fit:contain" onerror="this.style.display='none'"></div>
     <div class="logo-text">Luyen<em>Thi</em>369</div>
   </a>
   <nav class="nav">
-    <div class="nav-sec">
-      <div class="nav-lbl">Tổng quan</div>
-      <a class="nav-a " href="dashboard.html"><span class="ic">🏠</span>Trang chủ</a>
-    </div>
-    <div class="nav-sec">
-      <div class="nav-lbl">Luyện tập</div>
-      <a class="nav-a " href="luyen-mon.html"><span class="ic">📖</span>Luyện theo môn</a>
-      <a class="nav-a " href="hsa.html"><span class="ic">🏛️</span>Phòng luyện HSA<span class="badge">HOT</span></a>
-    </div>
-    <div class="nav-sec">
-      <div class="nav-lbl">Tra cứu</div>
-      <a class="nav-a active" href="ngan-hang-de.html"><span class="ic">🗂️</span>Ngân hàng đề</a>
-      <a class="nav-a " href="cai-dat.html"><span class="ic">⚙️</span>Cài đặt</a>
-    </div>
+    <div class="nav-lbl">Học tập</div>
+    <a class="nav-a" href="dashboard.html"><span class="ic">🏠</span>Trang chủ</a>
+    <a class="nav-a" href="luyen-mon.html"><span class="ic">📖</span>Luyện theo môn</a>
+    <a class="nav-a" href="hsa.html"><span class="ic">🏛️</span>Phòng luyện HSA</a>
+    <div class="nav-lbl">Công cụ</div>
+    <a class="nav-a active" href="ngan-hang-de.html"><span class="ic">🗂️</span>Ngân hàng đề</a>
+    <a class="nav-a" href="cai-dat.html"><span class="ic">⚙️</span>Cài đặt</a>
+    <a class="nav-a" href="admin.html"><span class="ic">🔐</span>Admin</a>
   </nav>
   <div class="sb-foot">
     <a class="user-card" href="cai-dat.html">
       <div class="av" id="sb-av">?</div>
-      <div><div class="uname" id="sb-name">Đang tải...</div><div class="uplan">⭐ PRO</div></div>
+      <div><div class="uname" id="sb-name">Đang tải...</div><div class="uplan">✨ Free Plan</div></div>
     </a>
-    <button class="logout" onclick="location.href='dang-nhap.html'">🚪 Đăng xuất</button>
+    <button class="logout" onclick="doLogout()">🚪 Đăng xuất</button>
   </div>
-</aside>
-
+</div>
 <div class="main">
   <div class="topbar">
-    <div class="topbar-l" style="display:flex;align-items:center;gap:10px"><button class="hamburger" onclick="openSidebar()">☰</button><div style="display:flex;flex-direction:column"><div class="ttl">Ngân hàng đề</div><div class="tsub">Lọc theo môn & năm</div></div></div>
-    <div class="topbar-r"><button class="icon-btn" onclick="Pomodoro.open()" title="Pomodoro">🍅</button><button class="btn btn-v" onclick="Battle.open()" style="gap:6px">⚔️ Battle</button><button class="icon-btn" id="theme-btn" onclick="toggleTheme()">☀️</button></div>
+    <div class="topbar-l"><div class="ttl">🗂️ Ngân hàng đề</div></div>
+    <div class="topbar-r">
+      <button class="icon-btn" id="theme-btn" onclick="toggleTheme()">☀️</button>
+      <a class="btn btn-v" href="admin.html">+ Thêm câu hỏi</a>
+    </div>
   </div>
-  <div class="content fadein">
+  <div class="content">
+
+    <!-- STATS -->
+    <div class="stats-row">
+      <div class="stat-c">
+        <div class="stat-label">📚 Tổng câu hỏi</div>
+        <div class="stat-val" id="st-total" style="color:var(--accent)">--</div>
+        <div class="stat-sub">Đã duyệt</div>
+      </div>
+      <div class="stat-c">
+        <div class="stat-label">📐 Số môn học</div>
+        <div class="stat-val" id="st-subjects" style="color:#a78bfa">--</div>
+        <div class="stat-sub">Môn có câu hỏi</div>
+      </div>
+      <div class="stat-c">
+        <div class="stat-label">⚡ Dễ / TB / Khó</div>
+        <div class="stat-val" id="st-diff" style="color:var(--green);font-size:16px">-- / -- / --</div>
+        <div class="stat-sub">Theo độ khó</div>
+      </div>
+      <div class="stat-c">
+        <div class="stat-label">🕐 Cập nhật</div>
+        <div class="stat-val" id="st-updated" style="color:var(--accent3);font-size:16px">--</div>
+        <div class="stat-sub">Câu mới nhất</div>
+      </div>
+    </div>
+
+    <!-- FILTER -->
     <div class="filter-bar">
-      <div class="sw"><input type="text" id="search-inp" placeholder="Tìm đề thi..." oninput="filterBank()"></div>
-      <select class="fsel" id="sel-mon" onchange="filterBank()">
+      <div class="search-wrap">
+        <input type="text" id="search-input" placeholder="Tìm kiếm câu hỏi..." oninput="filterQuestions()">
+      </div>
+      <select id="filter-subject" onchange="filterQuestions()">
         <option value="">Tất cả môn</option>
-        <option value="Toán">Toán</option>
-        <option value="Vật lý">Vật lý</option>
-        <option value="Hóa học">Hóa học</option>
-        <option value="Sinh học">Sinh học</option>
-        <option value="Tiếng Anh">Tiếng Anh</option>
-        <option value="HSA">HSA</option>
+        <option value="toan">📐 Toán</option>
+        <option value="ly">⚡ Vật lý</option>
+        <option value="hoa">🧪 Hóa học</option>
+        <option value="sinh">🌱 Sinh học</option>
+        <option value="anh">🌍 Tiếng Anh</option>
+        <option value="van">📖 Ngữ Văn</option>
+        <option value="su">📜 Lịch Sử</option>
+        <option value="dia">🗺 Địa Lý</option>
+        <option value="gdcd">⚖️ GDCD</option>
+        <option value="hsa">🎯 HSA</option>
       </select>
-      <select class="fsel" id="sel-year" onchange="filterBank()">
-        <option value="">Tất cả năm</option>
-        <option value="2025">2025</option>
-        <option value="2024">2024</option>
-        <option value="2023">2023</option>
-        <option value="2022">2022</option>
+      <select id="filter-diff" onchange="filterQuestions()">
+        <option value="">Tất cả độ khó</option>
+        <option value="easy">Dễ</option>
+        <option value="medium">Trung bình</option>
+        <option value="hard">Khó</option>
       </select>
+      <button class="btn btn-g" onclick="resetFilters()">↺ Đặt lại</button>
     </div>
-    <div class="tabs-row">
-      <div class="ftab active" onclick="setTab('all',this)">Tất cả (14)</div>
-      <div class="ftab" onclick="setTab('bo',this)">📚 Bộ GD&ĐT</div>
-      <div class="ftab" onclick="setTab('truong',this)">🏫 Trường THPT</div>
-      <div class="ftab" onclick="setTab('dd',this)">📝 Đề dự đoán</div>
-      <div class="ftab" onclick="setTab('ai',this)">🤖 AI tạo</div>
-    </div>
-    <div class="bank-grid" id="bank-grid"></div>
-  </div>
-  
-<footer class="site-footer">
-  <div class="sf-inner">
-    <div class="sf-col">
-      <div class="sf-label">Địa chỉ</div>
-      <div class="sf-addr">
-        <strong>Lớp 12A4</strong><br>
-        Trường THPT Đan Phượng<br>
-        Thị trấn Phùng, huyện Đan Phượng<br>
-        Hà Nội
-      </div>
-      <div class="sf-map">
-        <iframe src="https://maps.google.com/maps?q=Tr%C6%B0%E1%BB%9Dng%20THPT%20%C4%90an%20Ph%C6%B0%E1%BB%A3ng&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
-    </div>
-    <div class="sf-col">
-      <div class="sf-label">Thành viên nhóm</div>
-      <div class="sf-members">
-        <div class="sf-member">Nguyễn Thế Hải Nam</div>
-        <div class="sf-member">Doãn Hà Anh</div>
-        <div class="sf-member">Nguyễn Huyền Linh</div>
-        <div class="sf-member">Đỗ Minh Phương</div>
-        <div class="sf-member">Nguyễn Thị Mai Trang</div>
-      </div>
-    </div>
-    <div class="sf-col">
-      <div class="sf-label">Mạng xã hội</div>
-      <div class="sf-fb">
-        <a href="https://facebook.com" target="_blank">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="#1877f2"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.413c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.953h-1.513c-1.491 0-1.956.93-1.956 1.886v2.284h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
-          Facebook
-        </a>
-      </div>
-    </div>
-  </div>
-  <div class="sf-bottom">
-    <span class="sf-copy">© 2026 LuyenThi369</span>
-    <span class="sf-brand">Lớp 12A4 · Trường THPT Đan Phượng</span>
-  </div>
-</footer>
 
-</div>
-</div>
-<!-- PREVIEW OVERLAY -->
-<div class="prev-ov" id="prev-ov">
-  <div class="prev-box">
-    <div class="prev-hdr">
-      <div class="prev-title" id="prev-title">Xem trước đề</div>
-      <div class="prev-close" onclick="closePrev()">✕</div>
-    </div>
-    <div class="prev-body" id="prev-body"></div>
-    <div class="prev-foot">
-      <button class="btn btn-g" onclick="closePrev()">Đóng</button>
-      <button class="btn btn-p">▶ Bắt đầu làm đề</button>
+    <!-- TABLE -->
+    <div class="card" style="padding:0;overflow:hidden">
+      <table class="q-table">
+        <thead>
+          <tr>
+            <th style="width:50px">#</th>
+            <th>Câu hỏi</th>
+            <th style="width:110px">Môn</th>
+            <th style="width:90px">Chủ đề</th>
+            <th style="width:80px">Độ khó</th>
+            <th style="width:80px;text-align:right">Thao tác</th>
+          </tr>
+        </thead>
+        <tbody id="q-tbody">
+          <tr class="loading-row"><td colspan="6"><span class="spinner"></span>Đang tải câu hỏi...</td></tr>
+        </tbody>
+      </table>
+      <div style="padding:14px 16px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+        <div class="page-info" id="page-info">-- câu hỏi</div>
+        <div id="pagination" style="display:flex;gap:6px;flex-wrap:wrap"></div>
+      </div>
     </div>
   </div>
 </div>
+</div>
+
+<!-- MODAL XEM CHI TIẾT -->
+<div class="modal-ov" id="modal-ov">
+  <div class="modal-box">
+    <div class="modal-hdr">
+      <div class="modal-title" id="modal-title">Chi tiết câu hỏi</div>
+      <div class="modal-close" onclick="closeModal()">✕</div>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"><span id="toast-ic">📚</span><div><div id="toast-title"></div><div id="toast-sub" style="font-size:12px;color:var(--muted);margin-top:2px"></div></div></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+function applyTheme(t){document.documentElement.setAttribute('data-theme',t);localStorage.setItem('lt369_theme',t);const b=document.getElementById('theme-btn');if(b)b.textContent=t==='dark'?'☀️':'🌙';}
+function toggleTheme(){applyTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark');}
+const sb=window.supabase.createClient('https://ezimwiluksaomtdfsoam.supabase.co','eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV6aW13aWx1a3Nhb210ZGZzb2FtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI0NjEwNDcsImV4cCI6MjA4ODAzNzA0N30.JEcSet75PFEWDcxHP3_4jfWJeiJ16znBddF3XcNtbS0');
 
-function applyTheme(t){
-  document.documentElement.setAttribute('data-theme',t);
-  localStorage.setItem('lt369_theme',t);
-  const b=document.getElementById('theme-btn');
-  if(b) b.textContent=t==='dark'?'☀️':'🌙';
-}
-function toggleTheme(){applyTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark')}
+const SUBJ_LABEL={toan:'📐 Toán',ly:'⚡ Vật lý',hoa:'🧪 Hóa học',sinh:'🌱 Sinh học',anh:'🌍 Tiếng Anh',van:'📖 Văn',su:'📜 Lịch Sử',dia:'🗺 Địa Lý',gdcd:'⚖️ GDCD',hsa:'🎯 HSA'};
+const SUBJ_COLOR={toan:'rgba(0,229,255,.12)',ly:'rgba(167,139,250,.12)',hoa:'rgba(52,211,153,.12)',sinh:'rgba(74,222,128,.12)',anh:'rgba(245,158,11,.12)',van:'rgba(244,114,182,.12)',su:'rgba(251,146,60,.12)',dia:'rgba(52,211,153,.12)',gdcd:'rgba(96,165,250,.12)',hsa:'rgba(251,191,36,.12)'};
 
+let allQuestions=[], filtered=[], page=1, PAGE_SIZE=20;
 
-(function(){
+(async()=>{
   applyTheme(localStorage.getItem('lt369_theme')||'dark');
-  const n=localStorage.getItem('lt369_user')||'bạn';
-  const av=document.getElementById('sb-av');
-  const nm=document.getElementById('sb-name');
-  if(av) av.textContent=n.charAt(0).toUpperCase();
-  if(nm) nm.textContent=n;
-  const el=document.getElementById('na-bank');
-  if(el) el.classList.add('active');
+  const {data:{session}}=await sb.auth.getSession();
+  if(!session){location.href='dang-nhap.html';return;}
+  const name=session.user.user_metadata?.full_name||session.user.email.split('@')[0];
+  document.getElementById('sb-av').textContent=name.charAt(0).toUpperCase();
+  document.getElementById('sb-name').textContent=name;
+  await loadQuestions();
 })();
+async function doLogout(){await sb.auth.signOut();location.href='dang-nhap.html';}
 
-const BANK=[
-  {id:1,title:'Đề thi THPT Quốc gia 2025 – Môn Toán',type:'bo',mon:'Toán',year:'2025',q:50,time:90,diff:'Khó',score:'9.2'},
-  {id:2,title:'Đề thi THPT Quốc gia 2025 – Vật lý',type:'bo',mon:'Vật lý',year:'2025',q:40,time:50,diff:'Khó',score:'8.8'},
-  {id:3,title:'Đề thi THPT Quốc gia 2025 – Hóa học',type:'bo',mon:'Hóa học',year:'2025',q:40,time:50,diff:'Trung bình',score:'8.5'},
-  {id:4,title:'Đề thi THPT Quốc gia 2024 – Môn Toán',type:'bo',mon:'Toán',year:'2024',q:50,time:90,diff:'Trung bình',score:'8.0'},
-  {id:5,title:'Đề thi THPT Quốc gia 2024 – Tiếng Anh',type:'bo',mon:'Tiếng Anh',year:'2024',q:50,time:60,diff:'Trung bình',score:'7.8'},
-  {id:6,title:'Đề thử nghiệm THPT 2026 – THPT Đan Phượng',type:'truong',mon:'Tổng hợp',year:'2025',q:40,time:60,diff:'Dễ',score:'9.0'},
-  {id:7,title:'Đề kiểm tra HK1 2025 – Toán',type:'truong',mon:'Toán',year:'2025',q:30,time:45,diff:'Dễ',score:'9.5'},
-  {id:8,title:'Đề kiểm tra HK1 2025 – Hóa học',type:'truong',mon:'Hóa học',year:'2025',q:30,time:45,diff:'Dễ',score:'8.7'},
-  {id:9,title:'Đề dự đoán THPT 2026 – Toán (Đề 1)',type:'dd',mon:'Toán',year:'2026',q:50,time:90,diff:'Khó',score:'7.5'},
-  {id:10,title:'Đề dự đoán THPT 2026 – Vật lý (Đề 1)',type:'dd',mon:'Vật lý',year:'2026',q:40,time:50,diff:'Khó',score:'7.2'},
-  {id:11,title:'Đề dự đoán THPT 2026 – Tiếng Anh',type:'dd',mon:'Tiếng Anh',year:'2026',q:50,time:60,diff:'Trung bình',score:'8.1'},
-  {id:12,title:'HSA Mock Test #10 – Full đề 150 câu',type:'ai',mon:'HSA',year:'2025',q:150,time:195,diff:'Khó',score:'112'},
-  {id:13,title:'HSA Mock Test #11 – Tư duy định lượng',type:'ai',mon:'HSA',year:'2025',q:50,time:75,diff:'Khó',score:'45'},
-  {id:14,title:'AI Generated – Đề tổng hợp 2026',type:'ai',mon:'Tổng hợp',year:'2026',q:40,time:60,diff:'Trung bình',score:'8.3'},
-];
-const TYPE_LABELS={bo:'📚 Bộ GD&ĐT',truong:'🏫 Trường THPT',dd:'📝 Đề dự đoán',ai:'🤖 AI tạo'};
-const TYPE_CLASSES={bo:'bb-bo',truong:'bb-truong',dd:'bb-dd',ai:'bb-ai'};
-const DIFF_CLASSES={Khó:'diff-h','Trung bình':'diff-m',Dễ:'diff-e'};
-let currentTab='all';
-function renderBank(data){
-  document.getElementById('bank-grid').innerHTML=data.map(d=>`
-    <div class="bi" onclick="openPrev(${d.id})">
-      <div class="bi-hdr">
-        <span class="bib ${TYPE_CLASSES[d.type]}">${TYPE_LABELS[d.type]}</span>
-        <span class="bi-year">${d.year}</span>
-      </div>
-      <div class="bi-title">${d.title}</div>
-      <div class="bi-meta">${d.mon} · ${d.q} câu · ${d.time} phút</div>
-      <div class="bi-foot">
-        <span class="bi-diff ${DIFF_CLASSES[d.diff]}">● ${d.diff}</span>
-        <button class="start-btn" onclick="event.stopPropagation()">▶ Làm đề</button>
-      </div>
-    </div>`).join('');
-}
-function filterBank(){
-  const s=document.getElementById('search-inp').value.toLowerCase();
-  const m=document.getElementById('sel-mon').value;
-  const y=document.getElementById('sel-year').value;
-  let data=BANK.filter(d=>
-    (currentTab==='all'||d.type===currentTab)&&
-    (!s||d.title.toLowerCase().includes(s))&&
-    (!m||d.mon===m)&&
-    (!y||d.year===y)
-  );
-  renderBank(data);
-}
-function setTab(t,el){currentTab=t;document.querySelectorAll('.ftab').forEach(e=>e.classList.remove('active'));el.classList.add('active');filterBank()}
-function openPrev(id){
-  const d=BANK.find(b=>b.id===id);if(!d)return;
-  document.getElementById('prev-title').textContent=d.title;
-  document.getElementById('prev-body').innerHTML=`
-    <div class="prev-info">
-      <div class="pi"><div class="piv">${d.q}</div><div class="pil">Câu hỏi</div></div>
-      <div class="pi"><div class="piv">${d.time}'</div><div class="pil">Thời gian</div></div>
-      <div class="pi"><div class="piv" style="font-size:14px">${d.diff}</div><div class="pil">Độ khó</div></div>
-    </div>
-    <p style="font-size:13px;color:var(--muted);margin-bottom:16px">Môn: <strong style="color:var(--text)">${d.mon}</strong> · Năm: <strong style="color:var(--text)">${d.year}</strong> · Nguồn: <strong style="color:var(--text)">${TYPE_LABELS[d.type]}</strong></p>
-    <p style="font-size:13px;color:var(--muted)">Điểm trung bình người dùng: <strong style="color:var(--accent);font-family:'Space Mono'">${d.score}</strong></p>`;
-  document.getElementById('prev-ov').classList.add('show');
-  document.body.style.overflow='hidden';
-}
-function closePrev(){document.getElementById('prev-ov').classList.remove('show');document.body.style.overflow=''}
-renderBank(BANK);
-
-
-// Topbar scroll shadow
-window.addEventListener('scroll',()=>{
-  const tb=document.querySelector('.topbar');
-  if(tb) tb.classList.toggle('scrolled',window.scrollY>10);
-});
-function openSidebar(){
-  document.querySelector('.sidebar').classList.add('open');
-  var ov=document.getElementById('sb-overlay');
-  if(ov)ov.classList.add('show');
-  document.body.style.overflow='hidden';
-}
-function closeSidebar(){
-  document.querySelector('.sidebar').classList.remove('open');
-  var ov=document.getElementById('sb-overlay');
-  if(ov)ov.classList.remove('show');
-  document.body.style.overflow='';
-}
-// ═══════════════════════════════════════════════
-// SHARED ENHANCEMENTS - LuyenThi369
-// Battle Mode + Sound + Confetti + UI upgrades
-// ═══════════════════════════════════════════════
-
-// ── WEB AUDIO SOUND ENGINE ──
-const SFX = (function(){
-  let ctx = null;
-  function getCtx(){ if(!ctx) ctx = new (window.AudioContext||window.webkitAudioContext)(); return ctx; }
-  function play(freq, type, duration, gain=0.3){
-    try{
-      const c=getCtx(), o=c.createOscillator(), g=c.createGain();
-      o.connect(g); g.connect(c.destination);
-      o.type=type; o.frequency.setValueAtTime(freq,c.currentTime);
-      g.gain.setValueAtTime(gain,c.currentTime);
-      g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+duration);
-      o.start(c.currentTime); o.stop(c.currentTime+duration);
-    } catch(e){}
+async function loadQuestions(){
+  const {data,error}=await sb.from('questions').select('id,subject,topic,content,options,correct_index,explanation,difficulty,created_at,approved').order('created_at',{ascending:false});
+  if(error){showToast('⚠️','Lỗi tải dữ liệu',error.message);return;}
+  allQuestions=data||[];
+  // Stats
+  document.getElementById('st-total').textContent=allQuestions.filter(q=>q.approved).length;
+  const subjects=new Set(allQuestions.map(q=>q.subject));
+  document.getElementById('st-subjects').textContent=subjects.size;
+  const easy=allQuestions.filter(q=>q.difficulty==='easy').length;
+  const med=allQuestions.filter(q=>q.difficulty==='medium'||!q.difficulty).length;
+  const hard=allQuestions.filter(q=>q.difficulty==='hard').length;
+  document.getElementById('st-diff').textContent=easy+' / '+med+' / '+hard;
+  if(allQuestions.length){
+    const d=new Date(allQuestions[0].created_at);
+    document.getElementById('st-updated').textContent=d.toLocaleDateString('vi',{day:'2-digit',month:'2-digit'});
   }
-  return {
-    correct(){ play(523,  'sine', 0.12, 0.25); setTimeout(()=>play(659,'sine',0.12,0.2),80); setTimeout(()=>play(784,'sine',0.18,0.18),160); },
-    wrong(){   play(200,  'sawtooth', 0.15, 0.18); setTimeout(()=>play(160,'sawtooth',0.1,0.18),100); },
-    flip(){    play(880,  'sine', 0.06, 0.08); },
-    click(){   play(1200, 'sine', 0.04, 0.05); },
-    streak(){  [523,659,784,1047].forEach((f,i)=>setTimeout(()=>play(f,'sine',0.2,0.3),i*80)); },
-    countdown(){ play(440,'square',0.1,0.08); },
-    finish(){  [784,988,1175,1568].forEach((f,i)=>setTimeout(()=>play(f,'sine',0.25,0.3),i*100)); },
-    battle_start(){ [262,330,392,523].forEach((f,i)=>setTimeout(()=>play(f,'triangle',0.2,0.25),i*60)); }
-  };
-})();
-
-// ── CONFETTI ENGINE ──
-const Confetti = (function(){
-  let canvas, ctx2, pieces=[], anim=null;
-  const COLORS=['#00e5ff','#7c3aed','#f59e0b','#10b981','#ef4444','#a78bfa','#34d399','#fbbf24'];
-  function init(){
-    if(canvas) return;
-    canvas=document.createElement('canvas');
-    canvas.style.cssText='position:fixed;inset:0;pointer-events:none;z-index:99999;';
-    document.body.appendChild(canvas);
-    ctx2=canvas.getContext('2d');
-    resize(); window.addEventListener('resize',resize);
-  }
-  function resize(){ if(canvas){canvas.width=innerWidth;canvas.height=innerHeight;} }
-  function burst(n=120){
-    init();
-    for(let i=0;i<n;i++){
-      pieces.push({
-        x:Math.random()*innerWidth, y:-20,
-        vx:(Math.random()-0.5)*8, vy:Math.random()*6+3,
-        rot:Math.random()*360, rotV:(Math.random()-0.5)*8,
-        w:Math.random()*10+5, h:Math.random()*6+3,
-        color:COLORS[Math.floor(Math.random()*COLORS.length)],
-        alpha:1, gravity:0.15
-      });
-    }
-    if(!anim) loop();
-  }
-  function loop(){
-    ctx2.clearRect(0,0,canvas.width,canvas.height);
-    pieces=pieces.filter(p=>{
-      p.x+=p.vx; p.y+=p.vy; p.vy+=p.gravity;
-      p.rot+=p.rotV; p.alpha-=0.008;
-      if(p.alpha<=0||p.y>canvas.height+20) return false;
-      ctx2.save(); ctx2.translate(p.x,p.y); ctx2.rotate(p.rot*Math.PI/180);
-      ctx2.globalAlpha=p.alpha; ctx2.fillStyle=p.color;
-      ctx2.fillRect(-p.w/2,-p.h/2,p.w,p.h);
-      ctx2.restore();
-      return true;
-    });
-    if(pieces.length>0){anim=requestAnimationFrame(loop);}
-    else{anim=null; ctx2.clearRect(0,0,canvas.width,canvas.height);}
-  }
-  return { burst };
-})();
-
-// ── TOAST SYSTEM ──
-function showToast(ic, title, sub, color=''){
-  let t=document.getElementById('global-toast');
-  if(!t){
-    t=document.createElement('div'); t.id='global-toast';
-    t.style.cssText='position:fixed;bottom:24px;right:24px;background:linear-gradient(135deg,#1a2236,#0d1220);border:1px solid #1e2840;border-radius:14px;padding:14px 20px;display:flex;align-items:center;gap:12px;z-index:9998;transform:translateY(80px);opacity:0;transition:.4s cubic-bezier(.2,.8,.3,1);box-shadow:0 8px 32px rgba(0,0,0,.5);max-width:300px;pointer-events:none;';
-    document.body.appendChild(t);
-  }
-  if(color) t.style.borderColor=color;
-  t.innerHTML=`<span style="font-size:24px">${ic}</span><div><div style="font-size:14px;font-weight:700;color:#e8edf5">${title}</div>${sub?`<div style="font-size:12px;color:#5a6b88;margin-top:2px">${sub}</div>`:''}</div>`;
-  t.style.transform='translateY(0)'; t.style.opacity='1';
-  clearTimeout(t._timer);
-  t._timer=setTimeout(()=>{t.style.transform='translateY(80px)';t.style.opacity='0';},3500);
+  filtered=[...allQuestions];
+  renderTable();
 }
 
-// ── BATTLE MODE ──
-const Battle = (function(){
-  const QBANK_BATTLE = {
-    toan:[
-      {q:'∫2x dx = ?',o:['x²+C','x²/2+C','2x²+C','2+C'],a:0},
-      {q:'Đạo hàm của x³ là?',o:['3x','3x²','x²','2x³'],a:1},
-      {q:'log₂(8) = ?',o:['2','3','4','8'],a:1},
-      {q:'sin(90°) = ?',o:['0','1','-1','√2/2'],a:1},
-      {q:'Diện tích hình tròn bán kính r?',o:['πr','2πr','πr²','4πr²'],a:2},
-      {q:'(a+b)² = ?',o:['a²+b²','a²+ab+b²','a²+2ab+b²','2a²+2b²'],a:2},
-      {q:'Nghiệm của 2x+6=0 là?',o:['x=3','x=-3','x=6','x=-6'],a:1},
-      {q:'C(5,2) = ?',o:['10','20','5','15'],a:0},
-      {q:'cos(0°) = ?',o:['0','1','-1','1/2'],a:1},
-      {q:'Giới hạn lim(x→∞) 1/x = ?',o:['1','∞','0','-1'],a:2},
-    ],
-    ly:[
-      {q:'F=ma. Nếu F=10N, m=2kg thì a=?',o:['5 m/s²','20 m/s²','8 m/s²','12 m/s²'],a:0},
-      {q:'Tốc độ ánh sáng xấp xỉ?',o:['3×10⁶ m/s','3×10⁸ m/s','3×10¹⁰ m/s','3×10⁴ m/s'],a:1},
-      {q:'Đơn vị đo lực là?',o:['Pascal','Joule','Newton','Watt'],a:2},
-      {q:'Công thức tính động năng?',o:['mv','½mv²','ma','F×d'],a:1},
-      {q:'P=U×I là công thức tính?',o:['Điện trở','Công suất','Điện áp','Cường độ'],a:1},
-      {q:'Chu kỳ T = 1/f, f là?',o:['Biên độ','Pha ban đầu','Tần số','Góc pha'],a:2},
-      {q:'Hiện tượng khúc xạ ánh sáng xảy ra khi?',o:['Ánh sáng phản xạ','Ánh sáng đi qua 2 môi trường','Ánh sáng tắt','Nhiễu xạ'],a:1},
-      {q:'Đơn vị điện trở là?',o:['Volt','Ampere','Ohm','Farad'],a:2},
-    ],
-    hoa:[
-      {q:'Số hiệu nguyên tử của Natri (Na)?',o:['10','11','12','13'],a:1},
-      {q:'Công thức hóa học của nước?',o:['H₂O₂','HO','H₂O','H₃O'],a:2},
-      {q:'NaOH là?',o:['Axit','Bazơ','Muối','Oxit axit'],a:1},
-      {q:'Phản ứng tráng bạc dùng để nhận biết?',o:['Glucozo','Fructozo','Saccarozo','Tinh bột'],a:0},
-      {q:'CO₂ là oxit gì?',o:['Oxit bazơ','Oxit lưỡng tính','Oxit axit','Oxit trung tính'],a:2},
-      {q:'Khí gây hiệu ứng nhà kính chủ yếu?',o:['O₂','N₂','CO₂','H₂'],a:2},
-      {q:'Polyme được tổng hợp từ?',o:['Monome','Dime','Polyme nhỏ hơn','Nguyên tử'],a:0},
-      {q:'Kim loại nào dẫn điện tốt nhất?',o:['Vàng','Sắt','Bạc','Nhôm'],a:2},
-    ],
-    anh:[
-      {q:'"She ___ to school every day."',o:['go','goes','going','gone'],a:1},
-      {q:'Antonym of "generous"?',o:['kind','stingy','brave','honest'],a:1},
-      {q:'"I wish I ___ more money."',o:['have','had','will have','has'],a:1},
-      {q:'Passive: "They built this bridge." →',o:['This bridge built','This bridge is built','This bridge was built','This bridge were built'],a:2},
-      {q:'"Good at" + ?',o:['V-inf','V-ed','V-ing','V-s'],a:2},
-      {q:'Which word is a noun?',o:['beautiful','quickly','happiness','run'],a:2},
-      {q:'"It is high time we ___."',o:['leave','left','leaving','to leave'],a:1},
-      {q:'"Put off" means?',o:['cancel','postpone','hurry','finish'],a:1},
-    ],
-    mix:[]
-  };
-  // Build mix from all
-  Object.keys(QBANK_BATTLE).filter(k=>k!=='mix').forEach(k=>{
-    QBANK_BATTLE.mix.push(...QBANK_BATTLE[k]);
+function filterQuestions(){
+  const q=document.getElementById('search-input').value.toLowerCase();
+  const subj=document.getElementById('filter-subject').value;
+  const diff=document.getElementById('filter-diff').value;
+  filtered=allQuestions.filter(item=>{
+    if(subj&&item.subject!==subj)return false;
+    if(diff&&item.difficulty!==diff)return false;
+    if(q&&!item.content.toLowerCase().includes(q)&&!(item.topic||'').toLowerCase().includes(q))return false;
+    return true;
   });
+  page=1;renderTable();
+}
+function resetFilters(){document.getElementById('search-input').value='';document.getElementById('filter-subject').value='';document.getElementById('filter-diff').value='';filtered=[...allQuestions];page=1;renderTable();}
 
-  let overlay, state={};
-
-  function buildOverlay(){
-    const el=document.createElement('div');
-    el.id='battle-ov';
-    el.style.cssText='display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);backdrop-filter:blur(20px);z-index:500;align-items:center;justify-content:center;';
-    el.innerHTML=`
-    <div id="battle-box" style="width:700px;max-width:95vw;background:#0d1117;border:1px solid #1e2840;border-radius:24px;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,.7);">
-      <!-- LOBBY -->
-      <div id="bt-lobby" style="padding:40px;text-align:center;">
-        <div style="font-size:52px;margin-bottom:12px;animation:pulse2 1.5s ease-in-out infinite">⚔️</div>
-        <h2 style="font-size:28px;font-weight:900;margin-bottom:8px;background:linear-gradient(135deg,#00e5ff,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Battle Mode</h2>
-        <p style="color:#5a6b88;margin-bottom:28px;font-size:14px">10 câu · 15 giây/câu · Điểm theo tốc độ</p>
-        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:24px;" id="bt-subj-grid">
-          <div class="bt-sopt active" data-s="mix" onclick="Battle.selSubj(this,'mix')">🎲 Tổng hợp</div>
-          <div class="bt-sopt" data-s="toan" onclick="Battle.selSubj(this,'toan')">📐 Toán</div>
-          <div class="bt-sopt" data-s="ly" onclick="Battle.selSubj(this,'ly')">⚡ Vật lý</div>
-          <div class="bt-sopt" data-s="hoa" onclick="Battle.selSubj(this,'hoa')">🧪 Hóa</div>
-          <div class="bt-sopt" data-s="anh" onclick="Battle.selSubj(this,'anh')">🌍 Anh</div>
-        </div>
-        <button onclick="Battle.start()" style="width:100%;padding:16px;background:linear-gradient(135deg,#00e5ff,#0099cc);border:none;border-radius:12px;color:#000;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit;transition:.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">⚡ Bắt đầu!</button>
-        <button onclick="Battle.close()" style="margin-top:10px;width:100%;padding:10px;background:none;border:1px solid #1e2840;border-radius:12px;color:#5a6b88;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;">✕ Đóng</button>
-      </div>
-      <!-- GAME -->
-      <div id="bt-game" style="display:none;">
-        <div style="padding:16px 24px;border-bottom:1px solid #1e2840;display:flex;align-items:center;justify-content:space-between;">
-          <div style="font-size:13px;color:#5a6b88;font-weight:600" id="bt-qnum">Câu 1/10</div>
-          <div id="bt-timer-wrap" style="display:flex;align-items:center;gap:8px;">
-            <div id="bt-timer-bar-wrap" style="width:120px;height:6px;background:#1e2840;border-radius:999px;overflow:hidden;">
-              <div id="bt-timer-bar" style="height:100%;background:linear-gradient(90deg,#00e5ff,#7c3aed);border-radius:999px;transition:width .1s linear;"></div>
-            </div>
-            <div id="bt-timer" style="font-family:'Space Mono';font-size:20px;font-weight:900;color:#f59e0b;min-width:28px;text-align:right;">15</div>
-          </div>
-          <div id="bt-score-display" style="font-family:'Space Mono';font-size:16px;font-weight:800;color:#00e5ff;">0 pts</div>
-        </div>
-        <div style="padding:28px 28px 20px;">
-          <div id="bt-qtxt" style="font-size:20px;font-weight:700;line-height:1.6;margin-bottom:22px;min-height:60px;"></div>
-          <div id="bt-opts" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"></div>
-          <div id="bt-explain" style="display:none;margin-top:16px;padding:14px 16px;background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.2);border-radius:12px;font-size:13px;line-height:1.7;"></div>
-        </div>
-      </div>
-      <!-- RESULT -->
-      <div id="bt-result" style="display:none;padding:40px;text-align:center;"></div>
-    </div>`;
-    // Add styles
-    const style=document.createElement('style');
-    style.textContent=`
-    #battle-ov.show{display:flex!important}
-    .bt-sopt{padding:12px 8px;background:#111622;border:2px solid #1e2840;border-radius:12px;cursor:pointer;font-size:13px;font-weight:700;color:#5a6b88;transition:.2s;text-align:center;}
-    .bt-sopt:hover{border-color:#5a6b88;color:#e8edf5;}
-    .bt-sopt.active{background:rgba(0,229,255,.08);border-color:#00e5ff;color:#00e5ff;}
-    .bt-opt{padding:14px 16px;background:#111622;border:2px solid #1e2840;border-radius:12px;cursor:pointer;font-size:14px;font-weight:600;color:#e8edf5;transition:.2s;text-align:left;display:flex;align-items:center;gap:10px;}
-    .bt-opt:hover:not(.locked){border-color:#00e5ff;background:rgba(0,229,255,.04);transform:translateY(-1px);}
-    .bt-opt.correct{border-color:#10b981!important;background:rgba(16,185,129,.12)!important;color:#10b981!important;animation:correctPop .3s ease;}
-    .bt-opt.wrong{border-color:#ef4444!important;background:rgba(239,68,68,.1)!important;color:#ef4444!important;animation:wrongShake .3s ease;}
-    .bt-opt.reveal{border-color:#10b981;background:rgba(16,185,129,.06);color:#10b981;}
-    .bt-olbl{width:24px;height:24px;border-radius:6px;background:#1e2840;display:grid;place-items:center;font-size:12px;font-weight:800;flex-shrink:0;font-family:'Space Mono';}
-    .bt-opt.correct .bt-olbl{background:#10b981;color:#fff;}
-    .bt-opt.wrong .bt-olbl{background:#ef4444;color:#fff;}
-    @keyframes pulse2{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
-    @keyframes correctPop{0%{transform:scale(1)}40%{transform:scale(1.03)}100%{transform:scale(1)}}
-    @keyframes wrongShake{0%,100%{transform:translateX(0)}20%{transform:translateX(-5px)}60%{transform:translateX(5px)}}
-    @keyframes btScorePop{0%{transform:scale(1)}50%{transform:scale(1.3)}100%{transform:scale(1)}}
-    `;
-    document.head.appendChild(style);
-    document.body.appendChild(el);
-    overlay=el;
-  }
-
-  let selectedSubj='mix', timerI=null, timeLeft=15, currentQ=0, questions=[], answers=[], score=0;
-
-  function open(){
-    if(!overlay) buildOverlay();
-    document.getElementById('bt-lobby').style.display='block';
-    document.getElementById('bt-game').style.display='none';
-    document.getElementById('bt-result').style.display='none';
-    overlay.classList.add('show');
-    document.body.style.overflow='hidden';
-  }
-  function close(){
-    if(overlay) overlay.classList.remove('show');
-    document.body.style.overflow='';
-    clearInterval(timerI);
-  }
-  function selSubj(el, subj){
-    selectedSubj=subj;
-    document.querySelectorAll('.bt-sopt').forEach(e=>e.classList.remove('active'));
-    el.classList.add('active');
-  }
-  function start(){
-    SFX.battle_start();
-    const pool=[...(QBANK_BATTLE[selectedSubj]||QBANK_BATTLE.mix)].sort(()=>Math.random()-.5);
-    questions=pool.slice(0,10);
-    answers=[];
-    score=0;
-    currentQ=0;
-    document.getElementById('bt-lobby').style.display='none';
-    document.getElementById('bt-game').style.display='block';
-    document.getElementById('bt-result').style.display='none';
-    renderQ();
-  }
-  function renderQ(){
-    if(currentQ>=questions.length){showResult();return;}
-    const q=questions[currentQ];
-    document.getElementById('bt-qnum').textContent=`Câu ${currentQ+1}/10`;
-    document.getElementById('bt-score-display').textContent=score+' pts';
-    document.getElementById('bt-qtxt').textContent=q.q;
-    document.getElementById('bt-explain').style.display='none';
-    document.getElementById('bt-opts').innerHTML=q.o.map((o,i)=>`
-      <div class="bt-opt" onclick="Battle._answer(${i})" data-idx="${i}">
-        <span class="bt-olbl">${['A','B','C','D'][i]}</span>${o}
-      </div>`).join('');
-    startTimer();
-  }
-  function startTimer(){
-    clearInterval(timerI);
-    timeLeft=15;
-    updateTimerUI();
-    timerI=setInterval(()=>{
-      timeLeft--;
-      updateTimerUI();
-      if(timeLeft<=5) SFX.countdown();
-      if(timeLeft<=0){clearInterval(timerI);_answer(-1);}
-    },1000);
-  }
-  function updateTimerUI(){
-    document.getElementById('bt-timer').textContent=timeLeft;
-    document.getElementById('bt-timer-bar').style.width=(timeLeft/15*100)+'%';
-    const col=timeLeft<=5?'#ef4444':timeLeft<=10?'#f59e0b':'';
-    document.getElementById('bt-timer').style.color=col||'#f59e0b';
-    document.getElementById('bt-timer-bar').style.background=timeLeft<=5?'#ef4444':timeLeft<=10?'linear-gradient(90deg,#f59e0b,#ef4444)':'linear-gradient(90deg,#00e5ff,#7c3aed)';
-  }
-  function _answer(idx){
-    clearInterval(timerI);
-    const q=questions[currentQ];
-    const correct=idx===q.a;
-    const timeBonus=Math.max(0,timeLeft);
-    const pts=correct?100+timeBonus*10:0;
-    score+=pts;
-    answers.push({q:q.q,chosen:idx,correct:q.a,isCorrect:correct,pts});
-    // Lock all options
-    document.querySelectorAll('.bt-opt').forEach(el=>{
-      el.classList.add('locked');
-      el.style.cursor='default';
-      el.onclick=null;
-    });
-    // Highlight
-    document.querySelectorAll('.bt-opt').forEach(el=>{
-      const i=parseInt(el.dataset.idx);
-      if(i===q.a) el.classList.add('correct');
-      else if(i===idx && idx!==q.a) el.classList.add('wrong');
-    });
-    if(correct){SFX.correct();if(pts>200)Confetti.burst(40);}
-    else SFX.wrong();
-    document.getElementById('bt-score-display').textContent=score+' pts';
-    document.getElementById('bt-score-display').style.animation='btScorePop .3s ease';
-    setTimeout(()=>document.getElementById('bt-score-display').style.animation='',300);
-    // Show explain briefly then next
-    if(idx===-1){
-      const exp=document.getElementById('bt-explain');
-      exp.innerHTML=`⏰ <strong>Hết giờ!</strong> Đáp án đúng: <strong>${['A','B','C','D'][q.a]}. ${q.o[q.a]}</strong>`;
-      exp.style.display='block';
-    }
-    currentQ++;
-    setTimeout(()=>renderQ(), correct?600:1000);
-  }
-  function showResult(){
-    SFX.finish();
-    const total=questions.length;
-    const correct=answers.filter(a=>a.isCorrect).length;
-    const pct=Math.round(correct/total*100);
-    if(pct>=80) Confetti.burst(150);
-    document.getElementById('bt-game').style.display='none';
-    document.getElementById('bt-result').style.display='block';
-    const grade=pct>=90?'🏆 Huyền thoại!':pct>=70?'⭐ Xuất sắc!':pct>=50?'💪 Khá tốt!':'📖 Cần ôn thêm!';
-    const col=pct>=70?'#10b981':pct>=50?'#f59e0b':'#ef4444';
-    document.getElementById('bt-result').innerHTML=`
-      <div style="font-size:52px;margin-bottom:12px">${pct>=80?'🏆':pct>=60?'⭐':'💪'}</div>
-      <div style="font-size:56px;font-weight:900;font-family:'Space Mono';color:${col};line-height:1;margin-bottom:4px">${score}</div>
-      <div style="font-size:13px;color:#5a6b88;margin-bottom:8px">điểm</div>
-      <div style="font-size:18px;font-weight:800;margin-bottom:4px">${grade}</div>
-      <div style="font-size:13px;color:#5a6b88;margin-bottom:28px">${correct}/${total} câu đúng</div>
-      <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
-        <button onclick="Battle.start()" style="padding:12px 24px;background:linear-gradient(135deg,#00e5ff,#0099cc);border:none;border-radius:10px;color:#000;font-weight:800;cursor:pointer;font-size:14px;font-family:inherit">🔁 Chơi lại</button>
-        <button onclick="Battle.close()" style="padding:12px 24px;background:#111622;border:1px solid #1e2840;border-radius:10px;color:#5a6b88;font-weight:700;cursor:pointer;font-size:14px;font-family:inherit">✕ Đóng</button>
-      </div>`;
-    // Save high score
-    const best=parseInt(localStorage.getItem('lt369_battle_best')||'0');
-    if(score>best){
-      localStorage.setItem('lt369_battle_best',score);
-      showToast('🏆','Kỷ lục mới!',`${score} điểm – Battle Mode`,'#f59e0b');
-    }
-  }
-  return {open,close,start,selSubj,_answer};
-})();
-
-// ── STREAK MILESTONE CONFETTI ──
-function checkStreakMilestone(){
-  const streak=parseInt(localStorage.getItem('lt369_streak')||'0');
-  const lastMile=parseInt(localStorage.getItem('lt369_last_milestone')||'0');
-  const milestones=[3,7,14,21,30,50,100];
-  const hit=milestones.find(m=>streak>=m&&lastMile<m);
-  if(hit){
-    localStorage.setItem('lt369_last_milestone',hit);
-    setTimeout(()=>{
-      Confetti.burst(200);
-      SFX.streak();
-      showToast('🔥',`Streak ${hit} ngày!`,hit>=30?'🏆 Siêu phi thường!':hit>=14?'🌟 Tuyệt vời!':'💪 Tiếp tục nhé!','#f59e0b');
-    },800);
-  }
+function renderTable(){
+  const start=(page-1)*PAGE_SIZE, end=start+PAGE_SIZE;
+  const pageItems=filtered.slice(start,end);
+  const tbody=document.getElementById('q-tbody');
+  document.getElementById('page-info').textContent=filtered.length+' câu hỏi';
+  if(!pageItems.length){tbody.innerHTML='<tr class="loading-row"><td colspan="6" style="color:var(--muted)">Không có câu hỏi nào</td></tr>';renderPagination();return;}
+  tbody.innerHTML=pageItems.map((q,i)=>{
+    const diff=q.difficulty||'medium';
+    const diffCls=diff==='easy'?'diff-easy':diff==='hard'?'diff-hard':'diff-med';
+    const diffLbl=diff==='easy'?'Dễ':diff==='hard'?'Khó':'Trung bình';
+    const txt=q.content.replace(/<[^>]+>/g,'');
+    const bg=SUBJ_COLOR[q.subject]||'rgba(0,229,255,.1)';
+    return `<tr onclick="viewQuestion('${q.id}')" style="animation-delay:${i*.03}s">
+      <td><div class="q-num">${start+i+1}</div></td>
+      <td><div class="q-content">${txt}</div></td>
+      <td><span class="q-badge" style="background:${bg}">${SUBJ_LABEL[q.subject]||q.subject}</span></td>
+      <td><div style="font-size:12px;color:var(--muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:80px">${q.topic||'—'}</div></td>
+      <td><span class="q-badge ${diffCls}">${diffLbl}</span></td>
+      <td><div class="q-actions">
+        <div class="q-act-btn" onclick="event.stopPropagation();viewQuestion('${q.id}')" title="Xem">👁</div>
+        <a class="q-act-btn" href="admin.html" title="Sửa" onclick="event.stopPropagation()">✏️</a>
+      </div></td>
+    </tr>`;
+  }).join('');
+  renderPagination();
 }
 
-// ── POMODORO ──
-const Pomodoro = (function(){
-  let overlay, timerI=null, secsLeft=25*60, mode='work', workMins=25;
-  function init(){
-    if(overlay) return;
-    overlay=document.createElement('div');
-    overlay.id='pomo-widget';
-    overlay.style.cssText='position:fixed;bottom:80px;right:24px;z-index:400;background:#0d1117;border:1px solid #1e2840;border-radius:18px;padding:18px 22px;width:220px;box-shadow:0 12px 40px rgba(0,0,0,.5);display:none;';
-    overlay.innerHTML=`
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-        <div style="font-size:13px;font-weight:700;color:#e8edf5" id="pomo-label">🍅 Pomodoro</div>
-        <button onclick="Pomodoro.close()" style="background:none;border:none;color:#5a6b88;cursor:pointer;font-size:16px;line-height:1">✕</button>
-      </div>
-      <div style="text-align:center;margin-bottom:14px;">
-        <div id="pomo-time" style="font-size:42px;font-weight:900;font-family:'Space Mono';color:#00e5ff;line-height:1;">25:00</div>
-        <div id="pomo-mode" style="font-size:11px;color:#5a6b88;margin-top:4px;text-transform:uppercase;letter-spacing:1px;">Tập trung</div>
-      </div>
-      <div style="height:4px;background:#1e2840;border-radius:999px;margin-bottom:14px;overflow:hidden;">
-        <div id="pomo-bar" style="height:100%;background:linear-gradient(90deg,#00e5ff,#7c3aed);border-radius:999px;width:100%;transition:width .5s linear;"></div>
-      </div>
-      <div style="display:flex;gap:8px;">
-        <button id="pomo-btn" onclick="Pomodoro.toggle()" style="flex:1;padding:10px;background:linear-gradient(135deg,#00e5ff,#0099cc);border:none;border-radius:10px;color:#000;font-weight:800;cursor:pointer;font-size:13px;font-family:inherit;">▶ Bắt đầu</button>
-        <button onclick="Pomodoro.reset()" style="padding:10px 12px;background:#111622;border:1px solid #1e2840;border-radius:10px;color:#5a6b88;cursor:pointer;font-size:13px;font-family:inherit;">↺</button>
-      </div>`;
-    document.body.appendChild(overlay);
-  }
-  const totalSecs=()=>mode==='work'?workMins*60:5*60;
-  function updateUI(){
-    const m=Math.floor(secsLeft/60),s=secsLeft%60;
-    document.getElementById('pomo-time').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
-    document.getElementById('pomo-bar').style.width=(secsLeft/totalSecs()*100)+'%';
-    document.getElementById('pomo-mode').textContent=mode==='work'?'Tập trung':'Nghỉ giải lao';
-    const col=mode==='work'?secsLeft<=60?'#ef4444':'#00e5ff':'#10b981';
-    document.getElementById('pomo-time').style.color=col;
-  }
-  function open(){init();overlay.style.display='block';}
-  function close(){if(overlay)overlay.style.display='none';clearInterval(timerI);timerI=null;}
-  function toggle(){
-    if(timerI){clearInterval(timerI);timerI=null;document.getElementById('pomo-btn').textContent='▶ Tiếp tục';}
-    else{
-      document.getElementById('pomo-btn').textContent='⏸ Dừng';
-      timerI=setInterval(()=>{
-        secsLeft--;
-        updateUI();
-        if(secsLeft<=0){
-          clearInterval(timerI);timerI=null;
-          SFX.finish();
-          if(mode==='work'){
-            mode='break';secsLeft=5*60;
-            showToast('☕','Nghỉ 5 phút!','Bạn đã tập trung 25 phút, nghỉ ngơi nào!','#10b981');
-          } else {
-            mode='work';secsLeft=workMins*60;
-            showToast('🍅','Bắt đầu phiên mới!','Tập trung 25 phút!','#00e5ff');
-          }
-          document.getElementById('pomo-btn').textContent='▶ Bắt đầu';
-          updateUI();
-        }
-      },1000);
-    }
-  }
-  function reset(){clearInterval(timerI);timerI=null;mode='work';secsLeft=workMins*60;document.getElementById('pomo-btn').textContent='▶ Bắt đầu';updateUI();}
-  return {open,close,toggle,reset};
-})();
+function renderPagination(){
+  const total=Math.ceil(filtered.length/PAGE_SIZE);
+  const el=document.getElementById('pagination');
+  if(total<=1){el.innerHTML='';return;}
+  let html='';
+  if(page>1)html+=`<div class="page-btn" onclick="goPage(${page-1})">←</div>`;
+  for(let i=Math.max(1,page-2);i<=Math.min(total,page+2);i++)html+=`<div class="page-btn ${i===page?'active':''}" onclick="goPage(${i})">${i}</div>`;
+  if(page<total)html+=`<div class="page-btn" onclick="goPage(${page+1})">→</div>`;
+  el.innerHTML=html;
+}
+function goPage(p){page=p;renderTable();window.scrollTo(0,0);}
 
+function viewQuestion(id){
+  const q=allQuestions.find(x=>x.id===id);if(!q)return;
+  let opts=q.options;if(typeof opts==='string'){try{opts=JSON.parse(opts);}catch(e){opts=[];}}
+  document.getElementById('modal-title').textContent='Chi tiết câu hỏi #'+id.slice(0,8)+'…';
+  document.getElementById('modal-body').innerHTML=`
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
+      <span class="q-badge" style="background:${SUBJ_COLOR[q.subject]||'rgba(0,229,255,.1)'}">${SUBJ_LABEL[q.subject]||q.subject}</span>
+      ${q.topic?`<span class="q-badge" style="background:rgba(255,255,255,.06);color:var(--muted)">${q.topic}</span>`:''}
+      <span class="q-badge ${q.difficulty==='easy'?'diff-easy':q.difficulty==='hard'?'diff-hard':'diff-med'}">${q.difficulty==='easy'?'Dễ':q.difficulty==='hard'?'Khó':'Trung bình'}</span>
+      ${q.approved?'<span class="q-badge" style="background:rgba(16,185,129,.12);color:#34d399;border:1px solid rgba(16,185,129,.2)">✅ Đã duyệt</span>':'<span class="q-badge" style="background:rgba(245,158,11,.12);color:#fbbf24;border:1px solid rgba(245,158,11,.2)">⏳ Chờ duyệt</span>'}
+    </div>
+    <div style="font-size:16px;font-weight:600;line-height:1.7;margin-bottom:20px">${q.content}</div>
+    <div style="display:grid;gap:8px;margin-bottom:16px">
+      ${(opts||[]).map((o,i)=>`<div class="opt-item ${i===q.correct_index?'correct':''}">${['A','B','C','D'][i]}. ${o} ${i===q.correct_index?'✓':''}</div>`).join('')}
+    </div>
+    ${q.explanation?`<div class="explain-box"><strong>💡 Giải thích:</strong><br>${q.explanation}</div>`:''}
+    <div style="margin-top:16px;display:flex;gap:8px">
+      <a class="btn btn-v" href="admin.html">✏️ Chỉnh sửa trong Admin</a>
+      <button class="btn btn-g" onclick="closeModal()">Đóng</button>
+    </div>
+  `;
+  document.getElementById('modal-ov').classList.add('show');
+}
+function closeModal(){document.getElementById('modal-ov').classList.remove('show');}
+document.getElementById('modal-ov').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal();});
 
+function showToast(ic,title,sub){
+  const t=document.getElementById('toast');
+  document.getElementById('toast-ic').textContent=ic;
+  document.getElementById('toast-title').textContent=title;
+  document.getElementById('toast-sub').textContent=sub||'';
+  t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),3500);
+}
 </script>
-</body></html>
+</body>
+</html>
