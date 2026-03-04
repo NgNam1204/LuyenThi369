@@ -2,50 +2,38 @@
 <html lang="vi" data-theme="dark">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Admin – LuyenThi369</title>
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<title>Ngân hàng đề – LuyenThi369</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap" rel="stylesheet">
 <style>
-
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
   --bg:#080b10;--bg2:#0d1017;--surface:#161c28;--border:#1e2840;
   --accent:#00e5ff;--accent2:#7c3aed;--accent3:#f59e0b;
   --green:#10b981;--red:#ef4444;
-  --text:#e8edf5;--muted:#5a6b88;--card:#111622;
-  --shadow:0 4px 24px rgba(0,0,0,.4);--radius:14px;
+  --text:#e8edf5;--muted:#5a6b88;--card:#111622;--radius:14px;
 }
 [data-theme="light"]{
   --bg:#f5f7ff;--bg2:#ffffff;--surface:#edf0fb;--border:#dce3f5;
   --text:#111827;--muted:#6b7a99;--card:#ffffff;
-  --shadow:0 2px 16px rgba(100,120,200,.12);
 }
 body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-serif;transition:background .3s,color .3s;line-height:1.5;animation:pageLoad .4s ease}
 @keyframes pageLoad{from{opacity:0}to{opacity:1}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes logoPulse{0%,100%{box-shadow:0 0 16px rgba(0,229,255,.3)}50%{box-shadow:0 0 28px rgba(0,229,255,.55)}}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 ::selection{background:rgba(0,229,255,.25)}
 ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(0,229,255,.2);border-radius:3px}
 
-/* ── KEYFRAMES ── */
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-@keyframes scaleIn{from{opacity:0;transform:scale(.93)}to{opacity:1;transform:scale(1)}}
-@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
-@keyframes logoPulse{0%,100%{box-shadow:0 0 16px rgba(0,229,255,.3)}50%{box-shadow:0 0 28px rgba(0,229,255,.55)}}
-@keyframes spin{to{transform:rotate(360deg)}}
-@keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
-@keyframes glowPulse{0%,100%{opacity:.5}50%{opacity:1}}
-
-/* ── APP ── */
 .app{display:flex;min-height:100vh}
-
-/* ── SIDEBAR ── */
-.sidebar{width:260px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;height:100vh;overflow-y:auto;z-index:100;transition:background .3s,border-color .3s}
+.sidebar{width:260px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;height:100vh;overflow-y:auto;z-index:100;transition:background .3s,border-color .3s,.28s}
 .logo{padding:20px;display:flex;align-items:center;gap:11px;border-bottom:1px solid var(--border);text-decoration:none}
-.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:10px;display:grid;place-items:center;font-size:18px;flex-shrink:0;animation:logoPulse 3s ease-in-out infinite;overflow:hidden}
+.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:10px;display:grid;place-items:center;flex-shrink:0;animation:logoPulse 3s ease-in-out infinite;overflow:hidden}
 .logo-icon img{width:28px;height:28px;object-fit:contain}
 .logo-text{font-size:16px;font-weight:800;color:var(--text)}.logo-text em{font-style:normal;color:var(--accent)}
 .nav{flex:1;padding:12px 0}
 .nav-sec{margin-bottom:4px}
 .nav-lbl{font-size:10px;font-weight:700;letter-spacing:2px;color:var(--muted);padding:8px 20px;text-transform:uppercase;opacity:.7}
-.nav-a{display:flex;align-items:center;gap:12px;padding:10px 20px;color:var(--muted);font-size:14px;font-weight:500;transition:.2s;border-left:3px solid transparent;text-decoration:none;border-radius:0}
+.nav-a{display:flex;align-items:center;gap:12px;padding:10px 20px;color:var(--muted);font-size:14px;font-weight:500;transition:.2s;border-left:3px solid transparent;text-decoration:none}
 .nav-a:hover{color:var(--text);background:rgba(128,128,200,.06)}
 .nav-a.active{color:var(--accent);background:rgba(0,229,255,.07);border-left-color:var(--accent);font-weight:600}
 .nav-a .ic{width:18px;text-align:center;flex-shrink:0;font-size:17px}
@@ -58,232 +46,144 @@ body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-se
 .uplan{font-size:12px;color:var(--accent3);font-weight:600}
 .logout{margin-top:8px;display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;cursor:pointer;color:var(--muted);font-size:14px;font-weight:600;transition:.2s;border:none;background:none;font-family:inherit;width:100%}
 .logout:hover{color:var(--red);background:rgba(239,68,68,.06)}
-
-/* ── MOBILE SIDEBAR ── */
-.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:98;backdrop-filter:blur(4px);cursor:pointer}
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:98;backdrop-filter:blur(4px)}
 .sidebar-overlay.show{display:block}
 .hamburger{width:36px;height:36px;border-radius:9px;background:var(--surface);border:1px solid var(--border);align-items:center;justify-content:center;cursor:pointer;font-size:18px;flex-shrink:0;transition:.2s;margin-right:8px;display:none}
 .hamburger:hover{border-color:var(--accent)}
 .sidebar-close{display:none;position:absolute;top:14px;right:10px;width:30px;height:30px;border-radius:8px;background:var(--surface);border:1px solid var(--border);align-items:center;justify-content:center;cursor:pointer;font-size:20px;font-weight:700;color:var(--muted);z-index:10;line-height:1}
 
-/* ── MAIN ── */
-.main{margin-left:260px;flex:1;display:flex;flex-direction:column;min-height:100vh;min-width:0;overflow-x:hidden}
-.topbar{position:fixed;top:0;left:260px;right:0;z-index:50;background:rgba(8,11,16,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;transition:background .3s,border-color .3s,box-shadow .3s,left .28s}
+.main{margin-left:260px;flex:1;display:flex;flex-direction:column;min-height:100vh;min-width:0}
+.topbar{position:fixed;top:0;left:260px;right:0;z-index:50;background:rgba(8,11,16,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;transition:.3s,left .28s}
 .topbar.scrolled{box-shadow:0 4px 32px rgba(0,0,0,.4)}
 [data-theme="light"] .topbar{background:rgba(245,247,255,.92)}
+.topbar::after{content:"";position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent2),var(--accent),var(--accent2),transparent);opacity:.25;pointer-events:none}
 .topbar-l{display:flex;align-items:center;gap:10px}
 .topbar-l .ttl{font-size:20px;font-weight:800;letter-spacing:-.3px}
 .topbar-l .tsub{font-size:12px;color:var(--muted);margin-top:1px}
 .topbar-r{display:flex;align-items:center;gap:8px}
-/* decorative topbar line */
-.topbar::after{content:"";position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent2),var(--accent),var(--accent2),transparent);opacity:.25;pointer-events:none}
+.content{padding:24px 28px;flex:1;padding-top:84px}
+.icon-btn{width:38px;height:38px;border-radius:10px;background:var(--surface);border:1px solid var(--border);cursor:pointer;font-size:17px;transition:.2s;display:flex;align-items:center;justify-content:center}
+.icon-btn:hover{border-color:var(--accent)}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:9px 18px;border-radius:10px;font-size:13px;font-weight:700;cursor:pointer;border:1px solid transparent;font-family:inherit;transition:.2s;text-decoration:none}
+.btn-v{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#000}
+.btn-v:hover{opacity:.85;transform:translateY(-1px)}
+.btn-g{background:var(--surface);border-color:var(--border);color:var(--text)}
+.btn-g:hover{border-color:var(--accent);color:var(--accent)}
 
-/* ── BUTTONS ── */
-.btn{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:.2s;font-family:inherit;white-space:nowrap;text-decoration:none}
-.btn-p{background:var(--accent);color:#000}.btn-p:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,229,255,.35)}
-.btn-g{background:var(--surface);color:var(--muted);border:1px solid var(--border)}.btn-g:hover{color:var(--text);border-color:var(--muted)}
-.btn-v{background:linear-gradient(135deg,var(--accent2),#6d28d9);color:#fff}.btn-v:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(124,58,237,.4)}
-.btn-red{background:rgba(239,68,68,.1);color:var(--red);border:1px solid rgba(239,68,68,.2)}.btn-red:hover{background:rgba(239,68,68,.2)}
-.icon-btn{width:36px;height:36px;border-radius:9px;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center;cursor:pointer;transition:.2s;font-size:16px}
-.icon-btn:hover{border-color:var(--accent);transform:translateY(-1px)}
+.page-hero{display:flex;align-items:center;gap:18px;margin-bottom:28px;animation:fadeUp .5s ease}
+.page-hero-ic{font-size:42px;line-height:1}
+.page-hero h1{font-size:26px;font-weight:900;letter-spacing:-.4px}
+.page-hero p{font-size:14px;color:var(--muted);margin-top:4px}
 
-/* ── CONTENT ── */
-.content{padding:20px 24px;flex:1;min-width:0;overflow-x:hidden;padding-top:80px}
-.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;transition:.25s cubic-bezier(.16,1,.3,1)}
-.card:hover{border-color:rgba(0,229,255,.18);box-shadow:0 4px 24px rgba(0,0,0,.25)}
-[data-theme="light"] .card{box-shadow:var(--shadow)}
+/* ── UPLOAD PANEL ── */
+.upload-panel{background:var(--card);border:1.5px solid rgba(0,229,255,.18);border-radius:var(--radius);padding:24px;margin-bottom:28px;display:none}
+.upload-panel.show{display:block;animation:fadeUp .3s ease}
+.up-title{font-size:15px;font-weight:800;color:var(--accent);margin-bottom:18px;display:flex;align-items:center;gap:8px}
+.up-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:12px;margin-bottom:12px}
+.fi{display:flex;flex-direction:column;gap:6px}
+.fi label{font-size:10px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:1.1px}
+.fi input,.fi select{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:10px 14px;font-size:13px;color:var(--text);font-family:inherit;outline:none;transition:.25s;width:100%}
+.fi input:focus,.fi select:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,229,255,.07)}
+.fi input::placeholder{color:var(--muted);opacity:.5}
+.drop-zone{border:2px dashed var(--border);border-radius:12px;padding:24px;text-align:center;cursor:pointer;transition:.3s;background:var(--surface);position:relative;margin-top:4px}
+.drop-zone:hover,.drop-zone.drag{border-color:var(--accent);background:rgba(0,229,255,.04)}
+.drop-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.drop-zone.has-file{border-color:var(--green);background:rgba(16,185,129,.04)}
+.dz-ic{font-size:28px;margin-bottom:6px}
+.dz-txt{font-size:13px;font-weight:700;color:var(--text)}
+.dz-sub{font-size:11px;color:var(--muted);margin-top:3px}
+.prog-wrap{margin-top:12px;display:none}
+.prog-wrap.show{display:block}
+.prog-bar-bg{background:var(--surface);border-radius:999px;height:6px;margin-top:6px;overflow:hidden}
+.prog-bar{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:999px;transition:width .3s;width:0%}
+.prog-lbl{font-size:11px;color:var(--muted)}
 
-/* ── SECTION LABEL ── */
-.sec-lbl{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:8px}
-.sec-lbl::after{content:"";flex:1;height:1px;background:var(--border)}
+/* ── STATS ── */
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px;animation:fadeUp .5s .05s ease both}
+.stat-c{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:18px;text-align:center}
+.stat-lbl{font-size:10px;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px}
+.stat-val{font-size:26px;font-weight:900;letter-spacing:-1px}
+.stat-sub{font-size:11px;color:var(--muted);margin-top:3px}
 
-/* ── SKELETON ── */
-.skel{background:linear-gradient(90deg,var(--surface) 25%,rgba(255,255,255,.04) 50%,var(--surface) 75%);background-size:400% 100%;animation:shimmer 1.6s infinite;border-radius:8px}
-.skel-s{display:inline-block;height:14px;border-radius:6px;background:linear-gradient(90deg,var(--surface) 25%,rgba(255,255,255,.04) 50%,var(--surface) 75%);background-size:400% 100%;animation:shimmer 1.6s infinite}
+/* ── FILTER ── */
+.filter-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:20px;animation:fadeUp .5s .1s ease both}
+.search-wrap{flex:1;min-width:180px;position:relative}
+.search-wrap input{width:100%;background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:10px 16px 10px 38px;font-size:13px;color:var(--text);font-family:inherit;outline:none;transition:.25s}
+.search-wrap input:focus{border-color:var(--accent)}
+.search-wrap::before{content:"🔍";position:absolute;left:12px;top:50%;transform:translateY(-50%);font-size:14px;pointer-events:none}
+.fsel{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:10px 14px;font-size:13px;color:var(--text);font-family:inherit;outline:none;cursor:pointer;transition:.25s}
+.fsel:focus{border-color:var(--accent)}
 
-/* ── PROGRESS BAR ── */
-.pbar{height:5px;background:var(--surface);border-radius:999px;overflow:hidden}
-.pbar-fill{height:100%;border-radius:999px;transition:width .8s cubic-bezier(.16,1,.3,1)}
+/* ── PDF GRID ── */
+.pdf-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px;animation:fadeUp .5s .15s ease both}
+.pdf-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:.28s;display:flex;flex-direction:column}
+.pdf-card:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 12px 32px rgba(0,229,255,.08)}
+.pdf-thumb{height:130px;display:flex;align-items:center;justify-content:center;border-bottom:1px solid var(--border);position:relative;overflow:hidden}
+.pdf-thumb-bg{position:absolute;inset:0;opacity:.06}
+.pdf-thumb-ic{font-size:52px;position:relative;z-index:1}
+.pdf-badge{position:absolute;top:10px;right:10px;padding:3px 9px;border-radius:999px;font-size:10px;font-weight:700;z-index:2}
+.pdf-body{padding:16px;flex:1;display:flex;flex-direction:column}
+.pdf-title{font-size:14px;font-weight:800;line-height:1.4;margin-bottom:8px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pdf-meta{font-size:11px;color:var(--muted);display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px}
+.pdf-actions{display:flex;gap:7px;margin-top:auto}
+.pdf-actions .btn{flex:1;justify-content:center;padding:7px 8px;font-size:12px}
+.pdf-del{background:rgba(239,68,68,.1);border:1px solid rgba(239,68,68,.2);color:#f87171;padding:7px 10px;border-radius:9px;cursor:pointer;font-size:13px;transition:.2s;font-family:inherit}
+.pdf-del:hover{background:rgba(239,68,68,.22)}
 
-/* ── TOAST ── */
+.s-toan{background:rgba(0,229,255,.12);color:var(--accent)}
+.s-ly{background:rgba(245,158,11,.12);color:#fbbf24}
+.s-hoa{background:rgba(16,185,129,.12);color:#34d399}
+.s-sinh{background:rgba(124,58,237,.12);color:#a78bfa}
+.s-anh{background:rgba(239,68,68,.12);color:#f87171}
+.s-van{background:rgba(236,72,153,.12);color:#f472b6}
+.s-su{background:rgba(99,102,241,.12);color:#818cf8}
+.s-dia{background:rgba(20,184,166,.12);color:#2dd4bf}
+.s-hsa{background:rgba(251,191,36,.12);color:#fbbf24}
+.s-other{background:rgba(148,163,184,.12);color:#94a3b8}
+.bg-toan{background:linear-gradient(135deg,rgba(0,229,255,.08),rgba(0,100,200,.08))}
+.bg-ly{background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(200,100,0,.08))}
+.bg-hoa{background:linear-gradient(135deg,rgba(16,185,129,.08),rgba(0,150,100,.08))}
+.bg-sinh{background:linear-gradient(135deg,rgba(124,58,237,.08),rgba(80,30,180,.08))}
+.bg-anh{background:linear-gradient(135deg,rgba(239,68,68,.08),rgba(180,30,30,.08))}
+.bg-van{background:linear-gradient(135deg,rgba(236,72,153,.08),rgba(180,30,120,.08))}
+.bg-su{background:linear-gradient(135deg,rgba(99,102,241,.08),rgba(60,60,200,.08))}
+.bg-dia{background:linear-gradient(135deg,rgba(20,184,166,.08),rgba(0,140,120,.08))}
+.bg-hsa{background:linear-gradient(135deg,rgba(251,191,36,.08),rgba(200,140,0,.08))}
+.bg-other{background:linear-gradient(135deg,rgba(148,163,184,.08),rgba(80,100,130,.08))}
+
+.empty-state{text-align:center;padding:60px 20px;color:var(--muted);grid-column:1/-1}
+.empty-ic{font-size:50px;margin-bottom:14px}
+.empty-title{font-size:18px;font-weight:700;color:var(--text);margin-bottom:6px}
+.empty-sub{font-size:13px;line-height:1.7}
+
+.skel{background:linear-gradient(90deg,var(--surface) 25%,rgba(255,255,255,.03) 50%,var(--surface) 75%);background-size:200%;animation:shimmer 1.5s infinite;border-radius:var(--radius);height:240px}
+
+/* modal */
+.modal-ov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.82);backdrop-filter:blur(10px);z-index:200;align-items:center;justify-content:center}
+.modal-ov.show{display:flex}
+.modal-box{background:var(--bg2);border:1px solid var(--border);border-radius:18px;width:92vw;max-width:920px;max-height:92vh;display:flex;flex-direction:column;animation:fadeUp .25s ease}
+.modal-hdr{padding:16px 22px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-shrink:0}
+.modal-title{font-size:15px;font-weight:800;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.modal-close{width:30px;height:30px;border-radius:8px;background:var(--surface);border:1px solid var(--border);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;transition:.2s;flex-shrink:0}
+.modal-close:hover{border-color:var(--red);color:var(--red)}
+.modal-body{flex:1;overflow:hidden;border-radius:0 0 18px 18px}
+.modal-body iframe{width:100%;height:100%;min-height:72vh;border:none;display:block}
+
 #toast{position:fixed;bottom:24px;right:24px;background:linear-gradient(135deg,#1a2236,#0d1220);border:1px solid #1e2840;border-radius:14px;padding:14px 20px;display:flex;align-items:center;gap:12px;z-index:9000;transform:translateY(80px);opacity:0;transition:.4s cubic-bezier(.2,.8,.3,1);box-shadow:0 8px 32px rgba(0,0,0,.5);max-width:300px;pointer-events:none}
 #toast.show{transform:translateY(0);opacity:1}
 #toast-ic{font-size:22px}
 #toast-title{font-size:13px;font-weight:700;color:#e8edf5}
 #toast-sub{font-size:11px;color:#5a6b88;margin-top:2px}
 
-/* ── MOBILE ── */
 @media(max-width:768px){
-  .hamburger{display:flex!important}
-  .sidebar-close{display:flex}
-  .sidebar{position:fixed;left:0;top:0;height:100vh;transform:translateX(-260px);transition:transform .28s cubic-bezier(.4,0,.2,1);z-index:99;box-shadow:4px 0 24px rgba(0,0,0,.4)}
+  .sidebar{transform:translateX(-100%);transition:transform .28s}
   .sidebar.open{transform:translateX(0)}
-  .main{margin-left:0!important;width:100%}
-  .topbar{padding:0 14px;left:0!important}
-  .content{padding:14px;padding-top:76px}
-  .topbar-l .tsub{display:none}
-}
-
-
-/* ── ADMIN SPECIFIC ── */
-.admin-hero{
-  background:linear-gradient(135deg,rgba(124,58,237,.1),rgba(0,229,255,.06));
-  border:1px solid rgba(124,58,237,.2);border-radius:20px;padding:24px 28px;margin-bottom:24px;
-  display:flex;align-items:center;gap:20px;position:relative;overflow:hidden;
-  animation:fadeUp .4s cubic-bezier(.16,1,.3,1) both;
-}
-.admin-hero::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent2),var(--accent),var(--accent3));}
-.admin-hero-ic{font-size:40px;flex-shrink:0}
-.admin-hero-text h1{font-size:22px;font-weight:900;letter-spacing:-.3px;margin-bottom:4px}
-.admin-hero-text p{font-size:13px;color:var(--muted)}
-.admin-hero-actions{margin-left:auto;display:flex;gap:8px;flex-shrink:0}
-
-/* ── SECTION PANELS ── */
-.section-tabs{display:flex;gap:4px;margin-bottom:24px;background:var(--bg2);border:1px solid var(--border);border-radius:16px;padding:6px;width:fit-content;animation:slideDown .4s cubic-bezier(.16,1,.3,1) .05s both}
-.stab{padding:10px 24px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:700;transition:.25s;color:var(--muted);display:flex;align-items:center;gap:8px}
-.stab.active{background:linear-gradient(135deg,var(--accent2),#5b21b6);color:#fff;box-shadow:0 4px 16px rgba(124,58,237,.35)}
-.stab:not(.active):hover{color:var(--text);background:var(--surface)}
-.stab-badge{background:rgba(255,255,255,.2);font-size:10px;font-weight:800;padding:2px 7px;border-radius:999px}
-
-/* ── STATS GRID ── */
-.stats-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:20px;animation:fadeUp .4s cubic-bezier(.16,1,.3,1) .1s both}
-.stat-box{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center;transition:.25s;cursor:default;animation:scaleIn .4s cubic-bezier(.16,1,.3,1) both}
-.stat-box:nth-child(1){animation-delay:.05s}.stat-box:nth-child(2){animation-delay:.1s}.stat-box:nth-child(3){animation-delay:.15s}.stat-box:nth-child(4){animation-delay:.2s}.stat-box:nth-child(5){animation-delay:.25s}.stat-box:nth-child(6){animation-delay:.3s}.stat-box:nth-child(7){animation-delay:.35s}.stat-box:nth-child(8){animation-delay:.4s}.stat-box:nth-child(9){animation-delay:.45s}.stat-box:nth-child(10){animation-delay:.5s}
-.stat-box:hover{border-color:rgba(0,229,255,.2);transform:translateY(-2px)}
-.stat-n{font-size:22px;font-weight:900;font-family:'Space Mono',monospace}
-.stat-l{font-size:10px;color:var(--muted);margin-top:4px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
-
-/* ── INNER TABS ── */
-.inner-tabs{display:flex;gap:3px;margin-bottom:20px;background:var(--surface);border-radius:11px;padding:4px;width:fit-content}
-.itab{padding:7px 18px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:700;transition:.2s;color:var(--muted)}
-.itab.active{background:var(--card);color:var(--accent);border:1px solid var(--border)}
-.itab:not(.active):hover{color:var(--text)}
-
-/* ── FORM CARD ── */
-.form-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:16px;animation:scaleIn .4s cubic-bezier(.16,1,.3,1) both}
-.form-card-title{font-size:15px;font-weight:800;margin-bottom:20px;display:flex;align-items:center;gap:8px;letter-spacing:-.2px}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
-.form-row.full{grid-template-columns:1fr}
-.form-row.tri{grid-template-columns:1fr 1fr 1fr}
-.fg{display:flex;flex-direction:column;gap:6px}
-.fg label{font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.8px}
-.fg input,.fg select,.fg textarea{background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:10px 14px;color:var(--text);font-family:inherit;font-size:14px;transition:.25s;outline:none;width:100%;font-weight:500}
-.fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,229,255,.08)}
-.fg textarea{resize:vertical;min-height:80px;line-height:1.6}
-.fg input::placeholder,.fg textarea::placeholder{color:var(--muted);opacity:.5;font-weight:400}
-.opt-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.opt-item{display:flex;align-items:center;gap:8px;background:var(--surface);border:1.5px solid var(--border);border-radius:10px;padding:8px 12px;transition:.2s}
-.opt-item:has(input[type=radio]:checked){border-color:var(--accent);background:rgba(0,229,255,.05)}
-.opt-label{font-size:13px;font-weight:800;color:var(--accent);min-width:20px;flex-shrink:0}
-.opt-item input[type=text]{border:none;background:none;padding:2px 0;font-size:14px}
-.opt-item input[type=text]:focus{box-shadow:none}
-.form-actions{display:flex;gap:10px;margin-top:8px}
-
-/* ── TABLE ── */
-.tbl-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;animation:fadeUp .4s cubic-bezier(.16,1,.3,1) .05s both}
-.tbl-header{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.tbl-title{font-size:15px;font-weight:800;letter-spacing:-.2px}
-.tbl-filters{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
-.tbl-filters input,.tbl-filters select{background:var(--surface);border:1.5px solid var(--border);border-radius:9px;padding:7px 12px;font-size:13px;font-weight:600;color:var(--text);font-family:inherit;outline:none;transition:.2s}
-.tbl-filters input:focus,.tbl-filters select:focus{border-color:var(--accent)}
-table{width:100%;border-collapse:collapse;font-size:13px}
-th{text-align:left;padding:10px 16px;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.8px;font-weight:800;border-bottom:1px solid var(--border);white-space:nowrap}
-td{padding:11px 16px;border-bottom:1px solid rgba(30,40,64,.5);vertical-align:middle}
-tbody tr{transition:.15s;animation:fadeUp .3s ease both}
-tbody tr:hover{background:rgba(0,229,255,.025)}
-tbody tr:last-child td{border-bottom:none}
-.q-preview{max-width:320px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500}
-.q-topic{font-size:11px;color:var(--muted);margin-top:3px}
-
-/* ── BADGES ── */
-.sbadge{display:inline-flex;padding:3px 9px;border-radius:6px;font-size:11px;font-weight:800;white-space:nowrap}
-.s-toan{background:rgba(0,229,255,.12);color:var(--accent)}
-.s-ly{background:rgba(124,58,237,.15);color:#a78bfa}
-.s-hoa{background:rgba(16,185,129,.15);color:var(--green)}
-.s-sinh{background:rgba(74,222,128,.15);color:#4ade80}
-.s-anh{background:rgba(245,158,11,.15);color:var(--accent3)}
-.s-van{background:rgba(244,114,182,.15);color:#f472b6}
-.s-su{background:rgba(251,146,60,.15);color:#fb923c}
-.s-dia{background:rgba(52,211,153,.15);color:#34d399}
-.s-gdcd{background:rgba(96,165,250,.15);color:#60a5fa}
-.s-hsa{background:rgba(251,191,36,.15);color:#fbbf24}
-.diff-easy{background:rgba(16,185,129,.12);color:#34d399;border:1px solid rgba(16,185,129,.2)}
-.diff-med{background:rgba(245,158,11,.12);color:#fbbf24;border:1px solid rgba(245,158,11,.2)}
-.diff-hard{background:rgba(239,68,68,.12);color:#f87171;border:1px solid rgba(239,68,68,.2)}
-
-/* ── ACTION BUTTONS ── */
-.abtn{padding:5px 10px;border-radius:7px;border:none;cursor:pointer;font-size:11px;font-weight:700;font-family:inherit;transition:.18s}
-.abtn:hover{transform:translateY(-1px);box-shadow:0 3px 10px rgba(0,0,0,.25)}
-.abtn-ok{background:rgba(16,185,129,.15);color:var(--green)}
-.abtn-del{background:rgba(239,68,68,.12);color:var(--red)}
-.abtn-edit{background:rgba(0,229,255,.1);color:var(--accent)}
-
-/* ── PAGER ── */
-.pager{display:flex;gap:6px;align-items:center;padding:14px 16px;border-top:1px solid var(--border);justify-content:flex-end}
-.pager button{padding:6px 12px;border-radius:8px;border:1px solid var(--border);background:var(--surface);color:var(--text);cursor:pointer;font-family:inherit;font-weight:700;font-size:12px;transition:.2s}
-.pager button:hover:not(:disabled){border-color:var(--accent);color:var(--accent)}
-.pager button:disabled{opacity:.3;cursor:default}
-.pager span{font-size:13px;color:var(--muted);font-weight:600}
-
-/* ── IMPORT TAB ── */
-.import-json{font-family:'Space Mono',monospace;font-size:12px;line-height:1.6}
-.code-preview{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px;font-size:12px;font-family:'Space Mono',monospace;color:var(--accent);overflow-x:auto;line-height:1.7;margin-bottom:16px}
-
-/* ── EDIT MODAL ── */
-.modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(12px);z-index:999;display:none;align-items:center;justify-content:center}
-.modal-ov.show{display:flex}
-.modal-box{background:var(--card);border:1px solid var(--border);border-radius:20px;width:min(720px,95vw);max-height:90vh;overflow-y:auto;animation:scaleIn .3s cubic-bezier(.16,1,.3,1)}
-.modal-hdr{padding:18px 24px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;position:sticky;top:0;background:var(--card);z-index:1}
-.modal-title{font-size:16px;font-weight:800}
-.modal-close{width:32px;height:32px;border-radius:8px;background:var(--surface);border:1px solid var(--border);cursor:pointer;display:grid;place-items:center;font-size:14px;transition:.2s}
-.modal-close:hover{border-color:var(--red);color:var(--red)}
-.modal-body{padding:24px}
-
-@media(max-width:900px){
-  .stats-grid{grid-template-columns:repeat(3,1fr)}
-  .form-row{grid-template-columns:1fr}
-  .opt-grid{grid-template-columns:1fr}
-  .admin-hero{flex-direction:column;align-items:flex-start}
-  .admin-hero-actions{margin-left:0}
-}
-@media(max-width:600px){
-  .stats-grid{grid-template-columns:repeat(2,1fr)}
-  .section-tabs{flex-wrap:wrap}
-}
-
-/* ── FOOTER ── */
-.site-footer{background:#06090f;border-top:1px solid #1a2030;padding:32px 28px 20px;margin-top:auto;transition:background .3s}
-[data-theme="light"] .site-footer{background:#eef1fb;border-top-color:#c8d4f0}
-.sf-inner{display:table;width:100%;table-layout:fixed;border-collapse:collapse}
-.sf-col{display:table-cell;width:33.333%;vertical-align:top;padding:0 24px;text-align:center}
-.sf-col:first-child{padding-left:0;text-align:left;border-right:1px solid #1e2840}
-.sf-col:nth-child(2){border-right:1px solid #1e2840}
-.sf-col:last-child{padding-right:0}
-.sf-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#4a5878;margin-bottom:14px;display:block;text-align:center}
-.sf-col:first-child .sf-label{text-align:left}
-.sf-addr{font-size:13px;color:#8899bb;line-height:1.9}
-.sf-addr strong{color:#c8d4f0;font-weight:700}
-[data-theme="light"] .sf-addr{color:#3a4a6a}[data-theme="light"] .sf-addr strong{color:#0f1a35}
-.sf-map{margin-top:12px}
-.sf-map iframe{border-radius:10px;width:100%;height:130px;border:1px solid #1e2840;display:block}
-.sf-members{display:inline-flex;flex-direction:column;gap:8px;align-items:flex-start}
-.sf-member{display:flex;align-items:center;gap:8px;font-size:13px;color:#8899bb;transition:.2s}
-.sf-member:hover{color:var(--accent);transform:translateX(4px)}
-[data-theme="light"] .sf-member{color:#3a4a6a}
-.sf-member::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0}
-.sf-fb{display:flex;justify-content:center;width:100%}
-.sf-fb a{display:inline-flex;align-items:center;gap:8px;background:#1a2236;color:#e8edf5;font-size:13px;font-weight:600;padding:9px 20px;border-radius:10px;border:1px solid #1877f2;text-decoration:none;transition:.2s}
-.sf-fb a:hover{background:#1877f2;color:#fff}
-[data-theme="light"] .sf-fb a{background:#dce6ff;color:#1a2545}
-.sf-bottom{margin-top:20px;padding-top:14px;border-top:1px solid #1a2030;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
-[data-theme="light"] .sf-bottom{border-top-color:#c8d4f0}
-.sf-copy,.sf-brand{font-size:12px;color:#3a4868}
-[data-theme="light"] .sf-copy,[data-theme="light"] .sf-brand{color:#7a8aaa}
-@media(max-width:768px){
-  .sf-inner{display:flex!important;flex-direction:column!important}
-  .sf-col{width:100%!important;padding:14px 0!important;border:none!important;display:block!important;text-align:center!important}
-  .sf-col:first-child{text-align:center!important}
-  .sf-bottom{flex-direction:column;align-items:flex-start;gap:4px}
+  .sidebar-close{display:flex}.hamburger{display:flex}
+  .main{margin-left:0}.topbar{left:0}
+  .content{padding:16px;padding-top:80px}
+  .up-grid{grid-template-columns:1fr 1fr}
+  .stats-row{grid-template-columns:1fr 1fr}
+  .pdf-grid{grid-template-columns:1fr}
 }
 </style>
 </head>
@@ -293,7 +193,7 @@ tbody tr:last-child td{border-bottom:none}
 <aside class="sidebar">
   <button class="sidebar-close" onclick="closeSidebar()">‹</button>
   <a class="logo" href="dashboard.html">
-    <div class="logo-icon"><img src="logo.png" style="width:28px;height:28px;object-fit:contain" onerror="this.style.display='none'"></div>
+    <div class="logo-icon"><img src="logo.png" onerror="this.style.display='none'"></div>
     <div class="logo-text">Luyen<em>Thi</em>369</div>
   </a>
   <nav class="nav">
@@ -308,12 +208,12 @@ tbody tr:last-child td{border-bottom:none}
     </div>
     <div class="nav-sec">
       <div class="nav-lbl">Tra cứu</div>
-      <a class="nav-a" href="ngan-hang-de.html"><span class="ic">🗂️</span>Ngân hàng đề</a>
+      <a class="nav-a active" href="ngan-hang-de.html"><span class="ic">📂</span>Ngân hàng đề</a>
       <a class="nav-a" href="cai-dat.html"><span class="ic">⚙️</span>Cài đặt</a>
     </div>
     <div class="nav-sec">
       <div class="nav-lbl">Hệ thống</div>
-      <a class="nav-a active" href="admin.html"><span class="ic">🔐</span>Admin</a>
+      <a class="nav-a" href="admin.html"><span class="ic">🔐</span>Admin</a>
     </div>
   </nav>
   <div class="sb-foot">
@@ -330,464 +230,142 @@ tbody tr:last-child td{border-bottom:none}
     <div class="topbar-l">
       <button class="hamburger" onclick="openSidebar()">☰</button>
       <div>
-        <div class="ttl">🔐 Admin Panel</div>
-        <div class="tsub">Quản trị nội dung</div>
+        <div class="ttl">📂 Ngân hàng đề</div>
+        <div class="tsub">Đề thi PDF · Tải về miễn phí</div>
       </div>
     </div>
     <div class="topbar-r">
       <button class="icon-btn" id="theme-btn" onclick="toggleTheme()">☀️</button>
-      <button class="btn btn-g" onclick="loadAll()">🔄 Refresh</button>
-      <a class="btn btn-p" href="dashboard.html">← Về trang chủ</a>
+      <button class="btn btn-v" id="btn-upload" style="display:none" onclick="toggleUpload()">📤 Upload đề</button>
     </div>
   </div>
 
   <div class="content">
-
-    <!-- HERO -->
-    <div class="admin-hero">
-      <div class="admin-hero-ic">🎛️</div>
-      <div class="admin-hero-text">
-        <h1>Quản lý câu hỏi</h1>
-        <p>Thêm, chỉnh sửa, duyệt câu hỏi cho <strong>Luyện đề THPT</strong> và <strong>HSA</strong></p>
-      </div>
-      <div class="admin-hero-actions">
-        <span id="total-count" style="font-size:13px;color:var(--muted);align-self:center">Đang tải...</span>
+    <div class="page-hero">
+      <div class="page-hero-ic">📂</div>
+      <div>
+        <h1>Ngân hàng đề thi</h1>
+        <p>Tải về đề thi PDF miễn phí · Cập nhật thường xuyên bởi Admin</p>
       </div>
     </div>
 
-    <!-- MAIN SECTION TABS -->
-    <div class="section-tabs">
-      <div class="stab active" id="stab-luyen" onclick="switchSection('luyen',this)">
-        📖 Luyện đề THPT
-        <span class="stab-badge" id="stab-luyen-cnt">--</span>
-      </div>
-      <div class="stab" id="stab-hsa" onclick="switchSection('hsa',this)">
-        🎯 HSA – Đánh giá năng lực
-        <span class="stab-badge" id="stab-hsa-cnt">--</span>
-      </div>
-      <div class="stab" id="stab-perm" onclick="switchSection('perm',this)">
-        🔑 Cấp quyền Admin
-        <span class="stab-badge" id="stab-perm-cnt" style="background:rgba(245,158,11,.2);color:#f59e0b">--</span>
-      </div>
-    </div>
-
-    <!-- ══ SECTION: LUYỆN ĐỀ ══ -->
-    <div id="sec-luyen">
-      <!-- STATS 9 MÔN -->
-      <div class="stats-grid" id="stats-luyen">
-        <div class="stat-box"><div class="stat-n s-toan" id="st-toan">--</div><div class="stat-l">📐 Toán</div></div>
-        <div class="stat-box"><div class="stat-n s-ly" id="st-ly">--</div><div class="stat-l">⚡ Vật lý</div></div>
-        <div class="stat-box"><div class="stat-n s-hoa" id="st-hoa">--</div><div class="stat-l">🧪 Hóa học</div></div>
-        <div class="stat-box"><div class="stat-n s-sinh" id="st-sinh">--</div><div class="stat-l">🌱 Sinh học</div></div>
-        <div class="stat-box"><div class="stat-n s-anh" id="st-anh">--</div><div class="stat-l">🌍 Tiếng Anh</div></div>
-        <div class="stat-box"><div class="stat-n s-van" id="st-van">--</div><div class="stat-l">📖 Ngữ Văn</div></div>
-        <div class="stat-box"><div class="stat-n s-su" id="st-su">--</div><div class="stat-l">📜 Lịch Sử</div></div>
-        <div class="stat-box"><div class="stat-n s-dia" id="st-dia">--</div><div class="stat-l">🗺 Địa Lý</div></div>
-        <div class="stat-box"><div class="stat-n s-gdcd" id="st-gdcd">--</div><div class="stat-l">⚖️ GDCD</div></div>
-        <div class="stat-box" style="grid-column:span 1"><div class="stat-n" style="color:var(--accent)" id="st-luyen-total">--</div><div class="stat-l">📊 Tổng cộng</div></div>
-      </div>
-
-      <!-- INNER TABS -->
-      <div class="inner-tabs">
-        <div class="itab active" onclick="switchInner('luyen','add',this)">➕ Thêm câu hỏi</div>
-        <div class="itab" onclick="switchInner('luyen','list',this)">📋 Danh sách</div>
-        <div class="itab" onclick="switchInner('luyen','import',this)">📥 Import JSON</div>
-      </div>
-
-      <!-- ADD FORM -->
-      <div id="luyen-tab-add">
-        <div class="form-card">
-          <div class="form-card-title">➕ Thêm câu hỏi Luyện đề</div>
-          <div class="form-row tri">
-            <div class="fg">
-              <label>Môn học *</label>
-              <select id="lf-subject">
-                <option value="toan">📐 Toán</option>
-                <option value="ly">⚡ Vật lý</option>
-                <option value="hoa">🧪 Hóa học</option>
-                <option value="sinh">🌱 Sinh học</option>
-                <option value="anh">🌍 Tiếng Anh</option>
-                <option value="van">📖 Ngữ Văn</option>
-                <option value="su">📜 Lịch Sử</option>
-                <option value="dia">🗺 Địa Lý</option>
-                <option value="gdcd">⚖️ GDCD</option>
-              </select>
-            </div>
-            <div class="fg">
-              <label>Chủ đề / Chương</label>
-              <input id="lf-topic" type="text" placeholder="VD: Hàm số, Dao động cơ, Este...">
-            </div>
-            <div class="fg">
-              <label>Độ khó</label>
-              <select id="lf-difficulty">
-                <option value="easy">⭐ Dễ</option>
-                <option value="medium" selected>⭐⭐ Trung bình</option>
-                <option value="hard">⭐⭐⭐ Khó</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-row full">
-            <div class="fg">
-              <label>Nội dung câu hỏi *</label>
-              <textarea id="lf-content" rows="3" placeholder="Nhập câu hỏi ở đây..."></textarea>
-            </div>
-          </div>
-          <div class="fg" style="margin-bottom:14px">
-            <label>4 Đáp án * (chọn radio = đáp án đúng)</label>
-            <div class="opt-grid">
-              <div class="opt-item"><input type="radio" name="lcorrect" value="0" checked style="width:auto;accent-color:var(--accent)"><span class="opt-label">A</span><input id="lf-o0" type="text" placeholder="Đáp án A"></div>
-              <div class="opt-item"><input type="radio" name="lcorrect" value="1" style="width:auto;accent-color:var(--accent)"><span class="opt-label">B</span><input id="lf-o1" type="text" placeholder="Đáp án B"></div>
-              <div class="opt-item"><input type="radio" name="lcorrect" value="2" style="width:auto;accent-color:var(--accent)"><span class="opt-label">C</span><input id="lf-o2" type="text" placeholder="Đáp án C"></div>
-              <div class="opt-item"><input type="radio" name="lcorrect" value="3" style="width:auto;accent-color:var(--accent)"><span class="opt-label">D</span><input id="lf-o3" type="text" placeholder="Đáp án D"></div>
-            </div>
-          </div>
-          <div class="form-row full">
-            <div class="fg">
-              <label>Giải thích đáp án</label>
-              <textarea id="lf-explanation" rows="2" placeholder="Giải thích tại sao đáp án đúng..."></textarea>
-            </div>
-          </div>
-          <div class="form-actions">
-            <button class="btn btn-p" style="flex:1;padding:12px" onclick="saveLuyen()">💾 Lưu câu hỏi</button>
-            <button class="btn btn-g" onclick="clearLuyenForm()">🗑 Xóa form</button>
-          </div>
+    <!-- ADMIN UPLOAD PANEL -->
+    <div class="upload-panel" id="upload-panel">
+      <div class="up-title">🔐 Upload đề thi PDF <span style="font-size:11px;color:var(--muted);font-weight:500">· Chỉ Admin</span></div>
+      <div class="up-grid">
+        <div class="fi">
+          <label>Tên đề thi *</label>
+          <input type="text" id="u-title" placeholder="VD: Đề thi HK2 Toán 12 – 2025">
         </div>
-      </div>
-
-      <!-- LIST -->
-      <div id="luyen-tab-list" style="display:none">
-        <div class="tbl-card">
-          <div class="tbl-header">
-            <div class="tbl-title">📋 Danh sách câu hỏi Luyện đề</div>
-            <div class="tbl-filters">
-              <select id="lf-filter-subj" onchange="filterLuyen()">
-                <option value="">Tất cả môn</option>
-                <option value="toan">Toán</option><option value="ly">Vật lý</option>
-                <option value="hoa">Hóa học</option><option value="sinh">Sinh học</option>
-                <option value="anh">Tiếng Anh</option><option value="van">Ngữ Văn</option>
-                <option value="su">Lịch Sử</option><option value="dia">Địa Lý</option>
-                <option value="gdcd">GDCD</option>
-              </select>
-              <select id="lf-filter-diff" onchange="filterLuyen()">
-                <option value="">Tất cả độ khó</option>
-                <option value="easy">Dễ</option><option value="medium">Trung bình</option><option value="hard">Khó</option>
-              </select>
-              <input id="lf-search" type="text" placeholder="🔍 Tìm kiếm..." style="width:200px" oninput="filterLuyen()">
-            </div>
-          </div>
-          <table>
-            <thead><tr>
-              <th style="width:40px">#</th>
-              <th style="width:90px">Môn</th>
-              <th>Câu hỏi</th>
-              <th style="width:80px">Độ khó</th>
-              <th style="width:70px">Duyệt</th>
-              <th style="width:130px;text-align:right">Thao tác</th>
-            </tr></thead>
-            <tbody id="luyen-tbody"></tbody>
-          </table>
-          <div class="pager">
-            <button id="lprev" onclick="lPage(-1)" disabled>← Trước</button>
-            <span id="lpage-info">-- / --</span>
-            <button id="lnext" onclick="lPage(1)">Tiếp →</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- IMPORT -->
-      <div id="luyen-tab-import" style="display:none">
-        <div class="form-card">
-          <div class="form-card-title">📥 Import câu hỏi Luyện đề từ JSON</div>
-          <p style="color:var(--muted);font-size:13px;margin-bottom:14px">Dán mảng JSON, mỗi phần tử là 1 câu hỏi:</p>
-          <div class="code-preview">[{"subject":"toan","topic":"Hàm số","content":"...","options":["A","B","C","D"],"correct_index":0,"explanation":"...","difficulty":"medium"}]</div>
-          <div class="fg" style="margin-bottom:14px">
-            <textarea id="luyen-import-json" class="import-json" rows="12" placeholder="Dán JSON vào đây..."></textarea>
-          </div>
-          <div class="form-actions">
-            <button class="btn btn-p" style="padding:12px 24px" onclick="importLuyen()">📥 Import</button>
-            <button class="btn btn-g" onclick="document.getElementById('luyen-import-json').value=''">🗑 Xóa</button>
-          </div>
-          <div id="luyen-import-result" style="margin-top:12px;font-size:13px;font-weight:600"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ══ SECTION: HSA ══ -->
-    <div id="sec-hsa" style="display:none">
-      <!-- HSA BANNER -->
-      <div style="background:linear-gradient(135deg,rgba(251,191,36,.08),rgba(124,58,237,.08));border:1px solid rgba(251,191,36,.2);border-radius:16px;padding:18px 22px;margin-bottom:20px;display:flex;align-items:center;gap:16px;animation:fadeUp .4s cubic-bezier(.16,1,.3,1) both">
-        <div style="font-size:32px">🏛️</div>
-        <div style="flex:1">
-          <div style="font-size:16px;font-weight:800;margin-bottom:3px">Câu hỏi HSA – Đánh giá năng lực</div>
-          <div style="font-size:13px;color:var(--muted)">Tư duy định lượng · Tư duy ngôn ngữ · Tư duy khoa học · 150 câu · 195 phút</div>
-        </div>
-        <div style="text-align:right;flex-shrink:0">
-          <div class="stat-n s-hsa" id="st-hsa" style="font-size:28px">--</div>
-          <div class="stat-l">câu HSA</div>
-        </div>
-      </div>
-
-      <!-- HSA STATS -->
-      <div class="stats-grid" style="grid-template-columns:repeat(3,1fr)" id="stats-hsa">
-        <div class="stat-box"><div class="stat-n" style="color:#fbbf24" id="hsa-st-dinh-luong">--</div><div class="stat-l">🔢 Tư duy định lượng</div></div>
-        <div class="stat-box"><div class="stat-n" style="color:#a78bfa" id="hsa-st-ngon-ngu">--</div><div class="stat-l">💬 Tư duy ngôn ngữ</div></div>
-        <div class="stat-box"><div class="stat-n" style="color:#34d399" id="hsa-st-khoa-hoc">--</div><div class="stat-l">🧩 Tư duy khoa học</div></div>
-      </div>
-
-      <!-- INNER TABS HSA -->
-      <div class="inner-tabs">
-        <div class="itab active" onclick="switchInner('hsa','add',this)">➕ Thêm câu hỏi</div>
-        <div class="itab" onclick="switchInner('hsa','list',this)">📋 Danh sách</div>
-        <div class="itab" onclick="switchInner('hsa','import',this)">📥 Import JSON</div>
-      </div>
-
-      <!-- HSA ADD FORM -->
-      <div id="hsa-tab-add">
-        <div class="form-card">
-          <div class="form-card-title" style="color:#fbbf24">🎯 Thêm câu hỏi HSA</div>
-          <div class="form-row tri">
-            <div class="fg">
-              <label>Phần thi *</label>
-              <select id="hf-topic">
-                <option value="Tư duy định lượng">🔢 Tư duy định lượng</option>
-                <option value="Tư duy ngôn ngữ">💬 Tư duy ngôn ngữ</option>
-                <option value="Tư duy khoa học">🧩 Tư duy khoa học</option>
-                <option value="Phân tích số liệu">📊 Phân tích số liệu</option>
-                <option value="Đọc hiểu văn bản">📖 Đọc hiểu văn bản</option>
-                <option value="Logic – Suy luận">🔗 Logic – Suy luận</option>
-              </select>
-            </div>
-            <div class="fg">
-              <label>Chủ đề con</label>
-              <input id="hf-subtopic" type="text" placeholder="VD: Phương trình bậc 2, Suy luận logic...">
-            </div>
-            <div class="fg">
-              <label>Độ khó</label>
-              <select id="hf-difficulty">
-                <option value="easy">⭐ Dễ</option>
-                <option value="medium" selected>⭐⭐ Trung bình</option>
-                <option value="hard">⭐⭐⭐ Khó</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-row full">
-            <div class="fg">
-              <label>Nội dung câu hỏi *</label>
-              <textarea id="hf-content" rows="3" placeholder="Nhập câu hỏi HSA..."></textarea>
-            </div>
-          </div>
-          <div class="fg" style="margin-bottom:14px">
-            <label>4 Đáp án * (chọn radio = đáp án đúng)</label>
-            <div class="opt-grid">
-              <div class="opt-item"><input type="radio" name="hcorrect" value="0" checked style="width:auto;accent-color:#fbbf24"><span class="opt-label" style="color:#fbbf24">A</span><input id="hf-o0" type="text" placeholder="Đáp án A"></div>
-              <div class="opt-item"><input type="radio" name="hcorrect" value="1" style="width:auto;accent-color:#fbbf24"><span class="opt-label" style="color:#fbbf24">B</span><input id="hf-o1" type="text" placeholder="Đáp án B"></div>
-              <div class="opt-item"><input type="radio" name="hcorrect" value="2" style="width:auto;accent-color:#fbbf24"><span class="opt-label" style="color:#fbbf24">C</span><input id="hf-o2" type="text" placeholder="Đáp án C"></div>
-              <div class="opt-item"><input type="radio" name="hcorrect" value="3" style="width:auto;accent-color:#fbbf24"><span class="opt-label" style="color:#fbbf24">D</span><input id="hf-o3" type="text" placeholder="Đáp án D"></div>
-            </div>
-          </div>
-          <div class="form-row full">
-            <div class="fg">
-              <label>Giải thích đáp án</label>
-              <textarea id="hf-explanation" rows="2" placeholder="Giải thích tại sao đáp án đúng..."></textarea>
-            </div>
-          </div>
-          <div class="form-actions">
-            <button class="btn" style="flex:1;padding:12px;background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#000;font-weight:800" onclick="saveHSA()">💾 Lưu câu hỏi HSA</button>
-            <button class="btn btn-g" onclick="clearHSAForm()">🗑 Xóa form</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- HSA LIST -->
-      <div id="hsa-tab-list" style="display:none">
-        <div class="tbl-card">
-          <div class="tbl-header">
-            <div class="tbl-title">📋 Danh sách câu hỏi HSA</div>
-            <div class="tbl-filters">
-              <select id="hf-filter-topic" onchange="filterHSA()">
-                <option value="">Tất cả phần</option>
-                <option value="Tư duy định lượng">Định lượng</option>
-                <option value="Tư duy ngôn ngữ">Ngôn ngữ</option>
-                <option value="Tư duy khoa học">Khoa học</option>
-              </select>
-              <input id="hf-search" type="text" placeholder="🔍 Tìm kiếm..." style="width:200px" oninput="filterHSA()">
-            </div>
-          </div>
-          <table>
-            <thead><tr>
-              <th style="width:40px">#</th>
-              <th style="width:140px">Phần thi</th>
-              <th>Câu hỏi</th>
-              <th style="width:80px">Độ khó</th>
-              <th style="width:70px">Duyệt</th>
-              <th style="width:130px;text-align:right">Thao tác</th>
-            </tr></thead>
-            <tbody id="hsa-tbody"></tbody>
-          </table>
-          <div class="pager">
-            <button id="hprev" onclick="hPage(-1)" disabled>← Trước</button>
-            <span id="hpage-info">-- / --</span>
-            <button id="hnext" onclick="hPage(1)">Tiếp →</button>
-          </div>
-        </div>
-      </div>
-
-      <!-- HSA IMPORT -->
-      <div id="hsa-tab-import" style="display:none">
-        <div class="form-card">
-          <div class="form-card-title">📥 Import câu hỏi HSA từ JSON</div>
-          <p style="color:var(--muted);font-size:13px;margin-bottom:14px">Định dạng chuẩn — subject sẽ tự động là "hsa":</p>
-          <div class="code-preview">[{"topic":"Tư duy định lượng","content":"...","options":["A","B","C","D"],"correct_index":0,"explanation":"...","difficulty":"medium"}]</div>
-          <div class="fg" style="margin-bottom:14px">
-            <textarea id="hsa-import-json" class="import-json" rows="12" placeholder="Dán JSON vào đây..."></textarea>
-          </div>
-          <div class="form-actions">
-            <button class="btn" style="padding:12px 24px;background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#000;font-weight:800" onclick="importHSA()">📥 Import HSA</button>
-            <button class="btn btn-g" onclick="document.getElementById('hsa-import-json').value=''">🗑 Xóa</button>
-          </div>
-          <div id="hsa-import-result" style="margin-top:12px;font-size:13px;font-weight:600"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ══ SECTION: CẤP QUYỀN ADMIN ══ -->
-    <div id="sec-perm" style="display:none">
-
-      <!-- INFO BANNER -->
-      <div style="background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(239,68,68,.05));border:1px solid rgba(245,158,11,.25);border-radius:16px;padding:20px 24px;margin-bottom:20px;display:flex;align-items:flex-start;gap:16px;position:relative;overflow:hidden">
-        <div style="position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent3),var(--red))"></div>
-        <div style="font-size:32px;flex-shrink:0">🔑</div>
-        <div>
-          <div style="font-size:16px;font-weight:800;margin-bottom:4px">Quản lý quyền Admin</div>
-          <div style="font-size:13px;color:var(--muted);line-height:1.6">Thêm hoặc xoá email khỏi danh sách admin. Admin có thể thêm/xoá câu hỏi, duyệt nội dung và truy cập trang quản trị này. Chỉ <strong style="color:var(--accent3)">super admin</strong> mới có thể thay đổi danh sách.</div>
-        </div>
-      </div>
-
-      <!-- ADD ADMIN FORM -->
-      <div class="form-card" style="animation-delay:.05s">
-        <div class="form-card-title">➕ Thêm Admin mới</div>
-        <div style="display:grid;grid-template-columns:1fr auto;gap:12px;align-items:flex-end">
-          <div class="fg">
-            <label>Gmail cần cấp quyền</label>
-            <input type="email" id="new-admin-email" placeholder="example@gmail.com" style="font-size:14px" oninput="clearAddResult()">
-          </div>
-          <button class="btn btn-v" style="padding:10px 24px;height:42px" onclick="addAdmin()">🔑 Cấp quyền</button>
-        </div>
-        <div id="add-admin-result" style="margin-top:10px;font-size:13px;font-weight:600;display:none"></div>
-      </div>
-
-      <!-- CURRENT ADMIN LIST -->
-      <div class="tbl-card" style="animation-delay:.1s">
-        <div style="padding:16px 20px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--border)">
-          <div style="font-size:14px;font-weight:800;display:flex;align-items:center;gap:8px">🛡️ Danh sách Admin hiện tại <span id="admin-count-badge" style="background:rgba(0,229,255,.12);color:var(--accent);font-size:11px;padding:2px 8px;border-radius:999px;font-weight:700">0</span></div>
-          <button class="btn btn-g" style="font-size:12px;padding:6px 14px" onclick="loadAdminList()">🔄 Làm mới</button>
-        </div>
-        <table style="width:100%;border-collapse:collapse">
-          <thead>
-            <tr style="background:var(--surface)">
-              <th style="padding:10px 16px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);text-align:left">#</th>
-              <th style="padding:10px 16px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);text-align:left">Gmail</th>
-              <th style="padding:10px 16px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);text-align:left">Loại</th>
-              <th style="padding:10px 16px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);text-align:left">Ngày thêm</th>
-              <th style="padding:10px 16px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);text-align:right">Thao tác</th>
-            </tr>
-          </thead>
-          <tbody id="admin-list-tbody"></tbody>
-        </table>
-        <div id="admin-list-empty" style="display:none;padding:40px;text-align:center;color:var(--muted);font-size:14px">Chưa có admin nào</div>
-      </div>
-
-      <!-- CONFIRM REMOVE MODAL -->
-      <div id="confirm-rm-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);z-index:300;align-items:center;justify-content:center">
-        <div style="background:var(--card);border:1px solid rgba(239,68,68,.3);border-radius:20px;padding:28px;width:380px;max-width:92vw;animation:scaleIn .25s cubic-bezier(.16,1,.3,1)">
-          <div style="font-size:36px;text-align:center;margin-bottom:12px">⚠️</div>
-          <div style="font-size:16px;font-weight:800;text-align:center;margin-bottom:8px">Xác nhận thu hồi quyền</div>
-          <div style="font-size:13px;color:var(--muted);text-align:center;margin-bottom:20px">Bạn sắp thu hồi quyền admin của:<br><strong id="rm-email-display" style="color:var(--red);font-size:14px"></strong></div>
-          <div style="display:flex;gap:10px">
-            <button class="btn btn-g" style="flex:1" onclick="closeRmModal()">Huỷ</button>
-            <button class="btn" style="flex:1;background:var(--red);color:#fff" onclick="confirmRemoveAdmin()">🗑 Thu hồi</button>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-
-<footer class="site-footer">
-    <div class="sf-inner">
-      <div class="sf-col">
-        <div class="sf-label">Địa chỉ</div>
-        <div class="sf-addr"><strong>Lớp 12A4</strong><br>Trường THPT Đan Phượng<br>Thị trấn Phùng, huyện Đan Phượng<br>Hà Nội</div>
-        <div class="sf-map"><iframe src="https://maps.google.com/maps?q=Tr%C6%B0%E1%BB%9Dng%20THPT%20%C4%90an%20Ph%C6%B0%E1%BB%A3ng&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
-      </div>
-      <div class="sf-col">
-        <div class="sf-label">Thành viên nhóm</div>
-        <div class="sf-members">
-          <div class="sf-member">Nguyễn Thế Hải Nam</div>
-          <div class="sf-member">Doãn Hà Anh</div>
-          <div class="sf-member">Nguyễn Huyền Linh</div>
-          <div class="sf-member">Đỗ Minh Phương</div>
-          <div class="sf-member">Nguyễn Thị Mai Trang</div>
-        </div>
-      </div>
-      <div class="sf-col">
-        <div class="sf-label">Mạng xã hội</div>
-        <div class="sf-fb"><a href="https://facebook.com" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#1877f2"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.413c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.953h-1.513c-1.491 0-1.956.93-1.956 1.886v2.284h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>Facebook</a></div>
-      </div>
-    </div>
-    <div class="sf-bottom">
-      <span class="sf-copy">© 2026 LuyenThi369</span>
-      <span class="sf-brand">Lớp 12A4 · Trường THPT Đan Phượng</span>
-    </div>
-  </footer>
-  </div>
-</div>
-</div>
-
-<!-- EDIT MODAL -->
-<div class="modal-ov" id="edit-modal">
-  <div class="modal-box">
-    <div class="modal-hdr">
-      <div class="modal-title">✏️ Chỉnh sửa câu hỏi</div>
-      <div class="modal-close" onclick="closeEditModal()">✕</div>
-    </div>
-    <div class="modal-body">
-      <input type="hidden" id="edit-id">
-      <div class="form-row tri">
-        <div class="fg"><label>Môn / Phần thi</label><input id="edit-subject" type="text"></div>
-        <div class="fg"><label>Chủ đề</label><input id="edit-topic" type="text"></div>
-        <div class="fg"><label>Độ khó</label>
-          <select id="edit-difficulty">
-            <option value="easy">Dễ</option><option value="medium">Trung bình</option><option value="hard">Khó</option>
+        <div class="fi">
+          <label>Môn học *</label>
+          <select id="u-subject">
+            <option value="">-- Chọn môn --</option>
+            <option value="toan">📐 Toán</option>
+            <option value="ly">⚡ Vật lý</option>
+            <option value="hoa">🧪 Hóa học</option>
+            <option value="sinh">🌱 Sinh học</option>
+            <option value="anh">🌍 Tiếng Anh</option>
+            <option value="van">📖 Ngữ Văn</option>
+            <option value="su">📜 Lịch Sử</option>
+            <option value="dia">🗺 Địa Lý</option>
+            <option value="hsa">🎯 HSA</option>
+            <option value="other">📄 Khác</option>
           </select>
         </div>
-      </div>
-      <div class="form-row full"><div class="fg"><label>Câu hỏi</label><textarea id="edit-content" rows="3"></textarea></div></div>
-      <div class="fg" style="margin-bottom:14px"><label>Đáp án</label>
-        <div class="opt-grid">
-          <div class="opt-item"><input type="radio" name="ecorrect" value="0" style="width:auto;accent-color:var(--accent)"><span class="opt-label">A</span><input id="ef-o0" type="text"></div>
-          <div class="opt-item"><input type="radio" name="ecorrect" value="1" style="width:auto;accent-color:var(--accent)"><span class="opt-label">B</span><input id="ef-o1" type="text"></div>
-          <div class="opt-item"><input type="radio" name="ecorrect" value="2" style="width:auto;accent-color:var(--accent)"><span class="opt-label">C</span><input id="ef-o2" type="text"></div>
-          <div class="opt-item"><input type="radio" name="ecorrect" value="3" style="width:auto;accent-color:var(--accent)"><span class="opt-label">D</span><input id="ef-o3" type="text"></div>
+        <div class="fi">
+          <label>Năm học</label>
+          <input type="text" id="u-year" placeholder="VD: 2024-2025">
         </div>
       </div>
-      <div class="form-row full"><div class="fg"><label>Giải thích</label><textarea id="edit-explanation" rows="2"></textarea></div></div>
-      <div class="form-actions">
-        <button class="btn btn-p" style="flex:1;padding:12px" onclick="saveEdit()">💾 Lưu thay đổi</button>
-        <button class="btn btn-g" onclick="closeEditModal()">Hủy</button>
+      <div class="fi" style="margin-bottom:12px">
+        <label>Mô tả ngắn</label>
+        <input type="text" id="u-desc" placeholder="VD: Đề chính thức, có đáp án...">
+      </div>
+      <div class="drop-zone" id="drop-zone">
+        <input type="file" id="file-input" accept=".pdf" onchange="onFileSelect(this)">
+        <div class="dz-ic" id="dz-ic">📄</div>
+        <div class="dz-txt" id="dz-txt">Kéo thả file PDF vào đây</div>
+        <div class="dz-sub" id="dz-sub">hoặc click để chọn · Tối đa 50MB</div>
+      </div>
+      <div class="prog-wrap" id="prog-wrap">
+        <div class="prog-lbl" id="prog-lbl">Đang upload...</div>
+        <div class="prog-bar-bg"><div class="prog-bar" id="prog-bar"></div></div>
+      </div>
+      <div style="display:flex;gap:10px;margin-top:16px">
+        <button class="btn btn-v" onclick="doUpload()">📤 Upload</button>
+        <button class="btn btn-g" onclick="clearUpload()">✕ Hủy</button>
       </div>
     </div>
+
+    <!-- STATS -->
+    <div class="stats-row">
+      <div class="stat-c"><div class="stat-lbl">📂 Tổng đề</div><div class="stat-val" id="st-total" style="color:var(--accent)">--</div><div class="stat-sub">File PDF</div></div>
+      <div class="stat-c"><div class="stat-lbl">📐 Môn học</div><div class="stat-val" id="st-subj" style="color:#a78bfa">--</div><div class="stat-sub">Môn có đề</div></div>
+      <div class="stat-c"><div class="stat-lbl">🕐 Mới nhất</div><div class="stat-val" id="st-date" style="color:var(--accent3);font-size:16px">--</div><div class="stat-sub">Ngày cập nhật</div></div>
+    </div>
+
+    <!-- FILTER -->
+    <div class="filter-bar">
+      <div class="search-wrap">
+        <input type="text" id="s-search" placeholder="Tìm đề thi..." oninput="filterPDFs()">
+      </div>
+      <select class="fsel" id="s-subj" onchange="filterPDFs()">
+        <option value="">Tất cả môn</option>
+        <option value="toan">📐 Toán</option>
+        <option value="ly">⚡ Vật lý</option>
+        <option value="hoa">🧪 Hóa học</option>
+        <option value="sinh">🌱 Sinh học</option>
+        <option value="anh">🌍 Tiếng Anh</option>
+        <option value="van">📖 Ngữ Văn</option>
+        <option value="su">📜 Lịch Sử</option>
+        <option value="dia">🗺 Địa Lý</option>
+        <option value="hsa">🎯 HSA</option>
+        <option value="other">📄 Khác</option>
+      </select>
+      <select class="fsel" id="s-year" onchange="filterPDFs()">
+        <option value="">Tất cả năm</option>
+      </select>
+      <button class="btn btn-g" onclick="resetFilter()">↺ Đặt lại</button>
+    </div>
+
+    <!-- PDF GRID -->
+    <div class="pdf-grid" id="pdf-grid">
+      <div class="skel"></div><div class="skel"></div><div class="skel"></div>
+    </div>
+  </div>
+
+  <footer style="padding:18px 28px;border-top:1px solid var(--border);text-align:center">
+    <span style="font-size:12px;color:var(--muted)">© 2026 LuyenThi369 · Lớp 12A4 Trường THPT Đan Phượng</span>
+  </footer>
+</div>
+</div>
+
+<!-- MODAL XEM PDF -->
+<div class="modal-ov" id="modal-ov" onclick="if(event.target===this)closeModal()">
+  <div class="modal-box">
+    <div class="modal-hdr">
+      <div class="modal-title" id="modal-title">Xem đề thi</div>
+      <div style="display:flex;gap:8px;align-items:center;flex-shrink:0">
+        <a class="btn btn-v" id="modal-dl" href="#" style="font-size:12px;padding:7px 14px">⬇️ Tải về</a>
+        <div class="modal-close" onclick="closeModal()">✕</div>
+      </div>
+    </div>
+    <div class="modal-body"><iframe id="modal-frame" src=""></iframe></div>
   </div>
 </div>
+
 <div id="toast"><span id="toast-ic">✅</span><div><div id="toast-title"></div><div id="toast-sub"></div></div></div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-
 const SUPABASE_URL='https://ezimwiluksaomtdfsoam.supabase.co';
 const SUPABASE_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV6aW13aWx1a3Nhb210ZGZzb2FtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI0NjEwNDcsImV4cCI6MjA4ODAzNzA0N30.JEcSet75PFEWDcxHP3_4jfWJeiJ16znBddF3XcNtbS0';
 const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-let currentUser=null,currentUserId=null,currentUserEmail='';
+const ADMIN_EMAILS=['admin@luyenthi369.com','nguyennam120408@gmail.com'];
+const BUCKET='exam-pdfs';
+const SNAME={toan:'📐 Toán',ly:'⚡ Vật lý',hoa:'🧪 Hóa học',sinh:'🌱 Sinh học',anh:'🌍 Tiếng Anh',van:'📖 Văn',su:'📜 Lịch Sử',dia:'🗺 Địa Lý',hsa:'🎯 HSA',other:'📄 Khác'};
+let allPDFs=[],filtered=[],isAdmin=false,selectedFile=null;
 
 function applyTheme(t){document.documentElement.setAttribute('data-theme',t);localStorage.setItem('lt369_theme',t);const b=document.getElementById('theme-btn');if(b)b.textContent=t==='dark'?'☀️':'🌙';}
 function toggleTheme(){applyTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark');}
@@ -795,430 +373,184 @@ async function doLogout(){await sb.auth.signOut();location.href='dang-nhap.html'
 function openSidebar(){document.querySelector('.sidebar').classList.add('open');document.getElementById('sb-overlay').classList.add('show');}
 function closeSidebar(){document.querySelector('.sidebar').classList.remove('open');document.getElementById('sb-overlay').classList.remove('show');}
 function showToast(ic,title,sub,col){
-  const t=document.getElementById('toast');
-  if(col)t.style.borderColor=col;
+  const t=document.getElementById('toast');clearTimeout(t._t);
   document.getElementById('toast-ic').textContent=ic;
   document.getElementById('toast-title').textContent=title;
   document.getElementById('toast-sub').textContent=sub||'';
-  t.classList.add('show');clearTimeout(t._t);
-  t._t=setTimeout(()=>{t.classList.remove('show');t.style.borderColor='';if(col)t.style.borderColor='';} ,3500);
+  if(col)t.style.borderColor=col;
+  t.classList.add('show');
+  t._t=setTimeout(()=>{t.classList.remove('show');t.style.borderColor='';},3500);
 }
-window.addEventListener('scroll',()=>{const tb=document.getElementById('topbar');if(tb)tb.classList.toggle('scrolled',window.scrollY>10);});
+window.addEventListener('scroll',()=>{document.getElementById('topbar').classList.toggle('scrolled',window.scrollY>10);});
+
 async function initUser(){
   applyTheme(localStorage.getItem('lt369_theme')||'dark');
   const {data:{session}}=await sb.auth.getSession();
   if(!session){location.href='dang-nhap.html';return null;}
-  currentUser=session.user;currentUserId=session.user.id;currentUserEmail=session.user.email;
-  const name=session.user.user_metadata?.full_name||session.user.email.split('@')[0];
+  const u=session.user;
+  const name=u.user_metadata?.full_name||u.email.split('@')[0];
   localStorage.setItem('lt369_user',name);
   const av=document.getElementById('sb-av');if(av)av.textContent=name.charAt(0).toUpperCase();
   const nm=document.getElementById('sb-name');if(nm)nm.textContent=name;
+  isAdmin=ADMIN_EMAILS.includes(u.email)||u.user_metadata?.is_admin===true;
+  if(!isAdmin){const {data}=await sb.from('admin_list').select('email').eq('email',u.email).maybeSingle();if(data)isAdmin=true;}
+  if(isAdmin)document.getElementById('btn-upload').style.display='inline-flex';
   return session;
 }
 
+(async()=>{const s=await initUser();if(!s)return;await loadPDFs();})();
 
-const ADMIN_EMAILS=['admin@luyenthi369.com','nguyennam120408@gmail.com'];
-const SUBJ_LABEL={toan:'Toán',ly:'Vật lý',hoa:'Hóa học',sinh:'Sinh học',anh:'Tiếng Anh',van:'Ngữ Văn',su:'Lịch Sử',dia:'Địa Lý',gdcd:'GDCD',hsa:'HSA'};
-const DIFF_LABEL={easy:'Dễ',medium:'Trung bình',hard:'Khó',1:'Dễ',2:'Trung bình',3:'Khó',4:'Rất khó'};
-
-let allLuyen=[],filteredLuyen=[],lCurPage=1;
-let allHSA=[],filteredHSA=[],hCurPage=1;
-const PAGE=20;
-
-(async()=>{
-  const session=await initUser();
-  if(!session) return;
-  const isAdmin=ADMIN_EMAILS.includes(session.user.email)||session.user.user_metadata?.is_admin===true;
-  if(!isAdmin){
-    document.querySelector('.content').innerHTML=`<div style="text-align:center;padding:80px 20px"><div style="font-size:64px;margin-bottom:16px">🚫</div><h2 style="margin-bottom:8px">Không có quyền truy cập</h2><p style="color:var(--muted);margin-bottom:20px">${session.user.email}</p><a href="dashboard.html" class="btn btn-p">← Về Dashboard</a></div>`;
+async function loadPDFs(){
+  const {data,error}=await sb.from('exam_pdfs').select('*').order('created_at',{ascending:false});
+  const grid=document.getElementById('pdf-grid');
+  if(error||!data){
+    grid.innerHTML=`<div class="empty-state"><div class="empty-ic">📭</div><div class="empty-title">Chưa có đề thi nào</div><div class="empty-sub">${isAdmin?'Hãy upload đề thi PDF đầu tiên!':'Admin chưa upload đề thi nào.'}</div></div>`;
+    ['st-total','st-subj'].forEach(id=>document.getElementById(id).textContent='0');
     return;
   }
-  loadAll();
-})();
-
-async function loadAll(){
-  const {data,error}=await sb.from('questions').select('*').order('created_at',{ascending:false});
-  if(error){showToast('❌','Lỗi tải dữ liệu',error.message,'var(--red)');return;}
-  const all=data||[];
-  allLuyen=all.filter(q=>q.subject!=='hsa');
-  allHSA=all.filter(q=>q.subject==='hsa');
-  filteredLuyen=[...allLuyen];filteredHSA=[...allHSA];
-  updateStats();
-  lCurPage=1;hCurPage=1;
-  renderLuyen();renderHSA();
-  document.getElementById('total-count').textContent=all.length+' câu tổng cộng';
-  showToast('✅','Đã tải '+all.length+' câu hỏi','');
+  allPDFs=data;
+  document.getElementById('st-total').textContent=allPDFs.length;
+  document.getElementById('st-subj').textContent=new Set(allPDFs.map(p=>p.subject)).size;
+  if(allPDFs.length)document.getElementById('st-date').textContent=new Date(allPDFs[0].created_at).toLocaleDateString('vi',{day:'2-digit',month:'2-digit'});
+  const years=[...new Set(allPDFs.map(p=>p.year).filter(Boolean))].sort().reverse();
+  const ys=document.getElementById('s-year');
+  ys.innerHTML='<option value="">Tất cả năm</option>'+years.map(y=>`<option value="${y}">${y}</option>`).join('');
+  filtered=[...allPDFs];render();
 }
 
-function updateStats(){
-  ['toan','ly','hoa','sinh','anh','van','su','dia','gdcd'].forEach(s=>{
-    const el=document.getElementById('st-'+s);
-    if(el) el.textContent=allLuyen.filter(q=>q.subject===s).length;
-  });
-  document.getElementById('st-luyen-total').textContent=allLuyen.length;
-  document.getElementById('st-hsa').textContent=allHSA.length;
-  document.getElementById('stab-luyen-cnt').textContent=allLuyen.length;
-  document.getElementById('stab-hsa-cnt').textContent=allHSA.length;
-  // HSA part stats
-  const parts=['Tư duy định lượng','Tư duy ngôn ngữ','Tư duy khoa học'];
-  const ids=['hsa-st-dinh-luong','hsa-st-ngon-ngu','hsa-st-khoa-hoc'];
-  parts.forEach((p,i)=>{
-    const el=document.getElementById(ids[i]);
-    if(el) el.textContent=allHSA.filter(q=>(q.topic||'').includes(p.split(' ').pop())||q.topic===p).length||'--';
-  });
-}
-
-// ── SECTION SWITCH ──
-function switchSection(sec,el){
-  document.querySelectorAll('.stab').forEach(t=>t.classList.remove('active'));
-  el.classList.add('active');
-  document.getElementById('sec-luyen').style.display=sec==='luyen'?'':'none';
-  document.getElementById('sec-hsa').style.display=sec==='hsa'?'':'none';
-  document.getElementById('sec-perm').style.display=sec==='perm'?'':'none';
-  if(sec==='list'||sec==='luyen') renderLuyen();
-  if(sec==='hsa') renderHSA();
-  if(sec==='perm') loadAdminList();
-}
-
-// ── INNER TAB SWITCH ──
-function switchInner(sec,tab,el){
-  const prefix=sec==='luyen'?'luyen':'hsa';
-  el.closest('.inner-tabs').querySelectorAll('.itab').forEach(t=>t.classList.remove('active'));
-  el.classList.add('active');
-  ['add','list','import'].forEach(t=>{
-    const el2=document.getElementById(prefix+'-tab-'+t);
-    if(el2) el2.style.display=t===tab?'':'none';
-  });
-  if(tab==='list'){ if(sec==='luyen') renderLuyen(); else renderHSA(); }
-}
-
-// ── LUYEN TABLE ──
-function renderLuyen(){
-  const tbody=document.getElementById('luyen-tbody');if(!tbody)return;
-  const total=Math.ceil(filteredLuyen.length/PAGE)||1;
-  if(lCurPage>total)lCurPage=1;
-  const slice=filteredLuyen.slice((lCurPage-1)*PAGE,lCurPage*PAGE);
-  document.getElementById('lpage-info').textContent=lCurPage+' / '+total;
-  document.getElementById('lprev').disabled=lCurPage<=1;
-  document.getElementById('lnext').disabled=lCurPage>=total;
-  tbody.innerHTML=slice.map((q,i)=>rowHTML(q,(lCurPage-1)*PAGE+i+1,'luyen')).join('');
-}
-function filterLuyen(){
-  const subj=document.getElementById('lf-filter-subj').value;
-  const diff=document.getElementById('lf-filter-diff').value;
-  const kw=document.getElementById('lf-search').value.toLowerCase();
-  filteredLuyen=allLuyen.filter(q=>{
-    if(subj&&q.subject!==subj)return false;
-    if(diff&&(q.difficulty!==diff))return false;
-    if(kw&&!q.content.toLowerCase().includes(kw))return false;
+function filterPDFs(){
+  const q=document.getElementById('s-search').value.toLowerCase();
+  const subj=document.getElementById('s-subj').value;
+  const year=document.getElementById('s-year').value;
+  filtered=allPDFs.filter(p=>{
+    if(subj&&p.subject!==subj)return false;
+    if(year&&p.year!==year)return false;
+    if(q&&!p.title.toLowerCase().includes(q)&&!(p.description||'').toLowerCase().includes(q))return false;
     return true;
   });
-  lCurPage=1;renderLuyen();
+  render();
 }
-function lPage(d){lCurPage+=d;renderLuyen();}
+function resetFilter(){document.getElementById('s-search').value='';document.getElementById('s-subj').value='';document.getElementById('s-year').value='';filtered=[...allPDFs];render();}
 
-// ── HSA TABLE ──
-function renderHSA(){
-  const tbody=document.getElementById('hsa-tbody');if(!tbody)return;
-  const total=Math.ceil(filteredHSA.length/PAGE)||1;
-  if(hCurPage>total)hCurPage=1;
-  const slice=filteredHSA.slice((hCurPage-1)*PAGE,hCurPage*PAGE);
-  document.getElementById('hpage-info').textContent=hCurPage+' / '+total;
-  document.getElementById('hprev').disabled=hCurPage<=1;
-  document.getElementById('hnext').disabled=hCurPage>=total;
-  tbody.innerHTML=slice.map((q,i)=>rowHTML(q,(hCurPage-1)*PAGE+i+1,'hsa')).join('');
-}
-function filterHSA(){
-  const topic=document.getElementById('hf-filter-topic').value;
-  const kw=document.getElementById('hf-search').value.toLowerCase();
-  filteredHSA=allHSA.filter(q=>{
-    if(topic&&q.topic!==topic)return false;
-    if(kw&&!q.content.toLowerCase().includes(kw))return false;
-    return true;
-  });
-  hCurPage=1;renderHSA();
-}
-function hPage(d){hCurPage+=d;renderHSA();}
-
-function rowHTML(q,idx,sec){
-  const diff=q.difficulty||'medium';
-  const diffCls=diff==='easy'||diff===1?'diff-easy':diff==='hard'||diff===3||diff===4?'diff-hard':'diff-med';
-  const diffLbl=DIFF_LABEL[diff]||diff;
-  const subLabel=sec==='hsa'?(q.topic||'HSA'):(SUBJ_LABEL[q.subject]||q.subject);
-  const subCls=sec==='hsa'?'s-hsa':('s-'+q.subject);
-  return `<tr>
-    <td style="color:var(--muted);font-size:12px">${idx}</td>
-    <td><span class="sbadge ${subCls}">${subLabel}</span></td>
-    <td><div class="q-preview">${q.content}</div>${q.topic&&sec!=='hsa'?`<div class="q-topic">${q.topic}</div>`:''}</td>
-    <td><span class="sbadge ${diffCls}">${diffLbl}</span></td>
-    <td style="color:${q.approved?'var(--green)':'var(--accent3)'};">${q.approved?'✅':'⏳'}</td>
-    <td style="text-align:right">
-      <button class="abtn abtn-edit" onclick="openEdit('${q.id}')" style="margin-right:4px">✏️ Sửa</button>
-      <button class="abtn ${q.approved?'abtn-del':'abtn-ok'}" onclick="toggleApprove('${q.id}',${q.approved})" style="margin-right:4px">${q.approved?'Ẩn':'Duyệt'}</button>
-      <button class="abtn abtn-del" onclick="deleteQ('${q.id}')">🗑</button>
-    </td>
-  </tr>`;
-}
-
-// ── SAVE LUYEN ──
-async function saveLuyen(){
-  const content=document.getElementById('lf-content').value.trim();
-  const opts=['lf-o0','lf-o1','lf-o2','lf-o3'].map(id=>document.getElementById(id).value.trim());
-  if(!content){showToast('⚠️','Thiếu câu hỏi','','var(--accent3)');return;}
-  if(opts.some(o=>!o)){showToast('⚠️','Thiếu đáp án','Điền đủ 4 đáp án','var(--accent3)');return;}
-  const correct=parseInt(document.querySelector('input[name="lcorrect"]:checked').value);
-  const row={subject:document.getElementById('lf-subject').value,topic:document.getElementById('lf-topic').value.trim()||null,content,options:JSON.stringify(opts),correct_index:correct,explanation:document.getElementById('lf-explanation').value.trim()||null,difficulty:document.getElementById('lf-difficulty').value,approved:true,created_at:new Date().toISOString()};
-  const {error}=await sb.from('questions').insert(row);
-  if(error){showToast('❌','Lỗi',error.message,'var(--red)');return;}
-  showToast('✅','Đã lưu câu hỏi!','','var(--green)');clearLuyenForm();loadAll();
-}
-
-// ── SAVE HSA ──
-async function saveHSA(){
-  const content=document.getElementById('hf-content').value.trim();
-  const opts=['hf-o0','hf-o1','hf-o2','hf-o3'].map(id=>document.getElementById(id).value.trim());
-  if(!content){showToast('⚠️','Thiếu câu hỏi','','var(--accent3)');return;}
-  if(opts.some(o=>!o)){showToast('⚠️','Thiếu đáp án','Điền đủ 4 đáp án','var(--accent3)');return;}
-  const correct=parseInt(document.querySelector('input[name="hcorrect"]:checked').value);
-  const topic=document.getElementById('hf-topic').value;
-  const subtopic=document.getElementById('hf-subtopic').value.trim();
-  const row={subject:'hsa',topic,content,options:JSON.stringify(opts),correct_index:correct,explanation:document.getElementById('hf-explanation').value.trim()||null,difficulty:document.getElementById('hf-difficulty').value,approved:true,created_at:new Date().toISOString()};
-  const {error}=await sb.from('questions').insert(row);
-  if(error){showToast('❌','Lỗi',error.message,'var(--red)');return;}
-  showToast('✅','Đã lưu câu hỏi HSA!','','var(--green)');clearHSAForm();loadAll();
-}
-
-function clearLuyenForm(){['lf-content','lf-topic','lf-explanation','lf-o0','lf-o1','lf-o2','lf-o3'].forEach(id=>document.getElementById(id).value='');document.querySelector('input[name="lcorrect"][value="0"]').checked=true;}
-function clearHSAForm(){['hf-content','hf-subtopic','hf-explanation','hf-o0','hf-o1','hf-o2','hf-o3'].forEach(id=>document.getElementById(id).value='');document.querySelector('input[name="hcorrect"][value="0"]').checked=true;}
-
-// ── ACTIONS ──
-async function toggleApprove(id,cur){
-  const {error}=await sb.from('questions').update({approved:!cur}).eq('id',id);
-  if(error){showToast('❌','Lỗi',error.message,'var(--red)');return;}
-  showToast('✅',cur?'Đã ẩn':'Đã duyệt','');loadAll();
-}
-async function deleteQ(id){
-  if(!confirm('Xóa câu hỏi này?')) return;
-  const {error}=await sb.from('questions').delete().eq('id',id);
-  if(error){showToast('❌','Lỗi',error.message,'var(--red)');return;}
-  showToast('🗑️','Đã xóa','');loadAll();
-}
-
-// ── EDIT MODAL ──
-function openEdit(id){
-  const q=[...allLuyen,...allHSA].find(x=>x.id===id);if(!q)return;
-  document.getElementById('edit-id').value=id;
-  document.getElementById('edit-subject').value=q.subject;
-  document.getElementById('edit-topic').value=q.topic||'';
-  document.getElementById('edit-content').value=q.content;
-  document.getElementById('edit-difficulty').value=q.difficulty||'medium';
-  const opts=typeof q.options==='string'?JSON.parse(q.options):q.options||[];
-  opts.forEach((o,i)=>{const el=document.getElementById('ef-o'+i);if(el)el.value=o;});
-  const r=document.querySelector(`input[name="ecorrect"][value="${q.correct_index}"]`);if(r)r.checked=true;
-  document.getElementById('edit-explanation').value=q.explanation||'';
-  document.getElementById('edit-modal').classList.add('show');
-}
-function closeEditModal(){document.getElementById('edit-modal').classList.remove('show');}
-async function saveEdit(){
-  const id=document.getElementById('edit-id').value;
-  const opts=['ef-o0','ef-o1','ef-o2','ef-o3'].map(i=>document.getElementById(i).value.trim());
-  const correct=parseInt(document.querySelector('input[name="ecorrect"]:checked').value);
-  const row={subject:document.getElementById('edit-subject').value,topic:document.getElementById('edit-topic').value||null,content:document.getElementById('edit-content').value.trim(),options:JSON.stringify(opts),correct_index:correct,explanation:document.getElementById('edit-explanation').value.trim()||null,difficulty:document.getElementById('edit-difficulty').value};
-  const {error}=await sb.from('questions').update(row).eq('id',id);
-  if(error){showToast('❌','Lỗi',error.message,'var(--red)');return;}
-  showToast('✅','Đã cập nhật','','var(--green)');closeEditModal();loadAll();
-}
-document.getElementById('edit-modal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeEditModal();});
-
-// ── IMPORT ──
-async function importLuyen(){
-  await doImport('luyen-import-json','luyen-import-result','');
-}
-async function importHSA(){
-  await doImport('hsa-import-json','hsa-import-result','hsa');
-}
-async function doImport(textareaId,resultId,forceSubject){
-  const raw=document.getElementById(textareaId).value.trim();
-  const el=document.getElementById(resultId);
-  let arr;try{arr=JSON.parse(raw);}catch(e){el.innerHTML=`<span style="color:var(--red)">❌ JSON không hợp lệ: ${e.message}</span>`;return;}
-  if(!Array.isArray(arr)){el.innerHTML='<span style="color:var(--red)">❌ Phải là mảng JSON []</span>';return;}
-  const rows=arr.map(q=>({subject:forceSubject||q.subject||'toan',topic:q.topic||null,content:q.content||q.q||'',options:JSON.stringify(q.options||q.o||[]),correct_index:q.correct_index??q.a??0,explanation:q.explanation||q.e||null,difficulty:q.difficulty||'medium',approved:true,created_at:new Date().toISOString()})).filter(q=>q.content);
-  el.innerHTML=`<span style="color:var(--accent)">⏳ Đang import ${rows.length} câu...</span>`;
-  let ok=0,fail=0;
-  for(let i=0;i<rows.length;i+=50){const {error}=await sb.from('questions').insert(rows.slice(i,i+50));if(error)fail+=Math.min(50,rows.length-i);else ok+=Math.min(50,rows.length-i);}
-  el.innerHTML=`<span style="color:var(--green)">✅ Thành công: ${ok} câu</span>`+(fail?` <span style="color:var(--red)">| Thất bại: ${fail}</span>`:'');
-  if(ok>0){loadAll();document.getElementById(textareaId).value='';}
-}
-
-// ══════════════════════════════════════
-// 🔑 ADMIN PERMISSION MANAGEMENT
-// ══════════════════════════════════════
-
-// Stored in Supabase table `admin_list` (email TEXT, added_by TEXT, added_at TIMESTAMPTZ)
-// Fallback: also check ADMIN_EMAILS hardcoded array
-
-let adminListCache = [];
-let pendingRemoveEmail = null;
-
-async function loadAdminList() {
-  const tbody = document.getElementById('admin-list-tbody');
-  const empty = document.getElementById('admin-list-empty');
-  tbody.innerHTML = '<tr><td colspan="5" style="padding:28px;text-align:center;color:var(--muted)"><div class="skel-s" style="width:60%;margin:0 auto"></div></td></tr>';
-  empty.style.display = 'none';
-
-  // Try fetching from Supabase admin_list table
-  const { data, error } = await sb.from('admin_list').select('*').order('added_at', { ascending: false });
-
-  let list = [];
-  if (!error && data && data.length > 0) {
-    list = data;
-  } else {
-    // Fallback to hardcoded list
-    list = ADMIN_EMAILS.map(email => ({
-      email,
-      added_by: 'system',
-      added_at: null,
-      is_super: true
-    }));
-  }
-
-  adminListCache = list;
-  document.getElementById('admin-count-badge').textContent = list.length;
-  document.getElementById('stab-perm-cnt').textContent = list.length;
-
-  tbody.innerHTML = '';
-  if (!list.length) {
-    empty.style.display = 'block';
-    return;
-  }
-
-  list.forEach((item, i) => {
-    const isSuper = ADMIN_EMAILS.includes(item.email) || item.is_super;
-    const isSelf = item.email === currentUserEmail;
-    const dateStr = item.added_at ? new Date(item.added_at).toLocaleDateString('vi-VN') : '—';
-    const tr = document.createElement('tr');
-    tr.style.cssText = 'animation:fadeUp .3s ease both;border-bottom:1px solid var(--border)';
-    tr.style.animationDelay = (i * 0.04) + 's';
-    tr.innerHTML = `
-      <td style="padding:12px 16px;font-size:13px;color:var(--muted);font-family:'Space Mono'">${i+1}</td>
-      <td style="padding:12px 16px">
-        <div style="display:flex;align-items:center;gap:10px">
-          <div style="width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,${isSuper?'var(--accent3),#ef4444':'var(--accent2),var(--accent)'});display:grid;place-items:center;font-size:14px;font-weight:800;color:#fff;flex-shrink:0">${item.email.charAt(0).toUpperCase()}</div>
-          <div>
-            <div style="font-size:13px;font-weight:700">${item.email}</div>
-            ${isSelf ? '<div style="font-size:11px;color:var(--accent);font-weight:600">← Tài khoản của bạn</div>' : ''}
-          </div>
+function render(){
+  const grid=document.getElementById('pdf-grid');
+  if(!filtered.length){grid.innerHTML=`<div class="empty-state"><div class="empty-ic">🔍</div><div class="empty-title">Không tìm thấy</div><div class="empty-sub">Thử tìm với từ khóa khác</div></div>`;return;}
+  grid.innerHTML=filtered.map((p,i)=>{
+    const s=p.subject||'other';
+    const date=new Date(p.created_at).toLocaleDateString('vi',{day:'2-digit',month:'2-digit',year:'numeric'});
+    const del=isAdmin?`<button class="pdf-del" onclick="event.stopPropagation();deletePDF('${p.id}','${p.file_path}')" title="Xóa">🗑️</button>`:'';
+    return `<div class="pdf-card" style="animation:fadeUp .4s ${i*.05}s ease both">
+      <div class="pdf-thumb">
+        <div class="pdf-thumb-bg bg-${s}"></div>
+        <div class="pdf-thumb-ic">📄</div>
+        <span class="pdf-badge s-${s}">${SNAME[s]||'📄'}</span>
+      </div>
+      <div class="pdf-body">
+        <div class="pdf-title">${p.title}</div>
+        <div class="pdf-meta">
+          ${p.year?`<span>📅 ${p.year}</span>`:''}
+          <span>🕐 ${date}</span>
+          ${p.description?`<span>${p.description}</span>`:''}
         </div>
-      </td>
-      <td style="padding:12px 16px">
-        ${isSuper
-          ? '<span style="background:rgba(245,158,11,.15);color:#f59e0b;font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;border:1px solid rgba(245,158,11,.3)">⭐ Super Admin</span>'
-          : '<span style="background:rgba(0,229,255,.1);color:var(--accent);font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;border:1px solid rgba(0,229,255,.2)">🔑 Admin</span>'
-        }
-      </td>
-      <td style="padding:12px 16px;font-size:12px;color:var(--muted)">${dateStr}</td>
-      <td style="padding:12px 16px;text-align:right">
-        ${isSuper || isSelf
-          ? '<span style="font-size:11px;color:var(--muted);font-style:italic">Không thể xoá</span>'
-          : `<button onclick="promptRemove('${item.email}')" style="padding:5px 12px;border-radius:8px;background:rgba(239,68,68,.1);color:var(--red);border:1px solid rgba(239,68,68,.25);cursor:pointer;font-size:12px;font-weight:700;font-family:inherit;transition:.2s" onmouseover="this.style.background='rgba(239,68,68,.2)'" onmouseout="this.style.background='rgba(239,68,68,.1)'">🗑 Thu hồi</button>`
-        }
-      </td>`;
-    tbody.appendChild(tr);
-  });
+        <div class="pdf-actions">
+          <button class="btn btn-g" onclick="openPDF('${p.id}')">👁 Xem</button>
+          <a class="btn btn-v" href="${p.url}" target="_blank" download onclick="event.stopPropagation()">⬇️ Tải</a>
+          ${del}
+        </div>
+      </div>
+    </div>`;
+  }).join('');
 }
 
-function clearAddResult() {
-  const el = document.getElementById('add-admin-result');
-  el.style.display = 'none';
+function openPDF(id){
+  const p=allPDFs.find(x=>x.id===id);if(!p)return;
+  document.getElementById('modal-title').textContent=p.title;
+  document.getElementById('modal-dl').href=p.url;
+  document.getElementById('modal-dl').download=p.title+'.pdf';
+  document.getElementById('modal-frame').src=p.url;
+  document.getElementById('modal-ov').classList.add('show');
+  document.body.style.overflow='hidden';
 }
+function closeModal(){document.getElementById('modal-ov').classList.remove('show');document.getElementById('modal-frame').src='';document.body.style.overflow='';}
 
-async function addAdmin() {
-  const emailInput = document.getElementById('new-admin-email');
-  const resultEl = document.getElementById('add-admin-result');
-  const email = emailInput.value.trim().toLowerCase();
-
-  resultEl.style.display = 'none';
-
-  if (!email) {
-    showAddResult('⚠️ Vui lòng nhập Gmail', 'warn'); return;
-  }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    showAddResult('⚠️ Email không hợp lệ', 'warn'); return;
-  }
-  if (adminListCache.some(a => a.email === email)) {
-    showAddResult('ℹ️ Email này đã là admin rồi', 'info'); return;
-  }
-
-  const btn = event.target;
-  btn.disabled = true; btn.innerHTML = '<span class="skel-s" style="width:80px;height:14px"></span>';
-
-  const { error } = await sb.from('admin_list').insert({
-    email,
-    added_by: currentUserEmail,
-    added_at: new Date().toISOString(),
-    is_super: false
-  });
-
-  btn.disabled = false; btn.innerHTML = '🔑 Cấp quyền';
-
-  if (error) {
-    // Table might not exist yet — add to local ADMIN_EMAILS and show instructions
-    if (!ADMIN_EMAILS.includes(email)) ADMIN_EMAILS.push(email);
-    showAddResult(`✅ Đã thêm <strong>${email}</strong> vào danh sách admin (local). Tạo bảng admin_list trong Supabase để lưu vĩnh viễn.`, 'ok');
-  } else {
-    showAddResult(`✅ Đã cấp quyền admin cho <strong>${email}</strong>`, 'ok');
-    emailInput.value = '';
-    showToast('🔑', 'Đã cấp quyền Admin', email);
-  }
-  loadAdminList();
+// ── UPLOAD ──
+function toggleUpload(){
+  const p=document.getElementById('upload-panel');
+  p.classList.toggle('show');
+  if(p.classList.contains('show'))p.scrollIntoView({behavior:'smooth',block:'nearest'});
 }
-
-function showAddResult(msg, type) {
-  const el = document.getElementById('add-admin-result');
-  const colors = {
-    ok: { bg: 'rgba(16,185,129,.08)', border: 'rgba(16,185,129,.25)', color: '#10b981' },
-    warn: { bg: 'rgba(245,158,11,.08)', border: 'rgba(245,158,11,.25)', color: '#f59e0b' },
-    info: { bg: 'rgba(0,229,255,.06)', border: 'rgba(0,229,255,.2)', color: 'var(--accent)' },
-    err: { bg: 'rgba(239,68,68,.08)', border: 'rgba(239,68,68,.2)', color: 'var(--red)' }
-  };
-  const c = colors[type] || colors.info;
-  el.style.cssText = `display:flex;align-items:center;gap:8px;padding:10px 14px;border-radius:10px;background:${c.bg};border:1px solid ${c.border};color:${c.color};animation:slideDown .25s ease`;
-  el.innerHTML = msg;
+function onFileSelect(inp){
+  const f=inp.files[0];if(!f)return;
+  if(f.type!=='application/pdf'){showToast('⚠️','Chỉ nhận file PDF','','var(--accent3)');return;}
+  if(f.size>50*1024*1024){showToast('⚠️','File quá lớn','Tối đa 50MB','var(--accent3)');return;}
+  selectedFile=f;
+  document.getElementById('drop-zone').classList.add('has-file');
+  document.getElementById('dz-ic').textContent='✅';
+  document.getElementById('dz-txt').textContent=f.name;
+  document.getElementById('dz-sub').textContent=(f.size/1024/1024).toFixed(2)+' MB';
 }
-
-function promptRemove(email) {
-  pendingRemoveEmail = email;
-  document.getElementById('rm-email-display').textContent = email;
-  const modal = document.getElementById('confirm-rm-modal');
-  modal.style.display = 'flex';
-}
-
-function closeRmModal() {
-  document.getElementById('confirm-rm-modal').style.display = 'none';
-  pendingRemoveEmail = null;
-}
-
-async function confirmRemoveAdmin() {
-  if (!pendingRemoveEmail) return;
-  const email = pendingRemoveEmail;
-  closeRmModal();
-
-  const { error } = await sb.from('admin_list').delete().eq('email', email);
-
-  if (error) {
-    // Remove from local array
-    const idx = ADMIN_EMAILS.indexOf(email);
-    if (idx > -1) ADMIN_EMAILS.splice(idx, 1);
-  }
-
-  showToast('🗑', 'Đã thu hồi quyền', email);
-  loadAdminList();
-}
-
-// Close confirm modal on overlay click
-document.getElementById('confirm-rm-modal')?.addEventListener('click', function(e) {
-  if (e.target === this) closeRmModal();
+const dz=document.getElementById('drop-zone');
+dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('drag');});
+dz.addEventListener('dragleave',()=>dz.classList.remove('drag'));
+dz.addEventListener('drop',e=>{
+  e.preventDefault();dz.classList.remove('drag');
+  const f=e.dataTransfer.files[0];
+  if(f){const fi=document.getElementById('file-input');const dt=new DataTransfer();dt.items.add(f);fi.files=dt.files;onFileSelect(fi);}
 });
+
+async function doUpload(){
+  if(!isAdmin){showToast('🔒','Không có quyền','','var(--red)');return;}
+  const title=document.getElementById('u-title').value.trim();
+  const subject=document.getElementById('u-subject').value;
+  const year=document.getElementById('u-year').value.trim();
+  const desc=document.getElementById('u-desc').value.trim();
+  if(!title){showToast('⚠️','Nhập tên đề thi','','var(--accent3)');return;}
+  if(!subject){showToast('⚠️','Chọn môn học','','var(--accent3)');return;}
+  if(!selectedFile){showToast('⚠️','Chọn file PDF','','var(--accent3)');return;}
+  const prog=document.getElementById('prog-wrap');
+  prog.classList.add('show');
+  const bar=document.getElementById('prog-bar');
+  const lbl=document.getElementById('prog-lbl');
+  bar.style.width='15%';lbl.textContent='Đang upload file...';
+  const fileName=`${Date.now()}_${selectedFile.name.replace(/\s+/g,'_')}`;
+  const {error:storErr}=await sb.storage.from(BUCKET).upload(fileName,selectedFile,{cacheControl:'3600',upsert:false});
+  if(storErr){showToast('❌','Lỗi upload',storErr.message,'var(--red)');bar.style.width='0%';prog.classList.remove('show');return;}
+  bar.style.width='70%';lbl.textContent='Đang lưu thông tin...';
+  const {data:{publicUrl}}=sb.storage.from(BUCKET).getPublicUrl(fileName);
+  const {error:dbErr}=await sb.from('exam_pdfs').insert({
+    title,subject,year:year||null,description:desc||null,
+    file_path:fileName,url:publicUrl,created_at:new Date().toISOString()
+  });
+  if(dbErr){showToast('❌','Lỗi lưu DB',dbErr.message,'var(--red)');bar.style.width='0%';prog.classList.remove('show');return;}
+  bar.style.width='100%';lbl.textContent='Hoàn tất!';
+  setTimeout(()=>{clearUpload();loadPDFs();},700);
+  showToast('✅','Upload thành công!',title,'var(--green)');
+}
+
+function clearUpload(){
+  ['u-title','u-year','u-desc'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('u-subject').value='';
+  document.getElementById('file-input').value='';
+  document.getElementById('drop-zone').classList.remove('has-file','drag');
+  document.getElementById('dz-ic').textContent='📄';
+  document.getElementById('dz-txt').textContent='Kéo thả file PDF vào đây';
+  document.getElementById('dz-sub').textContent='hoặc click để chọn · Tối đa 50MB';
+  document.getElementById('prog-wrap').classList.remove('show');
+  document.getElementById('prog-bar').style.width='0%';
+  selectedFile=null;
+  document.getElementById('upload-panel').classList.remove('show');
+}
+
+async function deletePDF(id,filePath){
+  if(!isAdmin||!confirm('Xóa đề thi này khỏi hệ thống?'))return;
+  await sb.storage.from(BUCKET).remove([filePath]);
+  const {error}=await sb.from('exam_pdfs').delete().eq('id',id);
+  if(error){showToast('❌','Lỗi xóa',error.message,'var(--red)');return;}
+  allPDFs=allPDFs.filter(p=>p.id!==id);filtered=filtered.filter(p=>p.id!==id);
+  render();
+  document.getElementById('st-total').textContent=allPDFs.length;
+  showToast('🗑️','Đã xóa','','var(--red)');
+}
 </script>
 </body>
 </html>
