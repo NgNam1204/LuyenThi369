@@ -222,6 +222,9 @@ tbody tr:last-child td{border-bottom:none}
   .sf-bottom{flex-direction:column;align-items:flex-start;gap:4px}
 }
 </style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js"></script>
 </head>
 <body>
 <div class="app">
@@ -503,6 +506,7 @@ function viewQ(id){
       <button class="btn btn-g" onclick="closeModal()">Đóng</button>
     </div>`;
   document.getElementById('modal-ov').classList.add('show');
+  if(typeof renderMathInElement==='function')renderMathInElement(document.getElementById('modal-body'),{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false});
 }
 function closeModal(){document.getElementById('modal-ov').classList.remove('show');}
 document.getElementById('modal-ov').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal();});

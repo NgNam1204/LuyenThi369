@@ -504,6 +504,9 @@ body{animation:pageLoad .4s cubic-bezier(.2,.8,.3,1)}
 .stat-val,.sh-sv,.srv{animation:countUp .6s cubic-bezier(.2,.8,.3,1) both}
 @keyframes countUp{from{opacity:0;transform:scale(.7) translateY(10px)}to{opacity:1;transform:none}}
 </style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.10/dist/contrib/auto-render.min.js"></script>
 </head>
 <body>
 <div class="app">
@@ -1038,6 +1041,7 @@ async function saveStudySession(subject,correct,total,score){
   }catch(e){console.warn('saveStudySession err:',e.message);}
 }
 function closeQuiz(){document.getElementById('qov').classList.remove('show');document.body.style.overflow='';clearInterval(timerI)}
+function renderMath(el){if(typeof renderMathInElement==='function')renderMathInElement(el||document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],throwOnError:false});}
 function renderQ(){
   const q=curSet[curQ],ans=answers[curQ],locked=ans!==null;
   document.getElementById('qcur').textContent=curQ+1;
@@ -1052,6 +1056,7 @@ function renderQ(){
     <div class="explain ${locked?'show':''}">${locked?'<strong>'+(ans===q.a?'✅ Đúng!':'❌ Sai.')+'</strong> '+q.e:''}</div>`;
   document.getElementById('btn-prev').disabled=curQ===0;
   document.getElementById('btn-next').textContent=curQ===curSet.length-1?'Xem kết quả ✓':'Tiếp theo →';
+  renderMath(document.getElementById('qbody'));
 }
 function selectOpt(i){if(answers[curQ]!==null)return;answers[curQ]=i;renderQ();renderDots()}
 function prevQ(){if(curQ>0){curQ--;renderQ();renderDots()}}
