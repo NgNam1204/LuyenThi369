@@ -820,7 +820,6 @@ async function initUser(){
 const ADMIN_EMAILS=['admin@luyenthi369.com','nguyennam120408@gmail.com'];
 const SUBJ_LABEL={toan:'Toán',ly:'Vật lý',hoa:'Hóa học',sinh:'Sinh học',anh:'Tiếng Anh',van:'Ngữ Văn',su:'Lịch Sử',dia:'Địa Lý',gdcd:'GDCD',hsa:'HSA'};
 const DIFF_LABEL={easy:'Dễ',medium:'Trung bình',hard:'Khó',1:'Dễ',2:'Trung bình',3:'Khó',4:'Rất khó'};
-const DIFF_INT={easy:1,medium:2,hard:3};
 
 let allLuyen=[],filteredLuyen=[],lCurPage=1;
 let allHSA=[],filteredHSA=[],hCurPage=1;
@@ -968,7 +967,7 @@ async function saveLuyen(){
   if(!content){showToast('⚠️','Thiếu câu hỏi','','var(--accent3)');return;}
   if(opts.some(o=>!o)){showToast('⚠️','Thiếu đáp án','Điền đủ 4 đáp án','var(--accent3)');return;}
   const correct=parseInt(document.querySelector('input[name="lcorrect"]:checked').value);
-  const row={subject:document.getElementById('lf-subject').value,topic:document.getElementById('lf-topic').value.trim()||null,content,options:JSON.stringify(opts),correct_index:correct,explanation:document.getElementById('lf-explanation').value.trim()||null,difficulty:DIFF_INT[document.getElementById('lf-difficulty').value]||2,approved:true,created_at:new Date().toISOString()};
+  const row={subject:document.getElementById('lf-subject').value,topic:document.getElementById('lf-topic').value.trim()||null,content,options:JSON.stringify(opts),correct_index:correct,explanation:document.getElementById('lf-explanation').value.trim()||null,difficulty:document.getElementById('lf-difficulty').value,approved:true,created_at:new Date().toISOString()};
   const {error}=await sb.from('questions').insert(row);
   if(error){showToast('❌','Lỗi',error.message,'var(--red)');return;}
   showToast('✅','Đã lưu câu hỏi!','','var(--green)');clearLuyenForm();loadAll();
@@ -983,7 +982,7 @@ async function saveHSA(){
   const correct=parseInt(document.querySelector('input[name="hcorrect"]:checked').value);
   const topic=document.getElementById('hf-topic').value;
   const subtopic=document.getElementById('hf-subtopic').value.trim();
-  const row={subject:'hsa',topic,content,options:JSON.stringify(opts),correct_index:correct,explanation:document.getElementById('hf-explanation').value.trim()||null,difficulty:DIFF_INT[document.getElementById('hf-difficulty').value]||2,approved:true,created_at:new Date().toISOString()};
+  const row={subject:'hsa',topic,content,options:JSON.stringify(opts),correct_index:correct,explanation:document.getElementById('hf-explanation').value.trim()||null,difficulty:document.getElementById('hf-difficulty').value,approved:true,created_at:new Date().toISOString()};
   const {error}=await sb.from('questions').insert(row);
   if(error){showToast('❌','Lỗi',error.message,'var(--red)');return;}
   showToast('✅','Đã lưu câu hỏi HSA!','','var(--green)');clearHSAForm();loadAll();
@@ -1024,7 +1023,7 @@ async function saveEdit(){
   const id=document.getElementById('edit-id').value;
   const opts=['ef-o0','ef-o1','ef-o2','ef-o3'].map(i=>document.getElementById(i).value.trim());
   const correct=parseInt(document.querySelector('input[name="ecorrect"]:checked').value);
-  const row={subject:document.getElementById('edit-subject').value,topic:document.getElementById('edit-topic').value||null,content:document.getElementById('edit-content').value.trim(),options:JSON.stringify(opts),correct_index:correct,explanation:document.getElementById('edit-explanation').value.trim()||null,difficulty:DIFF_INT[document.getElementById('edit-difficulty').value]||2};
+  const row={subject:document.getElementById('edit-subject').value,topic:document.getElementById('edit-topic').value||null,content:document.getElementById('edit-content').value.trim(),options:JSON.stringify(opts),correct_index:correct,explanation:document.getElementById('edit-explanation').value.trim()||null,difficulty:document.getElementById('edit-difficulty').value};
   const {error}=await sb.from('questions').update(row).eq('id',id);
   if(error){showToast('❌','Lỗi',error.message,'var(--red)');return;}
   showToast('✅','Đã cập nhật','','var(--green)');closeEditModal();loadAll();
@@ -1043,7 +1042,7 @@ async function doImport(textareaId,resultId,forceSubject){
   const el=document.getElementById(resultId);
   let arr;try{arr=JSON.parse(raw);}catch(e){el.innerHTML=`<span style="color:var(--red)">❌ JSON không hợp lệ: ${e.message}</span>`;return;}
   if(!Array.isArray(arr)){el.innerHTML='<span style="color:var(--red)">❌ Phải là mảng JSON []</span>';return;}
-  const rows=arr.map(q=>({subject:forceSubject||q.subject||'toan',topic:q.topic||null,content:q.content||q.q||'',options:JSON.stringify(q.options||q.o||[]),correct_index:q.correct_index??q.a??0,explanation:q.explanation||q.e||null,difficulty:DIFF_INT[q.difficulty]||q.difficulty||2,approved:true,created_at:new Date().toISOString()})).filter(q=>q.content);
+  const rows=arr.map(q=>({subject:forceSubject||q.subject||'toan',topic:q.topic||null,content:q.content||q.q||'',options:JSON.stringify(q.options||q.o||[]),correct_index:q.correct_index??q.a??0,explanation:q.explanation||q.e||null,difficulty:q.difficulty||'medium',approved:true,created_at:new Date().toISOString()})).filter(q=>q.content);
   el.innerHTML=`<span style="color:var(--accent)">⏳ Đang import ${rows.length} câu...</span>`;
   let ok=0,fail=0;
   for(let i=0;i<rows.length;i+=50){const {error}=await sb.from('questions').insert(rows.slice(i,i+50));if(error)fail+=Math.min(50,rows.length-i);else ok+=Math.min(50,rows.length-i);}
