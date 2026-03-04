@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ngân hàng đề – LuyenThi369</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#080b10;--bg2:#0d1017;--surface:#161c28;--border:#1e2840;
+  --accent:#00e5ff;--accent2:#7c3aed;--accent3:#f59e0b;
+  --green:#10b981;--red:#ef4444;
+  --text:#e8edf5;--muted:#5a6b88;--card:#111622;
+  --shadow:0 4px 24px rgba(0,0,0,.4);--radius:14px;
+}
+[data-theme="light"]{
+  --bg:#f5f7ff;--bg2:#ffffff;--surface:#edf0fb;--border:#dce3f5;
+  --text:#111827;--muted:#6b7a99;--card:#ffffff;
+  --shadow:0 2px 16px rgba(100,120,200,.12);
+}
+body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-serif;transition:background .3s,color .3s;line-height:1.5;animation:pageLoad .4s ease}
+@keyframes pageLoad{from{opacity:0}to{opacity:1}}
+::selection{background:rgba(0,229,255,.25)}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(0,229,255,.2);border-radius:3px}
+
+/* ── KEYFRAMES ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scaleIn{from{opacity:0;transform:scale(.93)}to{opacity:1;transform:scale(1)}}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+@keyframes logoPulse{0%,100%{box-shadow:0 0 16px rgba(0,229,255,.3)}50%{box-shadow:0 0 28px rgba(0,229,255,.55)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes glowPulse{0%,100%{opacity:.5}50%{opacity:1}}
+
+/* ── APP ── */
+.app{display:flex;min-height:100vh}
+
+/* ── SIDEBAR ── */
+.sidebar{width:260px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;height:100vh;overflow-y:auto;z-index:100;transition:background .3s,border-color .3s}
+.logo{padding:20px;display:flex;align-items:center;gap:11px;border-bottom:1px solid var(--border);text-decoration:none}
+.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:10px;display:grid;place-items:center;font-size:18px;flex-shrink:0;animation:logoPulse 3s ease-in-out infinite;overflow:hidden}
+.logo-icon img{width:28px;height:28px;object-fit:contain}
+.logo-text{font-size:16px;font-weight:800;color:var(--text)}.logo-text em{font-style:normal;color:var(--accent)}
+.nav{flex:1;padding:12px 0}
+.nav-sec{margin-bottom:4px}
+.nav-lbl{font-size:10px;font-weight:700;letter-spacing:2px;color:var(--muted);padding:8px 20px;text-transform:uppercase;opacity:.7}
+.nav-a{display:flex;align-items:center;gap:12px;padding:10px 20px;color:var(--muted);font-size:14px;font-weight:500;transition:.2s;border-left:3px solid transparent;text-decoration:none;border-radius:0}
+.nav-a:hover{color:var(--text);background:rgba(128,128,200,.06)}
+.nav-a.active{color:var(--accent);background:rgba(0,229,255,.07);border-left-color:var(--accent);font-weight:600}
+.nav-a .ic{width:18px;text-align:center;flex-shrink:0;font-size:17px}
+.badge{margin-left:auto;background:linear-gradient(135deg,var(--accent2),#6d28d9);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:999px}
+.sb-foot{padding:14px;border-top:1px solid var(--border)}
+.user-card{display:flex;align-items:center;gap:10px;background:var(--surface);padding:10px 12px;border-radius:12px;cursor:pointer;text-decoration:none;transition:.2s;border:1px solid transparent}
+.user-card:hover{border-color:var(--accent)}
+.av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--accent2),var(--accent));display:grid;place-items:center;font-size:16px;font-weight:700;flex-shrink:0;color:#fff}
+.uname{font-size:14px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:130px}
+.uplan{font-size:12px;color:var(--accent3);font-weight:600}
+.logout{margin-top:8px;display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;cursor:pointer;color:var(--muted);font-size:14px;font-weight:600;transition:.2s;border:none;background:none;font-family:inherit;width:100%}
+.logout:hover{color:var(--red);background:rgba(239,68,68,.06)}
+
+/* ── MOBILE SIDEBAR ── */
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:98;backdrop-filter:blur(4px);cursor:pointer}
+.sidebar-overlay.show{display:block}
+.hamburger{width:36px;height:36px;border-radius:9px;background:var(--surface);border:1px solid var(--border);align-items:center;justify-content:center;cursor:pointer;font-size:18px;flex-shrink:0;transition:.2s;margin-right:8px;display:none}
+.hamburger:hover{border-color:var(--accent)}
+.sidebar-close{display:none;position:absolute;top:14px;right:10px;width:30px;height:30px;border-radius:8px;background:var(--surface);border:1px solid var(--border);align-items:center;justify-content:center;cursor:pointer;font-size:20px;font-weight:700;color:var(--muted);z-index:10;line-height:1}
+
+/* ── MAIN ── */
+.main{margin-left:260px;flex:1;display:flex;flex-direction:column;min-height:100vh;min-width:0;overflow-x:hidden}
+.topbar{position:fixed;top:0;left:260px;right:0;z-index:50;background:rgba(8,11,16,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;transition:background .3s,border-color .3s,box-shadow .3s,left .28s}
+.topbar.scrolled{box-shadow:0 4px 32px rgba(0,0,0,.4)}
+[data-theme="light"] .topbar{background:rgba(245,247,255,.92)}
+.topbar-l{display:flex;align-items:center;gap:10px}
+.topbar-l .ttl{font-size:20px;font-weight:800;letter-spacing:-.3px}
+.topbar-l .tsub{font-size:12px;color:var(--muted);margin-top:1px}
+.topbar-r{display:flex;align-items:center;gap:8px}
+/* decorative topbar line */
+.topbar::after{content:"";position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent2),var(--accent),var(--accent2),transparent);opacity:.25;pointer-events:none}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:.2s;font-family:inherit;white-space:nowrap;text-decoration:none}
+.btn-p{background:var(--accent);color:#000}.btn-p:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,229,255,.35)}
+.btn-g{background:var(--surface);color:var(--muted);border:1px solid var(--border)}.btn-g:hover{color:var(--text);border-color:var(--muted)}
+.btn-v{background:linear-gradient(135deg,var(--accent2),#6d28d9);color:#fff}.btn-v:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(124,58,237,.4)}
+.btn-red{background:rgba(239,68,68,.1);color:var(--red);border:1px solid rgba(239,68,68,.2)}.btn-red:hover{background:rgba(239,68,68,.2)}
+.icon-btn{width:36px;height:36px;border-radius:9px;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center;cursor:pointer;transition:.2s;font-size:16px}
+.icon-btn:hover{border-color:var(--accent);transform:translateY(-1px)}
+
+/* ── CONTENT ── */
+.content{padding:20px 24px;flex:1;min-width:0;overflow-x:hidden;padding-top:80px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;transition:.25s cubic-bezier(.16,1,.3,1)}
+.card:hover{border-color:rgba(0,229,255,.18);box-shadow:0 4px 24px rgba(0,0,0,.25)}
+[data-theme="light"] .card{box-shadow:var(--shadow)}
+
+/* ── SECTION LABEL ── */
+.sec-lbl{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.sec-lbl::after{content:"";flex:1;height:1px;background:var(--border)}
+
+/* ── SKELETON ── */
+.skel{background:linear-gradient(90deg,var(--surface) 25%,rgba(255,255,255,.04) 50%,var(--surface) 75%);background-size:400% 100%;animation:shimmer 1.6s infinite;border-radius:8px}
+.skel-s{display:inline-block;height:14px;border-radius:6px;background:linear-gradient(90deg,var(--surface) 25%,rgba(255,255,255,.04) 50%,var(--surface) 75%);background-size:400% 100%;animation:shimmer 1.6s infinite}
+
+/* ── PROGRESS BAR ── */
+.pbar{height:5px;background:var(--surface);border-radius:999px;overflow:hidden}
+.pbar-fill{height:100%;border-radius:999px;transition:width .8s cubic-bezier(.16,1,.3,1)}
+
+/* ── TOAST ── */
+#toast{position:fixed;bottom:24px;right:24px;background:linear-gradient(135deg,#1a2236,#0d1220);border:1px solid #1e2840;border-radius:14px;padding:14px 20px;display:flex;align-items:center;gap:12px;z-index:9000;transform:translateY(80px);opacity:0;transition:.4s cubic-bezier(.2,.8,.3,1);box-shadow:0 8px 32px rgba(0,0,0,.5);max-width:300px;pointer-events:none}
+#toast.show{transform:translateY(0);opacity:1}
+#toast-ic{font-size:22px}
+#toast-title{font-size:13px;font-weight:700;color:#e8edf5}
+#toast-sub{font-size:11px;color:#5a6b88;margin-top:2px}
+
+/* ── MOBILE ── */
+@media(max-width:768px){
+  .hamburger{display:flex!important}
+  .sidebar-close{display:flex}
+  .sidebar{position:fixed;left:0;top:0;height:100vh;transform:translateX(-260px);transition:transform .28s cubic-bezier(.4,0,.2,1);z-index:99;box-shadow:4px 0 24px rgba(0,0,0,.4)}
+  .sidebar.open{transform:translateX(0)}
+  .main{margin-left:0!important;width:100%}
+  .topbar{padding:0 14px;left:0!important}
+  .content{padding:14px;padding-top:76px}
+  .topbar-l .tsub{display:none}
+}
+
+/* ── NHD SPECIFIC ── */
+.page-hero{background:linear-gradient(135deg,rgba(0,229,255,.07),rgba(124,58,237,.05));border:1px solid rgba(0,229,255,.15);border-radius:18px;padding:22px 26px;margin-bottom:22px;display:flex;align-items:center;gap:18px;position:relative;overflow:hidden;animation:fadeUp .4s cubic-bezier(.16,1,.3,1) both}
+.page-hero::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2))}
+.page-hero-ic{font-size:36px;flex-shrink:0}
+.page-hero h1{font-size:20px;font-weight:900;letter-spacing:-.3px;margin-bottom:3px}
+.page-hero p{font-size:13px;color:var(--muted)}
+
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:22px}
+.stat-c{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;animation:scaleIn .4s cubic-bezier(.16,1,.3,1) both;transition:.25s}
+.stat-c:hover{border-color:rgba(0,229,255,.2);transform:translateY(-2px)}
+.stat-c:nth-child(1){animation-delay:.05s}.stat-c:nth-child(2){animation-delay:.1s}.stat-c:nth-child(3){animation-delay:.15s}.stat-c:nth-child(4){animation-delay:.2s}
+.stat-lbl{font-size:11px;color:var(--muted);font-weight:700;margin-bottom:7px;text-transform:uppercase;letter-spacing:.5px}
+.stat-val{font-size:26px;font-weight:900;font-family:'Space Mono',monospace}
+.stat-sub{font-size:11px;color:var(--muted);margin-top:3px}
+
+.filter-bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px;animation:fadeUp .4s cubic-bezier(.16,1,.3,1) .1s both}
+.search-wrap{position:relative;flex:1;min-width:180px}
+.search-wrap input{width:100%;background:var(--card);border:1.5px solid var(--border);border-radius:11px;padding:10px 16px 10px 40px;font-size:14px;font-weight:500;color:var(--text);font-family:inherit;outline:none;transition:.25s}
+.search-wrap input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(0,229,255,.07)}
+.search-wrap::before{content:"🔍";position:absolute;left:13px;top:50%;transform:translateY(-50%);font-size:14px;pointer-events:none}
+.fsel{background:var(--card);border:1.5px solid var(--border);border-radius:11px;padding:10px 14px;font-size:13px;font-weight:600;color:var(--text);font-family:inherit;outline:none;cursor:pointer;transition:.25s}
+.fsel:focus{border-color:var(--accent)}
+
+.tbl-card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;animation:fadeUp .4s cubic-bezier(.16,1,.3,1) .15s both}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;padding:11px 16px;color:var(--muted);font-size:10px;text-transform:uppercase;letter-spacing:.8px;font-weight:800;border-bottom:1px solid var(--border);white-space:nowrap}
+td{padding:12px 16px;border-bottom:1px solid rgba(30,40,64,.5);vertical-align:middle}
+tbody tr{transition:.15s;cursor:pointer;animation:fadeUp .3s ease both}
+tbody tr:hover{background:rgba(0,229,255,.03)}
+tbody tr:last-child td{border-bottom:none}
+.q-txt{max-width:360px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500}
+.sbadge{display:inline-flex;padding:3px 9px;border-radius:6px;font-size:11px;font-weight:800}
+.s-toan{background:rgba(0,229,255,.12);color:var(--accent)}.s-ly{background:rgba(124,58,237,.15);color:#a78bfa}
+.s-hoa{background:rgba(16,185,129,.15);color:var(--green)}.s-sinh{background:rgba(74,222,128,.15);color:#4ade80}
+.s-anh{background:rgba(245,158,11,.15);color:var(--accent3)}.s-van{background:rgba(244,114,182,.15);color:#f472b6}
+.s-su{background:rgba(251,146,60,.15);color:#fb923c}.s-dia{background:rgba(52,211,153,.15);color:#34d399}
+.s-gdcd{background:rgba(96,165,250,.15);color:#60a5fa}.s-hsa{background:rgba(251,191,36,.15);color:#fbbf24}
+.diff-easy{background:rgba(16,185,129,.12);color:#34d399;border:1px solid rgba(16,185,129,.2)}
+.diff-med{background:rgba(245,158,11,.12);color:#fbbf24;border:1px solid rgba(245,158,11,.2)}
+.diff-hard{background:rgba(239,68,68,.12);color:#f87171;border:1px solid rgba(239,68,68,.2)}
+
+.tbl-foot{padding:14px 16px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.tbl-info{font-size:13px;color:var(--muted);font-weight:600}
+.pager{display:flex;gap:5px}
+.pager-btn{width:34px;height:34px;border-radius:8px;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center;cursor:pointer;font-size:13px;font-weight:700;transition:.18s}
+.pager-btn:hover{border-color:var(--accent);color:var(--accent)}
+.pager-btn.active{background:var(--accent);color:#000;border-color:var(--accent)}
+
+/* MODAL */
+.modal-ov{position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(14px);z-index:999;display:none;align-items:center;justify-content:center}
+.modal-ov.show{display:flex}
+.modal-box{background:var(--card);border:1px solid var(--border);border-radius:22px;width:min(680px,95vw);max-height:90vh;overflow-y:auto;animation:scaleIn .3s cubic-bezier(.16,1,.3,1)}
+.modal-hdr{padding:20px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:var(--card);z-index:1}
+.modal-title{font-size:16px;font-weight:800}
+.modal-close{width:32px;height:32px;border-radius:8px;background:var(--surface);border:1px solid var(--border);cursor:pointer;display:grid;place-items:center;font-size:14px;transition:.2s}
+.modal-close:hover{border-color:var(--red);color:var(--red)}
+.modal-body{padding:24px}
+.opt-view{padding:12px 16px;border-radius:10px;border:1.5px solid var(--border);margin-bottom:8px;font-size:14px;font-weight:500;transition:.2s}
+.opt-view.correct{border-color:var(--green);background:rgba(16,185,129,.08);color:var(--green)}
+.explain-box{background:rgba(0,229,255,.05);border:1px solid rgba(0,229,255,.15);border-radius:10px;padding:14px;font-size:13px;line-height:1.7;margin-top:14px}
+
+@media(max-width:768px){.stats-row{grid-template-columns:1fr 1fr}}
+
+/* ── FOOTER ── */
+.site-footer{background:#06090f;border-top:1px solid #1a2030;padding:32px 28px 20px;margin-top:auto;transition:background .3s}
+[data-theme="light"] .site-footer{background:#eef1fb;border-top-color:#c8d4f0}
+.sf-inner{display:table;width:100%;table-layout:fixed;border-collapse:collapse}
+.sf-col{display:table-cell;width:33.333%;vertical-align:top;padding:0 24px;text-align:center}
+.sf-col:first-child{padding-left:0;text-align:left;border-right:1px solid #1e2840}
+.sf-col:nth-child(2){border-right:1px solid #1e2840}
+.sf-col:last-child{padding-right:0}
+.sf-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#4a5878;margin-bottom:14px;display:block;text-align:center}
+.sf-col:first-child .sf-label{text-align:left}
+.sf-addr{font-size:13px;color:#8899bb;line-height:1.9}
+.sf-addr strong{color:#c8d4f0;font-weight:700}
+[data-theme="light"] .sf-addr{color:#3a4a6a}[data-theme="light"] .sf-addr strong{color:#0f1a35}
+.sf-map{margin-top:12px}
+.sf-map iframe{border-radius:10px;width:100%;height:130px;border:1px solid #1e2840;display:block}
+.sf-members{display:inline-flex;flex-direction:column;gap:8px;align-items:flex-start}
+.sf-member{display:flex;align-items:center;gap:8px;font-size:13px;color:#8899bb;transition:.2s}
+.sf-member:hover{color:var(--accent);transform:translateX(4px)}
+[data-theme="light"] .sf-member{color:#3a4a6a}
+.sf-member::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0}
+.sf-fb{display:flex;justify-content:center;width:100%}
+.sf-fb a{display:inline-flex;align-items:center;gap:8px;background:#1a2236;color:#e8edf5;font-size:13px;font-weight:600;padding:9px 20px;border-radius:10px;border:1px solid #1877f2;text-decoration:none;transition:.2s}
+.sf-fb a:hover{background:#1877f2;color:#fff}
+[data-theme="light"] .sf-fb a{background:#dce6ff;color:#1a2545}
+.sf-bottom{margin-top:20px;padding-top:14px;border-top:1px solid #1a2030;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
+[data-theme="light"] .sf-bottom{border-top-color:#c8d4f0}
+.sf-copy,.sf-brand{font-size:12px;color:#3a4868}
+[data-theme="light"] .sf-copy,[data-theme="light"] .sf-brand{color:#7a8aaa}
+@media(max-width:768px){
+  .sf-inner{display:flex!important;flex-direction:column!important}
+  .sf-col{width:100%!important;padding:14px 0!important;border:none!important;display:block!important;text-align:center!important}
+  .sf-col:first-child{text-align:center!important}
+  .sf-bottom{flex-direction:column;align-items:flex-start;gap:4px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="sidebar-overlay" id="sb-overlay" onclick="closeSidebar()"></div>
+<aside class="sidebar">
+  <button class="sidebar-close" onclick="closeSidebar()">‹</button>
+  <a class="logo" href="dashboard.html">
+    <div class="logo-icon"><img src="logo.png" style="width:28px;height:28px;object-fit:contain" onerror="this.style.display='none'"></div>
+    <div class="logo-text">Luyen<em>Thi</em>369</div>
+  </a>
+  <nav class="nav">
+    <div class="nav-sec">
+      <div class="nav-lbl">Tổng quan</div>
+      <a class="nav-a" href="dashboard.html"><span class="ic">🏠</span>Trang chủ</a>
+    </div>
+    <div class="nav-sec">
+      <div class="nav-lbl">Luyện tập</div>
+      <a class="nav-a" href="luyen-mon.html"><span class="ic">📖</span>Luyện theo môn</a>
+      <a class="nav-a" href="hsa.html"><span class="ic">🏛️</span>Phòng luyện HSA<span class="badge">HOT</span></a>
+    </div>
+    <div class="nav-sec">
+      <div class="nav-lbl">Tra cứu</div>
+      <a class="nav-a active" href="ngan-hang-de.html"><span class="ic">🗂️</span>Ngân hàng đề</a>
+      <a class="nav-a" href="cai-dat.html"><span class="ic">⚙️</span>Cài đặt</a>
+    </div>
+    <div class="nav-sec">
+      <div class="nav-lbl">Hệ thống</div>
+      <a class="nav-a" href="admin.html"><span class="ic">🔐</span>Admin</a>
+    </div>
+  </nav>
+  <div class="sb-foot">
+    <a class="user-card" href="cai-dat.html">
+      <div class="av" id="sb-av">?</div>
+      <div><div class="uname" id="sb-name">Đang tải...</div><div class="uplan">✨ Free Plan</div></div>
+    </a>
+    <button class="logout" onclick="doLogout()">🚪 Đăng xuất</button>
+  </div>
+</aside>
+
+<div class="main">
+  <div class="topbar" id="topbar">
+    <div class="topbar-l">
+      <button class="hamburger" onclick="openSidebar()">☰</button>
+      <div>
+        <div class="ttl">🗂️ Ngân hàng đề</div>
+        <div class="tsub">Tra cứu câu hỏi</div>
+      </div>
+    </div>
+    <div class="topbar-r">
+      <button class="icon-btn" id="theme-btn" onclick="toggleTheme()">☀️</button>
+      <a class="btn btn-v" href="admin.html">+ Thêm câu hỏi</a>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="page-hero">
+      <div class="page-hero-ic">🗂️</div>
+      <div>
+        <h1>Ngân hàng câu hỏi</h1>
+        <p>Tra cứu toàn bộ ngân hàng đề · Lọc theo môn, độ khó, tìm kiếm nhanh</p>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-c"><div class="stat-lbl">📚 Tổng câu hỏi</div><div class="stat-val" id="st-total" style="color:var(--accent)">--</div><div class="stat-sub">Đã duyệt</div></div>
+      <div class="stat-c"><div class="stat-lbl">📐 Số môn</div><div class="stat-val" id="st-subjects" style="color:#a78bfa">--</div><div class="stat-sub">Môn có câu hỏi</div></div>
+      <div class="stat-c"><div class="stat-lbl">⭐ Dễ / TB / Khó</div><div class="stat-val" id="st-diff" style="color:var(--green);font-size:15px">-- / -- / --</div><div class="stat-sub">Theo độ khó</div></div>
+      <div class="stat-c"><div class="stat-lbl">🕐 Mới nhất</div><div class="stat-val" id="st-date" style="color:var(--accent3);font-size:16px">--</div><div class="stat-sub">Ngày cập nhật</div></div>
+    </div>
+
+    <div class="filter-bar">
+      <div class="search-wrap"><input type="text" id="s-search" placeholder="Tìm câu hỏi..." oninput="filterQ()"></div>
+      <select class="fsel" id="s-subj" onchange="filterQ()">
+        <option value="">Tất cả môn</option>
+        <option value="toan">📐 Toán</option><option value="ly">⚡ Vật lý</option>
+        <option value="hoa">🧪 Hóa học</option><option value="sinh">🌱 Sinh học</option>
+        <option value="anh">🌍 Tiếng Anh</option><option value="van">📖 Ngữ Văn</option>
+        <option value="su">📜 Lịch Sử</option><option value="dia">🗺 Địa Lý</option>
+        <option value="gdcd">⚖️ GDCD</option><option value="hsa">🎯 HSA</option>
+      </select>
+      <select class="fsel" id="s-diff" onchange="filterQ()">
+        <option value="">Tất cả độ khó</option>
+        <option value="easy">Dễ</option><option value="medium">Trung bình</option><option value="hard">Khó</option>
+      </select>
+      <button class="btn btn-g" onclick="resetF()">↺ Đặt lại</button>
+    </div>
+
+    <div class="tbl-card">
+      <table>
+        <thead><tr>
+          <th style="width:46px">#</th>
+          <th style="width:100px">Môn</th>
+          <th>Câu hỏi</th>
+          <th style="width:100px">Chủ đề</th>
+          <th style="width:80px">Độ khó</th>
+          <th style="width:60px;text-align:right">Xem</th>
+        </tr></thead>
+        <tbody id="q-tbody">
+          <tr><td colspan="6" style="text-align:center;padding:40px;color:var(--muted)">Đang tải...</td></tr>
+        </tbody>
+      </table>
+      <div class="tbl-foot">
+        <div class="tbl-info" id="tbl-info">-- câu hỏi</div>
+        <div class="pager" id="pager"></div>
+      </div>
+    </div>
+  </div>
+  <footer class="site-footer">
+    <div class="sf-inner">
+      <div class="sf-col">
+        <div class="sf-label">Địa chỉ</div>
+        <div class="sf-addr"><strong>Lớp 12A4</strong><br>Trường THPT Đan Phượng<br>Thị trấn Phùng, huyện Đan Phượng<br>Hà Nội</div>
+        <div class="sf-map"><iframe src="https://maps.google.com/maps?q=Tr%C6%B0%E1%BB%9Dng%20THPT%20%C4%90an%20Ph%C6%B0%E1%BB%A3ng&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+      </div>
+      <div class="sf-col">
+        <div class="sf-label">Thành viên nhóm</div>
+        <div class="sf-members">
+          <div class="sf-member">Nguyễn Thế Hải Nam</div>
+          <div class="sf-member">Doãn Hà Anh</div>
+          <div class="sf-member">Nguyễn Huyền Linh</div>
+          <div class="sf-member">Đỗ Minh Phương</div>
+          <div class="sf-member">Nguyễn Thị Mai Trang</div>
+        </div>
+      </div>
+      <div class="sf-col">
+        <div class="sf-label">Mạng xã hội</div>
+        <div class="sf-fb"><a href="https://facebook.com" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#1877f2"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.413c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.953h-1.513c-1.491 0-1.956.93-1.956 1.886v2.284h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>Facebook</a></div>
+      </div>
+    </div>
+    <div class="sf-bottom">
+      <span class="sf-copy">© 2026 LuyenThi369</span>
+      <span class="sf-brand">Lớp 12A4 · Trường THPT Đan Phượng</span>
+    </div>
+  </footer>
+
+</div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-ov" id="modal-ov">
+  <div class="modal-box">
+    <div class="modal-hdr">
+      <div class="modal-title" id="modal-title">Chi tiết câu hỏi</div>
+      <div class="modal-close" onclick="closeModal()">✕</div>
+    </div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<div id="toast"><span id="toast-ic">✅</span><div><div id="toast-title"></div><div id="toast-sub"></div></div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+
+const SUPABASE_URL='https://ezimwiluksaomtdfsoam.supabase.co';
+const SUPABASE_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV6aW13aWx1a3Nhb210ZGZzb2FtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI0NjEwNDcsImV4cCI6MjA4ODAzNzA0N30.JEcSet75PFEWDcxHP3_4jfWJeiJ16znBddF3XcNtbS0';
+const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+let currentUser=null,currentUserId=null;
+
+function applyTheme(t){document.documentElement.setAttribute('data-theme',t);localStorage.setItem('lt369_theme',t);const b=document.getElementById('theme-btn');if(b)b.textContent=t==='dark'?'☀️':'🌙';}
+function toggleTheme(){applyTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark');}
+async function doLogout(){await sb.auth.signOut();location.href='dang-nhap.html';}
+function openSidebar(){document.querySelector('.sidebar').classList.add('open');document.getElementById('sb-overlay').classList.add('show');}
+function closeSidebar(){document.querySelector('.sidebar').classList.remove('open');document.getElementById('sb-overlay').classList.remove('show');}
+function showToast(ic,title,sub,col){
+  const t=document.getElementById('toast');
+  if(col)t.style.borderColor=col;
+  document.getElementById('toast-ic').textContent=ic;
+  document.getElementById('toast-title').textContent=title;
+  document.getElementById('toast-sub').textContent=sub||'';
+  t.classList.add('show');clearTimeout(t._t);
+  t._t=setTimeout(()=>{t.classList.remove('show');t.style.borderColor='';if(col)t.style.borderColor='';} ,3500);
+}
+window.addEventListener('scroll',()=>{const tb=document.getElementById('topbar');if(tb)tb.classList.toggle('scrolled',window.scrollY>10);});
+async function initUser(){
+  applyTheme(localStorage.getItem('lt369_theme')||'dark');
+  const {data:{session}}=await sb.auth.getSession();
+  if(!session){location.href='dang-nhap.html';return null;}
+  currentUser=session.user;currentUserId=session.user.id;
+  const name=session.user.user_metadata?.full_name||session.user.email.split('@')[0];
+  localStorage.setItem('lt369_user',name);
+  const av=document.getElementById('sb-av');if(av)av.textContent=name.charAt(0).toUpperCase();
+  const nm=document.getElementById('sb-name');if(nm)nm.textContent=name;
+  return session;
+}
+
+const SNAME={toan:'📐 Toán',ly:'⚡ Vật lý',hoa:'🧪 Hóa học',sinh:'🌱 Sinh học',anh:'🌍 Tiếng Anh',van:'📖 Văn',su:'📜 Lịch Sử',dia:'🗺 Địa Lý',gdcd:'⚖️ GDCD',hsa:'🎯 HSA'};
+let all=[],filtered=[],page=1;const PS=20;
+
+(async()=>{
+  const s=await initUser();if(!s)return;
+  await loadQ();
+})();
+
+async function loadQ(){
+  const {data,error}=await sb.from('questions').select('id,subject,topic,content,options,correct_index,explanation,difficulty,created_at,approved').order('created_at',{ascending:false});
+  if(error){showToast('❌','Lỗi tải',error.message,'var(--red)');return;}
+  all=data||[];
+  // Stats
+  const approved=all.filter(q=>q.approved);
+  document.getElementById('st-total').textContent=approved.length;
+  document.getElementById('st-subjects').textContent=new Set(all.map(q=>q.subject)).size;
+  const easy=all.filter(q=>q.difficulty==='easy'||q.difficulty===1).length;
+  const hard=all.filter(q=>q.difficulty==='hard'||q.difficulty===3||q.difficulty===4).length;
+  const med=all.length-easy-hard;
+  document.getElementById('st-diff').textContent=easy+' / '+med+' / '+hard;
+  if(all.length)document.getElementById('st-date').textContent=new Date(all[0].created_at).toLocaleDateString('vi',{day:'2-digit',month:'2-digit'});
+  filtered=[...all];render();
+}
+
+function filterQ(){
+  const q=document.getElementById('s-search').value.toLowerCase();
+  const subj=document.getElementById('s-subj').value;
+  const diff=document.getElementById('s-diff').value;
+  filtered=all.filter(item=>{
+    if(subj&&item.subject!==subj)return false;
+    if(diff){const d=item.difficulty;const dm=diff==='easy'?(d==='easy'||d===1):diff==='hard'?(d==='hard'||d===3||d===4):(d==='medium'||d===2||(!d&&d!==1&&d!==3));if(!dm)return false;}
+    if(q&&!item.content.toLowerCase().includes(q)&&!(item.topic||'').toLowerCase().includes(q))return false;
+    return true;
+  });
+  page=1;render();
+}
+function resetF(){document.getElementById('s-search').value='';document.getElementById('s-subj').value='';document.getElementById('s-diff').value='';filtered=[...all];page=1;render();}
+
+function render(){
+  const start=(page-1)*PS,end=start+PS;
+  const items=filtered.slice(start,end);
+  document.getElementById('tbl-info').textContent=filtered.length+' câu hỏi';
+  const tbody=document.getElementById('q-tbody');
+  if(!items.length){tbody.innerHTML='<tr><td colspan="6" style="text-align:center;padding:40px;color:var(--muted)">Không có câu hỏi</td></tr>';renderPager();return;}
+  tbody.innerHTML=items.map((q,i)=>{
+    const d=q.difficulty||'medium';
+    const dc=d==='easy'||d===1?'diff-easy':d==='hard'||d===3||d===4?'diff-hard':'diff-med';
+    const dl=d==='easy'||d===1?'Dễ':d==='hard'||d===3||d===4?'Khó':'Trung bình';
+    return `<tr onclick="viewQ('${q.id}')" style="animation-delay:${i*.025}s">
+      <td style="color:var(--muted);font-size:12px">${start+i+1}</td>
+      <td><span class="sbadge s-${q.subject}">${SNAME[q.subject]||q.subject}</span></td>
+      <td><div class="q-txt">${q.content.replace(/<[^>]+>/g,'')}</div></td>
+      <td style="font-size:12px;color:var(--muted);max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${q.topic||'—'}</td>
+      <td><span class="sbadge ${dc}">${dl}</span></td>
+      <td style="text-align:right"><button class="btn btn-g" style="padding:5px 10px;font-size:11px" onclick="event.stopPropagation();viewQ('${q.id}')">👁 Xem</button></td>
+    </tr>`;
+  }).join('');
+  renderPager();
+}
+
+function renderPager(){
+  const total=Math.ceil(filtered.length/PS);
+  const el=document.getElementById('pager');
+  if(total<=1){el.innerHTML='';return;}
+  let h='';
+  if(page>1)h+=`<div class="pager-btn" onclick="goP(${page-1})">←</div>`;
+  for(let i=Math.max(1,page-2);i<=Math.min(total,page+2);i++)h+=`<div class="pager-btn ${i===page?'active':''}" onclick="goP(${i})">${i}</div>`;
+  if(page<total)h+=`<div class="pager-btn" onclick="goP(${page+1})">→</div>`;
+  el.innerHTML=h;
+}
+function goP(p){page=p;render();window.scrollTo(0,0);}
+
+function viewQ(id){
+  const q=all.find(x=>x.id===id);if(!q)return;
+  let opts=q.options;if(typeof opts==='string'){try{opts=JSON.parse(opts);}catch(e){opts=[];}}
+  const d=q.difficulty||'medium';
+  const dl=d==='easy'||d===1?'Dễ':d==='hard'||d===3||d===4?'Khó':'Trung bình';
+  const dc=d==='easy'||d===1?'diff-easy':d==='hard'||d===3||d===4?'diff-hard':'diff-med';
+  document.getElementById('modal-title').textContent='Chi tiết câu hỏi';
+  document.getElementById('modal-body').innerHTML=`
+    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px">
+      <span class="sbadge s-${q.subject}">${SNAME[q.subject]||q.subject}</span>
+      ${q.topic?`<span class="sbadge" style="background:rgba(255,255,255,.06);color:var(--muted)">${q.topic}</span>`:''}
+      <span class="sbadge ${dc}">${dl}</span>
+      ${q.approved?'<span class="sbadge" style="background:rgba(16,185,129,.12);color:#34d399">✅ Đã duyệt</span>':'<span class="sbadge" style="background:rgba(245,158,11,.12);color:#fbbf24">⏳ Chờ duyệt</span>'}
+    </div>
+    <div style="font-size:16px;font-weight:600;line-height:1.7;margin-bottom:20px">${q.content}</div>
+    <div style="display:grid;gap:8px;margin-bottom:14px">
+      ${(opts||[]).map((o,i)=>`<div class="opt-view ${i===q.correct_index?'correct':''}">${['A','B','C','D'][i]}. ${o} ${i===q.correct_index?'✓':''}</div>`).join('')}
+    </div>
+    ${q.explanation?`<div class="explain-box"><strong>💡 Giải thích:</strong><br>${q.explanation}</div>`:''}
+    <div style="margin-top:16px;display:flex;gap:8px">
+      <a class="btn btn-v" href="admin.html">✏️ Chỉnh sửa</a>
+      <button class="btn btn-g" onclick="closeModal()">Đóng</button>
+    </div>`;
+  document.getElementById('modal-ov').classList.add('show');
+}
+function closeModal(){document.getElementById('modal-ov').classList.remove('show');}
+document.getElementById('modal-ov').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal();});
+</script>
+</body>
+</html>

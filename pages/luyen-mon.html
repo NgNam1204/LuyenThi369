@@ -1,0 +1,1760 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Luyện theo môn – LuyenThi369</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#080b10;--bg2:#0d1017;--surface:#161c28;--border:#1e2840;
+  --accent:#00e5ff;--accent2:#7c3aed;--accent3:#f59e0b;
+  --green:#10b981;--red:#ef4444;
+  --text:#e8edf5;--muted:#5a6b88;--card:#111622;
+  --shadow:0 4px 24px rgba(0,0,0,.4);
+  --radius:14px;
+}
+[data-theme="light"]{
+  --bg:#f5f7ff;--bg2:#ffffff;--surface:#edf0fb;--border:#dce3f5;
+  --text:#111827;--muted:#6b7a99;--card:#ffffff;
+  --shadow:0 2px 16px rgba(100,120,200,.12);
+}
+body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-serif;transition:background .3s,color .3s;line-height:1.5}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+/* layout */
+.app{display:flex;min-height:100vh}
+.sidebar{width:260px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;height:100vh;overflow-y:auto;z-index:100;transition:background .3s,border-color .3s}
+.logo{padding:20px;display:flex;align-items:center;gap:11px;border-bottom:1px solid var(--border);text-decoration:none}
+.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:10px;display:grid;place-items:center;font-size:18px;flex-shrink:0;box-shadow:0 0 16px rgba(0,229,255,.3)}
+.logo-text{font-size:16px;font-weight:800;color:var(--text)}.logo-text em{font-style:normal;color:var(--accent)}
+.nav{flex:1;padding:12px 0}
+.nav-sec{margin-bottom:4px}
+.nav-lbl{font-size:10px;font-weight:700;letter-spacing:2px;color:var(--muted);padding:8px 20px;text-transform:uppercase;opacity:.7}
+.nav-a{display:flex;align-items:center;gap:12px;padding:10px 20px;color:var(--muted);font-size:14px;font-weight:500;transition:.2s;border-left:3px solid transparent;text-decoration:none;border-radius:0}
+.nav-a:hover{color:var(--text);background:rgba(128,128,200,.06)}
+.nav-a.active{color:var(--accent);background:rgba(0,229,255,.07);border-left-color:var(--accent);font-weight:600}
+.nav-a .ic{width:18px;text-align:center;flex-shrink:0;font-size:17px}
+.badge{margin-left:auto;background:linear-gradient(135deg,var(--accent2),#6d28d9);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:999px}
+.sb-foot{padding:14px;border-top:1px solid var(--border)}
+.user-card{display:flex;align-items:center;gap:10px;background:var(--surface);padding:10px 12px;border-radius:12px;cursor:pointer;text-decoration:none;transition:.2s;border:1px solid transparent}
+.user-card:hover{border-color:var(--accent)}
+.av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--accent2),var(--accent));display:grid;place-items:center;font-size:18px;font-weight:700;flex-shrink:0;color:#fff}
+.uname{font-size:14px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:130px}
+.uplan{font-size:12px;color:var(--accent3);font-weight:600}
+.logout{margin-top:8px;display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;cursor:pointer;color:var(--muted);font-size:14px;font-weight:600;transition:.2s;border:none;background:none;font-family:inherit;width:100%}
+.logout:hover{color:var(--red);background:rgba(239,68,68,.06)}
+/* main */
+.main{margin-left:260px;flex:1;display:flex;flex-direction:column;min-height:100vh;min-width:0;overflow-x:hidden}
+.topbar{position:fixed;top:0;left:260px;right:0;z-index:50;background:rgba(8,11,16,.9);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 32px;height:60px;display:flex;align-items:center;justify-content:space-between;transition:background .3s,border-color .3s,left .28s}
+[data-theme="light"] .topbar{background:rgba(245,247,255,.92)}
+.topbar-l .ttl{font-size:22px;font-weight:800;letter-spacing:-.3px;line-height:1.2}
+.topbar-l .tsub{font-size:13px;color:var(--muted);margin-top:1px}
+.topbar-r{display:flex;align-items:center;gap:8px}
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:7px;padding:8px 18px;border-radius:9px;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:.2s;font-family:inherit;white-space:nowrap}
+.btn-p{background:var(--accent);color:#000}.btn-p:hover{background:#00cfeb;transform:translateY(-1px)}
+.btn-g{background:var(--surface);color:var(--muted);border:1px solid var(--border)}.btn-g:hover{color:var(--text);border-color:var(--muted)}
+.btn-v{background:linear-gradient(135deg,var(--accent2),#6d28d9);color:#fff}.btn-v:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(124,58,237,.4)}
+.icon-btn{width:36px;height:36px;border-radius:9px;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center;cursor:pointer;transition:.2s;font-size:16px}
+.icon-btn:hover{border-color:var(--accent)}
+/* content */
+.content{padding:24px 28px;flex:1;min-width:0;overflow-x:hidden;padding-top:84px}
+/* cards */
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:background .3s,border-color .3s;min-width:0;overflow:hidden}
+[data-theme="light"] .card{box-shadow:var(--shadow)}
+.card-title{font-size:14px;font-weight:700;margin-bottom:18px;display:flex;align-items:center;gap:8px}
+/* progress bar */
+.pbar{height:6px;background:var(--surface);border-radius:999px;overflow:hidden}
+.pbar-fill{height:100%;border-radius:999px;transition:width .5s ease}
+/* animation */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.fadein>*{animation:fadeUp .35s ease both}
+.fadein>*:nth-child(2){animation-delay:.05s}
+.fadein>*:nth-child(3){animation-delay:.1s}
+.fadein>*:nth-child(4){animation-delay:.15s}
+/* footer */
+.site-footer{background:#06090f;border-top:1px solid #1a2030;padding:36px 40px 24px;margin-top:auto;transition:background .3s,border-color .3s}
+[data-theme="light"] .site-footer{background:#eef1fb;border-top-color:#c8d4f0}
+/* light mode text */
+[data-theme="light"] .sf-addr{color:#3a4a6a}
+[data-theme="light"] .sf-addr strong{color:#0f1a35}
+[data-theme="light"] .sf-member{color:#3a4a6a}
+[data-theme="light"] .sf-label{color:#5a6a8a}
+[data-theme="light"] .sf-copy,[data-theme="light"] .sf-brand{color:#5a6a8a}
+[data-theme="light"] .sf-bottom{border-top-color:#c8d4f0}
+[data-theme="light"] .sf-col:first-child,[data-theme="light"] .sf-col:nth-child(2){border-right-color:#c8d4f0}
+[data-theme="light"] .sf-map iframe{border-color:#c8d4f0}
+[data-theme="light"] .sf-fb a{background:#dce6ff;color:#0f1a35;border-color:#1877f2}
+/* layout */
+.sf-inner{display:table;width:100%;table-layout:fixed;border-collapse:collapse}
+.sf-col{display:table-cell;width:33.333%;vertical-align:top;padding:0 28px;text-align:center}
+.sf-col:first-child{padding-left:0;text-align:left;border-right:1px solid #1e2840}
+.sf-col:nth-child(2){border-right:1px solid #1e2840}
+.sf-col:last-child{padding-right:0}
+.sf-label{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#4a5878;margin-bottom:16px;display:block;text-align:center}
+.sf-col:first-child .sf-label{text-align:left}
+.sf-addr{font-size:14px;color:#8899bb;line-height:1.9}
+.sf-addr strong{color:#c8d4f0;font-weight:700}
+.sf-map{margin-top:14px}
+.sf-map iframe{border-radius:10px;width:100%;height:150px;border:1px solid #1e2840;display:block}
+.sf-members{display:inline-flex;flex-direction:column;gap:10px;align-items:flex-start}
+.sf-member{display:flex;align-items:center;gap:9px;font-size:14px;color:#8899bb;white-space:nowrap}
+[data-theme="light"] .sf-member{color:#3a4a6a}
+.sf-member::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--accent);flex-shrink:0}
+.sf-fb{display:flex;justify-content:center;width:100%}
+.sf-fb a{display:inline-flex;align-items:center;gap:9px;background:#1a2236;color:#e8edf5;font-size:14px;font-weight:600;padding:10px 22px;border-radius:12px;border:1px solid #1877f2;text-decoration:none;transition:.2s}
+[data-theme="light"] .sf-fb a{background:#dce6ff;color:#1a2545;border-color:#1877f2}
+.sf-fb a:hover{background:#1877f2;color:#fff}
+.sf-bottom{margin-top:24px;padding-top:16px;border-top:1px solid #1a2030;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;transition:border-color .3s}
+[data-theme="light"] .sf-bottom{border-top-color:#c8d4f0}
+.sf-copy,.sf-brand{font-size:13px;color:#3a4868;transition:color .3s}
+[data-theme="light"] .sf-copy,[data-theme="light"] .sf-brand{color:#7a8aaa}
+
+
+.stabs{display:flex;gap:8px;margin-bottom:24px;flex-wrap:wrap}
+.stab{padding:10px 20px;border-radius:10px;border:1px solid var(--border);background:var(--card);font-size:17px;font-weight:600;cursor:pointer;transition:.2s;color:var(--muted)}
+.stab:hover:not(.active){border-color:var(--muted);color:var(--text)}
+.stab.active{background:var(--accent);color:#000;border-color:var(--accent)}
+.sub-view{display:none}.sub-view.active{display:block}
+.sub-header{display:flex;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 26px;margin-bottom:22px}
+[data-theme="light"] .sub-header{box-shadow:var(--shadow)}
+.sh-info h2{font-size:18px;font-weight:800;margin-bottom:4px}
+.sh-info p{font-size:13px;color:var(--muted)}
+.sh-stats{display:flex;gap:22px}
+.sh-sv{font-size:26px;font-weight:800;font-family:'Space Mono';color:var(--accent)}
+.sh-sl{font-size:17px;color:var(--muted);margin-top:2px;text-align:center}
+.modes{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:24px}
+.mode-c{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:16px;cursor:pointer;transition:.25s;text-align:center}
+[data-theme="light"] .mode-c{box-shadow:var(--shadow)}
+.mode-c:hover{border-color:var(--accent2);transform:translateY(-2px)}
+.mc-ic{font-size:22px;margin-bottom:8px}.mc-t{font-size:14px;font-weight:700;margin-bottom:2px}.mc-s{font-size:12px;color:var(--muted)}
+.topics{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px}
+.tc{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;cursor:pointer;transition:.25s;position:relative;overflow:hidden}
+[data-theme="light"] .tc{box-shadow:var(--shadow)}
+.tc:hover{border-color:var(--accent);transform:translateY(-2px)}
+.tc::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent),var(--accent2));opacity:0;transition:.25s}
+.tc:hover::before{opacity:1}
+.tc-em{font-size:22px;margin-bottom:8px}.tc-t{font-size:18px;font-weight:700;margin-bottom:3px}.tc-c{font-size:18px;color:var(--muted);margin-bottom:10px}
+.tc-pct{position:absolute;top:14px;right:14px;font-size:17px;font-weight:700;font-family:'Space Mono';color:var(--muted)}
+/* QUIZ OVERLAY */
+.qov{display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(10px);z-index:200;align-items:center;justify-content:center}
+.qov.show{display:flex}
+.qbox{background:var(--bg2);border:1px solid var(--border);border-radius:20px;width:760px;max-width:96vw;max-height:92vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,.5)}
+[data-theme="light"] .qbox{box-shadow:0 16px 48px rgba(0,0,0,.15)}
+.qhdr{padding:18px 26px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.qtitle{font-size:17px;font-weight:800}
+.qmeta{display:flex;align-items:center;gap:12px;flex-shrink:0}
+.qpw{display:flex;align-items:center;gap:8px;font-size:18px;color:var(--muted)}
+.qpbar{width:100px;height:5px;background:var(--surface);border-radius:999px;overflow:hidden}
+.qpfill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:999px;transition:.4s}
+.qtimer{font-family:'Space Mono';font-size:18px;font-weight:700;color:var(--accent3);background:rgba(245,158,11,.1);padding:4px 12px;border-radius:8px}
+.qclose{width:30px;height:30px;border-radius:8px;border:1px solid var(--border);background:var(--surface);cursor:pointer;display:grid;place-items:center;color:var(--muted);transition:.2s;flex-shrink:0}
+.qclose:hover{color:var(--red);border-color:var(--red)}
+.qbody{padding:26px;overflow-y:auto;flex:1}
+.qnum{font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:10px}
+.qtext{font-size:18px;font-weight:600;line-height:1.7;margin-bottom:22px}
+.opts{display:flex;flex-direction:column;gap:9px}
+.opt{display:flex;align-items:center;gap:13px;padding:13px 16px;border:1.5px solid var(--border);border-radius:12px;cursor:pointer;transition:.2s;font-size:18px;font-weight:500}
+.opt:hover:not(.locked){border-color:var(--accent);background:rgba(0,229,255,.04)}
+.opt.sel{border-color:var(--accent);background:rgba(0,229,255,.07)}
+.opt.cor{border-color:var(--green);background:rgba(16,185,129,.08);color:var(--green)}
+.opt.wrg{border-color:var(--red);background:rgba(239,68,68,.07);color:var(--red)}
+.olbl{width:28px;height:28px;border-radius:8px;background:var(--surface);display:grid;place-items:center;font-size:18px;font-weight:800;flex-shrink:0;font-family:'Space Mono';transition:.2s}
+.opt.sel .olbl{background:var(--accent);color:#000}
+.opt.cor .olbl{background:var(--green);color:#fff}
+.opt.wrg .olbl{background:var(--red);color:#fff}
+.explain{margin-top:18px;padding:14px 18px;background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.2);border-radius:12px;font-size:17px;line-height:1.7;display:none}
+.explain.show{display:block}
+.qfoot{padding:14px 26px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.qdots{display:flex;gap:5px;flex-wrap:wrap;max-width:360px}
+.qdot{width:10px;height:10px;border-radius:50%;background:var(--surface);cursor:pointer;border:1px solid var(--border);transition:.2s}
+.qdot.cur{background:var(--accent);border-color:var(--accent)}
+.qdot.ok{background:var(--green);border-color:var(--green)}
+.qdot.ng{background:var(--red);border-color:var(--red)}
+.qacts{display:flex;gap:8px}
+
+
+/* ── MOBILE ── */
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:98;backdrop-filter:blur(4px);cursor:pointer}
+.sidebar-overlay.show{display:block}
+.hamburger{width:38px;height:38px;border-radius:9px;background:var(--surface);border:1px solid var(--border);align-items:center;justify-content:center;cursor:pointer;font-size:18px;flex-shrink:0;transition:.2s;margin-right:10px;display:none}
+.hamburger:hover{border-color:var(--accent)}
+.sidebar-close{display:none;position:absolute;top:16px;right:10px;width:32px;height:32px;border-radius:8px;background:var(--surface);border:1px solid var(--border);align-items:center;justify-content:center;cursor:pointer;font-size:22px;font-weight:700;color:var(--muted);transition:.2s;z-index:10;line-height:1}
+.sidebar-close:hover{color:var(--accent);border-color:var(--accent)}
+@media(max-width:768px){
+  .hamburger{display:flex!important}
+  .sidebar-close{display:flex}
+  .sidebar{position:fixed;left:0;top:0;height:100vh;transform:translateX(-260px);transition:transform .28s cubic-bezier(.4,0,.2,1);z-index:99;box-shadow:4px 0 24px rgba(0,0,0,.4)}
+  .sidebar.open{transform:translateX(0)}
+  .main{margin-left:0!important;width:100%}
+  .topbar{padding:0 16px;left:0}
+  .content{padding:16px}
+  .grid-4{grid-template-columns:repeat(2,1fr)!important}
+  .grid-2{grid-template-columns:1fr!important}
+  .two-col{grid-template-columns:1fr!important}
+  .modes{grid-template-columns:repeat(2,1fr)!important}
+  .topics{grid-template-columns:repeat(2,1fr)!important}
+  .parts-grid{grid-template-columns:1fr!important}
+  .stats-row{grid-template-columns:repeat(2,1fr)!important}
+  .settings-layout{grid-template-columns:1fr!important}
+  .bank-grid{grid-template-columns:1fr!important}
+  .qbox{max-height:98vh;border-radius:16px 16px 0 0;position:fixed;bottom:0;left:0;right:0;width:100%!important;max-width:100%!important}
+  .qov{align-items:flex-end}
+  .exam-box{border-radius:16px 16px 0 0;position:fixed;bottom:0;left:0;right:0;width:100%!important;max-width:100%!important;max-height:95vh}
+  .exam-ov{align-items:flex-end}
+  .exam-body{flex-direction:column}
+  .exam-parts{width:100%!important;height:auto;flex-direction:row;overflow-x:auto;padding:10px;display:flex;gap:8px;border-right:none;border-bottom:1px solid var(--border)}
+  .ep-part{flex-shrink:0;padding:8px 12px;margin-bottom:0}
+  .prev-box{border-radius:16px 16px 0 0;position:fixed;bottom:0;left:0;right:0;width:100%!important;max-width:100%!important}
+  .prev-ov{align-items:flex-end}
+  .topbar-l .ttl{font-size:17px}
+  .topbar-l .tsub{display:none}
+  .welcome-banner{flex-direction:column}
+  .cd-band{flex-direction:column;gap:10px}
+  .hbtns{flex-direction:column}
+  .hsa-hero{padding:24px 16px}
+  .sf-inner{display:flex!important;flex-direction:column!important}
+  .sf-col{width:100%!important;padding:16px 0!important;border:none!important;display:block!important;text-align:center!important}
+  .sf-col:first-child{text-align:center!important}
+  .sf-bottom{flex-direction:column;align-items:flex-start;gap:4px}
+  .fc-card{height:280px!important}
+  .fc-actions{flex-direction:column}
+}
+
+/* ═══════════════════════════════════════════
+   🃏 FLASHCARD MODE
+═══════════════════════════════════════════ */
+.fc-ov{
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.85);backdrop-filter:blur(16px);
+  z-index:200;align-items:center;justify-content:center;
+  flex-direction:column;gap:20px;
+}
+.fc-ov.show{display:flex}
+
+.fc-header{
+  display:flex;align-items:center;justify-content:space-between;
+  width:min(640px,95vw);
+}
+.fc-meta{font-size:13px;color:var(--muted);font-weight:600}
+.fc-progress{font-family:'Space Mono';font-size:14px;color:var(--accent);font-weight:700}
+
+.fc-scene{
+  width:min(640px,95vw);height:340px;
+  perspective:1200px;
+  cursor:pointer;
+}
+.fc-card{
+  width:100%;height:100%;
+  position:relative;
+  transform-style:preserve-3d;
+  transition:transform .55s cubic-bezier(.4,0,.2,1);
+}
+.fc-card.flipped{transform:rotateY(180deg)}
+.fc-face{
+  position:absolute;inset:0;
+  backface-visibility:hidden;
+  -webkit-backface-visibility:hidden;
+  border-radius:20px;
+  display:flex;flex-direction:column;
+  align-items:center;justify-content:center;
+  padding:36px;text-align:center;
+  border:1.5px solid var(--border);
+}
+.fc-front{
+  background:var(--bg2);
+  background-image:radial-gradient(ellipse at top left,rgba(0,229,255,.05),transparent 60%),
+                   radial-gradient(ellipse at bottom right,rgba(124,58,237,.05),transparent 60%);
+}
+.fc-back{
+  background:linear-gradient(135deg,rgba(0,229,255,.06),rgba(124,58,237,.06));
+  transform:rotateY(180deg);
+  border-color:rgba(0,229,255,.2);
+}
+.fc-tag{
+  font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--muted);margin-bottom:16px;
+  display:flex;align-items:center;gap:6px;
+}
+.fc-tag::before,.fc-tag::after{content:'';height:1px;width:30px;background:var(--border)}
+.fc-question{font-size:20px;font-weight:700;line-height:1.6;color:var(--text)}
+.fc-answer{font-size:18px;font-weight:600;line-height:1.7;color:var(--accent)}
+.fc-hint{font-size:12px;color:var(--muted);margin-top:20px;display:flex;align-items:center;gap:5px}
+.fc-hint-icon{font-size:14px;animation:tapBounce 1.5s ease-in-out infinite}
+@keyframes tapBounce{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-3px)}
+}
+
+.fc-actions{
+  display:flex;gap:12px;width:min(640px,95vw);
+}
+.fc-btn{
+  flex:1;padding:14px;border-radius:14px;
+  font-size:14px;font-weight:700;cursor:pointer;
+  border:1.5px solid var(--border);
+  font-family:inherit;transition:all .2s;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.fc-btn-wrong{
+  background:rgba(239,68,68,.08);color:var(--red);border-color:rgba(239,68,68,.25);
+}
+.fc-btn-wrong:hover{background:rgba(239,68,68,.18);transform:scale(1.02);box-shadow:0 4px 16px rgba(239,68,68,.2)}
+.fc-btn-hard{
+  background:rgba(245,158,11,.08);color:var(--accent3);border-color:rgba(245,158,11,.25);
+}
+.fc-btn-hard:hover{background:rgba(245,158,11,.18);transform:scale(1.02)}
+.fc-btn-ok{
+  background:rgba(16,185,129,.08);color:var(--green);border-color:rgba(16,185,129,.25);
+}
+.fc-btn-ok:hover{background:rgba(16,185,129,.18);transform:scale(1.02);box-shadow:0 4px 16px rgba(16,185,129,.2)}
+
+/* Swipe animation */
+@keyframes swipeLeft{
+  to{transform:translateX(-120%) rotate(-15deg);opacity:0}
+}
+@keyframes swipeRight{
+  to{transform:translateX(120%) rotate(15deg);opacity:0}
+}
+@keyframes swipeUp{
+  to{transform:translateY(-120%) scale(.8);opacity:0}
+}
+.fc-scene.anim-wrong{animation:swipeLeft .35s ease forwards}
+.fc-scene.anim-ok{animation:swipeRight .35s ease forwards}
+.fc-scene.anim-hard{animation:swipeUp .35s ease forwards}
+
+/* FC progress bar */
+.fc-pbar{
+  width:min(640px,95vw);height:5px;
+  background:var(--surface);border-radius:999px;overflow:hidden;
+}
+.fc-pbar-fill{
+  height:100%;border-radius:999px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  transition:width .4s ease;
+}
+
+/* FC result screen */
+.fc-result{
+  text-align:center;padding:40px 20px;
+  width:min(520px,95vw);
+  background:var(--bg2);border:1px solid var(--border);
+  border-radius:24px;
+}
+.fc-result h2{font-size:22px;font-weight:900;margin:12px 0 6px}
+.fc-result p{color:var(--muted);font-size:14px;margin-bottom:28px}
+.fc-stats{display:flex;gap:16px;justify-content:center;margin-bottom:28px;flex-wrap:wrap}
+.fc-stat{padding:14px 20px;border-radius:12px;border:1px solid var(--border);min-width:90px}
+.fc-stat-n{font-size:28px;font-weight:900;font-family:'Space Mono'}
+.fc-stat-l{font-size:12px;color:var(--muted);font-weight:600;margin-top:2px}
+.fc-close{
+  width:30px;height:30px;border-radius:8px;border:1px solid var(--border);
+  background:var(--surface);cursor:pointer;
+  display:grid;place-items:center;color:var(--muted);
+  transition:.2s;
+}
+.fc-close:hover{color:var(--red);border-color:var(--red)}
+
+/* ═══════════════════════════════════════════
+   ✨ ENHANCED UI ANIMATIONS
+═══════════════════════════════════════════ */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.fadein>*{animation:fadeUp .35s ease both}
+.fadein>*:nth-child(2){animation-delay:.05s}
+.fadein>*:nth-child(3){animation-delay:.1s}
+.fadein>*:nth-child(4){animation-delay:.15s}
+
+/* Topic cards enhanced */
+.tc{transition:border-color .25s,transform .25s,box-shadow .25s}
+.tc:hover{
+  box-shadow:0 8px 28px rgba(0,229,255,.1);
+  transform:translateY(-3px) scale(1.01);
+}
+.tc:hover .tc-em{animation:emojiBounce .4s ease}
+@keyframes emojiBounce{
+  0%,100%{transform:scale(1)}
+  50%{transform:scale(1.3) rotate(10deg)}
+}
+
+/* Mode cards */
+.mode-c{transition:border-color .25s,transform .25s,box-shadow .25s}
+.mode-c:hover{
+  box-shadow:0 6px 20px rgba(124,58,237,.15);
+}
+.mode-c:active{transform:scale(.97)}
+
+/* Subject tabs */
+.stab{transition:all .2s cubic-bezier(.34,1.3,.64,1)}
+.stab.active{transform:scale(1.04)}
+
+/* Progress bars animate */
+@keyframes fillBar{from{width:0}to{}}
+.pbar-fill{animation:fillBar .9s cubic-bezier(.4,0,.2,1) .3s both}
+
+/* Sub header */
+.sub-header{transition:border-color .25s}
+.sub-header:hover{border-color:rgba(0,229,255,.2)}
+
+/* Quiz options enhanced */
+.opt{transition:all .18s ease}
+.opt:hover:not(.locked){transform:translateX(4px)}
+
+/* Topbar scroll */
+.topbar.scrolled{box-shadow:0 4px 24px rgba(0,0,0,.3)}
+.topbar::after{content:"";position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent2),var(--accent),var(--accent2),transparent);opacity:.25;pointer-events:none}
+
+/* Flashcard mode button in modes grid */
+.mode-c.fc-mode{
+  background:linear-gradient(135deg,rgba(124,58,237,.08),rgba(0,229,255,.06));
+  border-color:rgba(124,58,237,.25);
+}
+.mode-c.fc-mode:hover{
+  border-color:var(--accent2);
+  box-shadow:0 6px 24px rgba(124,58,237,.2);
+}
+
+/* ═══ GLOBAL UI ENHANCEMENTS ═══ */
+
+/* Smooth page entry */
+body{animation:pageLoad .4s cubic-bezier(.2,.8,.3,1)}
+@keyframes pageLoad{from{opacity:0}to{opacity:1}}
+
+/* Card hover lift */
+.card{transition:all .25s cubic-bezier(.2,.8,.3,1)!important}
+.card:hover{border-color:rgba(0,229,255,.25)!important;transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,.3)!important}
+
+/* Stat cards glow on hover */
+.stat-c:hover{border-color:var(--accent)!important;box-shadow:0 0 20px rgba(0,229,255,.1)!important}
+
+/* Nav items smooth */
+.nav-a{transition:all .18s cubic-bezier(.2,.8,.3,1)!important}
+
+/* Logo pulse */
+@keyframes logoPulse{0%,100%{box-shadow:0 0 16px rgba(0,229,255,.3)}50%{box-shadow:0 0 28px rgba(0,229,255,.5)}}
+.logo-icon{animation:logoPulse 3s ease-in-out infinite}
+
+/* Topbar shadow on scroll */
+.topbar{transition:box-shadow .3s,background .3s,border-color .3s,left .28s!important}
+.topbar.scrolled{box-shadow:0 4px 32px rgba(0,0,0,.3)!important}
+
+/* Buttons ripple */
+.btn{position:relative;overflow:hidden}
+.btn::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,.1);opacity:0;border-radius:inherit;transform:scale(0);transition:.3s}
+.btn:active::after{transform:scale(1);opacity:1;transition:0s}
+
+/* Progress bars animated on load */
+.pbar-fill{animation:growBar .9s cubic-bezier(.2,.8,.3,1) both}
+@keyframes growBar{from{width:0!important}to{}}
+
+/* Suggestion items slide */
+.sug-item{transition:all .18s cubic-bezier(.2,.8,.3,1)!important}
+.sug-item:hover{transform:translateX(5px)!important;background:rgba(0,229,255,.03)!important}
+
+/* Topic cards */
+.tc{transition:all .2s cubic-bezier(.2,.8,.3,1)!important}
+.tc:hover{transform:translateY(-4px)!important;box-shadow:0 12px 32px rgba(0,0,0,.3)!important}
+
+/* Mode cards */
+.mode-c{transition:all .2s cubic-bezier(.2,.8,.3,1)!important}
+.mode-c:hover{transform:translateY(-3px)!important;box-shadow:0 8px 24px rgba(0,0,0,.25)!important}
+
+/* Part cards HSA */
+.part-c{transition:all .2s cubic-bezier(.2,.8,.3,1)!important}
+.part-c:hover{transform:translateY(-4px)!important;box-shadow:0 12px 32px rgba(0,0,0,.3)!important}
+
+/* Scrollbar upgrade */
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(0,229,255,.2);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:rgba(0,229,255,.4)}
+
+/* Selection color */
+::selection{background:rgba(0,229,255,.25);color:var(--text)}
+
+/* Footer members hover */
+.sf-member{transition:.2s}
+.sf-member:hover{color:var(--accent)!important;transform:translateX(4px)}
+
+/* Icon buttons */
+.icon-btn{transition:all .18s cubic-bezier(.2,.8,.3,1)!important}
+.icon-btn:hover{transform:translateY(-1px)!important;background:rgba(0,229,255,.08)!important}
+
+/* Leaderboard items */
+.lb-item{transition:.18s}
+.lb-item:hover{background:rgba(0,229,255,.04);border-radius:8px;padding-left:8px}
+
+/* Schedule items */
+.sched-item{transition:.18s}
+.sched-item:hover{background:rgba(0,229,255,.03);border-radius:10px;padding:12px 8px}
+
+/* Badge pop */
+.badge{animation:badgePop 2s ease-in-out infinite}
+@keyframes badgePop{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+
+/* HSA Hero gradient animate */
+.hsa-hero{background:linear-gradient(135deg,rgba(124,58,237,.08),rgba(0,229,255,.04),rgba(245,158,11,.04))!important;background-size:200%!important;animation:heroGrad 6s ease-in-out infinite!important}
+@keyframes heroGrad{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+
+/* Streak flame */
+.streak-flame,.streak-icon{animation:flameDance 2s ease-in-out infinite}
+@keyframes flameDance{0%,100%{transform:rotate(-4deg) scale(1)}25%{transform:rotate(4deg) scale(1.07)}50%{transform:rotate(-2deg) scale(1.04)}75%{transform:rotate(3deg) scale(1.06)}}
+
+/* Count-up animation for stats */
+.stat-val,.sh-sv,.srv{animation:countUp .6s cubic-bezier(.2,.8,.3,1) both}
+@keyframes countUp{from{opacity:0;transform:scale(.7) translateY(10px)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="sidebar-overlay" id="sb-overlay" onclick="closeSidebar()"></div>
+
+<aside class="sidebar">
+  <button class="sidebar-close" onclick="closeSidebar()">‹</button>
+  <a class="logo" href="dashboard.html">
+    <div class="logo-icon"><img src="logo.png" style="width:28px;height:28px;object-fit:contain;"></div>
+    <div class="logo-text">Luyen<em>Thi</em>369</div>
+  </a>
+  <nav class="nav">
+    <div class="nav-sec">
+      <div class="nav-lbl">Tổng quan</div>
+      <a class="nav-a " href="dashboard.html"><span class="ic">🏠</span>Trang chủ</a>
+    </div>
+    <div class="nav-sec">
+      <div class="nav-lbl">Luyện tập</div>
+      <a class="nav-a active" href="luyen-mon.html"><span class="ic">📖</span>Luyện theo môn</a>
+      <a class="nav-a " href="hsa.html"><span class="ic">🏛️</span>Phòng luyện HSA<span class="badge">HOT</span></a>
+    </div>
+    <div class="nav-sec">
+      <div class="nav-lbl">Tra cứu</div>
+      <a class="nav-a " href="ngan-hang-de.html"><span class="ic">🗂️</span>Ngân hàng đề</a>
+      <a class="nav-a " href="cai-dat.html"><span class="ic">⚙️</span>Cài đặt</a>
+    </div>
+    <div class="nav-sec">
+      <div class="nav-lbl">Hệ thống</div>
+      <a class="nav-a" href="admin.html"><span class="ic">🔐</span>Admin</a>
+    </div>
+  </nav>
+  <div class="sb-foot">
+    <a class="user-card" href="cai-dat.html">
+      <div class="av" id="sb-av">?</div>
+      <div><div class="uname" id="sb-name">Đang tải...</div><div class="uplan">⭐ PRO</div></div>
+    </a>
+    <button class="logout" onclick="doLogout()">🚪 Đăng xuất</button>
+  </div>
+</aside>
+
+<div class="main">
+  <div class="topbar">
+    <div class="topbar-l" style="display:flex;align-items:center;gap:10px"><button class="hamburger" onclick="openSidebar()">☰</button><div style="display:flex;flex-direction:column"><div class="ttl">Luyện theo môn</div><div class="tsub">Chuyên đề · 30 câu/môn · Thi thử</div></div></div>
+    <div class="topbar-r">
+      <button class="icon-btn" onclick="Pomodoro.open()" title="Pomodoro">🍅</button>
+      <button class="btn btn-v" onclick="Battle.open()" style="gap:6px">⚔️ Battle</button>
+      <button class="icon-btn" id="theme-btn" onclick="toggleTheme()">☀️</button>
+    </div>
+  </div>
+  <div class="content fadein">
+    <div class="stabs">
+      <div class="stab active" onclick="switchSub('toan',this)">📐 Toán</div>
+      <div class="stab" onclick="switchSub('ly',this)">⚡ Vật lý</div>
+      <div class="stab" onclick="switchSub('hoa',this)">🧪 Hóa học</div>
+      <div class="stab" onclick="switchSub('sinh',this)">🌱 Sinh học</div>
+      <div class="stab" onclick="switchSub('anh',this)">🌍 Tiếng Anh</div>
+      <div class="stab" onclick="switchSub('van',this)">📖 Ngữ Văn</div>
+      <div class="stab" onclick="switchSub('su',this)">📜 Lịch Sử</div>
+      <div class="stab" onclick="switchSub('dia',this)">🗺 Địa Lý</div>
+      <div class="stab" onclick="switchSub('gdcd',this)">⚖️ GDCD</div>
+      <div class="stab" onclick="switchSub('hsa',this)">🎯 HSA</div>
+    </div>
+    <!-- TOÁN -->
+    <div class="sub-view active" id="sv-toan">
+      <div class="sub-header">
+        <div class="sh-info"><h2>📐 Môn Toán</h2><p id="si-toan"><span class="skel-s" style="width:140px"></span></p></div>
+        <div class="sh-stats">
+          <div><div class="sh-sv" style="color:var(--accent)">--</div><div class="sh-sl">Điểm TB</div></div>
+          <div><div class="sh-sv" style="color:var(--green)">--%</div><div class="sh-sl">Hoàn thành</div></div>
+          <div><div class="sh-sv" style="color:var(--accent3)">--</div><div class="sh-sl">Câu sai</div></div>
+        </div>
+      </div>
+      <div class="modes">
+        <div class="mode-c" onclick="openQuiz('toan','📐 Toán – Luyện chuyên đề')"><div class="mc-ic">📚</div><div class="mc-t">Luyện chuyên đề</div><div class="mc-s" data-src="db">Câu hỏi từ DB</div></div>
+        <div class="mode-c fc-mode" onclick="openFlashcard('toan','Toán')"><div class="mc-ic">🃏</div><div class="mc-t">Ôn nhanh Flashcard</div><div class="mc-s">Lật thẻ · Ghi nhớ nhanh</div></div>
+        <div class="mode-c" onclick="openQuiz('toan','🔁 Câu sai cần ôn lại')"><div class="mc-ic">🔁</div><div class="mc-t">Làm lại câu sai</div><div class="mc-s">32 câu đang chờ</div></div>
+        <div class="mode-c" onclick="openQuiz('toan','🏆 Thi thử môn Toán')"><div class="mc-ic">🏆</div><div class="mc-t">Thi thử môn</div><div class="mc-s">Thi thử · 45 phút</div></div>
+      </div>
+      <div style="font-size:15px;font-weight:700;margin-bottom:14px">📑 Chuyên đề</div>
+      <div class="topics">
+        <div class="tc" onclick="openQuiz('toan','📈 Hàm số &amp; Đồ thị')"><div class="tc-pct" data-key=""></div><div class="tc-em">📈</div><div class="tc-t">Hàm số &amp; Đồ thị</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,var(--accent),#0066ff)"></div></div></div>
+        <div class="tc" onclick="openQuiz('toan','∫ Nguyên hàm – Tích phân')"><div class="tc-pct" data-key=""></div><div class="tc-em">∫</div><div class="tc-t">Nguyên hàm – Tích phân</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,#a78bfa,var(--accent2))"></div></div></div>
+        <div class="tc" onclick="openQuiz('toan','📐 Hình không gian')"><div class="tc-pct" data-key=""></div><div class="tc-em">📐</div><div class="tc-t">Hình không gian</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,var(--green),#059669)"></div></div></div>
+        <div class="tc" onclick="openQuiz('toan','🔢 Mũ &amp; Logarit')"><div class="tc-pct" data-key=""></div><div class="tc-em">🔢</div><div class="tc-t">Mũ &amp; Logarit</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,var(--accent3),#f97316)"></div></div></div>
+        <div class="tc" onclick="openQuiz('toan','🔵 Số phức')"><div class="tc-pct" data-key=""></div><div class="tc-em">🔵</div><div class="tc-t">Số phức</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,var(--red),#dc2626)"></div></div></div>
+        <div class="tc" onclick="openQuiz('toan','📊 Xác suất – Thống kê')"><div class="tc-pct" data-key=""></div><div class="tc-em">📊</div><div class="tc-t">Xác suất – Thống kê</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,#67e8f9,#0891b2)"></div></div></div>
+      </div>
+    </div>
+    <!-- VẬT LÝ -->
+    <div class="sub-view" id="sv-ly">
+      <div class="sub-header">
+        <div class="sh-info"><h2>⚡ Môn Vật lý</h2><p id="si-ly"><span class="skel-s" style="width:130px"></span></p></div>
+        <div class="sh-stats"><div><div class="sh-sv" style="color:#a78bfa">--</div><div class="sh-sl">Điểm TB</div></div><div><div class="sh-sv" style="color:var(--green)">--%</div><div class="sh-sl">Hoàn thành</div></div></div>
+      </div>
+      <div class="modes">
+        <div class="mode-c" onclick="openQuiz('ly','⚡ Vật lý – Toàn bộ')"><div class="mc-ic">📚</div><div class="mc-t">Luyện chuyên đề</div><div class="mc-s" data-src="db">Câu hỏi từ DB</div></div>
+        <div class="mode-c fc-mode" onclick="openFlashcard('ly','Vật lý')"><div class="mc-ic">🃏</div><div class="mc-t">Ôn nhanh Flashcard</div><div class="mc-s">Lật thẻ · Ghi nhớ nhanh</div></div>
+        <div class="mode-c" onclick="openQuiz('ly','🔁 Câu sai Vật lý')"><div class="mc-ic">🔁</div><div class="mc-t">Câu sai</div><div class="mc-s">Câu đã sai</div></div>
+        <div class="mode-c" onclick="openQuiz('ly','🏆 Thi thử Vật lý')"><div class="mc-ic">🏆</div><div class="mc-t">Thi thử</div><div class="mc-s">Thi thử · 45 phút</div></div>
+      </div>
+      <div style="font-size:15px;font-weight:700;margin-bottom:14px">📑 Chuyên đề</div>
+      <div class="topics">
+        <div class="tc" onclick="openQuiz('ly','🌊 Dao động cơ học')"><div class="tc-pct" data-key=""></div><div class="tc-em">🌊</div><div class="tc-t">Dao động cơ học</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,#a78bfa,var(--accent2))"></div></div></div>
+        <div class="tc" onclick="openQuiz('ly','⚡ Điện xoay chiều')"><div class="tc-pct" data-key=""></div><div class="tc-em">⚡</div><div class="tc-t">Điện xoay chiều</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,#a78bfa,var(--accent2))"></div></div></div>
+        <div class="tc" onclick="openQuiz('ly','📡 Sóng điện từ')"><div class="tc-pct" data-key=""></div><div class="tc-em">📡</div><div class="tc-t">Sóng điện từ</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,#a78bfa,var(--accent2))"></div></div></div>
+        <div class="tc" onclick="openQuiz('ly','☢️ Vật lý hạt nhân')"><div class="tc-pct" data-key=""></div><div class="tc-em">☢️</div><div class="tc-t">Vật lý hạt nhân</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,var(--red),#dc2626)"></div></div></div>
+        <div class="tc" onclick="openQuiz('ly','💡 Quang học')"><div class="tc-pct" data-key=""></div><div class="tc-em">💡</div><div class="tc-t">Quang học</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,var(--accent3),#f97316)"></div></div></div>
+        <div class="tc" onclick="openQuiz('ly','🔬 Lượng tử ánh sáng')"><div class="tc-pct" data-key=""></div><div class="tc-em">🔬</div><div class="tc-t">Lượng tử ánh sáng</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,#67e8f9,#0891b2)"></div></div></div>
+      </div>
+    </div>
+    <!-- HÓA HỌC -->
+    <div class="sub-view" id="sv-hoa">
+      <div class="sub-header">
+        <div class="sh-info"><h2>🧪 Môn Hóa học</h2><p>30 câu · 7 chuyên đề · Tiến độ 71%</p></div>
+        <div class="sh-stats"><div><div class="sh-sv" style="color:var(--green)">--</div><div class="sh-sl">Điểm TB</div></div><div><div class="sh-sv" style="color:var(--green)">--%</div><div class="sh-sl">Hoàn thành</div></div></div>
+      </div>
+      <div class="modes">
+        <div class="mode-c" onclick="openQuiz('hoa','🧪 Hóa – Toàn bộ')"><div class="mc-ic">📚</div><div class="mc-t">Luyện chuyên đề</div><div class="mc-s" data-src="db">Câu hỏi từ DB</div></div>
+        <div class="mode-c fc-mode" onclick="openFlashcard('hoa','Hóa học')"><div class="mc-ic">🃏</div><div class="mc-t">Ôn nhanh Flashcard</div><div class="mc-s">Lật thẻ · Ghi nhớ nhanh</div></div>
+        <div class="mode-c" onclick="openQuiz('hoa','🔁 Câu sai Hóa học')"><div class="mc-ic">🔁</div><div class="mc-t">Câu sai</div><div class="mc-s">Câu đã sai</div></div>
+        <div class="mode-c" onclick="openQuiz('hoa','🏆 Thi thử Hóa học')"><div class="mc-ic">🏆</div><div class="mc-t">Thi thử</div><div class="mc-s">Thi thử · 45 phút</div></div>
+      </div>
+      <div style="font-size:15px;font-weight:700;margin-bottom:14px">📑 Chuyên đề</div>
+      <div class="topics">
+        <div class="tc" onclick="openQuiz('hoa','🧴 Este – Lipit')"><div class="tc-pct" data-key=""></div><div class="tc-em">🧴</div><div class="tc-t">Este – Lipit</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,var(--green),#059669)"></div></div></div>
+        <div class="tc" onclick="openQuiz('hoa','🔬 Amin – Aminoaxit')"><div class="tc-pct" data-key=""></div><div class="tc-em">🔬</div><div class="tc-t">Amin – Aminoaxit</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,var(--green),#059669)"></div></div></div>
+        <div class="tc" onclick="openQuiz('hoa','⚗️ Kim loại kiềm')"><div class="tc-pct" data-key=""></div><div class="tc-em">⚗️</div><div class="tc-t">Kim loại kiềm</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,var(--green),#059669)"></div></div></div>
+        <div class="tc" onclick="openQuiz('hoa','🍬 Carbohydrate')"><div class="tc-pct" data-key=""></div><div class="tc-em">🍬</div><div class="tc-t">Carbohydrate</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,var(--accent3),#f97316)"></div></div></div>
+        <div class="tc" onclick="openQuiz('hoa','🧱 Polime')"><div class="tc-pct" data-key=""></div><div class="tc-em">🧱</div><div class="tc-t">Polime</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,#a78bfa,var(--accent2))"></div></div></div>
+        <div class="tc" onclick="openQuiz('hoa','⚡ Điện hóa học')"><div class="tc-pct" data-key=""></div><div class="tc-em">⚡</div><div class="tc-t">Điện hóa học</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,var(--accent),#0066ff)"></div></div></div>
+      </div>
+    </div>
+    <!-- SINH HỌC -->
+    <div class="sub-view" id="sv-sinh">
+      <div class="sub-header">
+        <div class="sh-info"><h2>🌱 Môn Sinh học</h2><p>30 câu · 6 chuyên đề · Tiến độ 48%</p></div>
+        <div class="sh-stats"><div><div class="sh-sv" style="color:#4ade80">--</div><div class="sh-sl">Điểm TB</div></div></div>
+      </div>
+      <div class="modes">
+        <div class="mode-c" onclick="openQuiz('sinh','🌱 Sinh học – Toàn bộ')"><div class="mc-ic">📚</div><div class="mc-t">Luyện chuyên đề</div><div class="mc-s" data-src="db">Câu hỏi từ DB</div></div>
+        <div class="mode-c" onclick="openQuiz('sinh','🎚️ Sinh học – Theo mức độ')"><div class="mc-ic">🎚️</div><div class="mc-t">Theo mức độ</div><div class="mc-s">4 mức độ</div></div>
+        <div class="mode-c" onclick="openQuiz('sinh','🔁 Câu sai Sinh học')"><div class="mc-ic">🔁</div><div class="mc-t">Câu sai</div><div class="mc-s">Câu đã sai</div></div>
+        <div class="mode-c" onclick="openQuiz('sinh','🏆 Thi thử Sinh học')"><div class="mc-ic">🏆</div><div class="mc-t">Thi thử</div><div class="mc-s">Thi thử · 45 phút</div></div>
+      </div>
+      <div style="font-size:15px;font-weight:700;margin-bottom:14px">📑 Chuyên đề</div>
+      <div class="topics">
+        <div class="tc" onclick="openQuiz('sinh','🧬 Di truyền học')"><div class="tc-pct" data-key=""></div><div class="tc-em">🧬</div><div class="tc-t">Di truyền học</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,#4ade80,#16a34a)"></div></div></div>
+        <div class="tc" onclick="openQuiz('sinh','🌿 Sinh thái học')"><div class="tc-pct" data-key=""></div><div class="tc-em">🌿</div><div class="tc-t">Sinh thái học</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,#4ade80,#16a34a)"></div></div></div>
+        <div class="tc" onclick="openQuiz('sinh','🔭 Tế bào học')"><div class="tc-pct" data-key=""></div><div class="tc-em">🔭</div><div class="tc-t">Tế bào học</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,#4ade80,#16a34a)"></div></div></div>
+        <div class="tc" onclick="openQuiz('sinh','🧫 Vi sinh vật')"><div class="tc-pct" data-key=""></div><div class="tc-em">🧫</div><div class="tc-t">Vi sinh vật</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,#4ade80,#16a34a)"></div></div></div>
+        <div class="tc" onclick="openQuiz('sinh','💪 Sinh lý người')"><div class="tc-pct" data-key=""></div><div class="tc-em">💪</div><div class="tc-t">Sinh lý người</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,#4ade80,#16a34a)"></div></div></div>
+        <div class="tc" onclick="openQuiz('sinh','🌍 Tiến hóa')"><div class="tc-pct" data-key=""></div><div class="tc-em">🌍</div><div class="tc-t">Tiến hóa</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,#4ade80,#16a34a)"></div></div></div>
+      </div>
+    </div>
+    <!-- TIẾNG ANH -->
+    <div class="sub-view" id="sv-anh">
+      <div class="sub-header">
+        <div class="sh-info"><h2>🌍 Tiếng Anh</h2><p>30 câu · 5 chuyên đề · Tiến độ 82%</p></div>
+        <div class="sh-stats"><div><div class="sh-sv" style="color:var(--accent3)">--</div><div class="sh-sl">Điểm TB</div></div><div><div class="sh-sv" style="color:var(--green)">--%</div><div class="sh-sl">Hoàn thành</div></div></div>
+      </div>
+      <div class="modes">
+        <div class="mode-c" onclick="openQuiz('anh','🌍 Tiếng Anh – Toàn bộ')"><div class="mc-ic">📚</div><div class="mc-t">Luyện chuyên đề</div><div class="mc-s" data-src="db">Câu hỏi từ DB</div></div>
+        <div class="mode-c fc-mode" onclick="openFlashcard('anh','Tiếng Anh')"><div class="mc-ic">🃏</div><div class="mc-t">Ôn nhanh Flashcard</div><div class="mc-s">Lật thẻ · Ghi nhớ nhanh</div></div>
+        <div class="mode-c" onclick="openQuiz('anh','🔁 Câu sai Tiếng Anh')"><div class="mc-ic">🔁</div><div class="mc-t">Câu sai</div><div class="mc-s">Câu đã sai</div></div>
+        <div class="mode-c" onclick="openQuiz('anh','🏆 Thi thử Tiếng Anh')"><div class="mc-ic">🏆</div><div class="mc-t">Thi thử</div><div class="mc-s">Thi thử · 45 phút</div></div>
+      </div>
+      <div style="font-size:15px;font-weight:700;margin-bottom:14px">📑 Chuyên đề</div>
+      <div class="topics">
+        <div class="tc" onclick="openQuiz('anh','📝 Grammar')"><div class="tc-pct" data-key=""></div><div class="tc-em">📝</div><div class="tc-t">Grammar</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,var(--accent3),#f97316)"></div></div></div>
+        <div class="tc" onclick="openQuiz('anh','📖 Reading')"><div class="tc-pct" data-key=""></div><div class="tc-em">📖</div><div class="tc-t">Reading</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,var(--accent3),#f97316)"></div></div></div>
+        <div class="tc" onclick="openQuiz('anh','🔤 Vocabulary')"><div class="tc-pct" data-key=""></div><div class="tc-em">🔤</div><div class="tc-t">Vocabulary</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,var(--accent3),#f97316)"></div></div></div>
+        <div class="tc" onclick="openQuiz('anh','🗣️ Communication')"><div class="tc-pct" data-key=""></div><div class="tc-em">🗣️</div><div class="tc-t">Communication</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,var(--accent3),#f97316)"></div></div></div>
+        <div class="tc" onclick="openQuiz('anh','🔊 Pronunciation')"><div class="tc-pct" data-key=""></div><div class="tc-em">🔊</div><div class="tc-t">Pronunciation</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,var(--accent3),#f97316)"></div></div></div>
+        <div class="tc" onclick="openQuiz('anh','✍️ Writing Skills')"><div class="tc-pct" data-key=""></div><div class="tc-em">✍️</div><div class="tc-t">Writing Skills</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,var(--accent),#0066ff)"></div></div></div>
+      </div>
+    </div>
+  </div>
+  
+
+    <!-- NGỮ VĂN -->
+    <div class="sub-view" id="sv-van">
+      <div class="sub-header">
+        <div class="sh-info"><h2>📖 Ngữ Văn</h2><p id="si-van"><span class="skel-s" style="width:140px"></span></p></div>
+        <div class="sh-stats">
+          <div><div class="sh-sv" id="sv-score-van" style="color:#f472b6">--</div><div class="sh-sl">Điểm TB</div></div>
+          <div><div class="sh-sv" id="sv-pct-van" style="color:var(--green)">--%</div><div class="sh-sl">Đúng</div></div>
+        </div>
+      </div>
+      <div class="modes">
+        <div class="mode-c" onclick="openQuiz('van','📖 Văn – Luyện tổng hợp')"><div class="mc-ic">📚</div><div class="mc-t">Luyện tổng hợp</div><div class="mc-s">Câu hỏi từ DB</div></div>
+        <div class="mode-c fc-mode" onclick="openFlashcard('van','Ngữ Văn')"><div class="mc-ic">🃏</div><div class="mc-t">Flashcard ôn tác phẩm</div><div class="mc-s">Lật thẻ · Ghi nhớ nhanh</div></div>
+        <div class="mode-c" onclick="openQuiz('van','🏆 Thi thử Ngữ Văn')"><div class="mc-ic">🏆</div><div class="mc-t">Thi thử</div><div class="mc-s">Thi thử · 120 phút</div></div>
+        <div class="mode-c" onclick="openQuiz('van','🔁 Câu sai Ngữ Văn')"><div class="mc-ic">🔁</div><div class="mc-t">Làm lại câu sai</div><div class="mc-s">Câu đã sai</div></div>
+      </div>
+      <div style="font-size:15px;font-weight:700;margin-bottom:14px">📑 Chuyên đề</div>
+      <div class="topics">
+        <div class="tc" onclick="openQuiz('van','📜 Đọc hiểu văn bản')"><div class="tc-pct" data-key=""></div><div class="tc-em">📜</div><div class="tc-t">Đọc hiểu văn bản</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,#f472b6,#ec4899)"></div></div></div>
+        <div class="tc" onclick="openQuiz('van','✍️ Nghị luận xã hội')"><div class="tc-pct" data-key=""></div><div class="tc-em">✍️</div><div class="tc-t">Nghị luận xã hội</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,#f472b6,#a21caf)"></div></div></div>
+        <div class="tc" onclick="openQuiz('van','📗 Nghị luận văn học')"><div class="tc-pct" data-key=""></div><div class="tc-em">📗</div><div class="tc-t">Nghị luận văn học</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,#c084fc,#7c3aed)"></div></div></div>
+        <div class="tc" onclick="openQuiz('van','🖊️ Thơ hiện đại')"><div class="tc-pct" data-key=""></div><div class="tc-em">🖊️</div><div class="tc-t">Thơ hiện đại</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,#f472b6,#ec4899)"></div></div></div>
+        <div class="tc" onclick="openQuiz('van','📘 Văn xuôi')"><div class="tc-pct" data-key=""></div><div class="tc-em">📘</div><div class="tc-t">Văn xuôi</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,#c084fc,#7c3aed)"></div></div></div>
+      </div>
+    </div>
+
+    <!-- LỊCH SỬ -->
+    <div class="sub-view" id="sv-su">
+      <div class="sub-header">
+        <div class="sh-info"><h2>📜 Lịch Sử</h2><p id="si-su"><span class="skel-s" style="width:140px"></span></p></div>
+        <div class="sh-stats">
+          <div><div class="sh-sv" id="sv-score-su" style="color:#fb923c">--</div><div class="sh-sl">Điểm TB</div></div>
+          <div><div class="sh-sv" id="sv-pct-su" style="color:var(--green)">--%</div><div class="sh-sl">Đúng</div></div>
+        </div>
+      </div>
+      <div class="modes">
+        <div class="mode-c" onclick="openQuiz('su','📜 Lịch Sử – Luyện tổng hợp')"><div class="mc-ic">📚</div><div class="mc-t">Luyện tổng hợp</div><div class="mc-s">Câu hỏi từ DB</div></div>
+        <div class="mode-c fc-mode" onclick="openFlashcard('su','Lịch Sử')"><div class="mc-ic">🃏</div><div class="mc-t">Flashcard sự kiện</div><div class="mc-s">Lật thẻ · Ghi nhớ nhanh</div></div>
+        <div class="mode-c" onclick="openQuiz('su','🏆 Thi thử Lịch Sử')"><div class="mc-ic">🏆</div><div class="mc-t">Thi thử</div><div class="mc-s">50 câu · 50 phút</div></div>
+        <div class="mode-c" onclick="openQuiz('su','🔁 Câu sai Lịch Sử')"><div class="mc-ic">🔁</div><div class="mc-t">Làm lại câu sai</div><div class="mc-s">Câu đã sai</div></div>
+      </div>
+      <div style="font-size:15px;font-weight:700;margin-bottom:14px">📑 Chuyên đề</div>
+      <div class="topics">
+        <div class="tc" onclick="openQuiz('su','🇻🇳 Lịch sử VN 1945–1975')"><div class="tc-pct" data-key=""></div><div class="tc-em">🇻🇳</div><div class="tc-t">Lịch sử VN 1945–1975</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,#fb923c,#f97316)"></div></div></div>
+        <div class="tc" onclick="openQuiz('su','🌏 Lịch sử thế giới')"><div class="tc-pct" data-key=""></div><div class="tc-em">🌏</div><div class="tc-t">Lịch sử thế giới</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,#fb923c,#dc2626)"></div></div></div>
+        <div class="tc" onclick="openQuiz('su','🏯 Lịch sử VN trước 1945')"><div class="tc-pct" data-key=""></div><div class="tc-em">🏯</div><div class="tc-t">Lịch sử VN trước 1945</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,#fbbf24,#f97316)"></div></div></div>
+        <div class="tc" onclick="openQuiz('su','🔄 Lịch sử VN 1975–nay')"><div class="tc-pct" data-key=""></div><div class="tc-em">🔄</div><div class="tc-t">Lịch sử VN 1975–nay</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,#fb923c,#f97316)"></div></div></div>
+      </div>
+    </div>
+
+    <!-- ĐỊA LÝ -->
+    <div class="sub-view" id="sv-dia">
+      <div class="sub-header">
+        <div class="sh-info"><h2>🗺 Địa Lý</h2><p id="si-dia"><span class="skel-s" style="width:140px"></span></p></div>
+        <div class="sh-stats">
+          <div><div class="sh-sv" id="sv-score-dia" style="color:#34d399">--</div><div class="sh-sl">Điểm TB</div></div>
+          <div><div class="sh-sv" id="sv-pct-dia" style="color:var(--green)">--%</div><div class="sh-sl">Đúng</div></div>
+        </div>
+      </div>
+      <div class="modes">
+        <div class="mode-c" onclick="openQuiz('dia','🗺 Địa Lý – Luyện tổng hợp')"><div class="mc-ic">📚</div><div class="mc-t">Luyện tổng hợp</div><div class="mc-s">Câu hỏi từ DB</div></div>
+        <div class="mode-c fc-mode" onclick="openFlashcard('dia','Địa Lý')"><div class="mc-ic">🃏</div><div class="mc-t">Flashcard bản đồ</div><div class="mc-s">Lật thẻ · Ghi nhớ nhanh</div></div>
+        <div class="mode-c" onclick="openQuiz('dia','🏆 Thi thử Địa Lý')"><div class="mc-ic">🏆</div><div class="mc-t">Thi thử</div><div class="mc-s">50 câu · 50 phút</div></div>
+        <div class="mode-c" onclick="openQuiz('dia','🔁 Câu sai Địa Lý')"><div class="mc-ic">🔁</div><div class="mc-t">Làm lại câu sai</div><div class="mc-s">Câu đã sai</div></div>
+      </div>
+      <div style="font-size:15px;font-weight:700;margin-bottom:14px">📑 Chuyên đề</div>
+      <div class="topics">
+        <div class="tc" onclick="openQuiz('dia','🌏 Địa lý tự nhiên VN')"><div class="tc-pct" data-key=""></div><div class="tc-em">🌏</div><div class="tc-t">Địa lý tự nhiên VN</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,#34d399,#059669)"></div></div></div>
+        <div class="tc" onclick="openQuiz('dia','🏙️ Địa lý kinh tế VN')"><div class="tc-pct" data-key=""></div><div class="tc-em">🏙️</div><div class="tc-t">Địa lý kinh tế VN</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,#34d399,#0891b2)"></div></div></div>
+        <div class="tc" onclick="openQuiz('dia','🌍 Địa lý thế giới')"><div class="tc-pct" data-key=""></div><div class="tc-em">🌍</div><div class="tc-t">Địa lý thế giới</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,#67e8f9,#0891b2)"></div></div></div>
+        <div class="tc" onclick="openQuiz('dia','📊 Kỹ năng đọc biểu đồ')"><div class="tc-pct" data-key=""></div><div class="tc-em">📊</div><div class="tc-t">Kỹ năng đọc biểu đồ</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,#34d399,#059669)"></div></div></div>
+      </div>
+    </div>
+
+    <!-- GDCD -->
+    <div class="sub-view" id="sv-gdcd">
+      <div class="sub-header">
+        <div class="sh-info"><h2>⚖️ GDCD</h2><p id="si-gdcd"><span class="skel-s" style="width:140px"></span></p></div>
+        <div class="sh-stats">
+          <div><div class="sh-sv" id="sv-score-gdcd" style="color:#60a5fa">--</div><div class="sh-sl">Điểm TB</div></div>
+          <div><div class="sh-sv" id="sv-pct-gdcd" style="color:var(--green)">--%</div><div class="sh-sl">Đúng</div></div>
+        </div>
+      </div>
+      <div class="modes">
+        <div class="mode-c" onclick="openQuiz('gdcd','⚖️ GDCD – Luyện tổng hợp')"><div class="mc-ic">📚</div><div class="mc-t">Luyện tổng hợp</div><div class="mc-s">Câu hỏi từ DB</div></div>
+        <div class="mode-c fc-mode" onclick="openFlashcard('gdcd','GDCD')"><div class="mc-ic">🃏</div><div class="mc-t">Flashcard pháp luật</div><div class="mc-s">Lật thẻ · Ghi nhớ nhanh</div></div>
+        <div class="mode-c" onclick="openQuiz('gdcd','🏆 Thi thử GDCD')"><div class="mc-ic">🏆</div><div class="mc-t">Thi thử</div><div class="mc-s">40 câu · 50 phút</div></div>
+        <div class="mode-c" onclick="openQuiz('gdcd','🔁 Câu sai GDCD')"><div class="mc-ic">🔁</div><div class="mc-t">Làm lại câu sai</div><div class="mc-s">Câu đã sai</div></div>
+      </div>
+      <div style="font-size:15px;font-weight:700;margin-bottom:14px">📑 Chuyên đề</div>
+      <div class="topics">
+        <div class="tc" onclick="openQuiz('gdcd','⚖️ Pháp luật & Nhà nước')"><div class="tc-pct" data-key=""></div><div class="tc-em">⚖️</div><div class="tc-t">Pháp luật & Nhà nước</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,#60a5fa,#3b82f6)"></div></div></div>
+        <div class="tc" onclick="openQuiz('gdcd','🤝 Đạo đức – Lối sống')"><div class="tc-pct" data-key=""></div><div class="tc-em">🤝</div><div class="tc-t">Đạo đức – Lối sống</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,#60a5fa,#6d28d9)"></div></div></div>
+        <div class="tc" onclick="openQuiz('gdcd','🏛️ Quyền con người')"><div class="tc-pct" data-key=""></div><div class="tc-em">🏛️</div><div class="tc-t">Quyền con người</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,#60a5fa,#0891b2)"></div></div></div>
+        <div class="tc" onclick="openQuiz('gdcd','💼 Kinh tế Chính trị')"><div class="tc-pct" data-key=""></div><div class="tc-em">💼</div><div class="tc-t">Kinh tế Chính trị</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,#34d399,#0891b2)"></div></div></div>
+      </div>
+    </div>
+
+    <!-- HSA -->
+    <div class="sub-view" id="sv-hsa">
+      <div class="sub-header hsa-hero">
+        <div class="sh-info"><h2>🎯 Phòng luyện HSA</h2><p id="si-hsa"><span class="skel-s" style="width:140px"></span></p></div>
+        <div class="sh-stats">
+          <div><div class="sh-sv" id="sv-score-hsa" style="color:#fbbf24">--</div><div class="sh-sl">Điểm TB</div></div>
+          <div><div class="sh-sv" id="sv-pct-hsa" style="color:var(--green)">--%</div><div class="sh-sl">Đúng</div></div>
+          <div><a href="hsa.html" class="btn btn-v" style="font-size:12px;padding:7px 14px;text-decoration:none">🏛️ Phòng HSA đầy đủ →</a></div>
+        </div>
+      </div>
+      <div class="modes">
+        <div class="mode-c" onclick="openQuiz('hsa','🎯 HSA – Tổng hợp')"><div class="mc-ic">📚</div><div class="mc-t">Luyện tổng hợp</div><div class="mc-s">Câu hỏi từ DB</div></div>
+        <div class="mode-c" onclick="openQuiz('hsa','🏆 Thi thử HSA – 150 câu',150,195)"><div class="mc-ic">🏆</div><div class="mc-t">Thi thử 150 câu</div><div class="mc-s">195 phút · Chuẩn đề thật</div></div>
+        <div class="mode-c" onclick="openQuiz('hsa','🔢 Tư duy định lượng',50,50)"><div class="mc-ic">🔢</div><div class="mc-t">Tư duy định lượng</div><div class="mc-s">50 câu · 50 phút</div></div>
+        <div class="mode-c" onclick="openQuiz('hsa','💬 Tư duy ngôn ngữ',50,50)"><div class="mc-ic">💬</div><div class="mc-t">Tư duy ngôn ngữ</div><div class="mc-s">50 câu · 50 phút</div></div>
+        <div class="mode-c fc-mode" onclick="openFlashcard('hsa','HSA')"><div class="mc-ic">🃏</div><div class="mc-t">Flashcard luyện nhanh</div><div class="mc-s">Lật thẻ · Ghi nhớ nhanh</div></div>
+        <div class="mode-c" onclick="openQuiz('hsa','🔁 Câu sai HSA')"><div class="mc-ic">🔁</div><div class="mc-t">Làm lại câu sai</div><div class="mc-s">Câu đã sai</div></div>
+      </div>
+      <div style="font-size:15px;font-weight:700;margin-bottom:14px">📑 Phần thi</div>
+      <div class="topics">
+        <div class="tc" onclick="openQuiz('hsa','🔢 Toán học – Tư duy định lượng')"><div class="tc-pct" data-key=""></div><div class="tc-em">🔢</div><div class="tc-t">Toán học</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,#fbbf24,#f59e0b)"></div></div></div>
+        <div class="tc" onclick="openQuiz('hsa','📊 Phân tích số liệu')"><div class="tc-pct" data-key=""></div><div class="tc-em">📊</div><div class="tc-t">Phân tích số liệu</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,#fbbf24,#fb923c)"></div></div></div>
+        <div class="tc" onclick="openQuiz('hsa','📖 Đọc hiểu – Ngôn ngữ')"><div class="tc-pct" data-key=""></div><div class="tc-em">📖</div><div class="tc-t">Đọc hiểu – Ngôn ngữ</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,#a78bfa,#7c3aed)"></div></div></div>
+        <div class="tc" onclick="openQuiz('hsa','🧩 Logic – Suy luận')"><div class="tc-pct" data-key=""></div><div class="tc-em">🧩</div><div class="tc-t">Logic – Suy luận</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,#67e8f9,#0891b2)"></div></div></div>
+        <div class="tc" onclick="openQuiz('hsa','🔤 Từ vựng – Ngữ pháp')"><div class="tc-pct" data-key=""></div><div class="tc-em">🔤</div><div class="tc-t">Từ vựng – Ngữ pháp</div><div class="tc-c"></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:linear-gradient(90deg,#fbbf24,#f59e0b)"></div></div></div>
+      </div>
+    </div>
+
+<!-- 🃏 FLASHCARD OVERLAY -->
+<div class="fc-ov" id="fcOv">
+  <div class="fc-header">
+    <div>
+      <div class="fc-meta" id="fcSubjLabel">📐 Toán</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:2px">Nhấn thẻ để lật · Đánh giá để tiếp tục</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:10px">
+      <div class="fc-progress" id="fcProgress">1 / 30</div>
+      <button class="fc-close" onclick="closeFlashcard()">✕</button>
+    </div>
+  </div>
+  <div class="fc-pbar"><div class="fc-pbar-fill" id="fcPbar" style="width:0%"></div></div>
+  <div class="fc-scene-wrap" style="width:min(640px,95vw)">
+    <div class="fc-scene" id="fcScene" onclick="flipCard()">
+      <div class="fc-card" id="fcCard">
+        <div class="fc-face fc-front">
+          <div class="fc-tag">📖 Câu hỏi</div>
+          <div class="fc-question" id="fcQuestion">Đang tải...</div>
+          <div class="fc-hint">
+            <span class="fc-hint-icon">👆</span>
+            <span id="fcHintText">Nhấn thẻ để xem đáp án</span>
+          </div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-tag">✅ Đáp án</div>
+          <div class="fc-answer" id="fcAnswer"></div>
+          <div style="font-size:13px;color:var(--muted);margin-top:12px;line-height:1.6" id="fcExplain"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="fc-actions" id="fcActions" style="opacity:0.3;pointer-events:none">
+    <button class="fc-btn fc-btn-wrong" onclick="fcRate('wrong')">
+      ❌ Chưa thuộc
+    </button>
+    <button class="fc-btn fc-btn-hard" onclick="fcRate('hard')">
+      🤔 Còn lưỡng lự
+    </button>
+    <button class="fc-btn fc-btn-ok" onclick="fcRate('ok')">
+      ✅ Thuộc rồi!
+    </button>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="sf-inner">
+    <div class="sf-col">
+      <div class="sf-label">Địa chỉ</div>
+      <div class="sf-addr">
+        <strong>Lớp 12A4</strong><br>
+        Trường THPT Đan Phượng<br>
+        Thị trấn Phùng, huyện Đan Phượng<br>
+        Hà Nội
+      </div>
+      <div class="sf-map">
+        <iframe src="https://maps.google.com/maps?q=Tr%C6%B0%E1%BB%9Dng%20THPT%20%C4%90an%20Ph%C6%B0%E1%BB%A3ng&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+    <div class="sf-col">
+      <div class="sf-label">Thành viên nhóm</div>
+      <div class="sf-members">
+        <div class="sf-member">Nguyễn Thế Hải Nam</div>
+        <div class="sf-member">Doãn Hà Anh</div>
+        <div class="sf-member">Nguyễn Huyền Linh</div>
+        <div class="sf-member">Đỗ Minh Phương</div>
+        <div class="sf-member">Nguyễn Thị Mai Trang</div>
+      </div>
+    </div>
+    <div class="sf-col">
+      <div class="sf-label">Mạng xã hội</div>
+      <div class="sf-fb">
+        <a href="https://facebook.com" target="_blank">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="#1877f2"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.413c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.953h-1.513c-1.491 0-1.956.93-1.956 1.886v2.284h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>
+          Facebook
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="sf-bottom">
+    <span class="sf-copy">© 2026 LuyenThi369</span>
+    <span class="sf-brand">Lớp 12A4 · Trường THPT Đan Phượng</span>
+  </div>
+</footer>
+
+</div>
+</div>
+<!-- QUIZ OVERLAY -->
+<div class="qov" id="qov">
+  <div class="qbox">
+    <div class="qhdr">
+      <div class="qtitle" id="qtitle" data-subj="">Quiz</div>
+      <div class="qmeta">
+        <div class="qpw"><span id="qcur">1</span>/<span id="qtot">30</span><div class="qpbar"><div class="qpfill" id="qpfill" style="width:3.3%"></div></div></div>
+        <div class="qtimer" id="qtimer">30:00</div>
+        <div class="qclose" onclick="closeQuiz()">✕</div>
+      </div>
+    </div>
+    <div class="qbody" id="qbody"></div>
+    <div class="qfoot" id="qfoot">
+      <div class="qdots" id="qdots"></div>
+      <div class="qacts">
+        <button class="btn btn-g" id="btn-prev" onclick="prevQ()">← Trước</button>
+        <button class="btn btn-p" id="btn-next" onclick="nextQ()">Tiếp theo →</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+
+function applyTheme(t){
+  document.documentElement.setAttribute('data-theme',t);
+  localStorage.setItem('lt369_theme',t);
+  const b=document.getElementById('theme-btn');
+  if(b) b.textContent=t==='dark'?'☀️':'🌙';
+}
+function toggleTheme(){applyTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark')}
+
+const SUPABASE_URL='https://ezimwiluksaomtdfsoam.supabase.co';
+const SUPABASE_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV6aW13aWx1a3Nhb210ZGZzb2FtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI0NjEwNDcsImV4cCI6MjA4ODAzNzA0N30.JEcSet75PFEWDcxHP3_4jfWJeiJ16znBddF3XcNtbS0';
+const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+let currentUserId=null;
+
+(async function(){
+  applyTheme(localStorage.getItem('lt369_theme')||'dark');
+  const {data:{session}}=await sb.auth.getSession();
+  if(!session){window.location.href='dang-nhap.html';return;}
+  currentUserId=session.user.id;
+  const name=session.user.user_metadata?.full_name||session.user.email.split('@')[0];
+  localStorage.setItem('lt369_user',name);
+  const av=document.getElementById('sb-av');
+  const nm=document.getElementById('sb-name');
+  if(av) av.textContent=name.charAt(0).toUpperCase();
+  if(nm) nm.textContent=name;
+  const el=document.getElementById('na-mon');
+  if(el) el.classList.add('active');
+  await loadQuestionsFromDB();
+  loadStats();
+})();
+async function doLogout(){await sb.auth.signOut();window.location.href='dang-nhap.html';}
+
+function switchSub(id,el){
+  document.querySelectorAll('.sub-view').forEach(v=>v.classList.remove('active'));
+  document.getElementById('sv-'+id).classList.add('active');
+  document.querySelectorAll('.stab').forEach(t=>t.classList.remove('active'));
+  el.classList.add('active');
+}
+
+const QBANK_FALLBACK={toan:[],ly:[],hoa:[],sinh:[],anh:[]};
+const QBANK_CACHE={};
+const QBANK=new Proxy(QBANK_FALLBACK,{get(t,p){return QBANK_CACHE[p]||t[p]||[]}});
+
+async function loadQuestionsFromDB(){
+  const {data,error}=await sb
+    .from('questions')
+    .select('id,subject,topic,content,options,correct_index,explanation,difficulty')
+    .eq('approved',true)
+    .order('subject').order('created_at');
+  if(error){console.log('DB error:',error.message);}
+  if(!data||!data.length){
+    showToast('⚠️','Chưa có câu hỏi','Vào Admin để thêm câu hỏi');
+    // Hiển thị 0 trên tất cả subject info
+    ['toan','ly','hoa','sinh','anh','van','su','dia','gdcd','hsa'].forEach(s=>{
+      const el=document.getElementById('si-'+s);
+      if(el)el.textContent='0 câu trong DB';
+    });
+    return;
+  }
+  // Init tất cả môn
+  ['toan','ly','hoa','sinh','anh','van','su','dia','gdcd','hsa'].forEach(s=>QBANK_CACHE[s]=[]);
+  data.forEach(row=>{
+    const s=row.subject;
+    if(!QBANK_CACHE[s])QBANK_CACHE[s]=[];
+    let opts=row.options;
+    if(typeof opts==='string'){try{opts=JSON.parse(opts);}catch(e){opts=[];}}
+    QBANK_CACHE[s].push({q:row.content,o:opts,a:row.correct_index,e:row.explanation||'',id:row.id,topic:row.topic||''});
+  });
+  console.log('Loaded',data.length,'questions from DB');
+  // Render topic cards với dữ liệu thật
+  renderTopicCards();
+  // Cập nhật số câu thật lên mỗi môn
+  ['toan','ly','hoa','sinh','anh','van','su','dia','gdcd','hsa'].forEach(s=>{
+    const n=QBANK_CACHE[s]?.length||0;
+    const el=document.getElementById('si-'+s);
+    if(el)el.textContent=n>0?n+' câu trong ngân hàng':'Chưa có câu hỏi';
+    // Update mode-c text too
+    const modeEls=document.querySelectorAll('[data-src="db"]');
+    if(s==='toan'&&n>0)modeEls.forEach(el=>{}); // handled per-subject
+  });
+  // Update tab badges
+  ['toan','ly','hoa','sinh','anh','van','su','dia','gdcd','hsa'].forEach(s=>{
+    const n=QBANK_CACHE[s]?.length||0;
+    const tab=document.querySelector('.stab[onclick*="\'' + s + '\'"]');
+    if(tab&&n>0){
+      if(!tab.querySelector('.q-cnt'))tab.insertAdjacentHTML('beforeend',`<sup style="font-size:9px;opacity:.6;margin-left:3px">${n}</sup>`);
+    }
+  });
+}
+let curQ=0,answers=[],timerI=null,timeLeft=1800,curSet=[],_quizStartTime=null,_currentSubject='';
+function openQuiz(subj,title){
+  _currentSubject=subj;_quizStartTime=new Date().toISOString();
+  curSet=QBANK[subj]||QBANK.toan;
+  document.getElementById('qtitle').textContent=title;
+  document.getElementById('qtitle').dataset.subj=subj;
+  curQ=0;answers=new Array(curSet.length).fill(null);
+  timeLeft=1800;
+  document.getElementById('qtot').textContent=curSet.length;
+  document.getElementById('qfoot').style.display='flex';
+  renderQ();renderDots();startTimer();
+  document.getElementById('qov').classList.add('show');
+  document.body.style.overflow='hidden';
+}
+async function saveStudySession(subject,correct,total,score){
+  if(!currentUserId)return;
+  try{
+    const {error}=await sb.from('study_sessions').insert({
+      user_id:currentUserId,
+      subject:subject,
+      questions_attempted:total,
+      correct_count:correct,
+      score:parseFloat(score),
+      started_at:_quizStartTime,
+      ended_at:new Date().toISOString()
+    });
+    if(error) console.warn('saveStudySession:',error.message);
+    else if(typeof updateStreakOnStudy==='function') updateStreakOnStudy();
+  }catch(e){console.warn('saveStudySession err:',e.message);}
+}
+function closeQuiz(){document.getElementById('qov').classList.remove('show');document.body.style.overflow='';clearInterval(timerI)}
+function renderQ(){
+  const q=curSet[curQ],ans=answers[curQ],locked=ans!==null;
+  document.getElementById('qcur').textContent=curQ+1;
+  document.getElementById('qpfill').style.width=((curQ+1)/curSet.length*100)+'%';
+  document.getElementById('qbody').innerHTML=`
+    <div class="qnum">Câu ${curQ+1} / ${curSet.length}</div>
+    <div class="qtext">${q.q}</div>
+    <div class="opts">${q.o.map((o,i)=>`
+      <div class="opt ${locked?(i===q.a?'cor':(i===ans?'wrg':'locked')):(i===ans?'sel':'')} ${locked?'locked':''}" onclick="${locked?'':'selectOpt('+i+')'}">
+        <span class="olbl">${['A','B','C','D'][i]}</span>${o}
+      </div>`).join('')}</div>
+    <div class="explain ${locked?'show':''}">${locked?'<strong>'+(ans===q.a?'✅ Đúng!':'❌ Sai.')+'</strong> '+q.e:''}</div>`;
+  document.getElementById('btn-prev').disabled=curQ===0;
+  document.getElementById('btn-next').textContent=curQ===curSet.length-1?'Xem kết quả ✓':'Tiếp theo →';
+}
+function selectOpt(i){if(answers[curQ]!==null)return;answers[curQ]=i;renderQ();renderDots()}
+function prevQ(){if(curQ>0){curQ--;renderQ();renderDots()}}
+function nextQ(){if(curQ<curSet.length-1){curQ++;renderQ();renderDots()}else showResult()}
+function renderDots(){document.getElementById('qdots').innerHTML=curSet.map((_,i)=>`<div class="qdot ${i===curQ?'cur':answers[i]===null?'':(answers[i]===curSet[i].a?'ok':'ng')}" onclick="goQ(${i})"></div>`).join('')}
+function goQ(i){curQ=i;renderQ();renderDots()}
+function startTimer(){clearInterval(timerI);timerI=setInterval(()=>{timeLeft--;const m=Math.floor(timeLeft/60),s=timeLeft%60;document.getElementById('qtimer').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');if(timeLeft<=0){clearInterval(timerI);showResult()}if(timeLeft<=60)document.getElementById('qtimer').style.color='var(--red)'},1000)}
+function showResult(){
+  clearInterval(timerI);
+  const correct=answers.filter((a,i)=>a===curSet[i].a).length;
+  const score=(correct/curSet.length*10).toFixed(1);
+  // ── LƯU KẾT QUẢ VÀO SUPABASE ──
+  saveStudySession(_currentSubject, correct, curSet.length, score);
+  const grade=score>=9?'🏆 Xuất sắc!':score>=7?'⭐ Khá tốt!':score>=5?'📈 Trung bình':'💪 Cần cố gắng!';
+  const col=score>=7?'var(--green)':score>=5?'var(--accent3)':'var(--red)';
+  document.getElementById('qbody').innerHTML=`
+    <div style="text-align:center;padding:32px 20px">
+      <div style="font-size:56px;margin-bottom:8px">🎯</div>
+      <div style="font-size:64px;font-weight:900;font-family:'Space Mono';color:${col};line-height:1;margin-bottom:8px">${score}</div>
+      <div style="font-size:18px;font-weight:700;margin-bottom:6px">${grade}</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:28px">${correct}/${curSet.length} câu đúng</div>
+      <div style="display:flex;gap:10px;justify-content:center">
+        <button class="btn btn-p" onclick="openQuiz(document.getElementById('qtitle').dataset.subj||'toan',document.getElementById('qtitle').textContent)">🔁 Làm lại</button>
+        <button class="btn btn-g" onclick="closeQuiz()">✕ Đóng</button>
+      </div>
+    </div>`;
+  document.getElementById('qfoot').style.display='none';
+}
+
+
+function openSidebar(){
+  document.querySelector('.sidebar').classList.add('open');
+  var ov=document.getElementById('sb-overlay');
+  if(ov)ov.classList.add('show');
+  document.body.style.overflow='hidden';
+}
+function closeSidebar(){
+  document.querySelector('.sidebar').classList.remove('open');
+  var ov=document.getElementById('sb-overlay');
+  if(ov)ov.classList.remove('show');
+  document.body.style.overflow='';
+}
+
+// Topbar scroll effect
+window.addEventListener('scroll',()=>{
+  const tb=document.querySelector('.topbar');
+  if(tb) tb.classList.toggle('scrolled',window.scrollY>10);
+});
+
+// ═══════ FLASHCARD SYSTEM ═══════
+let fcSet=[], fcIndex=0, fcFlipped=false;
+let fcWrong=0, fcHard=0, fcOk=0;
+const FC_LABELS = {
+  toan:'📐 Toán', ly:'⚡ Vật lý', hoa:'🧪 Hóa học', van:'📖 Ngữ Văn', su:'📜 Lịch Sử', dia:'🗺 Địa Lý', gdcd:'⚖️ GDCD', hsa:'🎯 HSA',
+  sinh:'🌱 Sinh học', anh:'🌍 Tiếng Anh'
+};
+
+function openFlashcard(subj, title){
+  const bank = QBANK[subj] || QBANK.toan;
+  // Shuffle
+  fcSet = [...bank].sort(()=>Math.random()-.5);
+  fcIndex = 0; fcFlipped = false;
+  fcWrong = 0; fcHard = 0; fcOk = 0;
+  
+  const ov = document.getElementById('fcOv');
+  ov.querySelector('#fcSubjLabel').textContent = FC_LABELS[subj] || title;
+  renderFC();
+  ov.classList.add('show');
+  document.body.style.overflow='hidden';
+}
+
+function closeFlashcard(){
+  document.getElementById('fcOv').classList.remove('show');
+  document.body.style.overflow='';
+}
+
+function renderFC(){
+  const ov = document.getElementById('fcOv');
+  if(fcIndex >= fcSet.length){
+    showFCResult();
+    return;
+  }
+  const q = fcSet[fcIndex];
+  const card = document.getElementById('fcCard');
+  // Tắt transition trước để reset về mặt trước NGAY LẬP TỨC, không bị lộ đáp án
+  card.style.transition = 'none';
+  card.classList.remove('flipped');
+  void card.offsetWidth; // force reflow
+  card.style.transition = '';
+  fcFlipped = false;
+
+  // Remove old anim class
+  const scene = document.getElementById('fcScene');
+  scene.className = 'fc-scene';
+  
+  // Progress
+  const pct = (fcIndex/fcSet.length*100).toFixed(0);
+  document.getElementById('fcPbar').style.width=pct+'%';
+  document.getElementById('fcProgress').textContent=`${fcIndex+1} / ${fcSet.length}`;
+  
+  // Card content
+  document.getElementById('fcQuestion').textContent = q.q;
+  // Show correct answer
+  document.getElementById('fcAnswer').textContent = q.o[q.a];
+  document.getElementById('fcExplain').textContent = q.e || '';
+  
+  // Hide action buttons until flipped
+  document.getElementById('fcActions').style.opacity='0.3';
+  document.getElementById('fcActions').style.pointerEvents='none';
+  document.getElementById('fcHintText').textContent='Nhấn thẻ để xem đáp án';
+}
+
+function flipCard(){
+  if(fcIndex >= fcSet.length) return;
+  const card = document.getElementById('fcCard');
+  fcFlipped = !fcFlipped;
+  card.classList.toggle('flipped', fcFlipped);
+  if(fcFlipped){
+    document.getElementById('fcActions').style.opacity='1';
+    document.getElementById('fcActions').style.pointerEvents='auto';
+    document.getElementById('fcHintText').textContent='Đánh giá mức độ của bạn';
+  } else {
+    document.getElementById('fcActions').style.opacity='0.3';
+    document.getElementById('fcActions').style.pointerEvents='none';
+    document.getElementById('fcHintText').textContent='Nhấn thẻ để xem đáp án';
+  }
+}
+
+function fcRate(type){
+  if(!fcFlipped) return;
+  const scene = document.getElementById('fcScene');
+  if(type==='wrong'){fcWrong++;scene.classList.add('anim-wrong')}
+  else if(type==='hard'){fcHard++;scene.classList.add('anim-hard')}
+  else{fcOk++;scene.classList.add('anim-ok')}
+  
+  setTimeout(()=>{
+    fcIndex++;
+    renderFC();
+  }, 360);
+}
+
+function showFCResult(){
+  const total = fcSet.length;
+  const pct = Math.round(fcOk/total*100);
+  document.getElementById('fcOv').querySelector('.fc-scene-wrap').innerHTML = `
+    <div class="fc-result" id="fcResultBox" style="animation:fadeUp .4s ease">
+      <div style="font-size:52px">${pct>=80?'🏆':pct>=50?'⭐':'💪'}</div>
+      <h2>${pct>=80?'Xuất sắc!':pct>=50?'Tốt lắm!':'Cần ôn thêm!'}</h2>
+      <p>${total} thẻ đã ôn xong</p>
+      <div class="fc-stats">
+        <div class="fc-stat" style="border-color:rgba(16,185,129,.3);background:rgba(16,185,129,.06)">
+          <div class="fc-stat-n" style="color:var(--green)">${fcOk}</div>
+          <div class="fc-stat-l">✅ Thuộc rồi</div>
+        </div>
+        <div class="fc-stat" style="border-color:rgba(245,158,11,.3);background:rgba(245,158,11,.06)">
+          <div class="fc-stat-n" style="color:var(--accent3)">${fcHard}</div>
+          <div class="fc-stat-l">🤔 Còn lưỡng lự</div>
+        </div>
+        <div class="fc-stat" style="border-color:rgba(239,68,68,.3);background:rgba(239,68,68,.06)">
+          <div class="fc-stat-n" style="color:var(--red)">${fcWrong}</div>
+          <div class="fc-stat-l">❌ Chưa thuộc</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <button class="btn btn-p" onclick="restartFC()">🔁 Ôn lại</button>
+        ${fcWrong>0?`<button class="btn btn-v" onclick="reviewWrong()">❌ Ôn câu sai (${fcWrong})</button>`:''}
+        <button class="btn btn-g" onclick="closeFlashcard()">✕ Đóng</button>
+      </div>
+    </div>`;
+  document.getElementById('fcActions').style.display='none';
+  document.getElementById('fcPbar').style.width='100%';
+}
+
+function restartFC(){
+  fcSet = fcSet.sort(()=>Math.random()-.5);
+  fcIndex=0;fcWrong=0;fcHard=0;fcOk=0;
+  document.getElementById('fcActions').style.display='flex';
+  const wrap = document.getElementById('fcOv').querySelector('.fc-scene-wrap');
+  wrap.innerHTML=`
+    <div class="fc-scene" id="fcScene" onclick="flipCard()">
+      <div class="fc-card" id="fcCard">
+        <div class="fc-face fc-front">
+          <div class="fc-tag">📖 Câu hỏi</div>
+          <div class="fc-question" id="fcQuestion"></div>
+          <div class="fc-hint"><span class="fc-hint-icon">👆</span><span id="fcHintText">Nhấn thẻ để xem đáp án</span></div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-tag">✅ Đáp án</div>
+          <div class="fc-answer" id="fcAnswer"></div>
+          <div style="font-size:13px;color:var(--muted);margin-top:12px;line-height:1.6" id="fcExplain"></div>
+        </div>
+      </div>
+    </div>`;
+  renderFC();
+}
+
+function reviewWrong(){
+  // Would filter wrong cards in a real app - for now restart with all
+  restartFC();
+}
+
+// Init theme + user
+(function(){
+  const t=localStorage.getItem('lt369_theme')||'dark';
+  document.documentElement.setAttribute('data-theme',t);
+  const tb=document.getElementById('theme-btn');
+  if(tb) tb.textContent=t==='dark'?'☀️':'🌙';
+  const n=localStorage.getItem('lt369_user')||'bạn';
+  const av=document.getElementById('sb-av');
+  const nm=document.getElementById('sb-name');
+  if(av) av.textContent=n.charAt(0).toUpperCase();
+  if(nm) nm.textContent=n;
+})();
+function applyTheme(t){document.documentElement.setAttribute('data-theme',t);localStorage.setItem('lt369_theme',t);const b=document.getElementById('theme-btn');if(b)b.textContent=t==='dark'?'☀️':'🌙'}
+function toggleTheme(){applyTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark')}
+function switchSub(id,el){document.querySelectorAll('.stab').forEach(t=>t.classList.remove('active'));el.classList.add('active');document.querySelectorAll('.sub-view').forEach(v=>v.classList.remove('active'));const sv=document.getElementById('sv-'+id);if(sv)sv.classList.add('active')}
+// ═══════════════════════════════════════════════
+// SHARED ENHANCEMENTS - LuyenThi369
+// Battle Mode + Sound + Confetti + UI upgrades
+// ═══════════════════════════════════════════════
+
+// ── WEB AUDIO SOUND ENGINE ──
+const SFX = (function(){
+  let ctx = null;
+  function getCtx(){ if(!ctx) ctx = new (window.AudioContext||window.webkitAudioContext)(); return ctx; }
+  function play(freq, type, duration, gain=0.3){
+    try{
+      const c=getCtx(), o=c.createOscillator(), g=c.createGain();
+      o.connect(g); g.connect(c.destination);
+      o.type=type; o.frequency.setValueAtTime(freq,c.currentTime);
+      g.gain.setValueAtTime(gain,c.currentTime);
+      g.gain.exponentialRampToValueAtTime(0.001,c.currentTime+duration);
+      o.start(c.currentTime); o.stop(c.currentTime+duration);
+    } catch(e){}
+  }
+  return {
+    correct(){ play(523,  'sine', 0.12, 0.25); setTimeout(()=>play(659,'sine',0.12,0.2),80); setTimeout(()=>play(784,'sine',0.18,0.18),160); },
+    wrong(){   play(200,  'sawtooth', 0.15, 0.18); setTimeout(()=>play(160,'sawtooth',0.1,0.18),100); },
+    flip(){    play(880,  'sine', 0.06, 0.08); },
+    click(){   play(1200, 'sine', 0.04, 0.05); },
+    streak(){  [523,659,784,1047].forEach((f,i)=>setTimeout(()=>play(f,'sine',0.2,0.3),i*80)); },
+    countdown(){ play(440,'square',0.1,0.08); },
+    finish(){  [784,988,1175,1568].forEach((f,i)=>setTimeout(()=>play(f,'sine',0.25,0.3),i*100)); },
+    battle_start(){ [262,330,392,523].forEach((f,i)=>setTimeout(()=>play(f,'triangle',0.2,0.25),i*60)); }
+  };
+})();
+
+// ── CONFETTI ENGINE ──
+const Confetti = (function(){
+  let canvas, ctx2, pieces=[], anim=null;
+  const COLORS=['#00e5ff','#7c3aed','#f59e0b','#10b981','#ef4444','#a78bfa','#34d399','#fbbf24'];
+  function init(){
+    if(canvas) return;
+    canvas=document.createElement('canvas');
+    canvas.style.cssText='position:fixed;inset:0;pointer-events:none;z-index:99999;';
+    document.body.appendChild(canvas);
+    ctx2=canvas.getContext('2d');
+    resize(); window.addEventListener('resize',resize);
+  }
+  function resize(){ if(canvas){canvas.width=innerWidth;canvas.height=innerHeight;} }
+  function burst(n=120){
+    init();
+    for(let i=0;i<n;i++){
+      pieces.push({
+        x:Math.random()*innerWidth, y:-20,
+        vx:(Math.random()-0.5)*8, vy:Math.random()*6+3,
+        rot:Math.random()*360, rotV:(Math.random()-0.5)*8,
+        w:Math.random()*10+5, h:Math.random()*6+3,
+        color:COLORS[Math.floor(Math.random()*COLORS.length)],
+        alpha:1, gravity:0.15
+      });
+    }
+    if(!anim) loop();
+  }
+  function loop(){
+    ctx2.clearRect(0,0,canvas.width,canvas.height);
+    pieces=pieces.filter(p=>{
+      p.x+=p.vx; p.y+=p.vy; p.vy+=p.gravity;
+      p.rot+=p.rotV; p.alpha-=0.008;
+      if(p.alpha<=0||p.y>canvas.height+20) return false;
+      ctx2.save(); ctx2.translate(p.x,p.y); ctx2.rotate(p.rot*Math.PI/180);
+      ctx2.globalAlpha=p.alpha; ctx2.fillStyle=p.color;
+      ctx2.fillRect(-p.w/2,-p.h/2,p.w,p.h);
+      ctx2.restore();
+      return true;
+    });
+    if(pieces.length>0){anim=requestAnimationFrame(loop);}
+    else{anim=null; ctx2.clearRect(0,0,canvas.width,canvas.height);}
+  }
+  return { burst };
+})();
+
+// ── TOAST SYSTEM ──
+function showToast(ic, title, sub, color=''){
+  let t=document.getElementById('global-toast');
+  if(!t){
+    t=document.createElement('div'); t.id='global-toast';
+    t.style.cssText='position:fixed;bottom:24px;right:24px;background:linear-gradient(135deg,#1a2236,#0d1220);border:1px solid #1e2840;border-radius:14px;padding:14px 20px;display:flex;align-items:center;gap:12px;z-index:9998;transform:translateY(80px);opacity:0;transition:.4s cubic-bezier(.2,.8,.3,1);box-shadow:0 8px 32px rgba(0,0,0,.5);max-width:300px;pointer-events:none;';
+    document.body.appendChild(t);
+  }
+  if(color) t.style.borderColor=color;
+  t.innerHTML=`<span style="font-size:24px">${ic}</span><div><div style="font-size:14px;font-weight:700;color:#e8edf5">${title}</div>${sub?`<div style="font-size:12px;color:#5a6b88;margin-top:2px">${sub}</div>`:''}</div>`;
+  t.style.transform='translateY(0)'; t.style.opacity='1';
+  clearTimeout(t._timer);
+  t._timer=setTimeout(()=>{t.style.transform='translateY(80px)';t.style.opacity='0';},3500);
+}
+
+// ── BATTLE MODE ──
+const Battle = (function(){
+  const QBANK_BATTLE = {
+    toan:[
+      {q:'∫2x dx = ?',o:['x²+C','x²/2+C','2x²+C','2+C'],a:0},
+      {q:'Đạo hàm của x³ là?',o:['3x','3x²','x²','2x³'],a:1},
+      {q:'log₂(8) = ?',o:['2','3','4','8'],a:1},
+      {q:'sin(90°) = ?',o:['0','1','-1','√2/2'],a:1},
+      {q:'Diện tích hình tròn bán kính r?',o:['πr','2πr','πr²','4πr²'],a:2},
+      {q:'(a+b)² = ?',o:['a²+b²','a²+ab+b²','a²+2ab+b²','2a²+2b²'],a:2},
+      {q:'Nghiệm của 2x+6=0 là?',o:['x=3','x=-3','x=6','x=-6'],a:1},
+      {q:'C(5,2) = ?',o:['10','20','5','15'],a:0},
+      {q:'cos(0°) = ?',o:['0','1','-1','1/2'],a:1},
+      {q:'Giới hạn lim(x→∞) 1/x = ?',o:['1','∞','0','-1'],a:2},
+    ],
+    ly:[
+      {q:'F=ma. Nếu F=10N, m=2kg thì a=?',o:['5 m/s²','20 m/s²','8 m/s²','12 m/s²'],a:0},
+      {q:'Tốc độ ánh sáng xấp xỉ?',o:['3×10⁶ m/s','3×10⁸ m/s','3×10¹⁰ m/s','3×10⁴ m/s'],a:1},
+      {q:'Đơn vị đo lực là?',o:['Pascal','Joule','Newton','Watt'],a:2},
+      {q:'Công thức tính động năng?',o:['mv','½mv²','ma','F×d'],a:1},
+      {q:'P=U×I là công thức tính?',o:['Điện trở','Công suất','Điện áp','Cường độ'],a:1},
+      {q:'Chu kỳ T = 1/f, f là?',o:['Biên độ','Pha ban đầu','Tần số','Góc pha'],a:2},
+      {q:'Hiện tượng khúc xạ ánh sáng xảy ra khi?',o:['Ánh sáng phản xạ','Ánh sáng đi qua 2 môi trường','Ánh sáng tắt','Nhiễu xạ'],a:1},
+      {q:'Đơn vị điện trở là?',o:['Volt','Ampere','Ohm','Farad'],a:2},
+    ],
+    hoa:[
+      {q:'Số hiệu nguyên tử của Natri (Na)?',o:['10','11','12','13'],a:1},
+      {q:'Công thức hóa học của nước?',o:['H₂O₂','HO','H₂O','H₃O'],a:2},
+      {q:'NaOH là?',o:['Axit','Bazơ','Muối','Oxit axit'],a:1},
+      {q:'Phản ứng tráng bạc dùng để nhận biết?',o:['Glucozo','Fructozo','Saccarozo','Tinh bột'],a:0},
+      {q:'CO₂ là oxit gì?',o:['Oxit bazơ','Oxit lưỡng tính','Oxit axit','Oxit trung tính'],a:2},
+      {q:'Khí gây hiệu ứng nhà kính chủ yếu?',o:['O₂','N₂','CO₂','H₂'],a:2},
+      {q:'Polyme được tổng hợp từ?',o:['Monome','Dime','Polyme nhỏ hơn','Nguyên tử'],a:0},
+      {q:'Kim loại nào dẫn điện tốt nhất?',o:['Vàng','Sắt','Bạc','Nhôm'],a:2},
+    ],
+    anh:[
+      {q:'"She ___ to school every day."',o:['go','goes','going','gone'],a:1},
+      {q:'Antonym of "generous"?',o:['kind','stingy','brave','honest'],a:1},
+      {q:'"I wish I ___ more money."',o:['have','had','will have','has'],a:1},
+      {q:'Passive: "They built this bridge." →',o:['This bridge built','This bridge is built','This bridge was built','This bridge were built'],a:2},
+      {q:'"Good at" + ?',o:['V-inf','V-ed','V-ing','V-s'],a:2},
+      {q:'Which word is a noun?',o:['beautiful','quickly','happiness','run'],a:2},
+      {q:'"It is high time we ___."',o:['leave','left','leaving','to leave'],a:1},
+      {q:'"Put off" means?',o:['cancel','postpone','hurry','finish'],a:1},
+    ],
+    mix:[]
+  };
+  // Build mix from all
+  Object.keys(QBANK_BATTLE).filter(k=>k!=='mix').forEach(k=>{
+    QBANK_BATTLE.mix.push(...QBANK_BATTLE[k]);
+  });
+
+  let overlay, state={};
+
+  function buildOverlay(){
+    const el=document.createElement('div');
+    el.id='battle-ov';
+    el.style.cssText='display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);backdrop-filter:blur(20px);z-index:500;align-items:center;justify-content:center;';
+    el.innerHTML=`
+    <div id="battle-box" style="width:700px;max-width:95vw;background:#0d1117;border:1px solid #1e2840;border-radius:24px;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,.7);">
+      <!-- LOBBY -->
+      <div id="bt-lobby" style="padding:40px;text-align:center;">
+        <div style="font-size:52px;margin-bottom:12px;animation:pulse2 1.5s ease-in-out infinite">⚔️</div>
+        <h2 style="font-size:28px;font-weight:900;margin-bottom:8px;background:linear-gradient(135deg,#00e5ff,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Battle Mode</h2>
+        <p style="color:#5a6b88;margin-bottom:28px;font-size:14px">10 câu · 15 giây/câu · Điểm theo tốc độ</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:24px;" id="bt-subj-grid">
+          <div class="bt-sopt active" data-s="mix" onclick="Battle.selSubj(this,'mix')">🎲 Tổng hợp</div>
+          <div class="bt-sopt" data-s="toan" onclick="Battle.selSubj(this,'toan')">📐 Toán</div>
+          <div class="bt-sopt" data-s="ly" onclick="Battle.selSubj(this,'ly')">⚡ Vật lý</div>
+          <div class="bt-sopt" data-s="hoa" onclick="Battle.selSubj(this,'hoa')">🧪 Hóa</div>
+          <div class="bt-sopt" data-s="anh" onclick="Battle.selSubj(this,'anh')">🌍 Anh</div>
+        </div>
+        <button onclick="Battle.start()" style="width:100%;padding:16px;background:linear-gradient(135deg,#00e5ff,#0099cc);border:none;border-radius:12px;color:#000;font-size:16px;font-weight:800;cursor:pointer;font-family:inherit;transition:.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform=''">⚡ Bắt đầu!</button>
+        <button onclick="Battle.close()" style="margin-top:10px;width:100%;padding:10px;background:none;border:1px solid #1e2840;border-radius:12px;color:#5a6b88;font-size:14px;font-weight:600;cursor:pointer;font-family:inherit;">✕ Đóng</button>
+      </div>
+      <!-- GAME -->
+      <div id="bt-game" style="display:none;">
+        <div style="padding:16px 24px;border-bottom:1px solid #1e2840;display:flex;align-items:center;justify-content:space-between;">
+          <div style="font-size:13px;color:#5a6b88;font-weight:600" id="bt-qnum">Câu 1/10</div>
+          <div id="bt-timer-wrap" style="display:flex;align-items:center;gap:8px;">
+            <div id="bt-timer-bar-wrap" style="width:120px;height:6px;background:#1e2840;border-radius:999px;overflow:hidden;">
+              <div id="bt-timer-bar" style="height:100%;background:linear-gradient(90deg,#00e5ff,#7c3aed);border-radius:999px;transition:width .1s linear;"></div>
+            </div>
+            <div id="bt-timer" style="font-family:'Space Mono';font-size:20px;font-weight:900;color:#f59e0b;min-width:28px;text-align:right;">15</div>
+          </div>
+          <div id="bt-score-display" style="font-family:'Space Mono';font-size:16px;font-weight:800;color:#00e5ff;">0 pts</div>
+        </div>
+        <div style="padding:28px 28px 20px;">
+          <div id="bt-qtxt" style="font-size:20px;font-weight:700;line-height:1.6;margin-bottom:22px;min-height:60px;"></div>
+          <div id="bt-opts" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;"></div>
+          <div id="bt-explain" style="display:none;margin-top:16px;padding:14px 16px;background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.2);border-radius:12px;font-size:13px;line-height:1.7;"></div>
+        </div>
+      </div>
+      <!-- RESULT -->
+      <div id="bt-result" style="display:none;padding:40px;text-align:center;"></div>
+    </div>`;
+    // Add styles
+    const style=document.createElement('style');
+    style.textContent=`
+    #battle-ov.show{display:flex!important}
+    .bt-sopt{padding:12px 8px;background:#111622;border:2px solid #1e2840;border-radius:12px;cursor:pointer;font-size:13px;font-weight:700;color:#5a6b88;transition:.2s;text-align:center;}
+    .bt-sopt:hover{border-color:#5a6b88;color:#e8edf5;}
+    .bt-sopt.active{background:rgba(0,229,255,.08);border-color:#00e5ff;color:#00e5ff;}
+    .bt-opt{padding:14px 16px;background:#111622;border:2px solid #1e2840;border-radius:12px;cursor:pointer;font-size:14px;font-weight:600;color:#e8edf5;transition:.2s;text-align:left;display:flex;align-items:center;gap:10px;}
+    .bt-opt:hover:not(.locked){border-color:#00e5ff;background:rgba(0,229,255,.04);transform:translateY(-1px);}
+    .bt-opt.correct{border-color:#10b981!important;background:rgba(16,185,129,.12)!important;color:#10b981!important;animation:correctPop .3s ease;}
+    .bt-opt.wrong{border-color:#ef4444!important;background:rgba(239,68,68,.1)!important;color:#ef4444!important;animation:wrongShake .3s ease;}
+    .bt-opt.reveal{border-color:#10b981;background:rgba(16,185,129,.06);color:#10b981;}
+    .bt-olbl{width:24px;height:24px;border-radius:6px;background:#1e2840;display:grid;place-items:center;font-size:12px;font-weight:800;flex-shrink:0;font-family:'Space Mono';}
+    .bt-opt.correct .bt-olbl{background:#10b981;color:#fff;}
+    .bt-opt.wrong .bt-olbl{background:#ef4444;color:#fff;}
+    @keyframes pulse2{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+    @keyframes correctPop{0%{transform:scale(1)}40%{transform:scale(1.03)}100%{transform:scale(1)}}
+    @keyframes wrongShake{0%,100%{transform:translateX(0)}20%{transform:translateX(-5px)}60%{transform:translateX(5px)}}
+    @keyframes btScorePop{0%{transform:scale(1)}50%{transform:scale(1.3)}100%{transform:scale(1)}}
+    `;
+    document.head.appendChild(style);
+    document.body.appendChild(el);
+    overlay=el;
+  }
+
+  let selectedSubj='mix', timerI=null, timeLeft=15, currentQ=0, questions=[], answers=[], score=0;
+
+  function open(){
+    if(!overlay) buildOverlay();
+    document.getElementById('bt-lobby').style.display='block';
+    document.getElementById('bt-game').style.display='none';
+    document.getElementById('bt-result').style.display='none';
+    overlay.classList.add('show');
+    document.body.style.overflow='hidden';
+  }
+  function close(){
+    if(overlay) overlay.classList.remove('show');
+    document.body.style.overflow='';
+    clearInterval(timerI);
+  }
+  function selSubj(el, subj){
+    selectedSubj=subj;
+    document.querySelectorAll('.bt-sopt').forEach(e=>e.classList.remove('active'));
+    el.classList.add('active');
+  }
+  function start(){
+    SFX.battle_start();
+    const pool=[...(QBANK_BATTLE[selectedSubj]||QBANK_BATTLE.mix)].sort(()=>Math.random()-.5);
+    questions=pool.slice(0,10);
+    answers=[];
+    score=0;
+    currentQ=0;
+    document.getElementById('bt-lobby').style.display='none';
+    document.getElementById('bt-game').style.display='block';
+    document.getElementById('bt-result').style.display='none';
+    renderQ();
+  }
+  function renderQ(){
+    if(currentQ>=questions.length){showResult();return;}
+    const q=questions[currentQ];
+    document.getElementById('bt-qnum').textContent=`Câu ${currentQ+1}/10`;
+    document.getElementById('bt-score-display').textContent=score+' pts';
+    document.getElementById('bt-qtxt').textContent=q.q;
+    document.getElementById('bt-explain').style.display='none';
+    document.getElementById('bt-opts').innerHTML=q.o.map((o,i)=>`
+      <div class="bt-opt" onclick="Battle._answer(${i})" data-idx="${i}">
+        <span class="bt-olbl">${['A','B','C','D'][i]}</span>${o}
+      </div>`).join('');
+    startTimer();
+  }
+  function startTimer(){
+    clearInterval(timerI);
+    timeLeft=15;
+    updateTimerUI();
+    timerI=setInterval(()=>{
+      timeLeft--;
+      updateTimerUI();
+      if(timeLeft<=5) SFX.countdown();
+      if(timeLeft<=0){clearInterval(timerI);_answer(-1);}
+    },1000);
+  }
+  function updateTimerUI(){
+    document.getElementById('bt-timer').textContent=timeLeft;
+    document.getElementById('bt-timer-bar').style.width=(timeLeft/15*100)+'%';
+    const col=timeLeft<=5?'#ef4444':timeLeft<=10?'#f59e0b':'';
+    document.getElementById('bt-timer').style.color=col||'#f59e0b';
+    document.getElementById('bt-timer-bar').style.background=timeLeft<=5?'#ef4444':timeLeft<=10?'linear-gradient(90deg,#f59e0b,#ef4444)':'linear-gradient(90deg,#00e5ff,#7c3aed)';
+  }
+  function _answer(idx){
+    clearInterval(timerI);
+    const q=questions[currentQ];
+    const correct=idx===q.a;
+    const timeBonus=Math.max(0,timeLeft);
+    const pts=correct?100+timeBonus*10:0;
+    score+=pts;
+    answers.push({q:q.q,chosen:idx,correct:q.a,isCorrect:correct,pts});
+    // Lock all options
+    document.querySelectorAll('.bt-opt').forEach(el=>{
+      el.classList.add('locked');
+      el.style.cursor='default';
+      el.onclick=null;
+    });
+    // Highlight
+    document.querySelectorAll('.bt-opt').forEach(el=>{
+      const i=parseInt(el.dataset.idx);
+      if(i===q.a) el.classList.add('correct');
+      else if(i===idx && idx!==q.a) el.classList.add('wrong');
+    });
+    if(correct){SFX.correct();if(pts>200)Confetti.burst(40);}
+    else SFX.wrong();
+    document.getElementById('bt-score-display').textContent=score+' pts';
+    document.getElementById('bt-score-display').style.animation='btScorePop .3s ease';
+    setTimeout(()=>document.getElementById('bt-score-display').style.animation='',300);
+    // Show explain briefly then next
+    if(idx===-1){
+      const exp=document.getElementById('bt-explain');
+      exp.innerHTML=`⏰ <strong>Hết giờ!</strong> Đáp án đúng: <strong>${['A','B','C','D'][q.a]}. ${q.o[q.a]}</strong>`;
+      exp.style.display='block';
+    }
+    currentQ++;
+    setTimeout(()=>renderQ(), correct?600:1000);
+  }
+  function showResult(){
+    SFX.finish();
+    const total=questions.length;
+    const correct=answers.filter(a=>a.isCorrect).length;
+    const pct=Math.round(correct/total*100);
+    if(pct>=80) Confetti.burst(150);
+    document.getElementById('bt-game').style.display='none';
+    document.getElementById('bt-result').style.display='block';
+    const grade=pct>=90?'🏆 Huyền thoại!':pct>=70?'⭐ Xuất sắc!':pct>=50?'💪 Khá tốt!':'📖 Cần ôn thêm!';
+    const col=pct>=70?'#10b981':pct>=50?'#f59e0b':'#ef4444';
+    document.getElementById('bt-result').innerHTML=`
+      <div style="font-size:52px;margin-bottom:12px">${pct>=80?'🏆':pct>=60?'⭐':'💪'}</div>
+      <div style="font-size:56px;font-weight:900;font-family:'Space Mono';color:${col};line-height:1;margin-bottom:4px">${score}</div>
+      <div style="font-size:13px;color:#5a6b88;margin-bottom:8px">điểm</div>
+      <div style="font-size:18px;font-weight:800;margin-bottom:4px">${grade}</div>
+      <div style="font-size:13px;color:#5a6b88;margin-bottom:28px">${correct}/${total} câu đúng</div>
+      <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+        <button onclick="Battle.start()" style="padding:12px 24px;background:linear-gradient(135deg,#00e5ff,#0099cc);border:none;border-radius:10px;color:#000;font-weight:800;cursor:pointer;font-size:14px;font-family:inherit">🔁 Chơi lại</button>
+        <button onclick="Battle.close()" style="padding:12px 24px;background:#111622;border:1px solid #1e2840;border-radius:10px;color:#5a6b88;font-weight:700;cursor:pointer;font-size:14px;font-family:inherit">✕ Đóng</button>
+      </div>`;
+    // Save high score
+    const best=parseInt(localStorage.getItem('lt369_battle_best')||'0');
+    if(score>best){
+      localStorage.setItem('lt369_battle_best',score);
+      showToast('🏆','Kỷ lục mới!',`${score} điểm – Battle Mode`,'#f59e0b');
+    }
+  }
+  return {open,close,start,selSubj,_answer};
+})();
+
+// ── STREAK MILESTONE CONFETTI ──
+function checkStreakMilestone(){
+  const streak=parseInt(localStorage.getItem('lt369_streak')||'0');
+  const lastMile=parseInt(localStorage.getItem('lt369_last_milestone')||'0');
+  const milestones=[3,7,14,21,30,50,100];
+  const hit=milestones.find(m=>streak>=m&&lastMile<m);
+  if(hit){
+    localStorage.setItem('lt369_last_milestone',hit);
+    setTimeout(()=>{
+      Confetti.burst(200);
+      SFX.streak();
+      showToast('🔥',`Streak ${hit} ngày!`,hit>=30?'🏆 Siêu phi thường!':hit>=14?'🌟 Tuyệt vời!':'💪 Tiếp tục nhé!','#f59e0b');
+    },800);
+  }
+}
+
+// ── POMODORO ──
+const Pomodoro = (function(){
+  let overlay, timerI=null, secsLeft=25*60, mode='work', workMins=25;
+  function init(){
+    if(overlay) return;
+    overlay=document.createElement('div');
+    overlay.id='pomo-widget';
+    overlay.style.cssText='position:fixed;bottom:80px;right:24px;z-index:400;background:#0d1117;border:1px solid #1e2840;border-radius:18px;padding:18px 22px;width:220px;box-shadow:0 12px 40px rgba(0,0,0,.5);display:none;';
+    overlay.innerHTML=`
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+        <div style="font-size:13px;font-weight:700;color:#e8edf5" id="pomo-label">🍅 Pomodoro</div>
+        <button onclick="Pomodoro.close()" style="background:none;border:none;color:#5a6b88;cursor:pointer;font-size:16px;line-height:1">✕</button>
+      </div>
+      <div style="text-align:center;margin-bottom:14px;">
+        <div id="pomo-time" style="font-size:42px;font-weight:900;font-family:'Space Mono';color:#00e5ff;line-height:1;">25:00</div>
+        <div id="pomo-mode" style="font-size:11px;color:#5a6b88;margin-top:4px;text-transform:uppercase;letter-spacing:1px;">Tập trung</div>
+      </div>
+      <div style="height:4px;background:#1e2840;border-radius:999px;margin-bottom:14px;overflow:hidden;">
+        <div id="pomo-bar" style="height:100%;background:linear-gradient(90deg,#00e5ff,#7c3aed);border-radius:999px;width:100%;transition:width .5s linear;"></div>
+      </div>
+      <div style="display:flex;gap:8px;">
+        <button id="pomo-btn" onclick="Pomodoro.toggle()" style="flex:1;padding:10px;background:linear-gradient(135deg,#00e5ff,#0099cc);border:none;border-radius:10px;color:#000;font-weight:800;cursor:pointer;font-size:13px;font-family:inherit;">▶ Bắt đầu</button>
+        <button onclick="Pomodoro.reset()" style="padding:10px 12px;background:#111622;border:1px solid #1e2840;border-radius:10px;color:#5a6b88;cursor:pointer;font-size:13px;font-family:inherit;">↺</button>
+      </div>`;
+    document.body.appendChild(overlay);
+  }
+  const totalSecs=()=>mode==='work'?workMins*60:5*60;
+  function updateUI(){
+    const m=Math.floor(secsLeft/60),s=secsLeft%60;
+    document.getElementById('pomo-time').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+    document.getElementById('pomo-bar').style.width=(secsLeft/totalSecs()*100)+'%';
+    document.getElementById('pomo-mode').textContent=mode==='work'?'Tập trung':'Nghỉ giải lao';
+    const col=mode==='work'?secsLeft<=60?'#ef4444':'#00e5ff':'#10b981';
+    document.getElementById('pomo-time').style.color=col;
+  }
+  function open(){init();overlay.style.display='block';}
+  function close(){if(overlay)overlay.style.display='none';clearInterval(timerI);timerI=null;}
+  function toggle(){
+    if(timerI){clearInterval(timerI);timerI=null;document.getElementById('pomo-btn').textContent='▶ Tiếp tục';}
+    else{
+      document.getElementById('pomo-btn').textContent='⏸ Dừng';
+      timerI=setInterval(()=>{
+        secsLeft--;
+        updateUI();
+        if(secsLeft<=0){
+          clearInterval(timerI);timerI=null;
+          SFX.finish();
+          if(mode==='work'){
+            mode='break';secsLeft=5*60;
+            showToast('☕','Nghỉ 5 phút!','Bạn đã tập trung 25 phút, nghỉ ngơi nào!','#10b981');
+          } else {
+            mode='work';secsLeft=workMins*60;
+            showToast('🍅','Bắt đầu phiên mới!','Tập trung 25 phút!','#00e5ff');
+          }
+          document.getElementById('pomo-btn').textContent='▶ Bắt đầu';
+          updateUI();
+        }
+      },1000);
+    }
+  }
+  function reset(){clearInterval(timerI);timerI=null;mode='work';secsLeft=workMins*60;document.getElementById('pomo-btn').textContent='▶ Bắt đầu';updateUI();}
+  return {open,close,toggle,reset};
+})();
+
+
+
+// ── RENDER TOPIC CARDS từ DB + study_sessions ──
+async function renderTopicCards(){
+  // Lấy study_sessions của user để tính % đúng theo topic
+  let sessionBySubj = {};
+  if(currentUserId){
+    const {data} = await sb.from('study_sessions')
+      .select('subject,questions_attempted,correct_count')
+      .eq('user_id', currentUserId);
+    (data||[]).forEach(r=>{
+      if(!sessionBySubj[r.subject]) sessionBySubj[r.subject]={q:0,c:0};
+      sessionBySubj[r.subject].q += r.questions_attempted||0;
+      sessionBySubj[r.subject].c += r.correct_count||0;
+    });
+  }
+
+  // Với mỗi topic card, tính từ QBANK_CACHE
+  document.querySelectorAll('.tc').forEach(card=>{
+    // Lấy subject từ onclick attr
+    const onclick = card.getAttribute('onclick')||'';
+    const mSubj = onclick.match(/openQuiz\('([^']+)'/);
+    if(!mSubj) return;
+    const subj = mSubj[1];
+    const titleEl = card.querySelector('.tc-t');
+    const title = titleEl ? titleEl.textContent : '';
+
+    // Đếm câu hỏi theo topic trong QBANK_CACHE
+    const questions = (QBANK_CACHE[subj]||[]).filter(q=>!q.topic||title.toLowerCase().includes(q.topic.toLowerCase())||q.topic.toLowerCase().includes(title.split('–')[0].trim().toLowerCase()));
+    const allQ = QBANK_CACHE[subj]||[];
+
+    // Số câu trong topic (khớp tên) hoặc dùng tổng môn nếu không có topic field
+    const topicQ = allQ.filter(q=>{
+      if(!q.topic) return false;
+      const t = q.topic.toLowerCase();
+      const n = title.toLowerCase().replace(/[–-]/g,' ');
+      return n.split(' ').some(w=>w.length>3&&t.includes(w)) || t.includes(n.split(' ')[0]);
+    });
+    const total = topicQ.length || 0;
+
+    // % từ study_sessions (tổng môn, không có topic-level)
+    const sd = sessionBySubj[subj];
+    const pct = sd && sd.q>0 ? Math.round(sd.c/sd.q*100) : null;
+
+    // Update tc-pct
+    const pctEl = card.querySelector('.tc-pct');
+    if(pctEl){
+      if(pct!==null){
+        pctEl.textContent = pct+'%';
+        pctEl.style.color = pct>=70?'var(--green)':pct>=50?'var(--accent3)':'var(--red)';
+      } else {
+        pctEl.textContent = '';
+      }
+    }
+
+    // Update tc-c
+    const cEl = card.querySelector('.tc-c');
+    if(cEl){
+      cEl.textContent = total>0 ? total+' câu trong DB' : (allQ.length>0?'Luyện theo môn':'Chưa có câu hỏi');
+    }
+
+    // Update progress bar
+    const bar = card.querySelector('.pbar-fill');
+    if(bar && pct!==null){
+      bar.style.width = pct+'%';
+    }
+  });
+}
+
+</script>
+</body></html>

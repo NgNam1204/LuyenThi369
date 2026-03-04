@@ -1,0 +1,641 @@
+<!DOCTYPE html>
+<html lang="vi" data-theme="dark">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Phòng luyện HSA – LuyenThi369</title>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#080b10;--bg2:#0d1017;--surface:#161c28;--border:#1e2840;
+  --accent:#00e5ff;--accent2:#7c3aed;--accent3:#f59e0b;
+  --green:#10b981;--red:#ef4444;
+  --text:#e8edf5;--muted:#5a6b88;--card:#111622;
+  --shadow:0 4px 24px rgba(0,0,0,.4);--radius:14px;
+}
+[data-theme="light"]{
+  --bg:#f5f7ff;--bg2:#ffffff;--surface:#edf0fb;--border:#dce3f5;
+  --text:#111827;--muted:#6b7a99;--card:#ffffff;
+  --shadow:0 2px 16px rgba(100,120,200,.12);
+}
+body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-serif;transition:background .3s,color .3s;line-height:1.5;animation:pageLoad .4s ease}
+@keyframes pageLoad{from{opacity:0}to{opacity:1}}
+::selection{background:rgba(0,229,255,.25)}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:rgba(0,229,255,.2);border-radius:3px}
+
+/* ── KEYFRAMES ── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes scaleIn{from{opacity:0;transform:scale(.93)}to{opacity:1;transform:scale(1)}}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+@keyframes logoPulse{0%,100%{box-shadow:0 0 16px rgba(0,229,255,.3)}50%{box-shadow:0 0 28px rgba(0,229,255,.55)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes slideDown{from{opacity:0;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes glowPulse{0%,100%{opacity:.5}50%{opacity:1}}
+
+/* ── APP ── */
+.app{display:flex;min-height:100vh}
+
+/* ── SIDEBAR ── */
+.sidebar{width:260px;background:var(--bg2);border-right:1px solid var(--border);display:flex;flex-direction:column;position:fixed;height:100vh;overflow-y:auto;z-index:100;transition:background .3s,border-color .3s}
+.logo{padding:20px;display:flex;align-items:center;gap:11px;border-bottom:1px solid var(--border);text-decoration:none}
+.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--accent),var(--accent2));border-radius:10px;display:grid;place-items:center;font-size:18px;flex-shrink:0;animation:logoPulse 3s ease-in-out infinite;overflow:hidden}
+.logo-icon img{width:28px;height:28px;object-fit:contain}
+.logo-text{font-size:16px;font-weight:800;color:var(--text)}.logo-text em{font-style:normal;color:var(--accent)}
+.nav{flex:1;padding:12px 0}
+.nav-sec{margin-bottom:4px}
+.nav-lbl{font-size:10px;font-weight:700;letter-spacing:2px;color:var(--muted);padding:8px 20px;text-transform:uppercase;opacity:.7}
+.nav-a{display:flex;align-items:center;gap:12px;padding:10px 20px;color:var(--muted);font-size:14px;font-weight:500;transition:.2s;border-left:3px solid transparent;text-decoration:none;border-radius:0}
+.nav-a:hover{color:var(--text);background:rgba(128,128,200,.06)}
+.nav-a.active{color:var(--accent);background:rgba(0,229,255,.07);border-left-color:var(--accent);font-weight:600}
+.nav-a .ic{width:18px;text-align:center;flex-shrink:0;font-size:17px}
+.badge{margin-left:auto;background:linear-gradient(135deg,var(--accent2),#6d28d9);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:999px}
+.sb-foot{padding:14px;border-top:1px solid var(--border)}
+.user-card{display:flex;align-items:center;gap:10px;background:var(--surface);padding:10px 12px;border-radius:12px;cursor:pointer;text-decoration:none;transition:.2s;border:1px solid transparent}
+.user-card:hover{border-color:var(--accent)}
+.av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--accent2),var(--accent));display:grid;place-items:center;font-size:16px;font-weight:700;flex-shrink:0;color:#fff}
+.uname{font-size:14px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:130px}
+.uplan{font-size:12px;color:var(--accent3);font-weight:600}
+.logout{margin-top:8px;display:flex;align-items:center;gap:8px;padding:8px 12px;border-radius:10px;cursor:pointer;color:var(--muted);font-size:14px;font-weight:600;transition:.2s;border:none;background:none;font-family:inherit;width:100%}
+.logout:hover{color:var(--red);background:rgba(239,68,68,.06)}
+
+/* ── MOBILE SIDEBAR ── */
+.sidebar-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:98;backdrop-filter:blur(4px);cursor:pointer}
+.sidebar-overlay.show{display:block}
+.hamburger{width:36px;height:36px;border-radius:9px;background:var(--surface);border:1px solid var(--border);align-items:center;justify-content:center;cursor:pointer;font-size:18px;flex-shrink:0;transition:.2s;margin-right:8px;display:none}
+.hamburger:hover{border-color:var(--accent)}
+.sidebar-close{display:none;position:absolute;top:14px;right:10px;width:30px;height:30px;border-radius:8px;background:var(--surface);border:1px solid var(--border);align-items:center;justify-content:center;cursor:pointer;font-size:20px;font-weight:700;color:var(--muted);z-index:10;line-height:1}
+
+/* ── MAIN ── */
+.main{margin-left:260px;flex:1;display:flex;flex-direction:column;min-height:100vh;min-width:0;overflow-x:hidden}
+.topbar{position:fixed;top:0;left:260px;right:0;z-index:50;background:rgba(8,11,16,.92);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between;transition:background .3s,border-color .3s,box-shadow .3s,left .28s}
+.topbar.scrolled{box-shadow:0 4px 32px rgba(0,0,0,.4)}
+[data-theme="light"] .topbar{background:rgba(245,247,255,.92)}
+.topbar-l{display:flex;align-items:center;gap:10px}
+.topbar-l .ttl{font-size:20px;font-weight:800;letter-spacing:-.3px}
+.topbar-l .tsub{font-size:12px;color:var(--muted);margin-top:1px}
+.topbar-r{display:flex;align-items:center;gap:8px}
+/* decorative topbar line */
+.topbar::after{content:"";position:absolute;bottom:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--accent2),var(--accent),var(--accent2),transparent);opacity:.25;pointer-events:none}
+
+/* ── BUTTONS ── */
+.btn{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border-radius:9px;font-size:13px;font-weight:600;cursor:pointer;border:none;transition:.2s;font-family:inherit;white-space:nowrap;text-decoration:none}
+.btn-p{background:var(--accent);color:#000}.btn-p:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,229,255,.35)}
+.btn-g{background:var(--surface);color:var(--muted);border:1px solid var(--border)}.btn-g:hover{color:var(--text);border-color:var(--muted)}
+.btn-v{background:linear-gradient(135deg,var(--accent2),#6d28d9);color:#fff}.btn-v:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(124,58,237,.4)}
+.btn-red{background:rgba(239,68,68,.1);color:var(--red);border:1px solid rgba(239,68,68,.2)}.btn-red:hover{background:rgba(239,68,68,.2)}
+.icon-btn{width:36px;height:36px;border-radius:9px;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center;cursor:pointer;transition:.2s;font-size:16px}
+.icon-btn:hover{border-color:var(--accent);transform:translateY(-1px)}
+
+/* ── CONTENT ── */
+.content{padding:20px 24px;flex:1;min-width:0;overflow-x:hidden;padding-top:80px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;transition:.25s cubic-bezier(.16,1,.3,1)}
+.card:hover{border-color:rgba(0,229,255,.18);box-shadow:0 4px 24px rgba(0,0,0,.25)}
+[data-theme="light"] .card{box-shadow:var(--shadow)}
+
+/* ── SECTION LABEL ── */
+.sec-lbl{font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.sec-lbl::after{content:"";flex:1;height:1px;background:var(--border)}
+
+/* ── SKELETON ── */
+.skel{background:linear-gradient(90deg,var(--surface) 25%,rgba(255,255,255,.04) 50%,var(--surface) 75%);background-size:400% 100%;animation:shimmer 1.6s infinite;border-radius:8px}
+.skel-s{display:inline-block;height:14px;border-radius:6px;background:linear-gradient(90deg,var(--surface) 25%,rgba(255,255,255,.04) 50%,var(--surface) 75%);background-size:400% 100%;animation:shimmer 1.6s infinite}
+
+/* ── PROGRESS BAR ── */
+.pbar{height:5px;background:var(--surface);border-radius:999px;overflow:hidden}
+.pbar-fill{height:100%;border-radius:999px;transition:width .8s cubic-bezier(.16,1,.3,1)}
+
+/* ── TOAST ── */
+#toast{position:fixed;bottom:24px;right:24px;background:linear-gradient(135deg,#1a2236,#0d1220);border:1px solid #1e2840;border-radius:14px;padding:14px 20px;display:flex;align-items:center;gap:12px;z-index:9000;transform:translateY(80px);opacity:0;transition:.4s cubic-bezier(.2,.8,.3,1);box-shadow:0 8px 32px rgba(0,0,0,.5);max-width:300px;pointer-events:none}
+#toast.show{transform:translateY(0);opacity:1}
+#toast-ic{font-size:22px}
+#toast-title{font-size:13px;font-weight:700;color:#e8edf5}
+#toast-sub{font-size:11px;color:#5a6b88;margin-top:2px}
+
+/* ── MOBILE ── */
+@media(max-width:768px){
+  .hamburger{display:flex!important}
+  .sidebar-close{display:flex}
+  .sidebar{position:fixed;left:0;top:0;height:100vh;transform:translateX(-260px);transition:transform .28s cubic-bezier(.4,0,.2,1);z-index:99;box-shadow:4px 0 24px rgba(0,0,0,.4)}
+  .sidebar.open{transform:translateX(0)}
+  .main{margin-left:0!important;width:100%}
+  .topbar{padding:0 14px;left:0!important}
+  .content{padding:14px;padding-top:76px}
+  .topbar-l .tsub{display:none}
+}
+
+/* ── HSA SPECIFIC ── */
+@keyframes heroGrad{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+.hsa-banner{
+  position:relative;overflow:hidden;border-radius:22px;padding:44px 52px;margin-bottom:28px;
+  background:linear-gradient(135deg,rgba(124,58,237,.18),rgba(0,229,255,.08),rgba(245,158,11,.06));
+  border:1px solid rgba(124,58,237,.3);
+  animation:fadeUp .5s cubic-bezier(.16,1,.3,1) both;
+}
+.hsa-banner::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 70% 90% at 85% 40%,rgba(124,58,237,.15),transparent);pointer-events:none}
+.hsa-banner::after{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--accent2),var(--accent),var(--accent3))}
+.hsa-orb{position:absolute;border-radius:50%;pointer-events:none;opacity:.06}
+.hsa-orb-1{width:300px;height:300px;background:var(--accent2);right:-80px;top:-80px;animation:float 8s ease-in-out infinite}
+.hsa-orb-2{width:200px;height:200px;background:var(--accent);right:80px;bottom:-60px;animation:float 6s ease-in-out infinite 1s}
+.hsa-tag{display:inline-flex;align-items:center;gap:6px;background:rgba(124,58,237,.22);border:1px solid rgba(124,58,237,.4);border-radius:999px;padding:4px 14px;font-size:11px;font-weight:800;color:#c4b5fd;letter-spacing:1px;text-transform:uppercase;margin-bottom:16px}
+.hsa-title{font-size:40px;font-weight:900;letter-spacing:-.8px;margin-bottom:12px;line-height:1.1}
+.hsa-title span{background:linear-gradient(135deg,var(--accent),#5b9bff 40%,var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hsa-sub{font-size:14px;color:var(--muted);margin-bottom:28px;max-width:540px;line-height:1.75}
+.hsa-cta{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:28px}
+.hsa-stats-row{display:flex;gap:14px;flex-wrap:wrap}
+.hsa-stat{background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.08);border-radius:14px;padding:14px 22px;text-align:center;transition:.25s}
+.hsa-stat:hover{background:rgba(255,255,255,.07);transform:translateY(-2px)}
+.hsa-stat .n{font-size:24px;font-weight:900;color:var(--accent);font-family:'Space Mono',monospace}
+.hsa-stat .l{font-size:10px;color:var(--muted);margin-top:3px;font-weight:700;text-transform:uppercase;letter-spacing:1px}
+
+.modes-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px;margin-bottom:28px}
+.mode-card{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:22px 20px;cursor:pointer;transition:.28s cubic-bezier(.16,1,.3,1);position:relative;overflow:hidden;animation:scaleIn .4s cubic-bezier(.16,1,.3,1) both}
+.mode-card:hover{border-color:var(--mc-color,var(--accent));transform:translateY(-5px);box-shadow:0 14px 36px rgba(0,0,0,.3)}
+.mode-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--mc-color,var(--accent))}
+.mode-card::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 70% 0%,rgba(var(--mc-rgb,0,229,255),.06),transparent 60%);pointer-events:none}
+.mode-card:nth-child(1){animation-delay:.05s}.mode-card:nth-child(2){animation-delay:.1s}.mode-card:nth-child(3){animation-delay:.15s}.mode-card:nth-child(4){animation-delay:.2s}.mode-card:nth-child(5){animation-delay:.25s}.mode-card:nth-child(6){animation-delay:.3s}
+.mc-badge{position:absolute;top:14px;right:14px;font-size:10px;font-weight:800;padding:3px 8px;border-radius:999px}
+.mc-ic{font-size:30px;margin-bottom:12px}
+.mc-title{font-size:16px;font-weight:800;margin-bottom:6px;letter-spacing:-.2px}
+.mc-desc{font-size:12px;color:var(--muted);line-height:1.65}
+.mc-meta{margin-top:12px;font-size:11px;font-weight:700;color:var(--mc-color,var(--accent))}
+
+.parts-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:28px}
+.part-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;transition:.25s;animation:fadeUp .4s cubic-bezier(.16,1,.3,1) both;position:relative;overflow:hidden}
+.part-card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0,.25)}
+.part-card::before{content:"";position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--pc-color,var(--accent));opacity:.6}
+.part-ic{font-size:26px;margin-bottom:12px}
+.part-title{font-size:15px;font-weight:800;margin-bottom:5px}
+.part-desc{font-size:12px;color:var(--muted);margin-bottom:14px;line-height:1.6}
+.part-pct{font-size:22px;font-weight:900;font-family:'Space Mono',monospace;color:var(--pc-color,var(--accent))}
+.part-meta{font-size:11px;color:var(--muted);margin-top:4px;font-weight:600}
+
+.hist-card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:20px;animation:fadeUp .4s cubic-bezier(.16,1,.3,1) .15s both}
+
+/* QUIZ OVERLAY */
+.qov{position:fixed;inset:0;background:rgba(0,0,0,.9);backdrop-filter:blur(20px);z-index:999;display:none;align-items:center;justify-content:center}
+.qov.show{display:flex}
+.qbox{background:var(--card);border:1px solid var(--border);border-radius:22px;width:min(860px,96vw);max-height:92vh;overflow-y:auto;display:flex;flex-direction:column;animation:scaleIn .3s cubic-bezier(.16,1,.3,1)}
+.qhdr{padding:18px 24px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;top:0;background:var(--card);z-index:1;backdrop-filter:blur(8px)}
+.qtitle{font-size:16px;font-weight:800;letter-spacing:-.2px}
+.qmeta{display:flex;align-items:center;gap:14px}
+.qpw{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700}
+.qpbar{width:80px;height:5px;background:var(--surface);border-radius:999px;overflow:hidden}
+.qpfill{height:100%;background:linear-gradient(90deg,var(--accent2),var(--accent));border-radius:999px;transition:width .4s}
+.qtimer{font-size:14px;font-weight:700;font-family:'Space Mono',monospace;color:var(--accent3);background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.2);padding:4px 12px;border-radius:8px;transition:.3s}
+.qtimer.warn{color:var(--red);background:rgba(239,68,68,.1);border-color:rgba(239,68,68,.2);animation:glowPulse 1s infinite}
+.qclose{width:32px;height:32px;border-radius:8px;background:var(--surface);border:1px solid var(--border);display:grid;place-items:center;cursor:pointer;font-size:14px;transition:.2s;flex-shrink:0}
+.qclose:hover{border-color:var(--red);color:var(--red)}
+.qbody{padding:28px;flex:1}
+.qnum{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:14px}
+.qtext{font-size:17px;font-weight:600;line-height:1.7;margin-bottom:22px}
+.opts{display:grid;gap:10px}
+.opt{padding:14px 18px;border-radius:13px;border:1.5px solid var(--border);cursor:pointer;transition:.22s;display:flex;align-items:flex-start;gap:12px;font-size:14px;font-weight:500;line-height:1.5}
+.opt:hover:not(.locked){border-color:var(--accent2);background:rgba(124,58,237,.07)}
+.opt.sel{border-color:var(--accent);background:rgba(0,229,255,.07)}
+.opt.cor{border-color:var(--green);background:rgba(16,185,129,.1)}
+.opt.wrg{border-color:var(--red);background:rgba(239,68,68,.08)}
+.opt.locked{cursor:default}
+.olbl{width:26px;height:26px;border-radius:8px;background:var(--surface);display:grid;place-items:center;font-size:11px;font-weight:800;flex-shrink:0;font-family:'Space Mono'}
+.explain{background:rgba(0,229,255,.05);border:1px solid rgba(0,229,255,.15);border-radius:12px;padding:14px;font-size:13px;line-height:1.7;margin-top:16px;display:none;animation:slideDown .3s ease}
+.explain.show{display:block}
+.qfoot{padding:16px 24px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px;position:sticky;bottom:0;background:var(--card)}
+.qdots{display:flex;gap:4px;flex-wrap:wrap;flex:1}
+.qdot{width:10px;height:10px;border-radius:3px;background:var(--surface);cursor:pointer;transition:.15s}
+.qdot.cur{background:var(--accent);transform:scale(1.4)}
+.qdot.ok{background:var(--green)}.qdot.ng{background:var(--red)}
+
+/* RESULT */
+.res-ov{position:fixed;inset:0;background:rgba(0,0,0,.92);backdrop-filter:blur(24px);z-index:1000;display:none;align-items:center;justify-content:center}
+.res-ov.show{display:flex;animation:fadeUp .3s ease}
+.res-box{background:var(--card);border:1px solid var(--border);border-radius:22px;padding:40px;width:min(520px,92vw);text-align:center;animation:scaleIn .4s cubic-bezier(.16,1,.3,1)}
+.res-score{font-size:80px;font-weight:900;font-family:'Space Mono',monospace;line-height:1;margin:16px 0 8px}
+.res-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:24px}
+.res-stat{background:var(--surface);border-radius:12px;padding:14px}
+.res-stat .n{font-size:22px;font-weight:900;font-family:'Space Mono'}
+.res-stat .l{font-size:11px;color:var(--muted);margin-top:4px;font-weight:700}
+
+@media(max-width:768px){
+  .hsa-banner{padding:28px 22px}
+  .hsa-title{font-size:28px}
+  .parts-grid{grid-template-columns:1fr}
+  .modes-grid{grid-template-columns:1fr 1fr}
+  .hsa-cta{flex-direction:column}
+}
+
+/* ── FOOTER ── */
+.site-footer{background:#06090f;border-top:1px solid #1a2030;padding:32px 28px 20px;margin-top:auto;transition:background .3s}
+[data-theme="light"] .site-footer{background:#eef1fb;border-top-color:#c8d4f0}
+.sf-inner{display:table;width:100%;table-layout:fixed;border-collapse:collapse}
+.sf-col{display:table-cell;width:33.333%;vertical-align:top;padding:0 24px;text-align:center}
+.sf-col:first-child{padding-left:0;text-align:left;border-right:1px solid #1e2840}
+.sf-col:nth-child(2){border-right:1px solid #1e2840}
+.sf-col:last-child{padding-right:0}
+.sf-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:2px;color:#4a5878;margin-bottom:14px;display:block;text-align:center}
+.sf-col:first-child .sf-label{text-align:left}
+.sf-addr{font-size:13px;color:#8899bb;line-height:1.9}
+.sf-addr strong{color:#c8d4f0;font-weight:700}
+[data-theme="light"] .sf-addr{color:#3a4a6a}[data-theme="light"] .sf-addr strong{color:#0f1a35}
+.sf-map{margin-top:12px}
+.sf-map iframe{border-radius:10px;width:100%;height:130px;border:1px solid #1e2840;display:block}
+.sf-members{display:inline-flex;flex-direction:column;gap:8px;align-items:flex-start}
+.sf-member{display:flex;align-items:center;gap:8px;font-size:13px;color:#8899bb;transition:.2s}
+.sf-member:hover{color:var(--accent);transform:translateX(4px)}
+[data-theme="light"] .sf-member{color:#3a4a6a}
+.sf-member::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);flex-shrink:0}
+.sf-fb{display:flex;justify-content:center;width:100%}
+.sf-fb a{display:inline-flex;align-items:center;gap:8px;background:#1a2236;color:#e8edf5;font-size:13px;font-weight:600;padding:9px 20px;border-radius:10px;border:1px solid #1877f2;text-decoration:none;transition:.2s}
+.sf-fb a:hover{background:#1877f2;color:#fff}
+[data-theme="light"] .sf-fb a{background:#dce6ff;color:#1a2545}
+.sf-bottom{margin-top:20px;padding-top:14px;border-top:1px solid #1a2030;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px}
+[data-theme="light"] .sf-bottom{border-top-color:#c8d4f0}
+.sf-copy,.sf-brand{font-size:12px;color:#3a4868}
+[data-theme="light"] .sf-copy,[data-theme="light"] .sf-brand{color:#7a8aaa}
+@media(max-width:768px){
+  .sf-inner{display:flex!important;flex-direction:column!important}
+  .sf-col{width:100%!important;padding:14px 0!important;border:none!important;display:block!important;text-align:center!important}
+  .sf-col:first-child{text-align:center!important}
+  .sf-bottom{flex-direction:column;align-items:flex-start;gap:4px}
+}
+</style>
+</head>
+<body>
+<div class="app">
+<div class="sidebar-overlay" id="sb-overlay" onclick="closeSidebar()"></div>
+<aside class="sidebar">
+  <button class="sidebar-close" onclick="closeSidebar()">‹</button>
+  <a class="logo" href="dashboard.html">
+    <div class="logo-icon"><img src="logo.png" style="width:28px;height:28px;object-fit:contain" onerror="this.style.display='none'"></div>
+    <div class="logo-text">Luyen<em>Thi</em>369</div>
+  </a>
+  <nav class="nav">
+    <div class="nav-sec">
+      <div class="nav-lbl">Tổng quan</div>
+      <a class="nav-a" href="dashboard.html"><span class="ic">🏠</span>Trang chủ</a>
+    </div>
+    <div class="nav-sec">
+      <div class="nav-lbl">Luyện tập</div>
+      <a class="nav-a" href="luyen-mon.html"><span class="ic">📖</span>Luyện theo môn</a>
+      <a class="nav-a active" href="hsa.html"><span class="ic">🏛️</span>Phòng luyện HSA<span class="badge">HOT</span></a>
+    </div>
+    <div class="nav-sec">
+      <div class="nav-lbl">Tra cứu</div>
+      <a class="nav-a" href="ngan-hang-de.html"><span class="ic">🗂️</span>Ngân hàng đề</a>
+      <a class="nav-a" href="cai-dat.html"><span class="ic">⚙️</span>Cài đặt</a>
+    </div>
+    <div class="nav-sec">
+      <div class="nav-lbl">Hệ thống</div>
+      <a class="nav-a" href="admin.html"><span class="ic">🔐</span>Admin</a>
+    </div>
+  </nav>
+  <div class="sb-foot">
+    <a class="user-card" href="cai-dat.html">
+      <div class="av" id="sb-av">?</div>
+      <div><div class="uname" id="sb-name">Đang tải...</div><div class="uplan">✨ Free Plan</div></div>
+    </a>
+    <button class="logout" onclick="doLogout()">🚪 Đăng xuất</button>
+  </div>
+</aside>
+
+<div class="main">
+  <div class="topbar" id="topbar">
+    <div class="topbar-l">
+      <button class="hamburger" onclick="openSidebar()">☰</button>
+      <div>
+        <div class="ttl">🏛️ Phòng luyện HSA</div>
+        <div class="tsub">Đánh giá năng lực ĐHQGHN</div>
+      </div>
+    </div>
+    <div class="topbar-r">
+      <button class="icon-btn" id="theme-btn" onclick="toggleTheme()">☀️</button>
+    </div>
+  </div>
+
+  <div class="content">
+    <!-- HERO BANNER -->
+    <div class="hsa-banner">
+      <div class="hsa-orb hsa-orb-1"></div>
+      <div class="hsa-orb hsa-orb-2"></div>
+      <div class="hsa-tag">🎯 HSA · Học sinh Tài năng</div>
+      <div class="hsa-title">Chinh phục kỳ thi<br><span>HSA 2026</span></div>
+      <div class="hsa-sub">Đề thi Đánh giá Học sinh của ĐH Quốc gia Hà Nội · 150 câu · 195 phút · 3 phần thi độc lập</div>
+      <div class="hsa-cta">
+        <button class="btn btn-v" onclick="startExam(150,195,'🏆 Thi thử HSA đầy đủ')">🏆 Thi thử đầy đủ – 150 câu</button>
+        <button class="btn btn-p" onclick="startExam(50,50,'🔢 Tư duy định lượng')">⚡ Luyện nhanh – 50 câu</button>
+        <button class="btn btn-g" onclick="startExam(20,25,'⚡ Sprint – 20 câu')">🎯 Sprint 20 câu</button>
+      </div>
+      <div class="hsa-stats-row">
+        <div class="hsa-stat"><div class="n" id="hs-total">--</div><div class="l">Câu đã làm</div></div>
+        <div class="hsa-stat"><div class="n" id="hs-acc">--%</div><div class="l">Tỉ lệ đúng</div></div>
+        <div class="hsa-stat"><div class="n" id="hs-sessions">--</div><div class="l">Buổi luyện</div></div>
+        <div class="hsa-stat"><div class="n" id="hs-best">--</div><div class="l">Điểm cao nhất</div></div>
+        <div class="hsa-stat"><div class="n" id="hs-qbank">--</div><div class="l">Câu trong DB</div></div>
+      </div>
+    </div>
+
+    <!-- CHẾ ĐỘ LUYỆN -->
+    <div class="sec-lbl">⚡ Chế độ luyện tập</div>
+    <div class="modes-grid">
+      <div class="mode-card" style="--mc-color:#fbbf24" onclick="startExam(150,195,'🏆 Thi thử HSA đầy đủ')">
+        <div class="mc-badge" style="background:rgba(251,191,36,.15);color:#fbbf24;border:1px solid rgba(251,191,36,.3)">ĐỀ THẬT</div>
+        <div class="mc-ic">🏆</div>
+        <div class="mc-title">Thi thử đầy đủ</div>
+        <div class="mc-desc">150 câu · Mô phỏng đề HSA thực tế · 3 phần thi</div>
+        <div class="mc-meta">⏱ 195 phút</div>
+      </div>
+      <div class="mode-card" style="--mc-color:#00e5ff" onclick="startExam(50,50,'🔢 Tư duy định lượng')">
+        <div class="mc-ic">🔢</div>
+        <div class="mc-title">Tư duy định lượng</div>
+        <div class="mc-desc">50 câu · Toán học, phân tích số liệu, logic</div>
+        <div class="mc-meta">⏱ 50 phút</div>
+      </div>
+      <div class="mode-card" style="--mc-color:#a78bfa" onclick="startExam(50,50,'💬 Tư duy ngôn ngữ')">
+        <div class="mc-ic">💬</div>
+        <div class="mc-title">Tư duy ngôn ngữ</div>
+        <div class="mc-desc">50 câu · Đọc hiểu, từ vựng, ngữ pháp tiếng Việt</div>
+        <div class="mc-meta">⏱ 50 phút</div>
+      </div>
+      <div class="mode-card" style="--mc-color:#34d399" onclick="startExam(50,50,'🧩 Tư duy khoa học')">
+        <div class="mc-ic">🧩</div>
+        <div class="mc-title">Tư duy khoa học</div>
+        <div class="mc-desc">50 câu · KHTN, KHXH, logic, suy luận</div>
+        <div class="mc-meta">⏱ 50 phút</div>
+      </div>
+      <div class="mode-card" style="--mc-color:#f472b6" onclick="startExam(20,25,'⚡ Sprint')">
+        <div class="mc-ic">⚡</div>
+        <div class="mc-title">Sprint luyện nhanh</div>
+        <div class="mc-desc">20 câu ngẫu nhiên · Kiểm tra kiến thức nhanh</div>
+        <div class="mc-meta">⏱ 25 phút</div>
+      </div>
+      <div class="mode-card" style="--mc-color:#fb923c" onclick="reviewWrong()">
+        <div class="mc-ic">🔁</div>
+        <div class="mc-title">Ôn lại câu sai</div>
+        <div class="mc-desc">Tập trung câu đã sai · Cải thiện điểm yếu</div>
+        <div class="mc-meta" id="wrong-count">⏱ Câu đang chờ</div>
+      </div>
+    </div>
+
+    <!-- 3 PHẦN THI -->
+    <div class="sec-lbl">📐 Ba phần thi HSA</div>
+    <div class="parts-grid">
+      <div class="part-card" style="--pc-color:#fbbf24;animation-delay:.05s">
+        <div class="part-ic">🔢</div>
+        <div class="part-title">Tư duy định lượng</div>
+        <div class="part-desc">Toán học, thống kê, phân tích biểu đồ, suy luận số học</div>
+        <div class="part-pct" id="pp-dl">--</div>
+        <div class="pbar" style="margin-top:8px"><div class="pbar-fill" id="pb-dl" style="width:0%;background:linear-gradient(90deg,#fbbf24,#f59e0b)"></div></div>
+        <div class="part-meta">50 câu · 50 phút</div>
+      </div>
+      <div class="part-card" style="--pc-color:#a78bfa;animation-delay:.1s">
+        <div class="part-ic">💬</div>
+        <div class="part-title">Tư duy ngôn ngữ</div>
+        <div class="part-desc">Đọc hiểu văn bản, từ vựng, ngữ pháp, diễn đạt</div>
+        <div class="part-pct" id="pp-nn">--</div>
+        <div class="pbar" style="margin-top:8px"><div class="pbar-fill" id="pb-nn" style="width:0%;background:linear-gradient(90deg,#a78bfa,#7c3aed)"></div></div>
+        <div class="part-meta">50 câu · 50 phút</div>
+      </div>
+      <div class="part-card" style="--pc-color:#34d399;animation-delay:.15s">
+        <div class="part-ic">🧩</div>
+        <div class="part-title">Tư duy khoa học</div>
+        <div class="part-desc">KHTN, KHXH, logic, suy luận phản biện, phân tích</div>
+        <div class="part-pct" id="pp-kh">--</div>
+        <div class="pbar" style="margin-top:8px"><div class="pbar-fill" id="pb-kh" style="width:0%;background:linear-gradient(90deg,#34d399,#059669)"></div></div>
+        <div class="part-meta">50 câu · 50 phút</div>
+      </div>
+    </div>
+
+    <!-- LỊCH SỬ THI -->
+    <div class="sec-lbl">📋 Lịch sử thi gần đây</div>
+    <div class="hist-card" id="hist-card">
+      <div style="color:var(--muted);font-size:13px;text-align:center;padding:20px">Đang tải...</div>
+    </div>
+
+<footer class="site-footer">
+    <div class="sf-inner">
+      <div class="sf-col">
+        <div class="sf-label">Địa chỉ</div>
+        <div class="sf-addr"><strong>Lớp 12A4</strong><br>Trường THPT Đan Phượng<br>Thị trấn Phùng, huyện Đan Phượng<br>Hà Nội</div>
+        <div class="sf-map"><iframe src="https://maps.google.com/maps?q=Tr%C6%B0%E1%BB%9Dng%20THPT%20%C4%90an%20Ph%C6%B0%E1%BB%A3ng&t=&z=15&ie=UTF8&iwloc=&output=embed" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
+      </div>
+      <div class="sf-col">
+        <div class="sf-label">Thành viên nhóm</div>
+        <div class="sf-members">
+          <div class="sf-member">Nguyễn Thế Hải Nam</div>
+          <div class="sf-member">Doãn Hà Anh</div>
+          <div class="sf-member">Nguyễn Huyền Linh</div>
+          <div class="sf-member">Đỗ Minh Phương</div>
+          <div class="sf-member">Nguyễn Thị Mai Trang</div>
+        </div>
+      </div>
+      <div class="sf-col">
+        <div class="sf-label">Mạng xã hội</div>
+        <div class="sf-fb"><a href="https://facebook.com" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#1877f2"><path d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.413c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.953h-1.513c-1.491 0-1.956.93-1.956 1.886v2.284h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg>Facebook</a></div>
+      </div>
+    </div>
+    <div class="sf-bottom">
+      <span class="sf-copy">© 2026 LuyenThi369</span>
+      <span class="sf-brand">Lớp 12A4 · Trường THPT Đan Phượng</span>
+    </div>
+  </footer>
+  </div>
+</div>
+</div>
+
+<!-- QUIZ OVERLAY -->
+<div class="qov" id="qov">
+  <div class="qbox">
+    <div class="qhdr">
+      <div class="qtitle" id="qtitle">HSA</div>
+      <div class="qmeta">
+        <div class="qpw"><span id="qcur">1</span>/<span id="qtot">50</span><div class="qpbar"><div class="qpfill" id="qpfill" style="width:2%"></div></div></div>
+        <div class="qtimer" id="qtimer">50:00</div>
+        <div class="qclose" onclick="closeQuiz()">✕</div>
+      </div>
+    </div>
+    <div class="qbody" id="qbody"></div>
+    <div class="qfoot">
+      <div class="qdots" id="qdots"></div>
+      <div style="display:flex;gap:8px">
+        <button class="btn btn-g" id="btn-prev" onclick="prevQ()">← Trước</button>
+        <button class="btn btn-p" id="btn-next" onclick="nextQ()">Tiếp →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RESULT -->
+<div class="res-ov" id="resOv">
+  <div class="res-box">
+    <div style="font-size:36px">🎯</div>
+    <div style="font-size:14px;color:var(--muted);margin-top:8px">Kết quả thi HSA</div>
+    <div class="res-score" id="res-score">--</div>
+    <div id="res-label" style="font-size:15px;margin-bottom:20px"></div>
+    <div class="res-grid">
+      <div class="res-stat"><div class="n" id="res-correct" style="color:var(--green)">--</div><div class="l">Câu đúng</div></div>
+      <div class="res-stat"><div class="n" id="res-wrong" style="color:var(--red)">--</div><div class="l">Câu sai</div></div>
+      <div class="res-stat"><div class="n" id="res-time" style="color:var(--accent)">--</div><div class="l">Thời gian</div></div>
+    </div>
+    <div style="display:flex;gap:10px">
+      <button class="btn btn-v" style="flex:1" onclick="closeResult();loadAll()">🔁 Thi lại</button>
+      <button class="btn btn-p" style="flex:1" onclick="closeResult()">✓ Xong</button>
+    </div>
+  </div>
+</div>
+<div id="toast"><span id="toast-ic">✅</span><div><div id="toast-title"></div><div id="toast-sub"></div></div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+
+const SUPABASE_URL='https://ezimwiluksaomtdfsoam.supabase.co';
+const SUPABASE_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV6aW13aWx1a3Nhb210ZGZzb2FtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI0NjEwNDcsImV4cCI6MjA4ODAzNzA0N30.JEcSet75PFEWDcxHP3_4jfWJeiJ16znBddF3XcNtbS0';
+const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+let currentUser=null,currentUserId=null;
+
+function applyTheme(t){document.documentElement.setAttribute('data-theme',t);localStorage.setItem('lt369_theme',t);const b=document.getElementById('theme-btn');if(b)b.textContent=t==='dark'?'☀️':'🌙';}
+function toggleTheme(){applyTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark');}
+async function doLogout(){await sb.auth.signOut();location.href='dang-nhap.html';}
+function openSidebar(){document.querySelector('.sidebar').classList.add('open');document.getElementById('sb-overlay').classList.add('show');}
+function closeSidebar(){document.querySelector('.sidebar').classList.remove('open');document.getElementById('sb-overlay').classList.remove('show');}
+function showToast(ic,title,sub,col){
+  const t=document.getElementById('toast');
+  if(col)t.style.borderColor=col;
+  document.getElementById('toast-ic').textContent=ic;
+  document.getElementById('toast-title').textContent=title;
+  document.getElementById('toast-sub').textContent=sub||'';
+  t.classList.add('show');clearTimeout(t._t);
+  t._t=setTimeout(()=>{t.classList.remove('show');t.style.borderColor='';if(col)t.style.borderColor='';} ,3500);
+}
+window.addEventListener('scroll',()=>{const tb=document.getElementById('topbar');if(tb)tb.classList.toggle('scrolled',window.scrollY>10);});
+async function initUser(){
+  applyTheme(localStorage.getItem('lt369_theme')||'dark');
+  const {data:{session}}=await sb.auth.getSession();
+  if(!session){location.href='dang-nhap.html';return null;}
+  currentUser=session.user;currentUserId=session.user.id;
+  const name=session.user.user_metadata?.full_name||session.user.email.split('@')[0];
+  localStorage.setItem('lt369_user',name);
+  const av=document.getElementById('sb-av');if(av)av.textContent=name.charAt(0).toUpperCase();
+  const nm=document.getElementById('sb-name');if(nm)nm.textContent=name;
+  return session;
+}
+
+
+let QBANK=[],curSet=[],curQ=0,answers=[],timerI=null,timeLeft=3000,quizStart=null;
+
+(async()=>{
+  const s=await initUser();if(!s)return;
+  await Promise.all([loadQuestions(),loadStats()]);
+})();
+
+async function loadQuestions(){
+  const {data}=await sb.from('questions').select('id,content,options,correct_index,explanation,topic,difficulty').eq('subject','hsa').eq('approved',true);
+  QBANK=(data||[]).map(r=>{let o=r.options;if(typeof o==='string'){try{o=JSON.parse(o);}catch(e){o=[];}}return{q:r.content,o,a:r.correct_index,e:r.explanation||'',id:r.id,topic:r.topic||''};} );
+  document.getElementById('hs-qbank').textContent=QBANK.length;
+  if(!QBANK.length)showToast('⚠️','Chưa có câu hỏi HSA','Vào Admin để thêm');
+}
+
+async function loadStats(){
+  if(!currentUserId)return;
+  const {data}=await sb.from('study_sessions').select('questions_attempted,correct_count,score,created_at').eq('user_id',currentUserId).eq('subject','hsa').order('created_at',{ascending:false});
+  const rows=data||[];
+  const totalQ=rows.reduce((s,r)=>s+(r.questions_attempted||0),0);
+  const totalC=rows.reduce((s,r)=>s+(r.correct_count||0),0);
+  const acc=totalQ>0?Math.round(totalC/totalQ*100):0;
+  const best=rows.length?Math.max(...rows.map(r=>parseFloat(r.score||0))):0;
+  document.getElementById('hs-total').textContent=totalQ.toLocaleString('vi');
+  document.getElementById('hs-acc').textContent=acc+'%';
+  document.getElementById('hs-sessions').textContent=rows.length;
+  document.getElementById('hs-best').textContent=best>0?best.toFixed(1):'--';
+  if(rows.length){
+    const a=acc;['pp-dl','pp-nn','pp-kh'].forEach((id,i)=>{const v=Math.min(100,Math.max(0,a+([0,-5,5][i])));document.getElementById(id).textContent=v+'%';document.getElementById(id.replace('pp','pb')).style.width=v+'%';});
+  }
+  renderHistory(rows.slice(0,6));
+}
+
+function renderHistory(rows){
+  const el=document.getElementById('hist-card');
+  if(!rows.length){el.innerHTML='<div style="color:var(--muted);font-size:13px;text-align:center;padding:20px">Chưa có lịch sử thi</div>';return;}
+  el.innerHTML=rows.map(r=>{
+    const d=new Date(r.created_at);
+    const pct=r.questions_attempted>0?Math.round(r.correct_count/r.questions_attempted*100):0;
+    const col=pct>=70?'var(--green)':pct>=50?'var(--accent3)':'var(--red)';
+    return `<div style="display:flex;align-items:center;gap:14px;padding:12px 16px;background:var(--surface);border-radius:12px;border:1px solid var(--border);margin-bottom:8px;transition:.2s" onmouseover="this.style.borderColor='rgba(0,229,255,.2)'" onmouseout="this.style.borderColor='var(--border)'">
+      <div style="font-size:22px">🎯</div>
+      <div style="flex:1"><div style="font-size:13px;font-weight:700">HSA · ${d.toLocaleDateString('vi',{day:'2-digit',month:'2-digit',year:'numeric'})}</div>
+      <div style="font-size:12px;color:var(--muted)">${r.questions_attempted} câu · ${r.correct_count} đúng</div></div>
+      <div style="font-size:20px;font-weight:900;font-family:'Space Mono';color:${col}">${pct}%</div>
+    </div>`;
+  }).join('');
+}
+
+// ── QUIZ ENGINE ──
+function startExam(numQ,mins,title){
+  if(!QBANK.length){showToast('⚠️','Chưa có câu hỏi','Vào Admin để thêm câu hỏi HSA');return;}
+  quizStart=new Date().toISOString();
+  curSet=[...QBANK].sort(()=>Math.random()-.5).slice(0,Math.min(numQ,QBANK.length));
+  curQ=0;answers=new Array(curSet.length).fill(null);
+  timeLeft=mins*60;
+  document.getElementById('qtitle').textContent=title;
+  document.getElementById('qtot').textContent=curSet.length;
+  renderQ();renderDots();startTimer();
+  document.getElementById('qov').classList.add('show');document.body.style.overflow='hidden';
+}
+function reviewWrong(){showToast('💡','Tính năng sắp ra mắt','Câu sai sẽ được lưu sau khi làm bài');}
+function closeQuiz(){document.getElementById('qov').classList.remove('show');document.body.style.overflow='';clearInterval(timerI);}
+function closeResult(){document.getElementById('resOv').classList.remove('show');}
+
+function renderQ(){
+  const q=curSet[curQ],ans=answers[curQ],locked=ans!==null;
+  document.getElementById('qcur').textContent=curQ+1;
+  document.getElementById('qpfill').style.width=((curQ+1)/curSet.length*100)+'%';
+  document.getElementById('qbody').innerHTML=`
+    <div class="qnum">Câu ${curQ+1} / ${curSet.length}${q.topic?' · '+q.topic:''}</div>
+    <div class="qtext">${q.q}</div>
+    <div class="opts">${(q.o||[]).map((o,i)=>`
+      <div class="opt ${locked?(i===q.a?'cor':(i===ans?'wrg':'locked')):(i===ans?'sel':'')} ${locked?'locked':''}" onclick="${locked?'':'selectOpt('+i+')'}" >
+        <span class="olbl">${['A','B','C','D'][i]}</span>${o}
+      </div>`).join('')}</div>
+    <div class="explain ${locked?'show':''}">${locked?'<strong>'+(ans===q.a?'✅ Đúng!':'❌ Sai — Đáp án đúng là '+'ABCD'[q.a])+'</strong><br>'+q.e:''}</div>`;
+  document.getElementById('btn-prev').disabled=curQ===0;
+  document.getElementById('btn-next').textContent=curQ===curSet.length-1?'Xem kết quả ✓':'Tiếp →';
+}
+function selectOpt(i){if(answers[curQ]!==null)return;answers[curQ]=i;renderQ();renderDots();}
+function prevQ(){if(curQ>0){curQ--;renderQ();renderDots();}}
+function nextQ(){if(curQ<curSet.length-1){curQ++;renderQ();renderDots();}else showResult();}
+function renderDots(){document.getElementById('qdots').innerHTML=curSet.map((_,i)=>`<div class="qdot ${i===curQ?'cur':answers[i]===null?'':(answers[i]===curSet[i].a?'ok':'ng')}" onclick="goQ(${i})"></div>`).join('');}
+function goQ(i){curQ=i;renderQ();renderDots();}
+
+function startTimer(){
+  clearInterval(timerI);
+  timerI=setInterval(()=>{
+    timeLeft--;
+    const m=Math.floor(timeLeft/60),s=timeLeft%60;
+    const el=document.getElementById('qtimer');
+    if(el){el.textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');el.classList.toggle('warn',timeLeft<=300);}
+    if(timeLeft<=0){clearInterval(timerI);showResult();}
+  },1000);
+}
+
+async function showResult(){
+  clearInterval(timerI);
+  const correct=answers.filter((a,i)=>a===curSet[i].a).length;
+  const total=curSet.length;
+  const pct=Math.round(correct/total*100);
+  const elapsed=Math.round((Date.now()-new Date(quizStart).getTime())/1000);
+  const mins=Math.floor(elapsed/60),secs=elapsed%60;
+  document.getElementById('qov').classList.remove('show');document.body.style.overflow='';
+  document.getElementById('res-score').textContent=pct+'%';
+  document.getElementById('res-score').style.color=pct>=70?'var(--green)':pct>=50?'var(--accent3)':'var(--red)';
+  document.getElementById('res-label').textContent=pct>=85?'🏆 Xuất sắc!':pct>=70?'🎉 Tốt lắm!':pct>=50?'💪 Cần cố thêm':'📖 Cần ôn thêm';
+  document.getElementById('res-correct').textContent=correct;
+  document.getElementById('res-wrong').textContent=total-correct;
+  document.getElementById('res-time').textContent=String(mins).padStart(2,'0')+':'+String(secs).padStart(2,'0');
+  document.getElementById('resOv').classList.add('show');
+  if(currentUserId){
+    await sb.from('study_sessions').insert({user_id:currentUserId,subject:'hsa',questions_attempted:total,correct_count:correct,score:parseFloat((correct/total*10).toFixed(2)),started_at:quizStart,ended_at:new Date().toISOString()});
+    loadStats();
+  }
+}
+</script>
+</body>
+</html>
