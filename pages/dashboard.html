@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Dashboard – LuyenThi369</title>
-<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
@@ -242,6 +242,22 @@ body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-se
   .sf-bottom{flex-direction:column;align-items:flex-start;gap:4px}
   .btn-v.hide-sm{display:none}
 }
+
+/* ── ENHANCED ANIMATIONS ── */
+@keyframes scaleIn{from{opacity:0;transform:scale(.93)}to{opacity:1;transform:scale(1)}}
+@keyframes slideDown{from{opacity:0;transform:translateY(-12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.stat-c{animation:scaleIn .4s cubic-bezier(.16,1,.3,1) both}
+.stat-c:nth-child(1){animation-delay:.05s}.stat-c:nth-child(2){animation-delay:.1s}
+.stat-c:nth-child(3){animation-delay:.15s}.stat-c:nth-child(4){animation-delay:.2s}
+.card{animation:fadeUp .4s cubic-bezier(.16,1,.3,1) both}
+.skel{background:linear-gradient(90deg,var(--surface) 25%,rgba(255,255,255,.04) 50%,var(--surface) 75%);background-size:400% 100%;animation:shimmer 1.6s infinite;border-radius:8px;height:20px;width:60%}
+.pbar-fill{transition:width .8s cubic-bezier(.16,1,.3,1)!important}
+.stat-val{transition:color .4s ease}
+/* logo pulse */
+.logo-icon{animation:logoPulse 3s ease-in-out infinite}
+@keyframes logoPulse{0%,100%{box-shadow:0 0 16px rgba(0,229,255,.3)}50%{box-shadow:0 0 28px rgba(0,229,255,.55)}}
+
 </style>
 </head>
 <body>
@@ -275,7 +291,7 @@ body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-se
       <div class="av" id="sb-av">B</div>
       <div><div class="uname" id="sb-name">bạn</div><div class="uplan">⭐ PRO</div></div>
     </a>
-    <button class="logout" onclick="location.href='dang-nhap.html'">🚪 Đăng xuất</button>
+    <button class="logout" onclick="doLogout()">Dang xuat</button>
   </div>
 </aside>
 
@@ -344,58 +360,54 @@ body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-se
       </div>
     </div>
 
-    <!-- STAT CARDS -->
+    <!-- STAT CARDS — dữ liệu thực từ study_sessions -->
     <div class="grid-4">
       <div class="stat-c">
-        <div class="stat-label">📐 Toán</div>
-        <div class="stat-val" style="color:var(--accent)">8.2</div>
-        <div class="stat-sub">Điểm dự đoán</div>
-        <div class="stat-trend up">↑ +0.3 tuần này</div>
+        <div class="stat-label">📚 Tổng câu đã làm</div>
+        <div class="stat-val" id="stat-total" style="color:var(--accent)"><div class="skel"></div></div>
+        <div class="stat-sub" id="stat-total-sub">câu hỏi</div>
+        <div class="stat-trend" id="stat-total-trend" style="color:var(--muted)">Đang tải...</div>
       </div>
       <div class="stat-c">
-        <div class="stat-label">⚡ Vật lý</div>
-        <div class="stat-val" style="color:#a78bfa">7.5</div>
-        <div class="stat-sub">Điểm dự đoán</div>
-        <div class="stat-trend dn">↓ -0.1 tuần này</div>
+        <div class="stat-label">🎯 Tỉ lệ đúng</div>
+        <div class="stat-val" id="stat-acc" style="color:var(--green)"><div class="skel"></div></div>
+        <div class="stat-sub" id="stat-acc-sub">trung bình</div>
+        <div class="stat-trend" id="stat-acc-trend" style="color:var(--muted)">Đang tải...</div>
       </div>
       <div class="stat-c">
-        <div class="stat-label">🧪 Hóa học</div>
-        <div class="stat-val" style="color:var(--green)">7.6</div>
-        <div class="stat-sub">Điểm dự đoán</div>
-        <div class="stat-trend up">↑ +0.4 tuần này</div>
+        <div class="stat-label">📅 Buổi học</div>
+        <div class="stat-val" id="stat-sessions" style="color:var(--accent2)"><div class="skel"></div></div>
+        <div class="stat-sub" id="stat-sessions-sub">lần luyện</div>
+        <div class="stat-trend" id="stat-sessions-trend" style="color:var(--muted)">Đang tải...</div>
       </div>
       <div class="stat-c">
-        <div class="stat-label">🌍 Tiếng Anh</div>
-        <div class="stat-val" style="color:var(--accent3)">7.9</div>
-        <div class="stat-sub">Điểm dự đoán</div>
-        <div class="stat-trend up">↑ +0.2 tuần này</div>
+        <div class="stat-label">🏆 Môn mạnh nhất</div>
+        <div class="stat-val" id="stat-best" style="font-size:17px;color:var(--accent3)"><div class="skel"></div></div>
+        <div class="stat-sub" id="stat-best-pct">Chưa có dữ liệu</div>
+        <div class="stat-trend" id="stat-best-trend" style="color:var(--muted)"></div>
       </div>
     </div>
 
-    <!-- CHARTS + SUGGESTIONS -->
+    <!-- CHARTS + SUGGESTIONS — fully dynamic -->
     <div class="grid-2">
       <div class="card">
-        <div class="card-title">📊 Tiến độ từng môn</div>
+        <div class="card-title">📈 Hoạt động 7 ngày gần đây</div>
         <div class="chart-wrap">
-          <div class="bar-w"><div class="bar-b" style="height:55%;background:linear-gradient(to top,var(--accent),#006699)"></div><div class="bar-l">T2</div></div>
-          <div class="bar-w"><div class="bar-b" style="height:70%;background:linear-gradient(to top,var(--accent),#006699)"></div><div class="bar-l">T3</div></div>
-          <div class="bar-w"><div class="bar-b" style="height:45%;background:linear-gradient(to top,var(--accent),#006699)"></div><div class="bar-l">T4</div></div>
-          <div class="bar-w"><div class="bar-b" style="height:80%;background:linear-gradient(to top,var(--accent),#006699)"></div><div class="bar-l">T5</div></div>
-          <div class="bar-w"><div class="bar-b" style="height:65%;background:linear-gradient(to top,var(--accent),#006699)"></div><div class="bar-l">T6</div></div>
-          <div class="bar-w"><div class="bar-b" style="height:40%;background:linear-gradient(to top,var(--accent),#006699)"></div><div class="bar-l">T7</div></div>
-          <div class="bar-w"><div class="bar-b" style="height:68%;background:linear-gradient(to top,var(--accent),#006699)"></div><div class="bar-l">CN</div></div>
+          <div id="weekly-chart" style="display:contents"></div>
         </div>
-        <div class="spr"><div class="spr-row"><span class="spr-name">📐 Toán</span><span class="spr-pct">68%</span></div><div class="pbar"><div class="pbar-fill" style="width:68%;background:linear-gradient(90deg,var(--accent),#0066ff)"></div></div></div>
-        <div class="spr"><div class="spr-row"><span class="spr-name">⚡ Vật lý</span><span class="spr-pct">54%</span></div><div class="pbar"><div class="pbar-fill" style="width:54%;background:linear-gradient(90deg,#a78bfa,var(--accent2))"></div></div></div>
-        <div class="spr"><div class="spr-row"><span class="spr-name">🧪 Hóa học</span><span class="spr-pct">71%</span></div><div class="pbar"><div class="pbar-fill" style="width:71%;background:linear-gradient(90deg,var(--green),#059669)"></div></div></div>
-        <div class="spr"><div class="spr-row"><span class="spr-name">🌍 Tiếng Anh</span><span class="spr-pct">82%</span></div><div class="pbar"><div class="pbar-fill" style="width:82%;background:linear-gradient(90deg,var(--accent3),#f97316)"></div></div></div>
+        <div id="subject-bars">
+          <div class="skel" style="margin-bottom:10px"></div>
+          <div class="skel" style="margin-bottom:10px;width:50%"></div>
+          <div class="skel" style="width:70%"></div>
+        </div>
       </div>
       <div class="card">
         <div class="card-title">💡 Gợi ý học tiếp</div>
-        <div class="sug-item"><div class="sig" style="background:rgba(0,229,255,.1)">📐</div><div><div class="sit-t">Hàm số &amp; Đồ thị</div><div class="sit-s">Toán · 24 câu chưa làm</div></div><button class="sug-btn" onclick="location.href='luyen-mon.html'">Học</button></div>
-        <div class="sug-item"><div class="sig" style="background:rgba(167,139,250,.1)">⚡</div><div><div class="sit-t">Điện xoay chiều</div><div class="sit-s">Vật lý · Sai 8/15 lần trước</div></div><button class="sug-btn" onclick="location.href='luyen-mon.html'">Ôn lại</button></div>
-        <div class="sug-item"><div class="sig" style="background:rgba(245,158,11,.1)">🏛️</div><div><div class="sit-t">HSA Mock Test #7</div><div class="sit-s">Thi thử · 120 phút</div></div><button class="sug-btn" onclick="location.href='hsa.html'">Thi thử</button></div>
-        <div class="sug-item"><div class="sig" style="background:rgba(52,211,153,.1)">🧪</div><div><div class="sit-t">Este – Lipit</div><div class="sit-s">Hóa · Chuyên đề điểm yếu</div></div><button class="sug-btn" onclick="location.href='luyen-mon.html'">Học</button></div>
+        <div id="suggestions-list">
+          <div class="skel" style="margin-bottom:12px;height:44px;width:100%"></div>
+          <div class="skel" style="margin-bottom:12px;height:44px;width:100%"></div>
+          <div class="skel" style="height:44px;width:100%"></div>
+        </div>
       </div>
     </div>
 
@@ -453,6 +465,7 @@ body{background:var(--bg);color:var(--text);font-family:'Be Vietnam Pro',sans-se
   </div>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 // ── THEME ──
 function applyTheme(t){
@@ -463,14 +476,25 @@ function applyTheme(t){
 }
 function toggleTheme(){applyTheme(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark')}
 
-// ── INIT ──
-(function(){
+// -- SUPABASE INIT --
+const SUPABASE_URL='https://ezimwiluksaomtdfsoam.supabase.co';
+const SUPABASE_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImV6aW13aWx1a3Nhb210ZGZzb2FtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI0NjEwNDcsImV4cCI6MjA4ODAzNzA0N30.JEcSet75PFEWDcxHP3_4jfWJeiJ16znBddF3XcNtbS0';
+const sb=window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
+let currentUserId=null;
+(async function(){
   applyTheme(localStorage.getItem('lt369_theme')||'dark');
-  const n=localStorage.getItem('lt369_user')||'bạn';
-  document.getElementById('sb-av').textContent=n.charAt(0).toUpperCase();
-  document.getElementById('sb-name').textContent=n;
-  document.getElementById('wname').textContent=n;
+  const {data:{session}}=await sb.auth.getSession();
+  if(!session){window.location.href='dang-nhap.html';return;}
+  currentUserId=session.user.id;
+  const name=session.user.user_metadata?.full_name||session.user.email.split('@')[0];
+  localStorage.setItem('lt369_user',name);
+  document.getElementById('sb-av').textContent=name.charAt(0).toUpperCase();
+  document.getElementById('sb-name').textContent=name;
+  document.getElementById('wname').textContent=name;
+  renderStreak();
+  loadDashboard();
 })();
+async function doLogout(){await sb.auth.signOut();window.location.href='dang-nhap.html';}
 
 // ── COUNTDOWN ──
 function updateCD(){
@@ -509,14 +533,37 @@ function showToast(ic,title,sub,col){
   t._t=setTimeout(()=>t.classList.remove('show'),3500);
 }
 
-// ── STREAK ──
+// ── STREAK (tính từ DB study_sessions) ──
 function getStreak(){
   return {
-    cur: parseInt(localStorage.getItem('lt369_streak')||'0'),
+    cur:  parseInt(localStorage.getItem('lt369_streak')||'0'),
     best: parseInt(localStorage.getItem('lt369_streak_best')||'0'),
     last: localStorage.getItem('lt369_streak_last')||'',
     freeze: parseInt(localStorage.getItem('lt369_freeze')||'0')
   };
+}
+// Tính streak thực từ danh sách ngày học, cập nhật localStorage
+function calcStreakFromSessions(rows){
+  if(!rows||!rows.length) return;
+  // Lấy tập hợp ngày (YYYY-MM-DD) đã học
+  const dates=new Set(rows.map(r=>r.created_at.slice(0,10)));
+  const today=new Date();
+  const fmt=d=>`${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+  // Đếm chuỗi liên tiếp tính lui từ hôm nay hoặc hôm qua
+  let streak=0, check=new Date(today);
+  // Nếu hôm nay chưa học thì bắt đầu từ hôm qua
+  if(!dates.has(fmt(check))) check.setDate(check.getDate()-1);
+  while(dates.has(fmt(check))){
+    streak++;
+    check.setDate(check.getDate()-1);
+  }
+  const todayStr=fmt(today);
+  const s=getStreak();
+  localStorage.setItem('lt369_streak', streak);
+  localStorage.setItem('lt369_streak_last', todayStr);
+  if(streak>s.best) localStorage.setItem('lt369_streak_best', streak);
+  renderStreak();
+  checkStreakMilestone(streak);
 }
 function renderStreak(){
   const s=getStreak();
@@ -914,5 +961,88 @@ const LofiPlayer = (function(){
 
   return { toggle, close, playPause, prev, next, next, setVol, selectStation };
 })();
+
+async function loadDashboard(){
+  if(!currentUserId) return;
+  const LNAME={toan:'Toán',ly:'Vật lý',hoa:'Hóa học',sinh:'Sinh học',anh:'Tiếng Anh',van:'Ngữ Văn',su:'Lịch Sử',dia:'Địa Lý',gdcd:'GDCD',hsa:'HSA'};
+  const EMOJI={toan:'📐',ly:'⚡',hoa:'🧪',sinh:'🌱',anh:'🌍',van:'📖',su:'📜',dia:'🗺',gdcd:'⚖️',hsa:'🎯'};
+  const COLOR={toan:'var(--accent)',ly:'#a78bfa',hoa:'var(--green)',sinh:'#4ade80',anh:'var(--accent3)',van:'#f472b6',su:'#fb923c',dia:'#34d399',gdcd:'#60a5fa',hsa:'#fbbf24'};
+
+  const {data,error}=await sb.from('study_sessions')
+    .select('subject,questions_attempted,correct_count,score,created_at')
+    .eq('user_id',currentUserId).order('created_at',{ascending:true});
+  if(error){console.log('loadDashboard:',error.message);}
+  const rows=data||[];
+  calcStreakFromSessions(rows);
+
+  // ── STAT CARDS từ DB thật ──
+  const totalQ=rows.reduce((s,r)=>s+(r.questions_attempted||0),0);
+  const totalC=rows.reduce((s,r)=>s+(r.correct_count||0),0);
+  const acc=totalQ>0?Math.round(totalC/totalQ*100):0;
+  const gel=id=>document.getElementById(id);
+
+  // Tổng câu
+  if(gel('stat-total')){gel('stat-total').textContent=totalQ.toLocaleString('vi');}
+  if(gel('stat-total-sub')){gel('stat-total-sub').textContent='câu hỏi đã làm';}
+  if(gel('stat-total-trend')){gel('stat-total-trend').textContent=rows.length+' buổi học tổng cộng';}
+
+  // Tỉ lệ đúng
+  if(gel('stat-acc')){gel('stat-acc').textContent=acc+'%';gel('stat-acc').style.color=acc>=70?'var(--green)':acc>=50?'var(--accent3)':'var(--red)';}
+  if(gel('stat-acc-sub')){gel('stat-acc-sub').textContent=totalC.toLocaleString('vi')+' câu đúng / '+totalQ.toLocaleString('vi');}
+  if(gel('stat-acc-trend')){gel('stat-acc-trend').textContent=acc>=70?'📈 Xuất sắc!':acc>=50?'📊 Khá tốt':'💪 Cần cải thiện';}
+
+  // Buổi học
+  const dates=new Set(rows.map(r=>r.created_at.slice(0,10)));
+  if(gel('stat-sessions')){gel('stat-sessions').textContent=rows.length;}
+  if(gel('stat-sessions-sub')){gel('stat-sessions-sub').textContent='lần luyện tập';}
+  if(gel('stat-sessions-trend')){gel('stat-sessions-trend').textContent=dates.size+' ngày học khác nhau';}
+
+  // Môn mạnh nhất
+  const bySubj={};
+  rows.forEach(r=>{if(!bySubj[r.subject])bySubj[r.subject]={q:0,c:0,n:0,scores:[]};bySubj[r.subject].q+=r.questions_attempted||0;bySubj[r.subject].c+=r.correct_count||0;bySubj[r.subject].n++;bySubj[r.subject].scores.push(parseFloat(r.score||0));});
+  let bestS=null,bestPct=0;
+  Object.entries(bySubj).forEach(([s,d])=>{const p=d.q>0?Math.round(d.c/d.q*100):0;if(p>bestPct){bestPct=p;bestS=s;}});
+  if(gel('stat-best')){gel('stat-best').textContent=bestS?(EMOJI[bestS]||'')+' '+(LNAME[bestS]||bestS):'--';}
+  if(gel('stat-best-pct')){gel('stat-best-pct').textContent=bestS?bestPct+'% chính xác':'Chưa có dữ liệu';}
+  if(gel('stat-best-trend')&&bestS){gel('stat-best-trend').textContent=(bySubj[bestS].n)+' buổi luyện';}
+
+  // ── SUBJECT PROGRESS BARS (chỉ môn đã học, dynamic) ──
+  const sorted=Object.entries(bySubj).map(([s,d])=>({s,pct:d.q>0?Math.round(d.c/d.q*100):0,q:d.q,n:d.n,avg:d.scores.length?d.scores.reduce((a,b)=>a+b,0)/d.scores.length:0})).sort((a,b)=>b.q-a.q).slice(0,5);
+  const sbEl=gel('subject-bars');
+  if(sbEl){
+    if(!sorted.length){sbEl.innerHTML='<div style="color:var(--muted);font-size:12px;padding:8px 0;text-align:center">Chưa có dữ liệu luyện tập</div>';}
+    else{sbEl.innerHTML=sorted.map(({s,pct,n},i)=>{
+      const col=pct>=70?'var(--green)':pct>=50?'var(--accent3)':'var(--red)';
+      const barCol=COLOR[s]||'var(--accent)';
+      return `<div class="spr" style="animation:fadeUp .4s ${.05+i*.07}s cubic-bezier(.16,1,.3,1) both"><div class="spr-row"><span class="spr-name">${EMOJI[s]||''} ${LNAME[s]||s}</span><span class="spr-pct" style="color:${col}">${pct}%</span></div><div class="pbar"><div class="pbar-fill" style="width:0%;background:${barCol}" data-w="${pct}"></div></div></div>`;
+    }).join('');
+    // Animate bars after render
+    setTimeout(()=>sbEl.querySelectorAll('.pbar-fill[data-w]').forEach(el=>{el.style.width=el.dataset.w+'%';}),80);}
+  }
+
+  renderWeeklyChart(rows);
+  renderSuggestions(bySubj,LNAME,EMOJI,COLOR);
+}
+function renderWeeklyChart(data){
+  const el=document.getElementById('weekly-chart');if(!el)return;
+  const DAY=['T2','T3','T4','T5','T6','T7','CN'];
+  const sc=new Array(7).fill(0),ct=new Array(7).fill(0);const now=new Date();
+  data.forEach(r=>{const d=new Date(r.created_at),diff=Math.floor((now-d)/86400000);if(diff<7){const dow=d.getDay()===0?6:d.getDay()-1;sc[dow]+=parseFloat(r.score||0);ct[dow]++;}});
+  const avgs=sc.map((s,i)=>ct[i]?s/ct[i]/10*100:0);const mx=Math.max(...avgs,10);const td=now.getDay()===0?6:now.getDay()-1;
+  el.innerHTML=DAY.map((d,i)=>{
+    const h=avgs[i]?Math.round(avgs[i]/mx*78)+4:4;const isT=i===td;
+    const col=isT?'linear-gradient(to top,var(--accent3),#f97316)':'linear-gradient(to top,var(--accent),#006699)';
+    const tip=avgs[i]?(avgs[i]/10).toFixed(1)+' d':'';
+    return '<div class="bar-w"><div class="bar-b" style="height:'+h+'%;background:'+col+';opacity:'+(avgs[i]?1:.25)+'"></div><div class="bar-l" style="'+(isT?'color:var(--accent3);font-weight:700':'')+'">'+d+(tip?'<br><span style="font-size:9px;opacity:.7">'+tip+'</span>':'')+'</div></div>';
+  }).join('');
+}
+function renderSuggestions(bySubj){
+  const el=document.getElementById('suggestions-list');if(!el)return;
+  const INFO={toan:{ic:'📐',col:'rgba(0,229,255,.1)',name:'Toan'},ly:{ic:'⚡',col:'rgba(167,139,250,.1)',name:'Vat ly'},hoa:{ic:'🧪',col:'rgba(52,211,153,.1)',name:'Hoa hoc'},sinh:{ic:'🌱',col:'rgba(74,222,128,.1)',name:'Sinh hoc'},anh:{ic:'🌍',col:'rgba(245,158,11,.1)',name:'Tieng Anh'}};
+  const scored=Object.entries(bySubj).map(([s,rs])=>({s,avg:rs.length?rs.reduce((a,r)=>a+parseFloat(r.score||0),0)/rs.length:null,n:rs.length})).sort((a,b)=>(a.avg??-1)-(b.avg??-1));
+  const items=scored.slice(0,3).map(({s,avg,n})=>{const {ic,col,name}=INFO[s];const sub=avg!=null?name+' TB '+avg.toFixed(1)+' ('+n+' lan)':name+' Chua lam';return '<div class="sug-item"><div class="sig" style="background:'+col+'">'+ic+'</div><div><div class="sit-t">'+name+'</div><div class="sit-s">'+sub+'</div></div><button class="sug-btn" onclick="location.href="luyen-mon.html"">'+(avg!=null?'On them':'Bat dau')+'</button></div>';});
+  items.push('<div class="sug-item"><div class="sig" style="background:rgba(245,158,11,.1)">🏛️</div><div><div class="sit-t">HSA Mock Test</div><div class="sit-s">Thi thu 120 phut</div></div><button class="sug-btn" onclick="location.href="hsa.html"">Thi thu</button></div>');
+  el.innerHTML=items.join('');
+}
 </script>
 </body></html>
